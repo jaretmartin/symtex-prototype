@@ -1,0 +1,92 @@
+/**
+ * Shadow & Elevation Design Tokens
+ */
+
+:root {
+  /* ========================================
+   * Box Shadows
+   * ======================================== */
+
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+
+  /* Dark theme shadows (more visible on dark backgrounds) */
+  --shadow-dark-sm: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+  --shadow-dark-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-dark-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+  --shadow-dark-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+
+  /* Colored shadows for brand elements */
+  --shadow-primary: 0 4px 14px 0 rgb(99 102 241 / 0.25);
+  --shadow-primary-lg: 0 10px 25px -3px rgb(99 102 241 / 0.3);
+  --shadow-accent: 0 4px 14px 0 rgb(139 92 246 / 0.25);
+  --shadow-gold: 0 4px 14px 0 rgb(245 158 11 / 0.25);
+  --shadow-success: 0 4px 14px 0 rgb(34 197 94 / 0.25);
+  --shadow-error: 0 4px 14px 0 rgb(239 68 68 / 0.25);
+
+  /* ========================================
+   * Elevation Levels
+   * ======================================== */
+
+  /* Use these for consistent elevation across components */
+  --elevation-0: none;
+  --elevation-1: var(--shadow-dark-sm);
+  --elevation-2: var(--shadow-dark-md);
+  --elevation-3: var(--shadow-dark-lg);
+  --elevation-4: var(--shadow-dark-xl);
+
+  /* ========================================
+   * Glow Effects
+   * ======================================== */
+
+  --glow-primary: 0 0 20px rgb(99 102 241 / 0.4);
+  --glow-accent: 0 0 20px rgb(139 92 246 / 0.4);
+  --glow-gold: 0 0 20px rgb(245 158 11 / 0.4);
+  --glow-success: 0 0 20px rgb(34 197 94 / 0.4);
+
+  /* ========================================
+   * Border Radius
+   * ======================================== */
+
+  --radius-none: 0;
+  --radius-sm: 0.25rem;    /* 4px */
+  --radius-md: 0.375rem;   /* 6px */
+  --radius-lg: 0.5rem;     /* 8px */
+  --radius-xl: 0.75rem;    /* 12px */
+  --radius-2xl: 1rem;      /* 16px */
+  --radius-3xl: 1.5rem;    /* 24px */
+  --radius-full: 9999px;
+}
+
+/* ========================================
+ * Elevation Utility Classes
+ * ======================================== */
+
+.elevation-flat {
+  box-shadow: none;
+}
+
+.elevation-raised {
+  box-shadow: var(--elevation-2);
+}
+
+.elevation-floating {
+  box-shadow: var(--elevation-4);
+}
+
+.glow-primary {
+  box-shadow: var(--glow-primary);
+}
+
+.glow-accent {
+  box-shadow: var(--glow-accent);
+}
+
+.glow-gold {
+  box-shadow: var(--glow-gold);
+}

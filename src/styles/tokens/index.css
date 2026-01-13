@@ -1,0 +1,10 @@
+/**
+ * Design Tokens Index
+ * Import this file to get all design tokens
+ */
+
+@import './colors.css';
+@import './typography.css';
+@import './shadows.css';
+@import './spacing.css';
+@import './animations.css';

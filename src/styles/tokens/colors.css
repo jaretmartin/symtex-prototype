@@ -1,0 +1,131 @@
+/**
+ * Color Design Tokens
+ * Single source of truth for all color values
+ */
+
+:root {
+  /* ========================================
+   * Brand Colors
+   * ======================================== */
+
+  /* Primary - Indigo/Purple gradient base */
+  --color-primary: #6366f1;
+  --color-primary-50: #eef2ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-200: #c7d2fe;
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #4338ca;
+  --color-primary-800: #3730a3;
+  --color-primary-900: #312e81;
+
+  /* Accent - Purple */
+  --color-accent: #8b5cf6;
+  --color-accent-50: #f5f3ff;
+  --color-accent-100: #ede9fe;
+  --color-accent-200: #ddd6fe;
+  --color-accent-300: #c4b5fd;
+  --color-accent-400: #a78bfa;
+  --color-accent-500: #8b5cf6;
+  --color-accent-600: #7c3aed;
+  --color-accent-700: #6d28d9;
+  --color-accent-800: #5b21b6;
+  --color-accent-900: #4c1d95;
+
+  /* Gold - Secondary accent */
+  --color-gold: #f59e0b;
+  --color-gold-50: #fffbeb;
+  --color-gold-100: #fef3c7;
+  --color-gold-200: #fde68a;
+  --color-gold-300: #fcd34d;
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+  --color-gold-600: #d97706;
+  --color-gold-700: #b45309;
+  --color-gold-800: #92400e;
+  --color-gold-900: #78350f;
+
+  /* ========================================
+   * Surface Colors
+   * ======================================== */
+
+  /* Dark theme surfaces */
+  --color-surface-base: #0a0a0f;
+  --color-surface-dark: #0f172a;
+  --color-surface-card: #1e293b;
+  --color-surface-elevated: #334155;
+  --color-surface-hover: #3f4f63;
+
+  /* Borders */
+  --color-border: #334155;
+  --color-border-subtle: #1e293b;
+  --color-border-strong: #475569;
+
+  /* ========================================
+   * Semantic Colors
+   * ======================================== */
+
+  /* Success */
+  --color-success: #22c55e;
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-900: #14532d;
+
+  /* Warning */
+  --color-warning: #f59e0b;
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-900: #78350f;
+
+  /* Error */
+  --color-error: #ef4444;
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-900: #7f1d1d;
+
+  /* Info */
+  --color-info: #3b82f6;
+  --color-info-50: #eff6ff;
+  --color-info-100: #dbeafe;
+  --color-info-500: #3b82f6;
+  --color-info-600: #2563eb;
+  --color-info-900: #1e3a8a;
+
+  /* ========================================
+   * Text Colors
+   * ======================================== */
+
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #cbd5e1;
+  --color-text-tertiary: #94a3b8;
+  --color-text-muted: #64748b;
+  --color-text-disabled: #475569;
+
+  /* ========================================
+   * Gradients
+   * ======================================== */
+
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  --gradient-gold: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-600) 100%);
+  --gradient-success: linear-gradient(135deg, var(--color-success) 0%, var(--color-success-600) 100%);
+  --gradient-surface: linear-gradient(180deg, var(--color-surface-card) 0%, var(--color-surface-dark) 100%);
+
+  /* ========================================
+   * Status Colors (for missions, automations)
+   * ======================================== */
+
+  --color-status-active: #22c55e;
+  --color-status-pending: #f59e0b;
+  --color-status-completed: #3b82f6;
+  --color-status-blocked: #ef4444;
+  --color-status-draft: #64748b;
+  --color-status-paused: #8b5cf6;
+}

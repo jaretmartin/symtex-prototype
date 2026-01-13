@@ -1,0 +1,72 @@
+/**
+ * Root Application Component
+ *
+ * Provides layout structure, global providers, and error boundaries
+ */
+
+import { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import Sidebar from './components/ui/Sidebar';
+import { ErrorBoundary } from './components/error';
+import { CommandPalette } from './components/command';
+import { ToastContainer } from './components/ui/Toast';
+import { analyticsService } from './api';
+import { useUIStore } from './store';
+
+function App(): JSX.Element {
+  const location = useLocation();
+  const sidebarOpen = useUIStore((state) => state.sidebarOpen);
+
+  // Track page views
+  useEffect(() => {
+    analyticsService.pageView(location.pathname, document.title);
+  }, [location.pathname]);
+
+  // LUX Builder uses full-screen layout without sidebar
+  const isFullScreenRoute = location.pathname === '/studio/lux';
+
+  if (isFullScreenRoute) {
+    return (
+      <ErrorBoundary>
+        <Outlet />
+        <CommandPalette />
+        <ToastContainer />
+      </ErrorBoundary>
+    );
+  }
+
+  return (
+    <ErrorBoundary>
+      <div className="flex min-h-screen bg-symtex-dark">
+        {/* Skip to main content link for accessibility */}
+        <a
+          href="#main-content"
+          className="skip-link"
+        >
+          Skip to main content
+        </a>
+
+        {/* Sidebar */}
+        <Sidebar />
+
+        {/* Main content area */}
+        <main
+          id="main-content"
+          className={`flex-1 transition-all duration-300 ${
+            sidebarOpen ? 'lg:ml-64' : 'ml-0'
+          } p-4 md:p-6 lg:p-8 overflow-auto`}
+        >
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
+        </main>
+      </div>
+
+      {/* Global overlays */}
+      <CommandPalette />
+      <ToastContainer />
+    </ErrorBoundary>
+  );
+}
+
+export default App;

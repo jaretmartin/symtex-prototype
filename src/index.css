@@ -1,0 +1,209 @@
+/* Design Token Imports */
+@import './styles/tokens/index.css';
+
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+ * Base Styles
+ * ======================================== */
+
+body {
+  @apply bg-symtex-dark text-white min-h-screen;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+ * Custom Scrollbar
+ * ======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-surface-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-border-strong);
+}
+
+/* ========================================
+ * Focus States (Accessibility)
+ * ======================================== */
+
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-symtex-primary focus-visible:ring-offset-2 focus-visible:ring-offset-symtex-dark;
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-symtex-primary focus:text-white focus:rounded-lg;
+}
+
+/* ========================================
+ * Gradient Backgrounds
+ * ======================================== */
+
+.gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.gradient-gold {
+  background: var(--gradient-gold);
+}
+
+.gradient-success {
+  background: var(--gradient-success);
+}
+
+/* ========================================
+ * Card Styles
+ * ======================================== */
+
+.card {
+  @apply bg-symtex-card border border-symtex-border rounded-xl;
+}
+
+.card-elevated {
+  @apply bg-symtex-card border border-symtex-border rounded-xl;
+  box-shadow: var(--elevation-2);
+}
+
+.card-interactive {
+  @apply bg-symtex-card border border-symtex-border rounded-xl transition-all duration-200;
+}
+
+.card-interactive:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-2px);
+}
+
+/* ========================================
+ * Mission Card Styles
+ * ======================================== */
+
+.mission-card {
+  @apply transition-all duration-300 ease-out;
+}
+
+.mission-card:hover {
+  @apply transform -translate-y-1;
+  box-shadow: var(--shadow-primary-lg);
+}
+
+/* Priority indicators */
+.priority-critical {
+  @apply border-l-4 border-red-500;
+}
+
+.priority-high {
+  @apply border-l-4 border-orange-500;
+}
+
+.priority-medium {
+  @apply border-l-4 border-yellow-500;
+}
+
+.priority-low {
+  @apply border-l-4 border-green-500;
+}
+
+/* ========================================
+ * DNA Helix Animation
+ * ======================================== */
+
+@keyframes dna-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.dna-pulse {
+  animation: dna-pulse 2s ease-in-out infinite;
+}
+
+/* ========================================
+ * Progress Ring Animation
+ * ======================================== */
+
+@keyframes progress-ring {
+  0% {
+    stroke-dashoffset: 100;
+  }
+}
+
+.progress-ring-animate {
+  animation: progress-ring 1s ease-out forwards;
+}
+
+/* ========================================
+ * React Flow Canvas Styles
+ * ======================================== */
+
+.react-flow__renderer {
+  background-color: var(--color-surface-base) !important;
+}
+
+.react-flow__node {
+  cursor: grab;
+}
+
+.react-flow__node:active {
+  cursor: grabbing;
+}
+
+.react-flow__controls {
+  background-color: var(--color-surface-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.react-flow__controls-button {
+  background-color: var(--color-surface-card) !important;
+  border-color: var(--color-border) !important;
+  fill: var(--color-text-tertiary) !important;
+}
+
+.react-flow__controls-button:hover {
+  background-color: var(--color-surface-elevated) !important;
+}
+
+.react-flow__minimap {
+  background-color: var(--color-surface-base) !important;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* ========================================
+ * Loading Skeleton
+ * ======================================== */
+
+.skeleton {
+  @apply bg-symtex-card rounded;
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-card) 25%,
+    var(--color-surface-elevated) 50%,
+    var(--color-surface-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
