@@ -13,6 +13,13 @@ export * from './entities/template';
 export * from './entities/user';
 export * from './entities/budget';
 export * from './entities/dna';
+export * from './entities/cognate';
+export * from './entities/space';
+export * from './entities/context';
+export * from './entities/narrative';
+export * from './entities/chat';
+export * from './entities/reasoning';
+export * from './entities/agent';
 
 // API types
 export * from './api/responses';

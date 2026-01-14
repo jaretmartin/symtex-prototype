@@ -16,9 +16,16 @@ import DNAStrength from '../../components/dna/DNAStrength'
 import PromptOpsPlaceholder from '../../components/dna/PromptOpsPlaceholder'
 
 // Import Home components
-import AIBudgetStatus from '../../components/home/AIBudgetStatus'
-import ActionCenter from '../../components/home/ActionCenter'
-import InsightsPanel from '../../components/home/InsightsPanel'
+import {
+  AIBudgetStatus,
+  ActionCenter,
+  InsightsPanel,
+  ActiveMissionsWidget,
+  CognateActivityWidget,
+  RecentContextsWidget,
+  QuickActionsWidget,
+  WidgetErrorBoundary
+} from '../../components/home'
 
 /**
  * Home Page - Main Dashboard
@@ -54,13 +61,20 @@ import InsightsPanel from '../../components/home/InsightsPanel'
  *    - Trend indicators
  *    - Usage visualization
  *    - Management actions
+ *
+ * 5. PHASE 2.7 ENHANCEMENTS:
+ *    - All widgets now have loading skeleton states
+ *    - Error boundaries wrap each widget for graceful error handling
+ *    - New widgets added: ActiveMissions, CognateActivity, RecentContexts, QuickActions
+ *    - Improved layout with responsive grid system
+ *    - Interactive filtering and navigation in all widgets
  */
 
-export default function Home() {
+export default function Home(): JSX.Element {
   return (
     <div className="max-w-7xl mx-auto space-y-8">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-white flex items-center gap-3">
             <HomeIcon className="w-8 h-8 text-symtex-primary" />
@@ -71,7 +85,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           <Link
             to="/studio/lux"
             className="flex items-center gap-2 px-4 py-2.5 rounded-lg gradient-primary text-white font-medium hover:opacity-90 transition-all"
@@ -98,47 +112,70 @@ export default function Home() {
       </div>
 
       {/* AI Budget Status - Expandable/Collapsible */}
-      <AIBudgetStatus />
+      <WidgetErrorBoundary widgetName="AI Budget Status">
+        <AIBudgetStatus />
+      </WidgetErrorBoundary>
 
       {/* Activity Stats - Merged from Activity page */}
-      {/*
-        NOTE: This component was previously on /activity page.
-        Merged here because:
-        1. Activity navigation was redundant (pointed to Home)
-        2. These stats provide immediate dashboard value
-        3. Reduces clicks to access key metrics
-      */}
-      <ActivityStats />
+      <WidgetErrorBoundary widgetName="Activity Stats">
+        <ActivityStats />
+      </WidgetErrorBoundary>
 
-      {/* Main Content Grid */}
+      {/* Quick Actions - Full width for easy access */}
+      <WidgetErrorBoundary widgetName="Quick Actions">
+        <QuickActionsWidget />
+      </WidgetErrorBoundary>
+
+      {/* Main Content Grid - Two columns on large screens */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column - Action Center & Insights */}
+        {/* Left Column - Action Center, Insights, Missions */}
         <div className="lg:col-span-2 space-y-6">
-          <ActionCenter />
-          <InsightsPanel />
+          <WidgetErrorBoundary widgetName="Action Center">
+            <ActionCenter />
+          </WidgetErrorBoundary>
+
+          <WidgetErrorBoundary widgetName="Active Missions">
+            <ActiveMissionsWidget maxItems={3} />
+          </WidgetErrorBoundary>
+
+          <WidgetErrorBoundary widgetName="AI Insights">
+            <InsightsPanel />
+          </WidgetErrorBoundary>
         </div>
 
-        {/* Right Column - DNA & PromptOps */}
+        {/* Right Column - DNA, Cognates, Contexts, PromptOps */}
         <div className="space-y-6">
           {/*
             DNA Strength Component
             Shows the health of your AI's core capabilities.
             PLACEHOLDER: Would connect to PromptOps for real metrics.
           */}
-          <DNAStrength />
+          <WidgetErrorBoundary widgetName="DNA Strength">
+            <DNAStrength compact />
+          </WidgetErrorBoundary>
+
+          <WidgetErrorBoundary widgetName="Cognate Activity">
+            <CognateActivityWidget maxItems={4} />
+          </WidgetErrorBoundary>
+
+          <WidgetErrorBoundary widgetName="Recent Contexts">
+            <RecentContextsWidget maxItems={4} />
+          </WidgetErrorBoundary>
 
           {/*
             PromptOps Placeholder
             Shows where PromptOps features would integrate.
             Features are planned but not yet implemented.
           */}
-          <PromptOpsPlaceholder />
+          <WidgetErrorBoundary widgetName="PromptOps">
+            <PromptOpsPlaceholder />
+          </WidgetErrorBoundary>
         </div>
       </div>
 
       {/* Quick Stats Footer */}
       <div className="bg-gradient-to-r from-symtex-primary/10 to-symtex-accent/10 rounded-xl border border-symtex-primary/20 p-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="p-3 rounded-xl bg-symtex-primary/20">
               <Sparkles className="w-6 h-6 text-symtex-primary" />
@@ -150,9 +187,12 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <button className="px-5 py-2.5 rounded-lg gradient-primary text-white font-medium hover:opacity-90 transition-opacity">
+          <Link
+            to="/reports"
+            className="px-5 py-2.5 rounded-lg gradient-primary text-white font-medium hover:opacity-90 transition-opacity"
+          >
             View Full Report
-          </button>
+          </Link>
         </div>
       </div>
     </div>

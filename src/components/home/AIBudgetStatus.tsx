@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   Wallet,
   ChevronDown,
@@ -14,9 +15,12 @@ import {
   RefreshCcw,
   Calendar,
   BarChart3,
-  Info
+  Info,
+  ArrowRight
 } from 'lucide-react'
 import clsx from 'clsx'
+import { useUIStore } from '@/store/useUIStore'
+import WidgetSkeleton from './WidgetSkeleton'
 
 interface BudgetCategory {
   id: string
@@ -32,19 +36,8 @@ interface AIBudgetStatusProps {
   className?: string
 }
 
-/**
- * AI Budget Status Component
- *
- * Displays current AI API spending and budget allocation.
- * Features:
- * - Collapsible detailed breakdown view
- * - Per-category spending (Chat, Embeddings, Image Gen, Code)
- * - Trend indicators showing spend vs previous period
- * - Visual budget utilization bar
- * - Alerts when approaching budget limits
- */
-
-const budgetCategories: BudgetCategory[] = [
+// Mock data - in production, this would come from a store or API
+const mockBudgetCategories: BudgetCategory[] = [
   {
     id: 'chat',
     name: 'Chat Completions',
@@ -83,8 +76,70 @@ const budgetCategories: BudgetCategory[] = [
   }
 ]
 
-export default function AIBudgetStatus({ className }: AIBudgetStatusProps) {
+/**
+ * AI Budget Status Component
+ *
+ * Displays current AI API spending and budget allocation.
+ * Features:
+ * - Loading skeleton state
+ * - Collapsible detailed breakdown view
+ * - Per-category spending with trend indicators
+ * - Visual budget utilization bar
+ * - Alerts when approaching budget limits
+ * - Click to view details navigation
+ * - Refresh functionality
+ */
+export default function AIBudgetStatus({ className }: AIBudgetStatusProps): JSX.Element {
+  const navigate = useNavigate()
+  const addToast = useUIStore((state) => state.addToast)
+
   const [isExpanded, setIsExpanded] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isRefreshing, setIsRefreshing] = useState(false)
+  const [budgetCategories, setBudgetCategories] = useState<BudgetCategory[]>([])
+
+  // Simulate data loading
+  useEffect(() => {
+    const loadData = async (): Promise<void> => {
+      setIsLoading(true)
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 800))
+      setBudgetCategories(mockBudgetCategories)
+      setIsLoading(false)
+    }
+
+    loadData()
+  }, [])
+
+  // Handle refresh
+  const handleRefresh = useCallback(async (): Promise<void> => {
+    setIsRefreshing(true)
+    // Simulate API refresh
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    // In production, this would fetch fresh data
+    setBudgetCategories(mockBudgetCategories)
+    setIsRefreshing(false)
+    addToast({
+      title: 'Budget data refreshed',
+      variant: 'success',
+      duration: 3000
+    })
+  }, [addToast])
+
+  // Handle view details
+  const handleViewDetails = useCallback((): void => {
+    navigate('/settings/budget')
+  }, [navigate])
+
+  // Handle category click
+  const handleCategoryClick = useCallback((categoryId: string): void => {
+    navigate(`/settings/budget?category=${categoryId}`)
+  }, [navigate])
+
+  // Show loading skeleton
+  if (isLoading) {
+    return <WidgetSkeleton height={180} showHeader={true} rows={0} className={className} />
+  }
 
   // Calculate totals
   const totalSpent = budgetCategories.reduce((acc, cat) => acc + cat.spent, 0)
@@ -93,8 +148,14 @@ export default function AIBudgetStatus({ className }: AIBudgetStatusProps) {
   const isNearLimit = utilizationPercent > 80
   const isOverLimit = utilizationPercent > 95
 
+  // Calculate overall trend
+  const overallTrend = budgetCategories.reduce((acc, cat) => {
+    const weight = cat.spent / totalSpent
+    return acc + (cat.trend * weight)
+  }, 0)
+
   // Format currency
-  const formatCurrency = (amount: number) => {
+  const formatCurrency = (amount: number): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -144,6 +205,21 @@ export default function AIBudgetStatus({ className }: AIBudgetStatusProps) {
         </div>
 
         <div className="flex items-center gap-4">
+          {/* Overall Trend Indicator */}
+          <div className="hidden sm:flex items-center gap-2">
+            <div className={clsx(
+              'flex items-center gap-1 text-sm font-medium px-2 py-1 rounded-full',
+              overallTrend > 0 ? 'bg-red-500/20 text-red-400' : 'bg-green-500/20 text-green-400'
+            )}>
+              {overallTrend > 0 ? (
+                <TrendingUp className="w-4 h-4" />
+              ) : (
+                <TrendingDown className="w-4 h-4" />
+              )}
+              {Math.abs(overallTrend).toFixed(1)}%
+            </div>
+          </div>
+
           {/* Quick Stats */}
           <div className="hidden md:flex items-center gap-6 mr-4">
             <div className="text-right">
@@ -187,11 +263,24 @@ export default function AIBudgetStatus({ className }: AIBudgetStatusProps) {
               <span>Billing Period: Jan 1 - Jan 31, 2026</span>
             </div>
             <div className="flex items-center gap-4">
-              <button className="flex items-center gap-2 text-sm text-symtex-primary hover:text-symtex-secondary transition-colors">
-                <RefreshCcw className="w-4 h-4" />
-                Refresh
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleRefresh()
+                }}
+                disabled={isRefreshing}
+                className="flex items-center gap-2 text-sm text-symtex-primary hover:text-symtex-secondary transition-colors disabled:opacity-50"
+              >
+                <RefreshCcw className={clsx('w-4 h-4', isRefreshing && 'animate-spin')} />
+                {isRefreshing ? 'Refreshing...' : 'Refresh'}
               </button>
-              <button className="flex items-center gap-2 text-sm text-symtex-primary hover:text-symtex-secondary transition-colors">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleViewDetails()
+                }}
+                className="flex items-center gap-2 text-sm text-symtex-primary hover:text-symtex-secondary transition-colors"
+              >
                 <BarChart3 className="w-4 h-4" />
                 Full Report
               </button>
@@ -213,9 +302,13 @@ export default function AIBudgetStatus({ className }: AIBudgetStatusProps) {
                 const isCritical = catUtilization > 95
 
                 return (
-                  <div
+                  <button
                     key={category.id}
-                    className="p-4 rounded-lg bg-slate-800/50 border border-symtex-border"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleCategoryClick(category.id)
+                    }}
+                    className="p-4 rounded-lg bg-slate-800/50 border border-symtex-border hover:border-symtex-primary/50 transition-colors text-left group"
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
@@ -226,7 +319,9 @@ export default function AIBudgetStatus({ className }: AIBudgetStatusProps) {
                           <Icon className="w-4 h-4" style={{ color: category.color }} />
                         </div>
                         <div>
-                          <p className="font-medium text-white text-sm">{category.name}</p>
+                          <p className="font-medium text-white text-sm group-hover:text-symtex-primary transition-colors">
+                            {category.name}
+                          </p>
                           <p className="text-xs text-slate-500">
                             {formatCurrency(category.spent)} / {formatCurrency(category.allocated)}
                           </p>
@@ -265,7 +360,14 @@ export default function AIBudgetStatus({ className }: AIBudgetStatusProps) {
                         </span>
                       </div>
                     </div>
-                  </div>
+
+                    {/* Hover indicator */}
+                    <div className="flex items-center justify-end mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="text-xs text-symtex-primary flex items-center gap-1">
+                        View Details <ArrowRight className="w-3 h-3" />
+                      </span>
+                    </div>
+                  </button>
                 )
               })}
             </div>
@@ -282,7 +384,7 @@ export default function AIBudgetStatus({ className }: AIBudgetStatusProps) {
                 {[35, 42, 58, 45, 67, 52, 78, 65, 82, 70, 55, 48, 62, 75].map((height, i) => (
                   <div
                     key={i}
-                    className="flex-1 bg-gradient-to-t from-symtex-primary to-symtex-accent rounded-t opacity-60"
+                    className="flex-1 bg-gradient-to-t from-symtex-primary to-symtex-accent rounded-t opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
                     style={{ height: `${height}%` }}
                   />
                 ))}
@@ -301,10 +403,26 @@ export default function AIBudgetStatus({ className }: AIBudgetStatusProps) {
               Budget resets in 22 days
             </p>
             <div className="flex items-center gap-3">
-              <button className="text-sm text-slate-400 hover:text-white transition-colors">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  addToast({
+                    title: 'Alert settings',
+                    description: 'Configure budget alerts in settings',
+                    variant: 'info'
+                  })
+                }}
+                className="text-sm text-slate-400 hover:text-white transition-colors"
+              >
                 Set Alerts
               </button>
-              <button className="px-4 py-2 rounded-lg bg-symtex-primary text-white text-sm font-medium hover:bg-symtex-primary/90 transition-colors">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleViewDetails()
+                }}
+                className="px-4 py-2 rounded-lg bg-symtex-primary text-white text-sm font-medium hover:bg-symtex-primary/90 transition-colors"
+              >
                 Manage Budget
               </button>
             </div>

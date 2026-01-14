@@ -90,6 +90,13 @@ export default {
         'fade-in-up': 'fadeInUp var(--duration-normal) var(--ease-out) forwards',
         'scale-in': 'scaleIn var(--duration-normal) var(--ease-out) forwards',
         'shimmer': 'shimmer 1.5s infinite',
+        'pulse-subtle': 'pulseSubtle 2s var(--ease-in-out) infinite',
+      },
+      keyframes: {
+        pulseSubtle: {
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(99, 102, 241, 0.4)' },
+          '50%': { boxShadow: '0 0 0 4px rgba(99, 102, 241, 0.1)' },
+        },
       },
     },
   },

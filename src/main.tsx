@@ -15,8 +15,12 @@ const Home = lazy(() => import('./routes/home/index'));
 const Missions = lazy(() => import('./routes/build/missions/index'));
 const LuxBuilder = lazy(() => import('./routes/studio/lux/index'));
 const Automations = lazy(() => import('./routes/studio/automations/index'));
+const NarrativeBuilder = lazy(() => import('./routes/studio/narrative/index'));
+const AgentRoster = lazy(() => import('./routes/studio/agents/index'));
 const Templates = lazy(() => import('./routes/library/templates'));
 const Knowledge = lazy(() => import('./routes/library/knowledge'));
+const Spaces = lazy(() => import('./routes/spaces/index'));
+const Chat = lazy(() => import('./routes/chat/index'));
 
 // Loading fallback component
 function RouteLoading(): JSX.Element {
@@ -87,6 +91,22 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               </Suspense>
             }
           />
+          <Route
+            path="studio/narrative"
+            element={
+              <Suspense fallback={<RouteLoading />}>
+                <NarrativeBuilder />
+              </Suspense>
+            }
+          />
+          <Route
+            path="studio/agents"
+            element={
+              <Suspense fallback={<RouteLoading />}>
+                <AgentRoster />
+              </Suspense>
+            }
+          />
 
           {/* Library Section */}
           <Route
@@ -106,10 +126,46 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             }
           />
 
+          {/* Spaces Section */}
+          <Route
+            path="spaces"
+            element={
+              <Suspense fallback={<RouteLoading />}>
+                <Spaces />
+              </Suspense>
+            }
+          />
+          <Route
+            path="spaces/:domainId"
+            element={
+              <Suspense fallback={<RouteLoading />}>
+                <Spaces />
+              </Suspense>
+            }
+          />
+          <Route
+            path="spaces/:domainId/:projectId"
+            element={
+              <Suspense fallback={<RouteLoading />}>
+                <Spaces />
+              </Suspense>
+            }
+          />
+
+          {/* Chat Section */}
+          <Route
+            path="chat"
+            element={
+              <Suspense fallback={<RouteLoading />}>
+                <Chat />
+              </Suspense>
+            }
+          />
+
           {/* Coming Soon Routes */}
           <Route path="dna" element={<ComingSoon title="DNA Analytics" />} />
           <Route path="analytics" element={<ComingSoon title="Analytics Dashboard" />} />
-          <Route path="conversations" element={<ComingSoon title="AI Conversations" />} />
+          <Route path="conversations" element={<Navigate to="/chat" replace />} />
           <Route path="settings" element={<ComingSoon title="Settings" />} />
 
           {/* Legacy redirects */}

@@ -8,8 +8,8 @@
  * - Integration with UI store for state management
  */
 
-import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   Home,
   Target,
@@ -24,10 +24,16 @@ import {
   X,
   BookOpen,
   FileText,
-  Lock
+  Lock,
+  Bot,
+  BookText,
+  Layers,
+  ChevronDown,
+  ChevronRight
 } from 'lucide-react';
 import clsx from 'clsx';
 import { useUIStore } from '../../store';
+import { SpaceTree } from '../context/SpaceTree';
 
 interface NavItem {
   name: string;
@@ -47,6 +53,8 @@ const navigation: NavItem[] = [
 const studioNavigation: NavItem[] = [
   { name: 'LUX Builder', href: '/studio/lux', icon: Workflow },
   { name: 'Automations', href: '/studio/automations', icon: Play },
+  { name: 'Narrative', href: '/studio/narrative', icon: BookText },
+  { name: 'Agents', href: '/studio/agents', icon: Bot },
 ];
 
 const libraryNavigation: NavItem[] = [
@@ -56,7 +64,9 @@ const libraryNavigation: NavItem[] = [
 
 export default function Sidebar(): JSX.Element {
   const location = useLocation();
+  const navigate = useNavigate();
   const { sidebarOpen, setSidebarOpen } = useUIStore();
+  const [spacesExpanded, setSpacesExpanded] = useState(true);
 
   // Close sidebar on route change (mobile)
   useEffect(() => {
@@ -189,6 +199,43 @@ export default function Sidebar(): JSX.Element {
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto" role="navigation">
           {/* Main Navigation */}
           {navigation.map(renderNavItem)}
+
+          {/* Spaces Section with SpaceTree */}
+          <div className="pt-4 mt-4 border-t border-symtex-border">
+            <button
+              type="button"
+              onClick={() => setSpacesExpanded(!spacesExpanded)}
+              className="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-slate-500 uppercase tracking-wider hover:text-slate-300 transition-colors"
+            >
+              <div className="flex items-center gap-2">
+                <Layers className="w-4 h-4" aria-hidden="true" />
+                <span>Spaces</span>
+              </div>
+              {spacesExpanded ? (
+                <ChevronDown className="w-4 h-4" aria-hidden="true" />
+              ) : (
+                <ChevronRight className="w-4 h-4" aria-hidden="true" />
+              )}
+            </button>
+            {spacesExpanded && (
+              <SpaceTree
+                className="mt-2"
+                onNavigate={(type, id) => {
+                  // Navigate to appropriate route based on space type
+                  if (type === 'personal') {
+                    navigate('/spaces');
+                  } else if (type === 'domain') {
+                    navigate(`/spaces/${id}`);
+                  } else if (type === 'project') {
+                    // Find the domain for this project (handled by route)
+                    navigate(`/spaces/domain/${id}`);
+                  } else if (type === 'mission') {
+                    navigate(`/missions/${id}`);
+                  }
+                }}
+              />
+            )}
+          </div>
 
           {/* Studio Section */}
           <div className="pt-4 mt-4 border-t border-symtex-border">

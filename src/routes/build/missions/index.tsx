@@ -7,13 +7,15 @@ import {
   CheckCircle2,
   AlertTriangle,
   Sparkles,
-  Calendar as CalendarIcon
+  Calendar as CalendarIcon,
+  Search
 } from 'lucide-react'
 import clsx from 'clsx'
 import MissionCard, { type Mission, type MissionPriority, type MissionStatus } from '../../../components/missions/MissionCard'
 import MissionFilters, { type ViewMode } from '../../../components/missions/MissionFilters'
 import KanbanBoard from '../../../components/missions/KanbanBoard'
 import TimelineView from '../../../components/missions/TimelineView'
+import { EmptyState } from '../../../components/empty/EmptyState'
 
 // Sample mission data
 const sampleMissions: Mission[] = [
@@ -316,10 +318,33 @@ export default function Missions() {
             />
           ))}
           {filteredMissions.length === 0 && (
-            <div className="text-center py-16 text-slate-400">
-              <Target className="w-12 h-12 mx-auto mb-4 opacity-30" />
-              <p>No missions match your filters</p>
-            </div>
+            <EmptyState
+              icon={searchQuery || selectedPriorities.length > 0 || selectedStatuses.length > 0
+                ? <Search className="w-8 h-8" />
+                : <Target className="w-8 h-8" />
+              }
+              title={searchQuery || selectedPriorities.length > 0 || selectedStatuses.length > 0
+                ? "No missions match your filters"
+                : "No missions yet"
+              }
+              description={searchQuery || selectedPriorities.length > 0 || selectedStatuses.length > 0
+                ? "Try adjusting your search or clearing some filters to see more results."
+                : "Create your first mission to start tracking AI-powered objectives."
+              }
+              action={!(searchQuery || selectedPriorities.length > 0 || selectedStatuses.length > 0) ? {
+                label: "Create Mission",
+                onClick: () => console.log("Create mission"),
+                icon: <Plus className="w-4 h-4" />
+              } : undefined}
+              secondaryAction={searchQuery || selectedPriorities.length > 0 || selectedStatuses.length > 0 ? {
+                label: "Clear Filters",
+                onClick: () => {
+                  setSearchQuery('')
+                  setSelectedPriorities([])
+                  setSelectedStatuses([])
+                }
+              } : undefined}
+            />
           )}
         </div>
       ) : (
@@ -333,9 +358,34 @@ export default function Missions() {
             />
           ))}
           {filteredMissions.length === 0 && (
-            <div className="col-span-full text-center py-16 text-slate-400">
-              <Target className="w-12 h-12 mx-auto mb-4 opacity-30" />
-              <p>No missions match your filters</p>
+            <div className="col-span-full">
+              <EmptyState
+                icon={searchQuery || selectedPriorities.length > 0 || selectedStatuses.length > 0
+                  ? <Search className="w-8 h-8" />
+                  : <Target className="w-8 h-8" />
+                }
+                title={searchQuery || selectedPriorities.length > 0 || selectedStatuses.length > 0
+                  ? "No missions match your filters"
+                  : "No missions yet"
+                }
+                description={searchQuery || selectedPriorities.length > 0 || selectedStatuses.length > 0
+                  ? "Try adjusting your search or clearing some filters to see more results."
+                  : "Create your first mission to start tracking AI-powered objectives."
+                }
+                action={!(searchQuery || selectedPriorities.length > 0 || selectedStatuses.length > 0) ? {
+                  label: "Create Mission",
+                  onClick: () => console.log("Create mission"),
+                  icon: <Plus className="w-4 h-4" />
+                } : undefined}
+                secondaryAction={searchQuery || selectedPriorities.length > 0 || selectedStatuses.length > 0 ? {
+                  label: "Clear Filters",
+                  onClick: () => {
+                    setSearchQuery('')
+                    setSelectedPriorities([])
+                    setSelectedStatuses([])
+                  }
+                } : undefined}
+              />
             </div>
           )}
         </div>
