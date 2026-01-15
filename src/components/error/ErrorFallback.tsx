@@ -43,11 +43,14 @@ export function ErrorFallback({ error, onReset }: ErrorFallbackProps): JSX.Eleme
           go back to the home page.
         </p>
 
-        {/* Error details (development only) */}
-        {import.meta.env.DEV && error && (
-          <div className="mb-6 p-4 bg-slate-800/50 rounded-lg text-left overflow-auto max-h-32">
+        {/* Error details (temporarily enabled in all environments for debugging) */}
+        {error && (
+          <div className="mb-6 p-4 bg-slate-800/50 rounded-lg text-left overflow-auto max-h-48">
             <p className="text-sm font-mono text-red-400 break-all">
               {error.message}
+            </p>
+            <p className="text-xs font-mono text-slate-500 mt-2 break-all">
+              {error.stack}
             </p>
           </div>
         )}

@@ -12,7 +12,7 @@
  * - Keyboard accessible with focus trap when expanded
  */
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ChevronRight,
@@ -467,9 +467,15 @@ export default function ContextSummaryPill({
   const currentId = useContextStore((state) => state.currentId);
   const navigateTo = useContextStore((state) => state.navigateTo);
 
-  const missions = useSpaceStore((state) => state.getMissions());
-  const projects = useSpaceStore((state) => state.getProjects());
-  const domains = useSpaceStore((state) => state.getDomains());
+  // Select raw data records (not methods that return new arrays)
+  const missionsRecord = useSpaceStore((state) => state.missions);
+  const projectsRecord = useSpaceStore((state) => state.projects);
+  const domainsRecord = useSpaceStore((state) => state.domains);
+
+  // Derive arrays with useMemo to prevent infinite re-renders
+  const missions = useMemo(() => Object.values(missionsRecord), [missionsRecord]);
+  const projects = useMemo(() => Object.values(projectsRecord), [projectsRecord]);
+  const domains = useMemo(() => Object.values(domainsRecord), [domainsRecord]);
 
   const cognates = useCognateStore((state) => state.cognates);
   const selectedCognate = useCognateStore((state) => state.selectedCognate);

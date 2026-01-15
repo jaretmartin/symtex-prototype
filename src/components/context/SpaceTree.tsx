@@ -41,11 +41,17 @@ interface TreeData {
  * Build tree data structure from flat stores
  */
 function useTreeData(): TreeData {
-  const domains = useSpaceStore((state) => state.getDomains());
-  const projects = useSpaceStore((state) => state.getProjects());
-  const missions = useSpaceStore((state) => state.getMissions());
+  // Select raw data records (not methods that return new arrays)
+  const domainsRecord = useSpaceStore((state) => state.domains);
+  const projectsRecord = useSpaceStore((state) => state.projects);
+  const missionsRecord = useSpaceStore((state) => state.missions);
 
   return useMemo(() => {
+    // Convert records to arrays inside useMemo to prevent infinite re-renders
+    const domains = Object.values(domainsRecord);
+    const projects = Object.values(projectsRecord);
+    const missions = Object.values(missionsRecord);
+
     // Group projects by domain
     const projectsByDomain: Record<string, Project[]> = {};
     projects.forEach((project) => {
@@ -72,7 +78,7 @@ function useTreeData(): TreeData {
       projectsByDomain,
       missionsByProject,
     };
-  }, [domains, projects, missions]);
+  }, [domainsRecord, projectsRecord, missionsRecord]);
 }
 
 /**

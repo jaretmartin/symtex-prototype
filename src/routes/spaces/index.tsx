@@ -5,7 +5,7 @@
  * Provides an overview and management interface for organizational structure.
  */
 
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Layers,
@@ -171,10 +171,16 @@ export default function SpacesPage(): JSX.Element {
   const { info } = useToast();
 
   const personal = useSpaceStore((state) => state.personal);
-  const domains = useSpaceStore((state) => state.getDomains());
-  const projects = useSpaceStore((state) => state.getProjects());
-  const missions = useSpaceStore((state) => state.getMissions());
+  // Select raw data records (not methods that return new arrays)
+  const domainsRecord = useSpaceStore((state) => state.domains);
+  const projectsRecord = useSpaceStore((state) => state.projects);
+  const missionsRecord = useSpaceStore((state) => state.missions);
   const navigateTo = useContextStore((state) => state.navigateTo);
+
+  // Derive arrays with useMemo to prevent infinite re-renders
+  const domains = useMemo(() => Object.values(domainsRecord), [domainsRecord]);
+  const projects = useMemo(() => Object.values(projectsRecord), [projectsRecord]);
+  const missions = useMemo(() => Object.values(missionsRecord), [missionsRecord]);
 
   // Current view state
   const selectedDomain = domainId
