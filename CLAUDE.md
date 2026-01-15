@@ -1,5 +1,19 @@
 # Claude Code Instructions
 
+## Project Identity
+
+> **This is PRO** (symtex-prototype)
+>
+> | Alias | Vercel | URL | Role |
+> |-------|--------|-----|------|
+> | **Pro** | symtex-prototype | symtex-prototype.vercel.app | Enterprise/Team features |
+>
+> **Timeline**: 6 months | **Language**: TypeScript
+>
+> See `/Users/jaretmartin/projects/SYMTEX_PROJECTS.md` for full project map.
+
+---
+
 ## CRITICAL: Model Requirements
 
 **YOU MUST use Opus 4.5 exclusively for ALL agents and sub-agents.**
