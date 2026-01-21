@@ -98,7 +98,7 @@ function getStatusIndicator(
       case 'paused':
         return { icon: Pause, colorClass: 'text-yellow-500' };
       case 'completed':
-        return { icon: CheckCircle, colorClass: 'text-slate-500' };
+        return { icon: CheckCircle, colorClass: 'text-muted-foreground' };
     }
   }
 
@@ -109,7 +109,7 @@ function getStatusIndicator(
       case 'running':
         return { icon: Play, colorClass: 'text-green-500' };
       case 'completed':
-        return { icon: CheckCircle, colorClass: 'text-slate-500' };
+        return { icon: CheckCircle, colorClass: 'text-muted-foreground' };
       case 'failed':
         return { icon: XCircle, colorClass: 'text-red-500' };
     }
@@ -209,9 +209,9 @@ export function TreeNode({
         ref={ref}
         className={clsx(
           'group flex items-center gap-1 py-1.5 pr-2 rounded-md cursor-pointer transition-all duration-150',
-          'hover:bg-slate-800/60',
+          'hover:bg-card/60',
           isSelected && 'bg-symtex-primary/20 text-symtex-primary',
-          !isSelected && 'text-slate-300',
+          !isSelected && 'text-muted-foreground',
           isFocused && 'ring-2 ring-symtex-primary ring-offset-1 ring-offset-slate-900'
         )}
         style={{ paddingLeft: getLevelPadding(level) }}
@@ -224,7 +224,7 @@ export function TreeNode({
           type="button"
           className={clsx(
             'flex-shrink-0 w-4 h-4 flex items-center justify-center rounded transition-colors',
-            hasChildren ? 'hover:bg-slate-700' : 'invisible'
+            hasChildren ? 'hover:bg-muted' : 'invisible'
           )}
           onClick={handleToggleClick}
           tabIndex={-1}
@@ -232,9 +232,9 @@ export function TreeNode({
         >
           {hasChildren &&
             (isExpanded ? (
-              <ChevronDown className="w-3.5 h-3.5 text-slate-500" aria-hidden="true" />
+              <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" aria-hidden="true" />
             ) : (
-              <ChevronRight className="w-3.5 h-3.5 text-slate-500" aria-hidden="true" />
+              <ChevronRight className="w-3.5 h-3.5 text-muted-foreground" aria-hidden="true" />
             ))}
         </button>
 
@@ -251,7 +251,7 @@ export function TreeNode({
         <Icon
           className={clsx(
             'flex-shrink-0 w-4 h-4',
-            isSelected ? 'text-symtex-primary' : 'text-slate-400'
+            isSelected ? 'text-symtex-primary' : 'text-muted-foreground'
           )}
           aria-hidden="true"
         />
@@ -269,7 +269,7 @@ export function TreeNode({
 
         {/* Child Count Badge */}
         {childCount !== undefined && childCount > 0 && (
-          <span className="flex-shrink-0 text-xs text-slate-500 bg-slate-800 px-1.5 py-0.5 rounded">
+          <span className="flex-shrink-0 text-xs text-muted-foreground bg-card px-1.5 py-0.5 rounded">
             {childCount}
           </span>
         )}
@@ -281,7 +281,7 @@ export function TreeNode({
             className={clsx(
               'flex-shrink-0 w-5 h-5 flex items-center justify-center rounded',
               'opacity-0 group-hover:opacity-100 transition-opacity',
-              'hover:bg-slate-700 text-slate-400 hover:text-slate-200'
+              'hover:bg-muted text-muted-foreground hover:text-muted-foreground'
             )}
             onClick={handleQuickAddClick}
             tabIndex={-1}

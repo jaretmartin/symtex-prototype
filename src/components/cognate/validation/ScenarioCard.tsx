@@ -143,7 +143,7 @@ export function ScenarioCard({
     <div
       className={`
         p-4 transition-colors
-        ${isClickable ? 'hover:bg-zinc-800/50 cursor-pointer' : ''}
+        ${isClickable ? 'hover:bg-muted/50 cursor-pointer' : ''}
         ${className}
       `}
       onClick={isClickable ? handleClick : undefined}
@@ -156,14 +156,14 @@ export function ScenarioCard({
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1 flex-wrap">
-            <h4 className={`font-medium text-white truncate ${compact ? 'text-sm' : ''}`}>
+            <h4 className={`font-medium text-foreground truncate ${compact ? 'text-sm' : ''}`}>
               {scenario.name}
             </h4>
             <TypeBadge type={scenario.type} />
           </div>
 
           {!compact && (
-            <p className="text-sm text-zinc-400 line-clamp-2">{scenario.description}</p>
+            <p className="text-sm text-muted-foreground line-clamp-2">{scenario.description}</p>
           )}
 
           {scenario.failureReason && (
@@ -180,7 +180,7 @@ export function ScenarioCard({
         </div>
 
         {showExecutionTime && (
-          <div className={`text-right text-zinc-500 whitespace-nowrap ${compact ? 'text-xs' : 'text-sm'}`}>
+          <div className={`text-right text-muted-foreground whitespace-nowrap ${compact ? 'text-xs' : 'text-sm'}`}>
             {scenario.executionTimeMs}ms
           </div>
         )}
@@ -229,13 +229,13 @@ export function ScenarioList({
   if (filteredScenarios.length === 0) {
     return (
       <div className={`p-8 text-center ${className}`}>
-        <p className="text-zinc-400">{emptyMessage}</p>
+        <p className="text-muted-foreground">{emptyMessage}</p>
       </div>
     );
   }
 
   return (
-    <div className={`divide-y divide-zinc-800 ${className}`}>
+    <div className={`divide-y divide-border ${className}`}>
       {filteredScenarios.map((scenario) => (
         <ScenarioCard
           key={scenario.id}

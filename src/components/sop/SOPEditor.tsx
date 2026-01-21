@@ -71,17 +71,17 @@ function TagInput({ tags, onChange }: TagInputProps): JSX.Element {
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-2 p-2 bg-zinc-900 border border-zinc-700 rounded-lg focus-within:border-blue-500">
+    <div className="flex flex-wrap items-center gap-2 p-2 bg-surface-base border border-border rounded-lg focus-within:border-blue-500">
       {tags.map((tag) => (
         <span
           key={tag}
-          className="flex items-center gap-1 px-2 py-0.5 bg-zinc-800 text-zinc-300 rounded text-sm"
+          className="flex items-center gap-1 px-2 py-0.5 bg-card text-muted-foreground rounded text-sm"
         >
           {tag}
           <button
             type="button"
             onClick={() => removeTag(tag)}
-            className="text-zinc-500 hover:text-zinc-300"
+            className="text-muted-foreground hover:text-muted-foreground"
           >
             <X className="w-3 h-3" />
           </button>
@@ -94,7 +94,7 @@ function TagInput({ tags, onChange }: TagInputProps): JSX.Element {
         onKeyDown={handleKeyDown}
         onBlur={addTag}
         placeholder={tags.length === 0 ? 'Add tags...' : ''}
-        className="flex-1 min-w-[100px] bg-transparent border-none text-sm text-white placeholder-zinc-500 focus:outline-none"
+        className="flex-1 min-w-[100px] bg-transparent border-none text-sm text-foreground placeholder-muted-foreground focus:outline-none"
       />
     </div>
   );
@@ -181,9 +181,9 @@ export function SOPEditor({
   return (
     <div className={`flex flex-col h-full ${className}`}>
       {/* Header Actions */}
-      <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-800">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-border">
         <div className="flex items-center gap-4">
-          <h2 className="text-xl font-semibold text-white">
+          <h2 className="text-xl font-semibold text-foreground">
             {isNew ? 'Create New SOP' : 'Edit SOP'}
           </h2>
           {!isValid && (
@@ -199,7 +199,7 @@ export function SOPEditor({
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+              className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-card rounded-lg transition-colors"
             >
               Cancel
             </button>
@@ -212,8 +212,8 @@ export function SOPEditor({
               className={`
                 flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors
                 ${isValid
-                  ? 'bg-blue-600 text-white hover:bg-blue-500'
-                  : 'bg-zinc-700 text-zinc-400 cursor-not-allowed'
+                  ? 'bg-blue-600 text-foreground hover:bg-blue-500'
+                  : 'bg-muted text-muted-foreground cursor-not-allowed'
                 }
               `}
             >
@@ -229,38 +229,38 @@ export function SOPEditor({
         {/* Editor Panel */}
         <div className="flex-1 overflow-auto p-6 space-y-6">
           {/* Metadata Section */}
-          <div className="space-y-4 p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
-            <h3 className="text-sm font-medium text-zinc-300">SOP Details</h3>
+          <div className="space-y-4 p-4 bg-surface-base/50 border border-border rounded-lg">
+            <h3 className="text-sm font-medium text-muted-foreground">SOP Details</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="block text-sm text-zinc-400">Name</label>
+                <label className="block text-sm text-muted-foreground">Name</label>
                 <input
                   type="text"
                   value={sop.name}
                   onChange={(e) => onChange({ ...sop, name: e.target.value })}
                   placeholder="SOP name"
-                  className="w-full px-3 py-2 text-sm bg-zinc-900 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none"
+                  className="w-full px-3 py-2 text-sm bg-surface-base border border-border rounded-lg text-foreground placeholder-muted-foreground focus:border-blue-500 focus:outline-none"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm text-zinc-400">Version</label>
+                <label className="block text-sm text-muted-foreground">Version</label>
                 <input
                   type="text"
                   value={sop.version}
                   onChange={(e) => onChange({ ...sop, version: e.target.value })}
                   placeholder="1.0.0"
-                  className="w-full px-3 py-2 text-sm bg-zinc-900 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none"
+                  className="w-full px-3 py-2 text-sm bg-surface-base border border-border rounded-lg text-foreground placeholder-muted-foreground focus:border-blue-500 focus:outline-none"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm text-zinc-400">Status</label>
+                <label className="block text-sm text-muted-foreground">Status</label>
                 <select
                   value={sop.status}
                   onChange={(e) => onChange({ ...sop, status: e.target.value as SOPStatus })}
-                  className="w-full px-3 py-2 text-sm bg-zinc-900 border border-zinc-700 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                  className="w-full px-3 py-2 text-sm bg-surface-base border border-border rounded-lg text-foreground focus:border-blue-500 focus:outline-none"
                 >
                   {STATUS_OPTIONS.map((opt) => (
                     <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -269,11 +269,11 @@ export function SOPEditor({
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm text-zinc-400">Priority</label>
+                <label className="block text-sm text-muted-foreground">Priority</label>
                 <select
                   value={sop.priority}
                   onChange={(e) => onChange({ ...sop, priority: e.target.value as SOPPriority })}
-                  className="w-full px-3 py-2 text-sm bg-zinc-900 border border-zinc-700 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                  className="w-full px-3 py-2 text-sm bg-surface-base border border-border rounded-lg text-foreground focus:border-blue-500 focus:outline-none"
                 >
                   {PRIORITY_OPTIONS.map((opt) => (
                     <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -282,18 +282,18 @@ export function SOPEditor({
               </div>
 
               <div className="space-y-2 md:col-span-2">
-                <label className="block text-sm text-zinc-400">Description</label>
+                <label className="block text-sm text-muted-foreground">Description</label>
                 <textarea
                   value={sop.description}
                   onChange={(e) => onChange({ ...sop, description: e.target.value })}
                   placeholder="Describe what this SOP does..."
                   rows={3}
-                  className="w-full px-3 py-2 text-sm bg-zinc-900 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none resize-none"
+                  className="w-full px-3 py-2 text-sm bg-surface-base border border-border rounded-lg text-foreground placeholder-muted-foreground focus:border-blue-500 focus:outline-none resize-none"
                 />
               </div>
 
               <div className="space-y-2 md:col-span-2">
-                <label className="flex items-center gap-1 text-sm text-zinc-400">
+                <label className="flex items-center gap-1 text-sm text-muted-foreground">
                   <Tag className="w-4 h-4" />
                   Tags
                 </label>
@@ -308,7 +308,7 @@ export function SOPEditor({
           {/* Rules Section */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-medium text-zinc-300">
+              <h3 className="text-sm font-medium text-muted-foreground">
                 Rules ({sop.rules.length})
               </h3>
               <button
@@ -322,12 +322,12 @@ export function SOPEditor({
             </div>
 
             {sop.rules.length === 0 ? (
-              <div className="p-8 text-center border border-dashed border-zinc-700 rounded-lg">
-                <p className="text-zinc-500 mb-4">No rules defined yet</p>
+              <div className="p-8 text-center border border-dashed border-border rounded-lg">
+                <p className="text-muted-foreground mb-4">No rules defined yet</p>
                 <button
                   type="button"
                   onClick={addRule}
-                  className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 text-sm bg-blue-600 text-foreground rounded-lg hover:bg-blue-500 transition-colors"
                 >
                   <Plus className="w-4 h-4" />
                   Add Your First Rule
@@ -352,7 +352,7 @@ export function SOPEditor({
 
         {/* S1 Preview Panel */}
         {showPreview && (
-          <div className="w-[400px] flex-shrink-0 border-l border-zinc-800">
+          <div className="w-[400px] flex-shrink-0 border-l border-border">
             <S1Preview
               rules={sop.rules}
               sopName={sop.name}
@@ -369,13 +369,13 @@ export function SOPEditor({
       <button
         type="button"
         onClick={() => setShowPreview(!showPreview)}
-        className="fixed bottom-6 right-6 p-3 bg-zinc-800 border border-zinc-700 rounded-full shadow-lg hover:bg-zinc-700 transition-colors z-40"
+        className="fixed bottom-6 right-6 p-3 bg-card border border-border rounded-full shadow-lg hover:bg-muted transition-colors z-40"
         title={showPreview ? 'Hide S1 Preview' : 'Show S1 Preview'}
       >
         {showPreview ? (
-          <ChevronRight className="w-5 h-5 text-zinc-300" />
+          <ChevronRight className="w-5 h-5 text-muted-foreground" />
         ) : (
-          <ChevronDown className="w-5 h-5 text-zinc-300" />
+          <ChevronDown className="w-5 h-5 text-muted-foreground" />
         )}
       </button>
     </div>

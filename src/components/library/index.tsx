@@ -333,7 +333,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
           {icon}
         </div>
       )}
-      <h3 className="text-lg font-medium text-white mb-2">{title}</h3>
+      <h3 className="text-lg font-medium text-foreground mb-2">{title}</h3>
       {description && <p className="text-gray-500 mb-4">{description}</p>}
       {action}
     </div>
@@ -366,7 +366,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
           <div className="p-2 bg-symtex-purple/20 rounded-lg text-symtex-purple">{icon}</div>
         )}
         <div>
-          <h2 className="text-xl font-semibold text-white">{title}</h2>
+          <h2 className="text-xl font-semibold text-foreground">{title}</h2>
           {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
         </div>
       </div>

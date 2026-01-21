@@ -41,12 +41,12 @@ interface EvidencePanelProps {
 const evidenceTypeConfig: Record<EvidenceType, { icon: typeof FileText; color: string }> = {
   screenshot: { icon: Image, color: 'text-purple-400' },
   document: { icon: FileText, color: 'text-blue-400' },
-  log: { icon: FileText, color: 'text-slate-400' },
+  log: { icon: FileText, color: 'text-muted-foreground' },
   code: { icon: Code2, color: 'text-emerald-400' },
   data: { icon: FileJson, color: 'text-amber-400' },
   audio: { icon: FileText, color: 'text-pink-400' },
   video: { icon: FileText, color: 'text-red-400' },
-  other: { icon: FileText, color: 'text-slate-400' },
+  other: { icon: FileText, color: 'text-muted-foreground' },
 };
 
 function formatBytes(bytes: number): string {
@@ -75,7 +75,7 @@ function CopyButton({ text, className }: CopyButtonProps) {
     <button
       onClick={handleCopy}
       className={cn(
-        'p-1.5 rounded hover:bg-slate-700/50 transition-colors',
+        'p-1.5 rounded hover:bg-muted/50 transition-colors',
         className
       )}
       title="Copy to clipboard"
@@ -83,7 +83,7 @@ function CopyButton({ text, className }: CopyButtonProps) {
       {copied ? (
         <Check className="w-3.5 h-3.5 text-emerald-400" />
       ) : (
-        <Copy className="w-3.5 h-3.5 text-slate-400" />
+        <Copy className="w-3.5 h-3.5 text-muted-foreground" />
       )}
     </button>
   );
@@ -99,18 +99,18 @@ function EvidenceItem({ evidence }: EvidenceItemProps) {
   const Icon = config.icon;
 
   return (
-    <div className="border border-slate-700/50 rounded-lg overflow-hidden">
+    <div className="border border-border/50 rounded-lg overflow-hidden">
       <div
-        className="flex items-center justify-between p-3 cursor-pointer hover:bg-slate-700/30 transition-colors"
+        className="flex items-center justify-between p-3 cursor-pointer hover:bg-muted/30 transition-colors"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-slate-700/50">
+          <div className="p-2 rounded-lg bg-muted/50">
             <Icon className={cn('w-4 h-4', config.color)} />
           </div>
           <div>
-            <p className="text-sm font-medium text-white">{evidence.name}</p>
-            <p className="text-xs text-slate-500">
+            <p className="text-sm font-medium text-foreground">{evidence.name}</p>
+            <p className="text-xs text-muted-foreground">
               {evidence.mimeType} - {formatBytes(evidence.size)}
             </p>
           </div>
@@ -121,36 +121,36 @@ function EvidenceItem({ evidence }: EvidenceItemProps) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="p-1.5 rounded hover:bg-slate-600/50 transition-colors"
+            className="p-1.5 rounded hover:bg-muted/50 transition-colors"
             title="Download"
           >
-            <Download className="w-4 h-4 text-slate-400" />
+            <Download className="w-4 h-4 text-muted-foreground" />
           </a>
           {isExpanded ? (
-            <ChevronDown className="w-4 h-4 text-slate-400" />
+            <ChevronDown className="w-4 h-4 text-muted-foreground" />
           ) : (
-            <ChevronRight className="w-4 h-4 text-slate-400" />
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
           )}
         </div>
       </div>
 
       {isExpanded && (
-        <div className="p-3 border-t border-slate-700/50 bg-slate-900/30">
+        <div className="p-3 border-t border-border/50 bg-surface-base/30">
           {evidence.description && (
-            <p className="text-sm text-slate-400 mb-3">{evidence.description}</p>
+            <p className="text-sm text-muted-foreground mb-3">{evidence.description}</p>
           )}
           <div className="space-y-2 text-xs">
             <div className="flex items-center justify-between">
-              <span className="text-slate-500">Captured:</span>
-              <span className="text-slate-300">{evidence.capturedAt.toLocaleString()}</span>
+              <span className="text-muted-foreground">Captured:</span>
+              <span className="text-muted-foreground">{evidence.capturedAt.toLocaleString()}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-500">By:</span>
-              <span className="text-slate-300">{evidence.capturedBy}</span>
+              <span className="text-muted-foreground">By:</span>
+              <span className="text-muted-foreground">{evidence.capturedBy}</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-slate-500">Hash:</span>
-              <span className="text-slate-400 font-mono text-xs truncate flex-1">{evidence.hash}</span>
+              <span className="text-muted-foreground">Hash:</span>
+              <span className="text-muted-foreground font-mono text-xs truncate flex-1">{evidence.hash}</span>
               <CopyButton text={evidence.hash} />
             </div>
           </div>
@@ -241,26 +241,26 @@ export function EvidencePanel({ entry, isOpen, onClose, className }: EvidencePan
   return (
     <div
       className={cn(
-        'fixed right-0 top-0 h-full w-[480px] bg-slate-900 border-l border-slate-700 shadow-2xl z-50 flex flex-col',
+        'fixed right-0 top-0 h-full w-[480px] bg-surface-base border-l border-border shadow-2xl z-50 flex flex-col',
         className
       )}
     >
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-slate-700">
+      <div className="flex items-center justify-between p-4 border-b border-border">
         <div>
-          <h2 className="text-lg font-semibold text-white">Evidence & Details</h2>
-          <p className="text-sm text-slate-400">Entry #{entry.sequence}</p>
+          <h2 className="text-lg font-semibold text-foreground">Evidence & Details</h2>
+          <p className="text-sm text-muted-foreground">Entry #{entry.sequence}</p>
         </div>
         <button
           onClick={onClose}
-          className="p-2 rounded-lg hover:bg-slate-800 transition-colors"
+          className="p-2 rounded-lg hover:bg-card transition-colors"
         >
-          <X className="w-5 h-5 text-slate-400" />
+          <X className="w-5 h-5 text-muted-foreground" />
         </button>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-slate-700">
+      <div className="flex border-b border-border">
         {[
           { id: 'io', label: 'Input/Output' },
           { id: 'evidence', label: `Evidence (${entry.evidence?.length || 0})` },
@@ -272,8 +272,8 @@ export function EvidencePanel({ entry, isOpen, onClose, className }: EvidencePan
             className={cn(
               'flex-1 px-4 py-3 text-sm font-medium transition-colors',
               activeTab === tab.id
-                ? 'text-white border-b-2 border-indigo-500'
-                : 'text-slate-400 hover:text-white'
+                ? 'text-foreground border-b-2 border-indigo-500'
+                : 'text-muted-foreground hover:text-foreground'
             )}
           >
             {tab.label}
@@ -287,15 +287,15 @@ export function EvidencePanel({ entry, isOpen, onClose, className }: EvidencePan
         {activeTab === 'io' && (
           <div className="space-y-4">
             {/* Input Snapshot */}
-            <Card className="bg-slate-800/50 border-slate-700/50">
+            <Card className="bg-card/50 border-border/50">
               <CardHeader className="py-3">
-                <CardTitle className="text-sm font-medium text-white flex items-center justify-between">
+                <CardTitle className="text-sm font-medium text-foreground flex items-center justify-between">
                   <span>Input Snapshot</span>
                   <CopyButton text={mockIO.input} />
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
-                <pre className="text-xs text-slate-300 bg-slate-900/50 p-3 rounded-lg overflow-x-auto font-mono">
+                <pre className="text-xs text-muted-foreground bg-surface-base/50 p-3 rounded-lg overflow-x-auto font-mono">
                   {mockIO.input}
                 </pre>
               </CardContent>
@@ -303,30 +303,30 @@ export function EvidencePanel({ entry, isOpen, onClose, className }: EvidencePan
 
             {/* Arrow */}
             <div className="flex justify-center">
-              <div className="p-2 rounded-full bg-slate-800 border border-slate-700">
+              <div className="p-2 rounded-full bg-card border border-border">
                 <ArrowRight className="w-4 h-4 text-indigo-400 rotate-90" />
               </div>
             </div>
 
             {/* Output Snapshot */}
-            <Card className="bg-slate-800/50 border-slate-700/50">
+            <Card className="bg-card/50 border-border/50">
               <CardHeader className="py-3">
-                <CardTitle className="text-sm font-medium text-white flex items-center justify-between">
+                <CardTitle className="text-sm font-medium text-foreground flex items-center justify-between">
                   <span>Output Snapshot</span>
                   <CopyButton text={mockIO.output} />
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
-                <pre className="text-xs text-slate-300 bg-slate-900/50 p-3 rounded-lg overflow-x-auto font-mono">
+                <pre className="text-xs text-muted-foreground bg-surface-base/50 p-3 rounded-lg overflow-x-auto font-mono">
                   {mockIO.output}
                 </pre>
               </CardContent>
             </Card>
 
             {/* Citations */}
-            <Card className="bg-slate-800/50 border-slate-700/50">
+            <Card className="bg-card/50 border-border/50">
               <CardHeader className="py-3">
-                <CardTitle className="text-sm font-medium text-white flex items-center gap-2">
+                <CardTitle className="text-sm font-medium text-foreground flex items-center gap-2">
                   <Link2 className="w-4 h-4 text-indigo-400" />
                   Citations & References
                 </CardTitle>
@@ -337,12 +337,12 @@ export function EvidencePanel({ entry, isOpen, onClose, className }: EvidencePan
                     <a
                       key={citation.id}
                       href={citation.url}
-                      className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-700/50 transition-colors group"
+                      className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 transition-colors group"
                     >
-                      <span className="text-sm text-slate-300 group-hover:text-white">
+                      <span className="text-sm text-muted-foreground group-hover:text-foreground">
                         {citation.title}
                       </span>
-                      <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover:text-indigo-400" />
+                      <ExternalLink className="w-3.5 h-3.5 text-muted-foreground group-hover:text-indigo-400" />
                     </a>
                   ))}
                 </div>
@@ -360,9 +360,9 @@ export function EvidencePanel({ entry, isOpen, onClose, className }: EvidencePan
               ))
             ) : (
               <div className="text-center py-8">
-                <FileText className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-                <p className="text-slate-400">No evidence attachments</p>
-                <p className="text-sm text-slate-500 mt-1">
+                <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+                <p className="text-muted-foreground">No evidence attachments</p>
+                <p className="text-sm text-muted-foreground mt-1">
                   This entry has no attached files or documents
                 </p>
               </div>
@@ -373,9 +373,9 @@ export function EvidencePanel({ entry, isOpen, onClose, className }: EvidencePan
         {/* Crypto/Verification Tab */}
         {activeTab === 'crypto' && (
           <div className="space-y-4">
-            <Card className="bg-slate-800/50 border-slate-700/50">
+            <Card className="bg-card/50 border-border/50">
               <CardHeader className="py-3">
-                <CardTitle className="text-sm font-medium text-white flex items-center gap-2">
+                <CardTitle className="text-sm font-medium text-foreground flex items-center gap-2">
                   <Shield className="w-4 h-4 text-emerald-400" />
                   Cryptographic Verification
                 </CardTitle>
@@ -388,18 +388,18 @@ export function EvidencePanel({ entry, isOpen, onClose, className }: EvidencePan
                       Integrity Verified
                     </span>
                   </div>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-muted-foreground">
                     This entry has not been modified since creation
                   </p>
                 </div>
 
                 <div className="space-y-3">
                   <div>
-                    <label className="text-xs text-slate-500 uppercase tracking-wider">
+                    <label className="text-xs text-muted-foreground uppercase tracking-wider">
                       Content Hash
                     </label>
                     <div className="flex items-center gap-2 mt-1">
-                      <code className="flex-1 text-xs text-slate-300 bg-slate-900/50 p-2 rounded font-mono truncate">
+                      <code className="flex-1 text-xs text-muted-foreground bg-surface-base/50 p-2 rounded font-mono truncate">
                         {entry.crypto.contentHash}
                       </code>
                       <CopyButton text={entry.crypto.contentHash} />
@@ -407,11 +407,11 @@ export function EvidencePanel({ entry, isOpen, onClose, className }: EvidencePan
                   </div>
 
                   <div>
-                    <label className="text-xs text-slate-500 uppercase tracking-wider">
+                    <label className="text-xs text-muted-foreground uppercase tracking-wider">
                       Previous Hash
                     </label>
                     <div className="flex items-center gap-2 mt-1">
-                      <code className="flex-1 text-xs text-slate-300 bg-slate-900/50 p-2 rounded font-mono truncate">
+                      <code className="flex-1 text-xs text-muted-foreground bg-surface-base/50 p-2 rounded font-mono truncate">
                         {entry.crypto.previousHash}
                       </code>
                       <CopyButton text={entry.crypto.previousHash} />
@@ -420,16 +420,16 @@ export function EvidencePanel({ entry, isOpen, onClose, className }: EvidencePan
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-xs text-slate-500 uppercase tracking-wider">
+                      <label className="text-xs text-muted-foreground uppercase tracking-wider">
                         Algorithm
                       </label>
-                      <p className="text-sm text-slate-300 mt-1">{entry.crypto.algorithm}</p>
+                      <p className="text-sm text-muted-foreground mt-1">{entry.crypto.algorithm}</p>
                     </div>
                     <div>
-                      <label className="text-xs text-slate-500 uppercase tracking-wider">
+                      <label className="text-xs text-muted-foreground uppercase tracking-wider">
                         Hashed At
                       </label>
-                      <p className="text-sm text-slate-300 mt-1">
+                      <p className="text-sm text-muted-foreground mt-1">
                         {entry.crypto.hashedAt.toLocaleString()}
                       </p>
                     </div>
@@ -437,11 +437,11 @@ export function EvidencePanel({ entry, isOpen, onClose, className }: EvidencePan
 
                   {entry.crypto.signature && (
                     <div>
-                      <label className="text-xs text-slate-500 uppercase tracking-wider">
+                      <label className="text-xs text-muted-foreground uppercase tracking-wider">
                         Digital Signature
                       </label>
                       <div className="flex items-center gap-2 mt-1">
-                        <code className="flex-1 text-xs text-slate-300 bg-slate-900/50 p-2 rounded font-mono truncate">
+                        <code className="flex-1 text-xs text-muted-foreground bg-surface-base/50 p-2 rounded font-mono truncate">
                           {entry.crypto.signature}
                         </code>
                         <CopyButton text={entry.crypto.signature} />
@@ -453,16 +453,16 @@ export function EvidencePanel({ entry, isOpen, onClose, className }: EvidencePan
             </Card>
 
             {/* Chain Info */}
-            <Card className="bg-slate-800/50 border-slate-700/50">
+            <Card className="bg-card/50 border-border/50">
               <CardHeader className="py-3">
-                <CardTitle className="text-sm font-medium text-white">
+                <CardTitle className="text-sm font-medium text-foreground">
                   Chain Position
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-slate-400">Sequence Number</span>
-                  <Badge variant="outline" className="border-slate-600 text-slate-300">
+                  <span className="text-muted-foreground">Sequence Number</span>
+                  <Badge variant="outline" className="border-border text-muted-foreground">
                     #{entry.sequence}
                   </Badge>
                 </div>

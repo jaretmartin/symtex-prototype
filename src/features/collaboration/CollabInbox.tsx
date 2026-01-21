@@ -70,8 +70,8 @@ const priorityConfig: Record<
   InboxPriority,
   { color: string; bgColor: string; label: string }
 > = {
-  low: { color: 'text-zinc-400', bgColor: 'bg-zinc-500/20', label: 'Low' },
-  normal: { color: 'text-zinc-300', bgColor: 'bg-zinc-500/20', label: 'Normal' },
+  low: { color: 'text-muted-foreground', bgColor: 'bg-muted/20', label: 'Low' },
+  normal: { color: 'text-muted-foreground', bgColor: 'bg-muted/20', label: 'Normal' },
   high: { color: 'text-amber-400', bgColor: 'bg-amber-500/20', label: 'High' },
   urgent: { color: 'text-red-400', bgColor: 'bg-red-500/20', label: 'Urgent' },
 };
@@ -212,11 +212,11 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
             <Inbox className="w-6 h-6 text-symtex-primary" />
             Collab Inbox
           </h1>
-          <p className="text-zinc-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             All messages and notifications from your Cognates
           </p>
         </div>
@@ -242,8 +242,8 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
               onClick={markAllInboxAsRead}
               className={clsx(
                 'flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm',
-                'border border-zinc-700 text-zinc-400',
-                'hover:border-zinc-600 hover:text-white hover:bg-zinc-800/50',
+                'border border-border text-muted-foreground',
+                'hover:border-border hover:text-foreground hover:bg-card/50',
                 'transition-colors'
               )}
             >
@@ -255,26 +255,26 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
       </div>
 
       {/* Toolbar */}
-      <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-4">
+      <div className="bg-surface-base/50 border border-border rounded-lg p-4">
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">
           {/* Search */}
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search inbox..."
               className={clsx(
-                'w-full pl-10 pr-4 py-2 rounded-lg bg-zinc-800 border border-zinc-700',
-                'text-white placeholder-zinc-500 text-sm',
+                'w-full pl-10 pr-4 py-2 rounded-lg bg-card border border-border',
+                'text-foreground placeholder-zinc-500 text-sm',
                 'focus:outline-none focus:border-symtex-primary focus:ring-1 focus:ring-symtex-primary'
               )}
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -289,7 +289,7 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
                 'px-3 py-1.5 rounded text-sm',
                 filterType === 'all'
                   ? 'bg-symtex-primary/20 text-symtex-primary'
-                  : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-card'
               )}
             >
               All
@@ -305,7 +305,7 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
                     'px-3 py-1.5 rounded text-sm flex items-center gap-1.5',
                     filterType === type
                       ? clsx(config.bgColor, config.color)
-                      : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-card'
                   )}
                 >
                   <Icon className="w-3.5 h-3.5" />
@@ -322,7 +322,7 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
               'flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm',
               showFilters || hasActiveFilters
                 ? 'bg-symtex-primary/20 text-symtex-primary border border-symtex-primary/30'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-700'
+                : 'text-muted-foreground hover:text-foreground hover:bg-card border border-border'
             )}
           >
             <Filter className="w-4 h-4" />
@@ -332,16 +332,16 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
 
         {/* Expanded Filters */}
         {showFilters && (
-          <div className="mt-4 pt-4 border-t border-zinc-800 flex flex-wrap items-center gap-4">
+          <div className="mt-4 pt-4 border-t border-border flex flex-wrap items-center gap-4">
             {/* Priority Filter */}
             <div className="flex items-center gap-2">
-              <span className="text-sm text-zinc-500">Priority:</span>
+              <span className="text-sm text-muted-foreground">Priority:</span>
               <select
                 value={filterPriority}
                 onChange={(e) => setFilterPriority(e.target.value as FilterPriority)}
                 className={clsx(
-                  'px-2 py-1 rounded text-sm bg-zinc-800 border border-zinc-700',
-                  'text-zinc-300 focus:outline-none focus:border-symtex-primary'
+                  'px-2 py-1 rounded text-sm bg-card border border-border',
+                  'text-muted-foreground focus:outline-none focus:border-symtex-primary'
                 )}
               >
                 <option value="all">All</option>
@@ -354,7 +354,7 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
 
             {/* Read Status Filter */}
             <div className="flex items-center gap-2">
-              <span className="text-sm text-zinc-500">Status:</span>
+              <span className="text-sm text-muted-foreground">Status:</span>
               {(['all', 'unread', 'read'] as FilterRead[]).map((status) => (
                 <button
                   key={status}
@@ -362,8 +362,8 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
                   className={clsx(
                     'px-2 py-1 rounded text-xs capitalize',
                     filterRead === status
-                      ? 'bg-zinc-700 text-white'
-                      : 'text-zinc-400 hover:text-white'
+                      ? 'bg-muted text-foreground'
+                      : 'text-muted-foreground hover:text-foreground'
                   )}
                 >
                   {status}
@@ -373,13 +373,13 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
 
             {/* Cognate Filter */}
             <div className="flex items-center gap-2">
-              <span className="text-sm text-zinc-500">Cognate:</span>
+              <span className="text-sm text-muted-foreground">Cognate:</span>
               <select
                 value={filterCognate || ''}
                 onChange={(e) => setFilterCognate(e.target.value || null)}
                 className={clsx(
-                  'px-2 py-1 rounded text-sm bg-zinc-800 border border-zinc-700',
-                  'text-zinc-300 focus:outline-none focus:border-symtex-primary'
+                  'px-2 py-1 rounded text-sm bg-card border border-border',
+                  'text-muted-foreground focus:outline-none focus:border-symtex-primary'
                 )}
               >
                 <option value="">All Cognates</option>
@@ -395,7 +395,7 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
             {hasActiveFilters && (
               <button
                 onClick={clearFilters}
-                className="text-sm text-zinc-400 hover:text-white flex items-center gap-1"
+                className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1"
               >
                 <X className="w-3 h-3" />
                 Clear filters
@@ -407,15 +407,15 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
 
       {/* Results Summary */}
       <div className="flex items-center justify-between text-sm">
-        <span className="text-zinc-400">
-          Showing <strong className="text-white">{filteredItems.length}</strong>{' '}
+        <span className="text-muted-foreground">
+          Showing <strong className="text-foreground">{filteredItems.length}</strong>{' '}
           {filteredItems.length === 1 ? 'message' : 'messages'}
           {hasActiveFilters && ' (filtered)'}
         </span>
       </div>
 
       {/* Messages List */}
-      <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg overflow-hidden divide-y divide-zinc-800/50">
+      <div className="bg-surface-base/50 border border-border rounded-lg overflow-hidden divide-y divide-zinc-800/50">
         {filteredItems.map((item) => (
           <InboxRow
             key={item.id}
@@ -428,11 +428,11 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
           <div className="p-12 text-center">
             {hasActiveFilters ? (
               <>
-                <Filter className="w-12 h-12 text-zinc-600 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-white mb-2">
+                <Filter className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-foreground mb-2">
                   No matching messages
                 </h3>
-                <p className="text-zinc-400 mb-4">
+                <p className="text-muted-foreground mb-4">
                   Try adjusting your filters to see more results
                 </p>
                 <button
@@ -444,11 +444,11 @@ export function CollabInbox({ className }: CollabInboxProps): JSX.Element {
               </>
             ) : (
               <>
-                <Inbox className="w-12 h-12 text-zinc-600 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-white mb-2">
+                <Inbox className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-foreground mb-2">
                   Inbox empty
                 </h3>
-                <p className="text-zinc-400">
+                <p className="text-muted-foreground">
                   No messages from your Cognates yet
                 </p>
               </>
@@ -474,8 +474,8 @@ function InboxRow({ item, onClick }: InboxRowProps): JSX.Element {
     <div
       onClick={onClick}
       className={clsx(
-        'p-4 hover:bg-zinc-800/30 transition-colors cursor-pointer group',
-        !item.read && 'bg-zinc-800/20'
+        'p-4 hover:bg-card/30 transition-colors cursor-pointer group',
+        !item.read && 'bg-card/20'
       )}
     >
       <div className="flex items-start gap-3">
@@ -495,7 +495,7 @@ function InboxRow({ item, onClick }: InboxRowProps): JSX.Element {
             <h4
               className={clsx(
                 'font-medium text-sm truncate',
-                item.read ? 'text-zinc-300' : 'text-white'
+                item.read ? 'text-muted-foreground' : 'text-foreground'
               )}
             >
               {item.title}
@@ -526,14 +526,14 @@ function InboxRow({ item, onClick }: InboxRowProps): JSX.Element {
           <p
             className={clsx(
               'text-sm truncate',
-              item.read ? 'text-zinc-500' : 'text-zinc-400'
+              item.read ? 'text-muted-foreground' : 'text-muted-foreground'
             )}
           >
             {item.preview}
           </p>
 
           {/* Meta */}
-          <div className="flex items-center gap-3 mt-2 text-xs text-zinc-500">
+          <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
             {/* Cognate */}
             {item.cognateName && (
               <span className="flex items-center gap-1">
@@ -553,7 +553,7 @@ function InboxRow({ item, onClick }: InboxRowProps): JSX.Element {
         {/* Link indicator */}
         {item.relatedApprovalId && (
           <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-            <ExternalLink className="w-4 h-4 text-zinc-500" />
+            <ExternalLink className="w-4 h-4 text-muted-foreground" />
           </div>
         )}
       </div>

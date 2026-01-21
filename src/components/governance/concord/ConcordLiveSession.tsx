@@ -35,7 +35,7 @@ const SENTIMENT_COLORS: Record<Sentiment, string> = {
   compromising: 'bg-green-500/20 text-green-400',
   agreeable: 'bg-emerald-500/20 text-emerald-400',
   supportive: 'bg-teal-500/20 text-teal-400',
-  neutral: 'bg-zinc-500/20 text-zinc-400',
+  neutral: 'bg-muted/20 text-muted-foreground',
 };
 
 // ============================================================================
@@ -121,13 +121,13 @@ export function ConcordLiveSession() {
         <div className="flex items-center gap-4">
           <Link
             to="/governance/concord"
-            className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
+            className="p-2 hover:bg-card rounded-lg transition-colors"
           >
-            <ArrowLeft className="w-5 h-5 text-zinc-400" />
+            <ArrowLeft className="w-5 h-5 text-muted-foreground" />
           </Link>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-bold text-zinc-100">CONCORD: {currentSession.topic}</h1>
+              <h1 className="text-xl font-bold text-muted-foreground">CONCORD: {currentSession.topic}</h1>
               <span
                 className={clsx(
                   'px-2 py-0.5 text-xs font-medium rounded-full',
@@ -137,15 +137,15 @@ export function ConcordLiveSession() {
                 {isRunning ? 'LIVE' : 'PAUSED'}
               </span>
             </div>
-            <p className="text-sm text-zinc-500">{currentSession.participants.length} participants</p>
+            <p className="text-sm text-muted-foreground">{currentSession.participants.length} participants</p>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
           {/* Timer */}
-          <div className="flex items-center gap-2 bg-zinc-800 px-4 py-2 rounded-xl">
-            <Clock className="w-4 h-4 text-zinc-500" />
-            <span className="font-mono font-bold text-zinc-100">
+          <div className="flex items-center gap-2 bg-card px-4 py-2 rounded-xl">
+            <Clock className="w-4 h-4 text-muted-foreground" />
+            <span className="font-mono font-bold text-muted-foreground">
               {formatTime(elapsedTime)} / {formatTime(totalTimeLimit)}
             </span>
           </div>
@@ -179,7 +179,7 @@ export function ConcordLiveSession() {
       </div>
 
       {/* Time Progress Bar */}
-      <div className="h-1.5 bg-zinc-700 rounded-full mb-4 overflow-hidden">
+      <div className="h-1.5 bg-muted rounded-full mb-4 overflow-hidden">
         <div
           className={clsx(
             'h-full transition-all',
@@ -192,9 +192,9 @@ export function ConcordLiveSession() {
       {/* Main Content */}
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-4 min-h-0">
         {/* Transcript Panel */}
-        <div className="lg:col-span-2 bg-zinc-800 rounded-xl border border-zinc-700 flex flex-col overflow-hidden">
-          <div className="flex items-center justify-between p-4 border-b border-zinc-700">
-            <h2 className="font-semibold flex items-center gap-2 text-zinc-100">
+        <div className="lg:col-span-2 bg-card rounded-xl border border-border flex flex-col overflow-hidden">
+          <div className="flex items-center justify-between p-4 border-b border-border">
+            <h2 className="font-semibold flex items-center gap-2 text-muted-foreground">
               <MessageSquare className="w-5 h-5 text-purple-400" />
               Live Transcript
             </h2>
@@ -218,7 +218,7 @@ export function ConcordLiveSession() {
                   value={humanInput}
                   onChange={(e) => setHumanInput(e.target.value)}
                   placeholder="Type your input..."
-                  className="flex-1 px-3 py-2 bg-zinc-900 rounded-lg border border-zinc-700 focus:outline-none focus:border-purple-500 text-zinc-100"
+                  className="flex-1 px-3 py-2 bg-surface-base rounded-lg border border-border focus:outline-none focus:border-purple-500 text-muted-foreground"
                 />
                 <button
                   onClick={handleHumanOverride}
@@ -248,8 +248,8 @@ export function ConcordLiveSession() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="font-semibold text-zinc-100">{cognateInfo?.name || 'Unknown'}</span>
-                      <span className="text-xs text-zinc-500">{turn.timestamp}</span>
+                      <span className="font-semibold text-muted-foreground">{cognateInfo?.name || 'Unknown'}</span>
+                      <span className="text-xs text-muted-foreground">{turn.timestamp}</span>
                       {turn.speaker !== 'human' && (
                         <button className="text-xs text-purple-400 hover:underline flex items-center gap-1">
                           <Brain className="w-3 h-3" />
@@ -257,7 +257,7 @@ export function ConcordLiveSession() {
                         </button>
                       )}
                     </div>
-                    <p className="text-zinc-300">{turn.message}</p>
+                    <p className="text-muted-foreground">{turn.message}</p>
                     <span
                       className={clsx(
                         'inline-block mt-1 text-xs px-2 py-0.5 rounded-full',
@@ -272,19 +272,19 @@ export function ConcordLiveSession() {
             })}
 
             {isRunning && (
-              <div className="flex gap-3 items-center text-zinc-500">
-                <div className="w-10 h-10 rounded-xl bg-zinc-700 flex items-center justify-center">
+              <div className="flex gap-3 items-center text-muted-foreground">
+                <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
                   <div className="flex gap-1">
                     <span
-                      className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce"
+                      className="w-2 h-2 bg-muted rounded-full animate-bounce"
                       style={{ animationDelay: '0ms' }}
                     />
                     <span
-                      className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce"
+                      className="w-2 h-2 bg-muted rounded-full animate-bounce"
                       style={{ animationDelay: '150ms' }}
                     />
                     <span
-                      className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce"
+                      className="w-2 h-2 bg-muted rounded-full animate-bounce"
                       style={{ animationDelay: '300ms' }}
                     />
                   </div>
@@ -298,14 +298,14 @@ export function ConcordLiveSession() {
         {/* Dynamics Panel */}
         <div className="space-y-4 overflow-y-auto">
           {/* Consensus Gauge */}
-          <div className="bg-zinc-800 rounded-xl border border-zinc-700 p-5">
-            <h3 className="font-semibold mb-4 flex items-center gap-2 text-zinc-100">
+          <div className="bg-card rounded-xl border border-border p-5">
+            <h3 className="font-semibold mb-4 flex items-center gap-2 text-muted-foreground">
               <BarChart2 className="w-5 h-5 text-purple-400" />
               Consensus Level
             </h3>
             <div className="relative pt-1">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-3xl font-bold text-zinc-100">{dynamics.consensus}%</span>
+                <span className="text-3xl font-bold text-muted-foreground">{dynamics.consensus}%</span>
                 <span
                   className={clsx(
                     'text-sm px-2 py-1 rounded-lg',
@@ -319,7 +319,7 @@ export function ConcordLiveSession() {
                   {dynamics.consensus >= 75 ? 'Strong' : dynamics.consensus >= 50 ? 'Building' : 'Divergent'}
                 </span>
               </div>
-              <div className="h-4 bg-zinc-700 rounded-full overflow-hidden">
+              <div className="h-4 bg-muted rounded-full overflow-hidden">
                 <div
                   className={clsx(
                     'h-full transition-all duration-500',
@@ -336,8 +336,8 @@ export function ConcordLiveSession() {
           </div>
 
           {/* Participant Alignment */}
-          <div className="bg-zinc-800 rounded-xl border border-zinc-700 p-5">
-            <h3 className="font-semibold mb-4 text-zinc-100">Participant Alignment</h3>
+          <div className="bg-card rounded-xl border border-border p-5">
+            <h3 className="font-semibold mb-4 text-muted-foreground">Participant Alignment</h3>
             <div className="space-y-4">
               {dynamics.participantAlignment.map((participant) => {
                 const cognateInfo = getParticipantInfo(participant.cognateId);
@@ -346,18 +346,18 @@ export function ConcordLiveSession() {
                     <div className="flex items-center justify-between mb-1">
                       <div className="flex items-center gap-2">
                         <span className="text-lg">{cognateInfo?.avatar || '?'}</span>
-                        <span className="text-sm font-medium text-zinc-300">
+                        <span className="text-sm font-medium text-muted-foreground">
                           {cognateInfo?.name || 'Unknown'}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-zinc-100">{participant.alignment}%</span>
+                        <span className="text-sm font-bold text-muted-foreground">{participant.alignment}%</span>
                         {participant.trend === 'increasing' && (
                           <span className="text-xs text-green-400">+</span>
                         )}
                       </div>
                     </div>
-                    <div className="h-2 bg-zinc-700 rounded-full overflow-hidden">
+                    <div className="h-2 bg-muted rounded-full overflow-hidden">
                       <div
                         className="h-full bg-purple-600 rounded-full transition-all"
                         style={{ width: `${participant.alignment}%` }}
@@ -370,8 +370,8 @@ export function ConcordLiveSession() {
           </div>
 
           {/* Emerging Consensus */}
-          <div className="bg-zinc-800 rounded-xl border border-zinc-700 p-5">
-            <h3 className="font-semibold mb-4 flex items-center gap-2 text-zinc-100">
+          <div className="bg-card rounded-xl border border-border p-5">
+            <h3 className="font-semibold mb-4 flex items-center gap-2 text-muted-foreground">
               <CheckCircle className="w-5 h-5 text-green-400" />
               Emerging Consensus
             </h3>
@@ -379,7 +379,7 @@ export function ConcordLiveSession() {
               {dynamics.emergingConsensus.map((point, index) => (
                 <li key={index} className="flex items-start gap-2 text-sm">
                   <ChevronRight className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
-                  <span className="text-zinc-400">{point}</span>
+                  <span className="text-muted-foreground">{point}</span>
                 </li>
               ))}
             </ul>
@@ -387,11 +387,11 @@ export function ConcordLiveSession() {
 
           {/* Estimated Time */}
           <div className="bg-gradient-to-br from-purple-900/20 to-zinc-800 rounded-xl border border-purple-700/50 p-5">
-            <h3 className="font-semibold mb-2 text-zinc-100">Estimated Completion</h3>
+            <h3 className="font-semibold mb-2 text-muted-foreground">Estimated Completion</h3>
             <p className="text-2xl font-bold text-purple-400">
               ~{Math.ceil(dynamics.estimatedTimeRemaining / 60)} min
             </p>
-            <p className="text-sm text-zinc-500 mt-1">Current: {dynamics.currentTopic}</p>
+            <p className="text-sm text-muted-foreground mt-1">Current: {dynamics.currentTopic}</p>
           </div>
         </div>
       </div>

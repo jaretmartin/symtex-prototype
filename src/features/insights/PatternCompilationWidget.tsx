@@ -66,38 +66,38 @@ export function PatternCompilationWidget({
   }, [patterns]);
 
   return (
-    <Card className={cn('bg-slate-800/50 border-slate-700/50', className)}>
+    <Card className={cn('bg-card/50 border-border/50', className)}>
       <CardHeader className="pb-2">
         <div className="flex items-start justify-between">
           <div>
-            <CardTitle className="text-lg font-semibold text-white flex items-center gap-2">
+            <CardTitle className="text-lg font-semibold text-foreground flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-amber-400" />
               Pattern Compilation
             </CardTitle>
-            <CardDescription className="text-slate-400">
+            <CardDescription className="text-muted-foreground">
               Patterns converted to deterministic S1
             </CardDescription>
           </div>
           <div className="text-right">
-            <p className="text-3xl font-bold text-white">{totalCompiled}</p>
-            <p className="text-xs text-slate-400">Patterns Compiled</p>
+            <p className="text-3xl font-bold text-foreground">{totalCompiled}</p>
+            <p className="text-xs text-muted-foreground">Patterns Compiled</p>
           </div>
         </div>
       </CardHeader>
       <CardContent className="pt-4">
         {/* Stats Row */}
-        <div className="flex items-center gap-4 mb-4 p-3 rounded-lg bg-slate-900/50">
-          <div className="flex-1 text-center border-r border-slate-700">
+        <div className="flex items-center gap-4 mb-4 p-3 rounded-lg bg-surface-base/50">
+          <div className="flex-1 text-center border-r border-border">
             <p className="text-lg font-semibold text-indigo-400">
               {formatTimeSaved(totalTimeSaved)}
             </p>
-            <p className="text-xs text-slate-500">Time Saved</p>
+            <p className="text-xs text-muted-foreground">Time Saved</p>
           </div>
           <div className="flex-1 text-center">
             <p className="text-lg font-semibold text-purple-400">
               {neuralConverted}
             </p>
-            <p className="text-xs text-slate-500">Neural to Symbolic</p>
+            <p className="text-xs text-muted-foreground">Neural to Symbolic</p>
           </div>
         </div>
 
@@ -109,7 +109,7 @@ export function PatternCompilationWidget({
             </div>
             <span className="text-xs font-medium text-purple-300">Neural</span>
           </div>
-          <ArrowRight className="w-4 h-4 text-slate-500" />
+          <ArrowRight className="w-4 h-4 text-muted-foreground" />
           <div className="flex items-center gap-1.5">
             <div className="p-1 rounded bg-indigo-500/20">
               <FileCode className="w-3 h-3 text-indigo-400" />
@@ -121,23 +121,23 @@ export function PatternCompilationWidget({
 
         {/* Recent Compilations */}
         <div className="space-y-2">
-          <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">
+          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
             Recent Compilations
           </p>
           {visiblePatterns.map((pattern) => (
             <div
               key={pattern.id}
-              className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-700/30 transition-colors"
+              className="flex items-center justify-between p-2 rounded-lg hover:bg-muted/30 transition-colors"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div className="p-1.5 rounded bg-slate-700/50">
-                  <FileCode className="w-3.5 h-3.5 text-slate-400" />
+                <div className="p-1.5 rounded bg-muted/50">
+                  <FileCode className="w-3.5 h-3.5 text-muted-foreground" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-white truncate">
+                  <p className="text-sm font-medium text-foreground truncate">
                     {pattern.patternName}
                   </p>
-                  <p className="text-xs text-slate-500 truncate">{pattern.sourcePath}</p>
+                  <p className="text-xs text-muted-foreground truncate">{pattern.sourcePath}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
@@ -147,12 +147,12 @@ export function PatternCompilationWidget({
                     'text-xs',
                     pattern.convertedFrom === 'neural'
                       ? 'border-purple-500/30 text-purple-400 bg-purple-500/10'
-                      : 'border-slate-600 text-slate-400 bg-slate-700/50'
+                      : 'border-border text-muted-foreground bg-muted/50'
                   )}
                 >
                   {pattern.convertedFrom === 'neural' ? 'Neural' : 'Manual'}
                 </Badge>
-                <div className="flex items-center gap-1 text-xs text-slate-500">
+                <div className="flex items-center gap-1 text-xs text-muted-foreground">
                   <Clock className="w-3 h-3" />
                   {formatTimeAgo(pattern.timestamp)}
                 </div>
@@ -163,7 +163,7 @@ export function PatternCompilationWidget({
 
         {/* Footer */}
         {patterns.length > maxVisible && (
-          <div className="mt-3 pt-3 border-t border-slate-700 text-center">
+          <div className="mt-3 pt-3 border-t border-border text-center">
             <button className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
               View all {patterns.length} recent compilations
             </button>

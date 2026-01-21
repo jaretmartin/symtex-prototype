@@ -140,9 +140,9 @@ function SAMRouterViz({
 
   if (compact) {
     return (
-      <div className={cn('flex items-center gap-2 px-3 py-2 bg-symtex-card rounded-lg border border-symtex-border', className)}>
+      <div className={cn('flex items-center gap-2 px-3 py-2 bg-card rounded-lg border border-border', className)}>
         <TargetIcon className={cn('w-4 h-4', config.color)} />
-        <span className="text-sm text-white">{config.label}</span>
+        <span className="text-sm text-foreground">{config.label}</span>
         <span className={cn('text-xs px-1.5 py-0.5 rounded', config.bgColor, config.color)}>
           {decision.confidence}%
         </span>
@@ -151,15 +151,15 @@ function SAMRouterViz({
   }
 
   return (
-    <div className={cn('bg-symtex-card rounded-xl border border-symtex-border overflow-hidden', className)}>
+    <div className={cn('bg-card rounded-xl border border-border overflow-hidden', className)}>
       {/* Header */}
-      <div className="p-4 border-b border-symtex-border bg-slate-800/30">
+      <div className="p-4 border-b border-border bg-card/30">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
             <Target className="w-4 h-4 text-symtex-primary" />
             SAM ROUTING DECISION
           </h3>
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-muted-foreground">
             {new Date(decision.timestamp).toLocaleTimeString()}
           </span>
         </div>
@@ -173,10 +173,10 @@ function SAMRouterViz({
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: animationPhase !== 'query' ? 1 : 0.5, x: 0 }}
-            className="flex-1 p-3 bg-slate-800/50 rounded-lg border border-symtex-border"
+            className="flex-1 p-3 bg-card/50 rounded-lg border border-border"
           >
-            <p className="text-xs text-slate-500 mb-1">Query</p>
-            <p className="text-sm text-white line-clamp-2">{decision.query}</p>
+            <p className="text-xs text-muted-foreground mb-1">Query</p>
+            <p className="text-sm text-foreground line-clamp-2">{decision.query}</p>
           </motion.div>
 
           {/* Arrow */}
@@ -185,7 +185,7 @@ function SAMRouterViz({
             animate={{ opacity: animationPhase === 'router' || animationPhase === 'target' ? 1 : 0.3, scale: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <ArrowRight className="w-5 h-5 text-slate-500" />
+            <ArrowRight className="w-5 h-5 text-muted-foreground" />
           </motion.div>
 
           {/* SAM Router */}
@@ -198,7 +198,7 @@ function SAMRouterViz({
             <div className="p-2 bg-symtex-primary/30 rounded-lg inline-block mb-2">
               <Sparkles className="w-5 h-5 text-symtex-primary" />
             </div>
-            <p className="text-xs text-slate-300">SAM Router</p>
+            <p className="text-xs text-muted-foreground">SAM Router</p>
             <p className="text-lg font-bold text-symtex-primary">{decision.confidence}%</p>
           </motion.div>
 
@@ -208,7 +208,7 @@ function SAMRouterViz({
             animate={{ opacity: animationPhase === 'target' ? 1 : 0.3, scale: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <ArrowRight className="w-5 h-5 text-slate-500" />
+            <ArrowRight className="w-5 h-5 text-muted-foreground" />
           </motion.div>
 
           {/* Target */}
@@ -221,49 +221,49 @@ function SAMRouterViz({
             <TargetIcon className={cn('w-6 h-6 mx-auto mb-2', config.color)} />
             <p className={cn('text-sm font-semibold', config.color)}>{config.label}</p>
             {decision.pattern && (
-              <p className="text-xs text-slate-400 mt-1">Pattern: {decision.pattern}</p>
+              <p className="text-xs text-muted-foreground mt-1">Pattern: {decision.pattern}</p>
             )}
           </motion.div>
         </div>
 
         {/* Cost Comparison */}
         <div className="grid grid-cols-3 gap-3 mb-4">
-          <div className="p-3 bg-slate-800/50 rounded-lg text-center">
+          <div className="p-3 bg-card/50 rounded-lg text-center">
             <DollarSign className="w-4 h-4 text-green-400 mx-auto mb-1" />
-            <p className="text-xs text-slate-500">Symbolic Cost</p>
+            <p className="text-xs text-muted-foreground">Symbolic Cost</p>
             <p className="text-lg font-bold text-green-400">~${decision.symbolicCost.toFixed(4)}</p>
           </div>
-          <div className="p-3 bg-slate-800/50 rounded-lg text-center">
+          <div className="p-3 bg-card/50 rounded-lg text-center">
             <DollarSign className="w-4 h-4 text-red-400 mx-auto mb-1" />
-            <p className="text-xs text-slate-500">Neural Cost</p>
+            <p className="text-xs text-muted-foreground">Neural Cost</p>
             <p className="text-lg font-bold text-red-400">~${decision.neuralCost.toFixed(2)}</p>
           </div>
-          <div className="p-3 bg-slate-800/50 rounded-lg text-center">
+          <div className="p-3 bg-card/50 rounded-lg text-center">
             <TrendingUp className="w-4 h-4 text-symtex-primary mx-auto mb-1" />
-            <p className="text-xs text-slate-500">Savings</p>
+            <p className="text-xs text-muted-foreground">Savings</p>
             <p className="text-lg font-bold text-symtex-primary">{costSavings}%</p>
           </div>
         </div>
 
         {/* Latency */}
-        <div className="flex items-center justify-between p-3 bg-slate-800/30 rounded-lg mb-4">
+        <div className="flex items-center justify-between p-3 bg-card/30 rounded-lg mb-4">
           <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4 text-slate-400" />
-            <span className="text-sm text-slate-300">Expected Latency</span>
+            <Clock className="w-4 h-4 text-muted-foreground" />
+            <span className="text-sm text-muted-foreground">Expected Latency</span>
           </div>
-          <span className="text-sm font-semibold text-white">{decision.latency}ms</span>
+          <span className="text-sm font-semibold text-foreground">{decision.latency}ms</span>
         </div>
 
         {/* Expandable Details */}
         <button
           onClick={() => setShowDetails(!showDetails)}
-          className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-slate-800/50 transition-colors"
+          className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-card/50 transition-colors"
         >
           <div className="flex items-center gap-2">
-            <Info className="w-4 h-4 text-slate-400" />
-            <span className="text-sm text-slate-300">Routing Reasoning</span>
+            <Info className="w-4 h-4 text-muted-foreground" />
+            <span className="text-sm text-muted-foreground">Routing Reasoning</span>
           </div>
-          <ChevronDown className={cn('w-4 h-4 text-slate-400 transition-transform', showDetails && 'rotate-180')} />
+          <ChevronDown className={cn('w-4 h-4 text-muted-foreground transition-transform', showDetails && 'rotate-180')} />
         </button>
 
         <AnimatePresence>
@@ -274,8 +274,8 @@ function SAMRouterViz({
               exit={{ height: 0, opacity: 0 }}
               className="overflow-hidden"
             >
-              <div className="p-3 bg-slate-800/30 rounded-lg mt-2">
-                <p className="text-sm text-slate-300">{decision.reasoning}</p>
+              <div className="p-3 bg-card/30 rounded-lg mt-2">
+                <p className="text-sm text-muted-foreground">{decision.reasoning}</p>
               </div>
             </motion.div>
           )}
@@ -284,9 +284,9 @@ function SAMRouterViz({
 
       {/* History */}
       {showHistory && (
-        <div className="border-t border-symtex-border">
+        <div className="border-t border-border">
           <div className="p-4">
-            <h4 className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-3">
+            <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
               Recent Routing Decisions
             </h4>
             <div className="space-y-2">
@@ -296,10 +296,10 @@ function SAMRouterViz({
                 return (
                   <div
                     key={item.id}
-                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-800/50 transition-colors"
+                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-card/50 transition-colors"
                   >
                     <ItemIcon className={cn('w-4 h-4 flex-shrink-0', itemConfig.color)} />
-                    <p className="text-sm text-slate-300 truncate flex-1">{item.query}</p>
+                    <p className="text-sm text-muted-foreground truncate flex-1">{item.query}</p>
                     <span className={cn('text-xs px-1.5 py-0.5 rounded', itemConfig.bgColor, itemConfig.color)}>
                       {item.confidence}%
                     </span>

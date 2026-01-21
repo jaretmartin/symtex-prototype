@@ -163,18 +163,18 @@ export default function RecentContextsWidget({
         'bg-card rounded-xl border border-border overflow-hidden',
         className
       )}>
-        <div className="p-5 border-b border-symtex-border">
-          <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+        <div className="p-5 border-b border-border">
+          <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
             <Layers className="w-5 h-5 text-symtex-primary" />
             Recent Contexts
           </h2>
         </div>
         <div className="p-8 flex flex-col items-center justify-center text-center">
-          <div className="p-4 rounded-full bg-slate-800 mb-4">
-            <Layers className="w-8 h-8 text-slate-500" />
+          <div className="p-4 rounded-full bg-card mb-4">
+            <Layers className="w-8 h-8 text-muted-foreground" />
           </div>
-          <h3 className="text-lg font-semibold text-white mb-2">No Contexts Yet</h3>
-          <p className="text-sm text-slate-400 max-w-xs mb-4">
+          <h3 className="text-lg font-semibold text-foreground mb-2">No Contexts Yet</h3>
+          <p className="text-sm text-muted-foreground max-w-xs mb-4">
             Create your first context to organize knowledge for your Cognates.
           </p>
           <button
@@ -191,12 +191,12 @@ export default function RecentContextsWidget({
 
   return (
     <div className={clsx(
-      'bg-symtex-card rounded-xl border border-symtex-border overflow-hidden',
+      'bg-card rounded-xl border border-border overflow-hidden',
       className
     )}>
       {/* Header */}
-      <div className="p-5 border-b border-symtex-border flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+      <div className="p-5 border-b border-border flex items-center justify-between">
+        <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
           <Layers className="w-5 h-5 text-symtex-primary" />
           Recent Contexts
         </h2>
@@ -210,7 +210,7 @@ export default function RecentContextsWidget({
       </div>
 
       {/* Contexts List */}
-      <div className="divide-y divide-symtex-border">
+      <div className="divide-y divide-border">
         {sortedContexts.map((context) => {
           const config = typeConfig[context.type]
           const Icon = config.icon
@@ -219,7 +219,7 @@ export default function RecentContextsWidget({
             <div
               key={context.id}
               onClick={() => handleContextClick(context)}
-              className="p-4 hover:bg-slate-800/30 transition-colors cursor-pointer group"
+              className="p-4 hover:bg-card/30 transition-colors cursor-pointer group"
             >
               <div className="flex items-start gap-3">
                 {/* Icon */}
@@ -230,7 +230,7 @@ export default function RecentContextsWidget({
                 {/* Content */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-medium text-white truncate group-hover:text-symtex-primary transition-colors">
+                    <h4 className="font-medium text-foreground truncate group-hover:text-symtex-primary transition-colors">
                       {context.name}
                     </h4>
                     {context.isPinned && (
@@ -238,11 +238,11 @@ export default function RecentContextsWidget({
                     )}
                   </div>
                   {context.description && (
-                    <p className="text-xs text-slate-400 truncate mb-1">
+                    <p className="text-xs text-muted-foreground truncate mb-1">
                       {context.description}
                     </p>
                   )}
-                  <div className="flex items-center gap-3 text-xs text-slate-500">
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
                     <span className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />
                       {context.lastAccessed}
@@ -264,7 +264,7 @@ export default function RecentContextsWidget({
                       'p-1.5 rounded-lg transition-colors',
                       context.isFavorite
                         ? 'text-yellow-400 hover:text-yellow-300'
-                        : 'text-slate-500 hover:text-yellow-400 opacity-0 group-hover:opacity-100'
+                        : 'text-muted-foreground hover:text-yellow-400 opacity-0 group-hover:opacity-100'
                     )}
                   >
                     {context.isFavorite ? (
@@ -273,7 +273,7 @@ export default function RecentContextsWidget({
                       <StarOff className="w-4 h-4" />
                     )}
                   </button>
-                  <ArrowRight className="w-4 h-4 text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
               </div>
             </div>
@@ -282,14 +282,14 @@ export default function RecentContextsWidget({
       </div>
 
       {/* Footer */}
-      <div className="p-4 border-t border-symtex-border bg-slate-800/30 flex items-center justify-between">
-        <p className="text-xs text-slate-500">
+      <div className="p-4 border-t border-border bg-card/30 flex items-center justify-between">
+        <p className="text-xs text-muted-foreground">
           {contexts.filter(c => c.isPinned).length} pinned,{' '}
           {contexts.filter(c => c.isFavorite).length} favorites
         </p>
         <button
           onClick={() => navigate('/spaces/new')}
-          className="text-xs text-slate-400 hover:text-white transition-colors"
+          className="text-xs text-muted-foreground hover:text-foreground transition-colors"
         >
           + New Context
         </button>

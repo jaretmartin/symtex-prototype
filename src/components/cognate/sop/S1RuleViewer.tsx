@@ -341,7 +341,7 @@ const RuleCard = React.memo(function RuleCard({
               'p-1.5 rounded-lg transition-colors',
               isActive
                 ? 'text-green-400 hover:bg-green-500/20'
-                : 'text-zinc-400 hover:bg-zinc-700'
+                : 'text-muted-foreground hover:bg-muted'
             )}
             aria-label={isActive ? 'Deactivate rule' : 'Activate rule'}
           >
@@ -356,16 +356,16 @@ const RuleCard = React.memo(function RuleCard({
 
       {/* Expanded Content */}
       {isExpanded && (
-        <div className="p-4 border-t border-zinc-700">
+        <div className="p-4 border-t border-border">
           {/* Description */}
           {sop.description && (
-            <p className="text-sm text-zinc-400 mb-4">{sop.description}</p>
+            <p className="text-sm text-muted-foreground mb-4">{sop.description}</p>
           )}
 
           {/* S1 Code */}
-          <div className="bg-zinc-950 rounded-lg p-4 overflow-x-auto">
+          <div className="bg-surface-base rounded-lg p-4 overflow-x-auto">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs text-zinc-500 font-medium">S1 Code</span>
+              <span className="text-xs text-muted-foreground font-medium">S1 Code</span>
               <button
                 type="button"
                 onClick={handleCopyClick}
@@ -379,7 +379,7 @@ const RuleCard = React.memo(function RuleCard({
           </div>
 
           {/* Stats */}
-          <div className="flex items-center gap-4 mt-4 text-xs text-zinc-400">
+          <div className="flex items-center gap-4 mt-4 text-xs text-muted-foreground">
             <span className="flex items-center gap-1">
               <Zap className="w-3 h-3" />
               {sop.triggerCount.toLocaleString()} total triggers
@@ -392,10 +392,10 @@ const RuleCard = React.memo(function RuleCard({
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-2 mt-4 pt-4 border-t border-zinc-700">
+          <div className="flex items-center gap-2 mt-4 pt-4 border-t border-border">
             <Link
               to={`/cognates/${sop.cognateId}/sops/${sop.id}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-300 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-lg transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-foreground bg-card hover:bg-muted border border-border rounded-lg transition-colors"
               onClick={(e) => e.stopPropagation()}
             >
               <FileText className="w-3 h-3" />
@@ -403,7 +403,7 @@ const RuleCard = React.memo(function RuleCard({
             </Link>
             <button
               type="button"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-300 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-lg transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-foreground bg-card hover:bg-muted border border-border rounded-lg transition-colors"
             >
               <Play className="w-3 h-3" />
               Test Rule
@@ -439,17 +439,17 @@ interface StatsPanelProps {
 function StatsPanel({ stats, className }: StatsPanelProps): JSX.Element {
   return (
     <div className={clsx('grid grid-cols-3 gap-4', className)}>
-      <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
-        <p className="text-sm text-zinc-400 mb-1">Total Rules</p>
-        <p className="text-2xl font-bold text-white">{stats.totalRules}</p>
+      <div className="p-4 bg-surface-base/50 border border-border rounded-lg">
+        <p className="text-sm text-muted-foreground mb-1">Total Rules</p>
+        <p className="text-2xl font-bold text-foreground">{stats.totalRules}</p>
       </div>
-      <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
-        <p className="text-sm text-zinc-400 mb-1">Active Rules</p>
+      <div className="p-4 bg-surface-base/50 border border-border rounded-lg">
+        <p className="text-sm text-muted-foreground mb-1">Active Rules</p>
         <p className="text-2xl font-bold text-green-400">{stats.activeRules}</p>
       </div>
-      <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
-        <p className="text-sm text-zinc-400 mb-1">Total Triggers</p>
-        <p className="text-2xl font-bold text-white">
+      <div className="p-4 bg-surface-base/50 border border-border rounded-lg">
+        <p className="text-sm text-muted-foreground mb-1">Total Triggers</p>
+        <p className="text-2xl font-bold text-foreground">
           {stats.totalTriggers.toLocaleString()}
         </p>
       </div>
@@ -674,18 +674,18 @@ export function S1RuleViewer({
       {/* Header */}
       <Link
         to={`/cognates/${cogId}/sops`}
-        className="inline-flex items-center gap-2 text-zinc-400 hover:text-white mb-6 transition-colors"
+        className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" /> Back to SOPs
       </Link>
 
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
             <Code className="w-7 h-7 text-purple-400" />
             S1 Rule Viewer
           </h1>
-          <p className="text-zinc-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             View and manage compiled S1 rules for this Cognate
           </p>
         </div>
@@ -693,7 +693,7 @@ export function S1RuleViewer({
         <button
           type="button"
           onClick={handleExportAll}
-          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-purple-600 text-white rounded-lg hover:bg-purple-500 transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-purple-600 text-foreground rounded-lg hover:bg-purple-500 transition-colors"
         >
           <Download className="w-4 h-4" />
           Export All Rules
@@ -706,20 +706,20 @@ export function S1RuleViewer({
       {/* Filters */}
       <div className="flex flex-wrap items-center gap-4 mb-6">
         <div className="flex-1 min-w-[200px] max-w-md relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search rules or S1 code..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-3 py-2 pl-10 text-sm bg-zinc-900 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:border-purple-500 focus:outline-none transition-colors"
+            className="w-full px-3 py-2 pl-10 text-sm bg-surface-base border border-border rounded-lg text-foreground placeholder-muted-foreground focus:border-purple-500 focus:outline-none transition-colors"
           />
         </div>
 
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value as StatusFilterValue)}
-          className="px-3 py-2 text-sm bg-zinc-900 border border-zinc-700 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors"
+          className="px-3 py-2 text-sm bg-surface-base border border-border rounded-lg text-foreground focus:border-purple-500 focus:outline-none transition-colors"
         >
           <option value="all">All Status</option>
           <option value="active">Active</option>
@@ -735,7 +735,7 @@ export function S1RuleViewer({
           >
             Expand All
           </button>
-          <span className="text-zinc-600">|</span>
+          <span className="text-muted-foreground">|</span>
           <button
             type="button"
             onClick={handleCollapseAll}
@@ -760,12 +760,12 @@ export function S1RuleViewer({
             />
           ))
         ) : (
-          <div className="p-12 text-center border border-zinc-800 rounded-lg">
-            <Code className="w-12 h-12 text-zinc-600 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-zinc-300 mb-2">
+          <div className="p-12 text-center border border-border rounded-lg">
+            <Code className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-foreground mb-2">
               No Rules Found
             </h3>
-            <p className="text-zinc-400">
+            <p className="text-muted-foreground">
               {searchTerm || statusFilter !== 'all'
                 ? 'Try adjusting your search or filters'
                 : 'Create SOPs to generate S1 rules'}

@@ -13,8 +13,8 @@ const ConditionNode = memo(({ data, selected }: NodeProps<ConditionNodeData>) =>
       style={{
         padding: '12px 16px',
         borderRadius: '12px',
-        background: 'linear-gradient(135deg, #1a1a2e 0%, #16162a 100%)',
-        border: selected ? '2px solid #8b5cf6' : '1px solid #2a2a3e',
+        background: 'linear-gradient(135deg, var(--color-surface-card) 0%, #16162a 100%)',
+        border: selected ? '2px solid var(--color-accent)' : '1px solid var(--color-surface-elevated)',
         minWidth: '180px',
         boxShadow: selected
           ? '0 0 20px rgba(139, 92, 246, 0.3)'
@@ -25,10 +25,10 @@ const ConditionNode = memo(({ data, selected }: NodeProps<ConditionNodeData>) =>
         type="target"
         position={Position.Top}
         style={{
-          background: '#8b5cf6',
+          background: 'var(--color-accent)',
           width: '12px',
           height: '12px',
-          border: '2px solid #0a0a0f',
+          border: '2px solid var(--color-surface-base)',
         }}
       />
       <div
@@ -44,7 +44,7 @@ const ConditionNode = memo(({ data, selected }: NodeProps<ConditionNodeData>) =>
             width: '32px',
             height: '32px',
             borderRadius: '8px',
-            background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+            background: 'linear-gradient(135deg, var(--color-accent), #7c3aed)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -66,7 +66,7 @@ const ConditionNode = memo(({ data, selected }: NodeProps<ConditionNodeData>) =>
           <div
             style={{
               fontSize: '10px',
-              color: '#8b5cf6',
+              color: 'var(--color-accent)',
               fontWeight: 500,
             }}
           >
@@ -78,7 +78,7 @@ const ConditionNode = memo(({ data, selected }: NodeProps<ConditionNodeData>) =>
         <div
           style={{
             fontSize: '11px',
-            color: '#94a3b8',
+            color: 'var(--color-text-muted)',
             marginTop: '4px',
           }}
         >
@@ -92,21 +92,21 @@ const ConditionNode = memo(({ data, selected }: NodeProps<ConditionNodeData>) =>
           justifyContent: 'space-between',
           marginTop: '12px',
           fontSize: '10px',
-          color: '#64748b',
+          color: 'var(--color-text-muted)',
         }}
       >
-        <span style={{ color: '#ef4444' }}>No</span>
-        <span style={{ color: '#22c55e' }}>Yes</span>
+        <span style={{ color: 'var(--color-error)' }}>No</span>
+        <span style={{ color: 'var(--color-success)' }}>Yes</span>
       </div>
       <Handle
         type="source"
         position={Position.Bottom}
         id="false"
         style={{
-          background: '#ef4444',
+          background: 'var(--color-error)',
           width: '10px',
           height: '10px',
-          border: '2px solid #0a0a0f',
+          border: '2px solid var(--color-surface-base)',
           left: '25%',
         }}
       />
@@ -115,10 +115,10 @@ const ConditionNode = memo(({ data, selected }: NodeProps<ConditionNodeData>) =>
         position={Position.Bottom}
         id="true"
         style={{
-          background: '#22c55e',
+          background: 'var(--color-success)',
           width: '10px',
           height: '10px',
-          border: '2px solid #0a0a0f',
+          border: '2px solid var(--color-surface-base)',
           left: '75%',
         }}
       />

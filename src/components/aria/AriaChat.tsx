@@ -184,10 +184,10 @@ function AriaEmptyState({ onSuggestionSelect }: AriaEmptyStateProps): JSX.Elemen
       </div>
 
       {/* Welcome text */}
-      <h3 className="text-xl font-semibold text-white mb-2">
+      <h3 className="text-xl font-semibold text-foreground mb-2">
         Hi, I'm Aria
       </h3>
-      <p className="text-slate-400 max-w-sm mb-6 text-sm leading-relaxed">
+      <p className="text-muted-foreground max-w-sm mb-6 text-sm leading-relaxed">
         {ARIA_WELCOME_MESSAGE}
       </p>
 
@@ -242,14 +242,14 @@ function ChatInputArea({
       className={clsx(
         'p-3',
         'border-t border-violet-500/20',
-        'bg-slate-900/50'
+        'bg-surface-base/50'
       )}
     >
       <div
         className={clsx(
           'flex items-end gap-2',
           'p-2 rounded-xl',
-          'bg-slate-800/50 border border-violet-500/20',
+          'bg-card/50 border border-violet-500/20',
           'focus-within:border-violet-500/40',
           'transition-colors'
         )}
@@ -260,7 +260,7 @@ function ChatInputArea({
           disabled={disabled}
           className={clsx(
             'flex-shrink-0 p-2 rounded-lg',
-            'text-slate-400 hover:text-violet-300',
+            'text-muted-foreground hover:text-violet-300',
             'hover:bg-violet-500/10',
             'transition-colors',
             'disabled:opacity-50 disabled:cursor-not-allowed'
@@ -309,9 +309,9 @@ function ChatInputArea({
       </div>
 
       {/* Keyboard hint */}
-      <p className="text-xs text-slate-500 text-center mt-2">
+      <p className="text-xs text-muted-foreground text-center mt-2">
         Press{' '}
-        <kbd className="px-1.5 py-0.5 bg-slate-700 rounded text-slate-400">
+        <kbd className="px-1.5 py-0.5 bg-muted rounded text-muted-foreground">
           Enter
         </kbd>{' '}
         to send
@@ -509,7 +509,7 @@ export function AriaChat({
       className={clsx(
         'fixed z-50',
         'flex flex-col',
-        'bg-slate-900/95 backdrop-blur-xl',
+        'bg-surface-base/95 backdrop-blur-xl',
         'border border-violet-500/30',
         'rounded-2xl',
         'shadow-2xl shadow-violet-500/10',
@@ -585,7 +585,7 @@ export function AriaChat({
                     className={clsx(
                       'px-4 py-2.5 rounded-2xl rounded-bl-md',
                       'bg-violet-900/30 border border-violet-500/20',
-                      'text-slate-200'
+                      'text-muted-foreground'
                     )}
                   >
                     <StreamingText text={streamingText} isStreaming={true} />

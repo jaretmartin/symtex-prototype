@@ -117,14 +117,14 @@ export default function QuickActionsWidget({ className }: QuickActionsWidgetProp
       className
     )}>
       {/* Header */}
-      <div className="p-5 border-b border-symtex-border flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+      <div className="p-5 border-b border-border flex items-center justify-between">
+        <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
           <Sparkles className="w-5 h-5 text-symtex-accent" />
           Quick Actions
         </h2>
         <button
           onClick={handleSettings}
-          className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 transition-colors"
+          className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
         >
           <Settings className="w-4 h-4" />
         </button>
@@ -140,7 +140,7 @@ export default function QuickActionsWidget({ className }: QuickActionsWidgetProp
               <button
                 key={action.id}
                 onClick={() => handleActionClick(action)}
-                className="group p-4 rounded-xl bg-slate-800/50 border border-symtex-border hover:border-symtex-primary/50 transition-all hover:bg-slate-800/80 text-left relative"
+                className="group p-4 rounded-xl bg-card/50 border border-border hover:border-symtex-primary/50 transition-all hover:bg-card/80 text-left relative"
               >
                 {action.isNew && (
                   <span className="absolute -top-1 -right-1 text-[10px] font-bold bg-symtex-accent text-white px-1.5 py-0.5 rounded-full">
@@ -152,11 +152,11 @@ export default function QuickActionsWidget({ className }: QuickActionsWidgetProp
                   <Icon className={clsx('w-5 h-5', action.color)} />
                 </div>
 
-                <h3 className="font-medium text-white text-sm mb-1 group-hover:text-symtex-primary transition-colors flex items-center gap-1">
+                <h3 className="font-medium text-foreground text-sm mb-1 group-hover:text-symtex-primary transition-colors flex items-center gap-1">
                   {action.title}
                   <Plus className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </h3>
-                <p className="text-xs text-slate-500 line-clamp-1">
+                <p className="text-xs text-muted-foreground line-clamp-1">
                   {action.description}
                 </p>
               </button>
@@ -166,16 +166,16 @@ export default function QuickActionsWidget({ className }: QuickActionsWidgetProp
       </div>
 
       {/* Keyboard Shortcut Hint */}
-      <div className="px-5 py-3 border-t border-symtex-border bg-slate-800/30 flex items-center justify-between">
-        <p className="text-xs text-slate-500 flex items-center gap-2">
-          <kbd className="px-1.5 py-0.5 rounded bg-slate-700 text-slate-400 font-mono text-[10px]">
+      <div className="px-5 py-3 border-t border-border bg-card/30 flex items-center justify-between">
+        <p className="text-xs text-muted-foreground flex items-center gap-2">
+          <kbd className="px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono text-[10px]">
             Cmd+K
           </kbd>
           <span>for command palette</span>
         </p>
         <button
           onClick={() => navigate('/help/shortcuts')}
-          className="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1"
+          className="text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
         >
           All shortcuts
           <ChevronRight className="w-3 h-3" />

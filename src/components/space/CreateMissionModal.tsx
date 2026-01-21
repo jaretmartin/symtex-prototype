@@ -29,7 +29,7 @@ interface FormData {
 }
 
 const STATUS_OPTIONS: { value: SpaceMissionStatus; label: string; color: string }[] = [
-  { value: 'queued', label: 'Queued', color: 'bg-zinc-500' },
+  { value: 'queued', label: 'Queued', color: 'bg-muted' },
   { value: 'running', label: 'Running', color: 'bg-blue-500' },
   { value: 'completed', label: 'Completed', color: 'bg-green-500' },
   { value: 'failed', label: 'Failed', color: 'bg-red-500' },
@@ -178,7 +178,7 @@ export function CreateMissionModal({
       <div
         className={clsx(
           'relative w-full max-w-2xl max-h-[90vh] overflow-y-auto',
-          'bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl',
+          'bg-surface-base border border-border rounded-xl shadow-2xl',
           'm-4'
         )}
         role="dialog"
@@ -186,16 +186,16 @@ export function CreateMissionModal({
         aria-labelledby="create-mission-title"
       >
         {/* Header */}
-        <div className="sticky top-0 bg-zinc-900 px-6 py-4 border-b border-zinc-800 flex items-center justify-between z-10">
+        <div className="sticky top-0 bg-surface-base px-6 py-4 border-b border-border flex items-center justify-between z-10">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-rose-500 flex items-center justify-center">
-              <Target className="w-5 h-5 text-white" />
+              <Target className="w-5 h-5 text-foreground" />
             </div>
             <div>
-              <h2 id="create-mission-title" className="text-lg font-semibold text-white">
+              <h2 id="create-mission-title" className="text-lg font-semibold text-foreground">
                 Create New Mission
               </h2>
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm text-muted-foreground">
                 Define a specific task for your AI to execute
               </p>
             </div>
@@ -203,7 +203,7 @@ export function CreateMissionModal({
           <button
             type="button"
             onClick={handleClose}
-            className="p-2 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className="p-2 text-muted-foreground hover:text-foreground hover:bg-card rounded-lg transition-colors"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -214,7 +214,7 @@ export function CreateMissionModal({
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Project Selector */}
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-2">
+            <label className="block text-sm font-medium text-muted-foreground mb-2">
               Project <span className="text-red-400">*</span>
             </label>
             <div className="relative">
@@ -223,10 +223,10 @@ export function CreateMissionModal({
                 onClick={(): void => setIsProjectDropdownOpen(!isProjectDropdownOpen)}
                 className={clsx(
                   'w-full flex items-center justify-between gap-2',
-                  'px-4 py-3 bg-zinc-900 border rounded-lg',
+                  'px-4 py-3 bg-surface-base border rounded-lg',
                   'text-left transition-colors',
-                  'hover:border-zinc-600 focus:border-symtex-primary focus:outline-none',
-                  errors.projectId ? 'border-red-500' : 'border-zinc-700'
+                  'hover:border-border focus:border-symtex-primary focus:outline-none',
+                  errors.projectId ? 'border-red-500' : 'border-border'
                 )}
               >
                 {selectedProject ? (
@@ -238,38 +238,38 @@ export function CreateMissionModal({
                       />
                     )}
                     <div>
-                      <span className="text-white">{selectedProject.name}</span>
+                      <span className="text-foreground">{selectedProject.name}</span>
                       {projectDomain && (
-                        <span className="text-zinc-500 text-sm ml-2">
+                        <span className="text-muted-foreground text-sm ml-2">
                           in {projectDomain.name}
                         </span>
                       )}
                     </div>
                   </div>
                 ) : (
-                  <span className="text-zinc-400">Select a project...</span>
+                  <span className="text-muted-foreground">Select a project...</span>
                 )}
                 <ChevronDown
                   className={clsx(
-                    'w-5 h-5 text-zinc-400 transition-transform',
+                    'w-5 h-5 text-muted-foreground transition-transform',
                     isProjectDropdownOpen && 'rotate-180'
                   )}
                 />
               </button>
 
               {isProjectDropdownOpen && (
-                <div className="absolute z-50 w-full mt-2 bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl max-h-72 overflow-y-auto">
+                <div className="absolute z-50 w-full mt-2 bg-surface-base border border-border rounded-lg shadow-xl max-h-72 overflow-y-auto">
                   {projectsByDomain.length > 0 ? (
                     projectsByDomain.map(({ domain, projects: domainProjects }) => (
                       <div key={domain.id}>
                         {/* Domain Header */}
-                        <div className="px-4 py-2 bg-zinc-800/50 border-b border-zinc-700 sticky top-0">
+                        <div className="px-4 py-2 bg-card/50 border-b border-border sticky top-0">
                           <div className="flex items-center gap-2">
                             <div
                               className="w-3 h-3 rounded-full"
                               style={{ backgroundColor: domain.color }}
                             />
-                            <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">
+                            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                               {domain.name}
                             </span>
                           </div>
@@ -288,8 +288,8 @@ export function CreateMissionModal({
                             }}
                             className={clsx(
                               'w-full flex items-center justify-between gap-3 px-4 py-3',
-                              'hover:bg-zinc-800 transition-colors',
-                              formData.projectId === project.id && 'bg-zinc-800'
+                              'hover:bg-card transition-colors',
+                              formData.projectId === project.id && 'bg-card'
                             )}
                           >
                             <div className="flex items-center gap-3">
@@ -298,8 +298,8 @@ export function CreateMissionModal({
                                 style={{ backgroundColor: domain.color }}
                               />
                               <div className="text-left">
-                                <span className="text-white block">{project.name}</span>
-                                <span className="text-xs text-zinc-500">
+                                <span className="text-foreground block">{project.name}</span>
+                                <span className="text-xs text-muted-foreground">
                                   {project.status.charAt(0).toUpperCase() + project.status.slice(1)} - {project.progress}% complete
                                 </span>
                               </div>
@@ -313,8 +313,8 @@ export function CreateMissionModal({
                     ))
                   ) : (
                     <div className="px-4 py-6 text-center">
-                      <p className="text-zinc-400 text-sm">No projects available</p>
-                      <p className="text-zinc-500 text-xs mt-1">Create a project first</p>
+                      <p className="text-muted-foreground text-sm">No projects available</p>
+                      <p className="text-muted-foreground text-xs mt-1">Create a project first</p>
                     </div>
                   )}
                 </div>
@@ -327,7 +327,7 @@ export function CreateMissionModal({
 
           {/* Name Field */}
           <div>
-            <label htmlFor="mission-name" className="block text-sm font-medium text-zinc-300 mb-2">
+            <label htmlFor="mission-name" className="block text-sm font-medium text-muted-foreground mb-2">
               Mission Name <span className="text-red-400">*</span>
             </label>
             <input
@@ -342,24 +342,24 @@ export function CreateMissionModal({
               }}
               placeholder="Enter mission name"
               className={clsx(
-                'w-full px-4 py-3 bg-zinc-900 border rounded-lg',
-                'text-white placeholder-zinc-500',
+                'w-full px-4 py-3 bg-surface-base border rounded-lg',
+                'text-foreground placeholder-muted-foreground',
                 'focus:outline-none focus:border-symtex-primary',
-                errors.name ? 'border-red-500' : 'border-zinc-700'
+                errors.name ? 'border-red-500' : 'border-border'
               )}
               maxLength={150}
             />
             {errors.name && (
               <p className="mt-1 text-sm text-red-400">{errors.name}</p>
             )}
-            <p className="mt-1 text-xs text-zinc-500">
+            <p className="mt-1 text-xs text-muted-foreground">
               {formData.name.length}/150 characters
             </p>
           </div>
 
           {/* Description */}
           <div>
-            <label htmlFor="mission-description" className="block text-sm font-medium text-zinc-300 mb-2">
+            <label htmlFor="mission-description" className="block text-sm font-medium text-muted-foreground mb-2">
               Description
             </label>
             <textarea
@@ -374,24 +374,24 @@ export function CreateMissionModal({
               placeholder="Describe in detail what this mission should accomplish..."
               rows={4}
               className={clsx(
-                'w-full px-4 py-3 bg-zinc-900 border rounded-lg',
-                'text-white placeholder-zinc-500 resize-none',
+                'w-full px-4 py-3 bg-surface-base border rounded-lg',
+                'text-foreground placeholder-muted-foreground resize-none',
                 'focus:outline-none focus:border-symtex-primary',
-                errors.description ? 'border-red-500' : 'border-zinc-700'
+                errors.description ? 'border-red-500' : 'border-border'
               )}
               maxLength={2000}
             />
             {errors.description && (
               <p className="mt-1 text-sm text-red-400">{errors.description}</p>
             )}
-            <p className="mt-1 text-xs text-zinc-500">
+            <p className="mt-1 text-xs text-muted-foreground">
               {formData.description.length}/2000 characters
             </p>
           </div>
 
           {/* Status */}
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-2">
+            <label className="block text-sm font-medium text-muted-foreground mb-2">
               Initial Status
             </label>
             <div className="flex flex-wrap gap-2">
@@ -403,8 +403,8 @@ export function CreateMissionModal({
                   className={clsx(
                     'flex items-center gap-2 px-3 py-2 rounded-lg border transition-all text-sm',
                     formData.status === option.value
-                      ? 'bg-zinc-800 border-symtex-primary text-white'
-                      : 'bg-zinc-900 border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                      ? 'bg-card border-symtex-primary text-foreground'
+                      : 'bg-surface-base border-border text-muted-foreground hover:border-border'
                   )}
                 >
                   <span className={clsx('w-2 h-2 rounded-full', option.color)} />
@@ -415,12 +415,12 @@ export function CreateMissionModal({
           </div>
 
           {/* Cognate Assignment */}
-          <div className="p-4 bg-zinc-800/50 border border-zinc-700 rounded-lg">
+          <div className="p-4 bg-card/50 border border-border rounded-lg">
             <div className="flex items-center gap-3 mb-3">
-              <Bot className="w-5 h-5 text-zinc-400" />
+              <Bot className="w-5 h-5 text-muted-foreground" />
               <div>
-                <p className="text-sm font-medium text-zinc-300">Assign a Cognate</p>
-                <p className="text-xs text-zinc-500">Optionally assign a Cognate to this mission</p>
+                <p className="text-sm font-medium text-muted-foreground">Assign a Cognate</p>
+                <p className="text-xs text-muted-foreground">Optionally assign a Cognate to this mission</p>
               </div>
             </div>
             <div className="relative">
@@ -429,31 +429,31 @@ export function CreateMissionModal({
                 onClick={(): void => setIsCognateDropdownOpen(!isCognateDropdownOpen)}
                 className={clsx(
                   'w-full flex items-center justify-between gap-2',
-                  'px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg',
+                  'px-4 py-3 bg-surface-base border border-border rounded-lg',
                   'text-left transition-colors',
-                  'hover:border-zinc-600 focus:border-symtex-primary focus:outline-none'
+                  'hover:border-border focus:border-symtex-primary focus:outline-none'
                 )}
               >
                 {selectedCognate ? (
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                      <Sparkles className="w-4 h-4 text-white" />
+                      <Sparkles className="w-4 h-4 text-foreground" />
                     </div>
-                    <span className="text-white">{selectedCognate.name}</span>
+                    <span className="text-foreground">{selectedCognate.name}</span>
                   </div>
                 ) : (
-                  <span className="text-zinc-400">No cognate assigned</span>
+                  <span className="text-muted-foreground">No cognate assigned</span>
                 )}
                 <ChevronDown
                   className={clsx(
-                    'w-5 h-5 text-zinc-400 transition-transform',
+                    'w-5 h-5 text-muted-foreground transition-transform',
                     isCognateDropdownOpen && 'rotate-180'
                   )}
                 />
               </button>
 
               {isCognateDropdownOpen && (
-                <div className="absolute z-50 w-full mt-2 bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl max-h-60 overflow-y-auto">
+                <div className="absolute z-50 w-full mt-2 bg-surface-base border border-border rounded-lg shadow-xl max-h-60 overflow-y-auto">
                   {/* Unassign Option */}
                   <button
                     type="button"
@@ -463,11 +463,11 @@ export function CreateMissionModal({
                     }}
                     className={clsx(
                       'w-full flex items-center justify-between gap-3 px-4 py-3',
-                      'hover:bg-zinc-800 transition-colors border-b border-zinc-700',
-                      !formData.assignedCognateId && 'bg-zinc-800'
+                      'hover:bg-card transition-colors border-b border-border',
+                      !formData.assignedCognateId && 'bg-card'
                     )}
                   >
-                    <span className="text-zinc-400">No cognate assigned</span>
+                    <span className="text-muted-foreground">No cognate assigned</span>
                     {!formData.assignedCognateId && (
                       <Check className="w-4 h-4 text-symtex-primary" />
                     )}
@@ -483,17 +483,17 @@ export function CreateMissionModal({
                         }}
                         className={clsx(
                           'w-full flex items-center justify-between gap-3 px-4 py-3',
-                          'hover:bg-zinc-800 transition-colors',
-                          formData.assignedCognateId === cognate.id && 'bg-zinc-800'
+                          'hover:bg-card transition-colors',
+                          formData.assignedCognateId === cognate.id && 'bg-card'
                         )}
                       >
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                            <Sparkles className="w-4 h-4 text-white" />
+                            <Sparkles className="w-4 h-4 text-foreground" />
                           </div>
                           <div className="text-left">
-                            <span className="text-white block">{cognate.name}</span>
-                            <span className="text-xs text-zinc-500">{cognate.role}</span>
+                            <span className="text-foreground block">{cognate.name}</span>
+                            <span className="text-xs text-muted-foreground">{cognate.role}</span>
                           </div>
                         </div>
                         {formData.assignedCognateId === cognate.id && (
@@ -503,7 +503,7 @@ export function CreateMissionModal({
                     ))
                   ) : (
                     <div className="px-4 py-4 text-center">
-                      <p className="text-zinc-400 text-sm">No cognates available</p>
+                      <p className="text-muted-foreground text-sm">No cognates available</p>
                     </div>
                   )}
                 </div>
@@ -513,12 +513,12 @@ export function CreateMissionModal({
         </form>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-zinc-900 px-6 py-4 border-t border-zinc-800 flex items-center justify-end gap-3">
+        <div className="sticky bottom-0 bg-surface-base px-6 py-4 border-t border-border flex items-center justify-end gap-3">
           <button
             type="button"
             onClick={handleClose}
             disabled={isSubmitting}
-            className="px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-card rounded-lg transition-colors"
           >
             Cancel
           </button>
@@ -528,7 +528,7 @@ export function CreateMissionModal({
             disabled={isSubmitting || projects.length === 0}
             className={clsx(
               'flex items-center gap-2 px-6 py-2 rounded-lg text-sm font-medium',
-              'bg-gradient-to-r from-orange-500 to-rose-500 text-white',
+              'bg-gradient-to-r from-orange-500 to-rose-500 text-foreground',
               'hover:opacity-90 transition-opacity',
               'disabled:opacity-50 disabled:cursor-not-allowed'
             )}

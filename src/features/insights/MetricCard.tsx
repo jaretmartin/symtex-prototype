@@ -45,8 +45,8 @@ const trendConfig: Record<
   },
   stable: {
     icon: Minus,
-    color: 'text-slate-400',
-    bgColor: 'bg-slate-500/10',
+    color: 'text-muted-foreground',
+    bgColor: 'bg-muted/10',
   },
 };
 
@@ -97,7 +97,7 @@ export function MetricCard({ metric, className, size = 'md' }: MetricCardProps) 
   return (
     <Card
       className={cn(
-        'bg-slate-800/50 border-slate-700/50 hover:border-slate-600/50 transition-all duration-200',
+        'bg-card/50 border-border/50 hover:border-border/50 transition-all duration-200',
         className
       )}
     >
@@ -122,14 +122,14 @@ export function MetricCard({ metric, className, size = 'md' }: MetricCardProps) 
           </div>
 
           {/* Value */}
-          <p className={cn('font-bold text-white mb-1', sizes.value)}>{metric.value}</p>
+          <p className={cn('font-bold text-foreground mb-1', sizes.value)}>{metric.value}</p>
 
           {/* Label */}
-          <p className={cn('text-slate-400 font-medium', sizes.label)}>{metric.label}</p>
+          <p className={cn('text-muted-foreground font-medium', sizes.label)}>{metric.label}</p>
 
           {/* Description (if provided) */}
           {metric.description && size === 'lg' && (
-            <p className="text-xs text-slate-500 mt-1">{metric.description}</p>
+            <p className="text-xs text-muted-foreground mt-1">{metric.description}</p>
           )}
         </div>
 

@@ -94,13 +94,13 @@ export function UpcomingWidget({
 
   if (isLoading) {
     return (
-      <div className={clsx('bg-zinc-900/50 border border-zinc-800 rounded-lg', className)}>
-        <div className="p-4 border-b border-zinc-800">
-          <div className="h-5 w-32 bg-zinc-800 rounded animate-pulse" />
+      <div className={clsx('bg-surface-base/50 border border-border rounded-lg', className)}>
+        <div className="p-4 border-b border-border">
+          <div className="h-5 w-32 bg-card rounded animate-pulse" />
         </div>
         <div className="p-4 space-y-3">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-16 bg-zinc-800/50 rounded animate-pulse" />
+            <div key={i} className="h-16 bg-card/50 rounded animate-pulse" />
           ))}
         </div>
       </div>
@@ -110,17 +110,17 @@ export function UpcomingWidget({
   return (
     <div
       className={clsx(
-        'bg-zinc-900/50 border border-zinc-800 rounded-lg overflow-hidden',
+        'bg-surface-base/50 border border-border rounded-lg overflow-hidden',
         className
       )}
     >
       {/* Header */}
-      <div className="p-4 border-b border-zinc-800 flex items-center justify-between">
-        <h3 className="font-semibold text-white flex items-center gap-2">
+      <div className="p-4 border-b border-border flex items-center justify-between">
+        <h3 className="font-semibold text-foreground flex items-center gap-2">
           <Calendar className="w-4 h-4 text-symtex-primary" />
           Upcoming
         </h3>
-        <span className="text-xs text-zinc-500">{displayEvents.length} events</span>
+        <span className="text-xs text-muted-foreground">{displayEvents.length} events</span>
       </div>
 
       {/* Events List */}
@@ -128,11 +128,11 @@ export function UpcomingWidget({
         {Object.entries(groupedEvents).map(([dateLabel, events]) => (
           <div key={dateLabel}>
             {/* Date Header */}
-            <div className="px-4 py-2 bg-zinc-800/30">
+            <div className="px-4 py-2 bg-card/30">
               <span
                 className={clsx(
                   'text-xs font-medium',
-                  dateLabel === 'Today' ? 'text-symtex-primary' : 'text-zinc-500'
+                  dateLabel === 'Today' ? 'text-symtex-primary' : 'text-muted-foreground'
                 )}
               >
                 {dateLabel}
@@ -147,7 +147,7 @@ export function UpcomingWidget({
               return (
                 <div
                   key={event.id}
-                  className="p-4 hover:bg-zinc-800/30 transition-colors group"
+                  className="p-4 hover:bg-card/30 transition-colors group"
                 >
                   <div className="flex items-start gap-3">
                     {/* Icon */}
@@ -163,7 +163,7 @@ export function UpcomingWidget({
                     {/* Content */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-medium text-white text-sm truncate">
+                        <h4 className="font-medium text-foreground text-sm truncate">
                           {event.title}
                         </h4>
                         {event.cognateAssigned && (
@@ -174,7 +174,7 @@ export function UpcomingWidget({
                       </div>
 
                       {/* Time and Duration */}
-                      <div className="flex items-center gap-3 text-xs text-zinc-400 mb-2">
+                      <div className="flex items-center gap-3 text-xs text-muted-foreground mb-2">
                         <span className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
                           {formatEventTime(event.time)}
@@ -185,7 +185,7 @@ export function UpcomingWidget({
                       </div>
 
                       {/* Participants & Location */}
-                      <div className="flex items-center gap-3 text-xs text-zinc-500">
+                      <div className="flex items-center gap-3 text-xs text-muted-foreground">
                         {event.participants.length > 0 && (
                           <span className="flex items-center gap-1 truncate">
                             <Users className="w-3 h-3 flex-shrink-0" />
@@ -213,7 +213,7 @@ export function UpcomingWidget({
                         className={clsx(
                           'flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium',
                           'bg-symtex-primary/20 text-symtex-primary',
-                          'hover:bg-symtex-primary hover:text-white',
+                          'hover:bg-symtex-primary hover:text-foreground',
                           'transition-colors opacity-0 group-hover:opacity-100'
                         )}
                       >
@@ -230,8 +230,8 @@ export function UpcomingWidget({
 
         {displayEvents.length === 0 && (
           <div className="p-8 text-center">
-            <Calendar className="w-8 h-8 text-zinc-600 mx-auto mb-2" />
-            <p className="text-sm text-zinc-500">No upcoming events</p>
+            <Calendar className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
+            <p className="text-sm text-muted-foreground">No upcoming events</p>
           </div>
         )}
       </div>

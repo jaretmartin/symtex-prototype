@@ -114,7 +114,7 @@ function compileRuleToS1(rule: SOPRule): string[] {
 function highlightSyntax(line: string): JSX.Element {
   // Check for comments
   if (line.trim().startsWith('#')) {
-    return <span className="text-zinc-500">{line}</span>;
+    return <span className="text-muted-foreground">{line}</span>;
   }
 
   // Split by spaces and operators while preserving them
@@ -138,7 +138,7 @@ function highlightSyntax(line: string): JSX.Element {
           return (
             <span key={index}>
               <span className="text-cyan-400">{ns}</span>
-              <span className="text-zinc-400">.</span>
+              <span className="text-muted-foreground">.</span>
               <span className="text-green-400">{rest.join('.')}</span>
             </span>
           );
@@ -152,7 +152,7 @@ function highlightSyntax(line: string): JSX.Element {
           return <span key={index} className="text-orange-400">{token}</span>;
         }
 
-        return <span key={index} className="text-zinc-300">{token}</span>;
+        return <span key={index} className="text-muted-foreground">{token}</span>;
       })}
     </>
   );
@@ -218,16 +218,16 @@ export function S1Preview({
   return (
     <div
       className={`
-        flex flex-col border border-zinc-800 rounded-lg overflow-hidden
-        ${isFullscreen ? 'fixed inset-4 z-50 bg-zinc-950' : ''}
+        flex flex-col border border-border rounded-lg overflow-hidden
+        ${isFullscreen ? 'fixed inset-4 z-50 bg-surface-base' : ''}
         ${className}
       `}
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2 bg-zinc-900/80 border-b border-zinc-800">
+      <div className="flex items-center justify-between px-4 py-2 bg-card/80 border-b border-border">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-zinc-300">S1 Preview</span>
-          <span className="px-1.5 py-0.5 text-xs bg-zinc-800 text-zinc-400 rounded">
+          <span className="text-sm font-medium text-muted-foreground">S1 Preview</span>
+          <span className="px-1.5 py-0.5 text-xs bg-card text-muted-foreground rounded">
             {rules.filter((r) => r.enabled).length} rules
           </span>
         </div>
@@ -236,7 +236,7 @@ export function S1Preview({
           <button
             type="button"
             onClick={handleCopy}
-            className="p-1.5 text-zinc-400 hover:text-white hover:bg-zinc-700 rounded transition-colors"
+            className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted rounded transition-colors"
             title="Copy to clipboard"
           >
             {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
@@ -244,7 +244,7 @@ export function S1Preview({
           <button
             type="button"
             onClick={handleDownload}
-            className="p-1.5 text-zinc-400 hover:text-white hover:bg-zinc-700 rounded transition-colors"
+            className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted rounded transition-colors"
             title="Download .s1 file"
           >
             <Download className="w-4 h-4" />
@@ -252,7 +252,7 @@ export function S1Preview({
           <button
             type="button"
             onClick={() => setIsFullscreen(!isFullscreen)}
-            className="p-1.5 text-zinc-400 hover:text-white hover:bg-zinc-700 rounded transition-colors"
+            className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted rounded transition-colors"
             title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
           >
             {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -262,7 +262,7 @@ export function S1Preview({
 
       {/* Errors/Warnings */}
       {(errors.length > 0 || warnings.length > 0) && (
-        <div className="px-4 py-2 border-b border-zinc-800 space-y-1">
+        <div className="px-4 py-2 border-b border-border space-y-1">
           {errors.map((error, index) => (
             <div key={`error-${index}`} className="flex items-center gap-2 text-sm text-red-400">
               <XCircle className="w-4 h-4 flex-shrink-0" />
@@ -279,11 +279,11 @@ export function S1Preview({
       )}
 
       {/* Code Preview */}
-      <div className="flex-1 overflow-auto bg-zinc-950">
+      <div className="flex-1 overflow-auto bg-surface-base">
         <pre className="p-4 text-sm font-mono leading-relaxed">
           {s1Lines.map((line, index) => (
             <div key={index} className="flex">
-              <span className="w-8 text-right pr-3 text-zinc-600 select-none">
+              <span className="w-8 text-right pr-3 text-muted-foreground select-none">
                 {index + 1}
               </span>
               <code className="flex-1">{highlightSyntax(line)}</code>

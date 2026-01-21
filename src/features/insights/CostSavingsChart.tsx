@@ -47,16 +47,16 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
   const savings = withoutSymtex && withSymtex ? withoutSymtex.value - withSymtex.value : 0;
 
   return (
-    <div className="bg-slate-800 border border-slate-700 rounded-lg p-3 shadow-xl">
-      <p className="text-sm font-medium text-white mb-2">{label}</p>
+    <div className="bg-card border border-border rounded-lg p-3 shadow-xl">
+      <p className="text-sm font-medium text-foreground mb-2">{label}</p>
       <div className="space-y-1.5">
         {withoutSymtex && (
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-              <span className="text-xs text-slate-400">Without Symtex</span>
+              <span className="text-xs text-muted-foreground">Without Symtex</span>
             </div>
-            <span className="text-sm font-medium text-white">
+            <span className="text-sm font-medium text-foreground">
               ${withoutSymtex.value.toLocaleString()}
             </span>
           </div>
@@ -65,14 +65,14 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <div className="w-2.5 h-2.5 rounded-full bg-indigo-400" />
-              <span className="text-xs text-slate-400">With Symtex</span>
+              <span className="text-xs text-muted-foreground">With Symtex</span>
             </div>
-            <span className="text-sm font-medium text-white">
+            <span className="text-sm font-medium text-foreground">
               ${withSymtex.value.toLocaleString()}
             </span>
           </div>
         )}
-        <div className="border-t border-slate-700 pt-1.5 mt-1.5">
+        <div className="border-t border-border pt-1.5 mt-1.5">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <TrendingDown className="w-3 h-3 text-emerald-400" />
@@ -105,12 +105,12 @@ function CostSavingsChartInner({
   }, [data]);
 
   return (
-    <Card className={cn('bg-slate-800/50 border-slate-700/50', className)}>
+    <Card className={cn('bg-card/50 border-border/50', className)}>
       <CardHeader className="pb-2">
         <div className="flex items-start justify-between">
           <div>
-            <CardTitle className="text-lg font-semibold text-white">Cost Comparison</CardTitle>
-            <CardDescription className="text-slate-400">
+            <CardTitle className="text-lg font-semibold text-foreground">Cost Comparison</CardTitle>
+            <CardDescription className="text-muted-foreground">
               Monthly operational costs with vs. without Symtex
             </CardDescription>
           </div>
@@ -118,7 +118,7 @@ function CostSavingsChartInner({
             <p className="text-2xl font-bold text-emerald-400">
               ${totalSavings.toLocaleString()}
             </p>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-muted-foreground">
               Total saved ({percentReduction.toFixed(1)}% reduction)
             </p>
           </div>
@@ -166,7 +166,7 @@ function CostSavingsChartInner({
                 align="right"
                 wrapperStyle={{ paddingBottom: 10 }}
                 formatter={(value) => (
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-muted-foreground">
                     {value === 'withoutSymtex' ? 'Without Symtex' : 'With Symtex'}
                   </span>
                 )}

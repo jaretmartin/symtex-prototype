@@ -262,10 +262,10 @@ function SpaceSwitcher({
         aria-label={`Current space: ${currentSpace?.name || 'None'}. Click to switch spaces`}
         className={cn(
           'flex items-center gap-2 px-3 py-2 rounded-lg',
-          'bg-slate-800/50 border border-symtex-border',
-          'hover:bg-slate-700/50 transition-colors',
+          'bg-card/50 border border-border',
+          'hover:bg-muted/50 transition-colors',
           'focus:outline-none focus:ring-2 focus:ring-symtex-primary focus:ring-offset-2 focus:ring-offset-symtex-dark',
-          isOpen && 'bg-slate-700/50'
+          isOpen && 'bg-muted/50'
         )}
       >
         <div
@@ -277,12 +277,12 @@ function SpaceSwitcher({
             style={{ color: currentSpace?.color || '#6366f1' }}
           />
         </div>
-        <span className="text-sm font-medium text-white max-w-[120px] truncate">
+        <span className="text-sm font-medium text-foreground max-w-[120px] truncate">
           {currentSpace?.name || 'Select Space'}
         </span>
         <ChevronDown
           className={cn(
-            'w-4 h-4 text-slate-400 transition-transform',
+            'w-4 h-4 text-muted-foreground transition-transform',
             isOpen && 'rotate-180'
           )}
         />
@@ -298,15 +298,15 @@ function SpaceSwitcher({
           }
           className={cn(
             'absolute left-0 top-full mt-2 w-72',
-            'bg-symtex-card border border-symtex-border rounded-xl shadow-2xl',
+            'bg-card border border-border rounded-xl shadow-2xl',
             'z-50 overflow-hidden',
             'animate-in slide-in-from-top-2 duration-200'
           )}
         >
           {/* Search */}
-          <div className="p-3 border-b border-symtex-border">
+          <div className="p-3 border-b border-border">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 ref={searchInputRef}
                 type="text"
@@ -315,13 +315,13 @@ function SpaceSwitcher({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className={cn(
                   'w-full pl-9 pr-3 py-2 rounded-lg',
-                  'bg-slate-800/50 border border-symtex-border',
-                  'text-sm text-white placeholder-slate-500',
+                  'bg-card/50 border border-border',
+                  'text-sm text-foreground placeholder-muted-foreground',
                   'focus:outline-none focus:border-symtex-primary'
                 )}
               />
             </div>
-            <div className="flex items-center gap-1 mt-2 text-xs text-slate-500">
+            <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
               <Command className="w-3 h-3" />
               <span>K then type "space" to switch</span>
             </div>
@@ -329,8 +329,8 @@ function SpaceSwitcher({
 
           {/* Current Space */}
           {currentSpace && (
-            <div className="p-2 border-b border-symtex-border">
-              <p className="px-2 py-1 text-xs font-medium text-slate-500 uppercase tracking-wider">
+            <div className="p-2 border-b border-border">
+              <p className="px-2 py-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Current
               </p>
               <SpaceItem
@@ -344,8 +344,8 @@ function SpaceSwitcher({
 
           {/* Favorites */}
           {favoriteSpaces.length > 0 && (
-            <div className="p-2 border-b border-symtex-border">
-              <p className="px-2 py-1 text-xs font-medium text-slate-500 uppercase tracking-wider flex items-center gap-1">
+            <div className="p-2 border-b border-border">
+              <p className="px-2 py-1 text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-1">
                 <Star className="w-3 h-3" />
                 Favorites
               </p>
@@ -364,8 +364,8 @@ function SpaceSwitcher({
 
           {/* Recent */}
           {recentSpaces.length > 0 && (
-            <div className="p-2 border-b border-symtex-border">
-              <p className="px-2 py-1 text-xs font-medium text-slate-500 uppercase tracking-wider flex items-center gap-1">
+            <div className="p-2 border-b border-border">
+              <p className="px-2 py-1 text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-1">
                 <Clock className="w-3 h-3" />
                 Recent
               </p>
@@ -386,7 +386,7 @@ function SpaceSwitcher({
               onClick={handleCreateSpace}
               className={cn(
                 'w-full flex items-center gap-2 px-2 py-2 rounded-lg',
-                'text-sm text-slate-300 hover:bg-slate-800/50 transition-colors'
+                'text-sm text-muted-foreground hover:bg-card/50 transition-colors'
               )}
             >
               <Plus className="w-4 h-4 text-symtex-primary" />
@@ -399,10 +399,10 @@ function SpaceSwitcher({
               }}
               className={cn(
                 'w-full flex items-center gap-2 px-2 py-2 rounded-lg',
-                'text-sm text-slate-300 hover:bg-slate-800/50 transition-colors'
+                'text-sm text-muted-foreground hover:bg-card/50 transition-colors'
               )}
             >
-              <Settings className="w-4 h-4 text-slate-400" />
+              <Settings className="w-4 h-4 text-muted-foreground" />
               Manage Spaces
             </button>
           </div>
@@ -431,9 +431,9 @@ function SpaceItem({ space, isSelected, isFocused, onClick }: SpaceItemProps): J
       onClick={onClick}
       className={cn(
         'w-full flex items-center gap-3 px-2 py-2 rounded-lg',
-        'hover:bg-slate-800/50 transition-colors',
+        'hover:bg-card/50 transition-colors',
         isSelected && 'bg-symtex-primary/10',
-        isFocused && 'bg-slate-800/70 ring-1 ring-symtex-primary'
+        isFocused && 'bg-muted/70 ring-1 ring-symtex-primary'
       )}
     >
       <div
@@ -446,9 +446,9 @@ function SpaceItem({ space, isSelected, isFocused, onClick }: SpaceItemProps): J
         />
       </div>
       <div className="flex-1 text-left min-w-0">
-        <p className="text-sm font-medium text-white truncate">{space.name}</p>
+        <p className="text-sm font-medium text-foreground truncate">{space.name}</p>
         {space.description && (
-          <p className="text-xs text-slate-500 truncate">{space.description}</p>
+          <p className="text-xs text-muted-foreground truncate">{space.description}</p>
         )}
       </div>
       {space.isFavorite && (

@@ -239,7 +239,7 @@ export default function InsightsPanel({ className }: InsightsPanelProps): JSX.El
           <button
             onClick={handleRefresh}
             disabled={isRefreshing}
-            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-slate-700/50 transition-colors disabled:opacity-50"
+            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors disabled:opacity-50"
           >
             <RefreshCcw className={clsx('w-4 h-4', isRefreshing && 'animate-spin')} />
           </button>
@@ -262,14 +262,14 @@ export default function InsightsPanel({ className }: InsightsPanelProps): JSX.El
                   'px-3 py-1.5 text-xs rounded-full transition-colors whitespace-nowrap',
                   activeCategory === cat.value
                     ? 'bg-symtex-primary text-foreground'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-slate-700/50'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 )}
               >
                 {cat.label}
                 {count > 0 && (
                   <span className={clsx(
                     'ml-1.5 px-1.5 rounded-full text-xs',
-                    activeCategory === cat.value ? 'bg-white/20' : 'bg-slate-700'
+                    activeCategory === cat.value ? 'bg-white/20' : 'bg-muted'
                   )}>
                     {count}
                   </span>
@@ -281,7 +281,7 @@ export default function InsightsPanel({ className }: InsightsPanelProps): JSX.El
       </div>
 
       {/* Insights List */}
-      <div className="divide-y divide-symtex-border max-h-[320px] overflow-y-auto">
+      <div className="divide-y divide-border max-h-[320px] overflow-y-auto">
         {filteredInsights.length === 0 ? (
           <div className="p-8 flex flex-col items-center justify-center text-center">
             <div className="p-4 rounded-full bg-surface-card mb-4">
@@ -320,7 +320,7 @@ export default function InsightsPanel({ className }: InsightsPanelProps): JSX.El
                         )}
                         <button
                           onClick={(e) => handleDismiss(e, insight.id)}
-                          className="p-1 rounded text-muted-foreground hover:text-slate-300 hover:bg-slate-700/50 transition-colors opacity-0 group-hover:opacity-100"
+                          className="p-1 rounded text-muted-foreground hover:text-foreground hover:bg-muted transition-colors opacity-0 group-hover:opacity-100"
                         >
                           <X className="w-3.5 h-3.5" />
                         </button>

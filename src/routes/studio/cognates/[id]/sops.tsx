@@ -115,34 +115,34 @@ export function CognateSOPsPage(): JSX.Element {
         <div className="flex items-center gap-4">
           <Link
             to="/studio/cognates"
-            className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
+            className="p-2 hover:bg-card rounded-lg transition-colors"
           >
-            <ArrowLeft className="w-5 h-5 text-zinc-400" />
+            <ArrowLeft className="w-5 h-5 text-muted-foreground" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-white">{cognate.name}</h1>
-            <p className="text-zinc-400 mt-1">Manage SOPs for this Cognate</p>
+            <h1 className="text-2xl font-bold text-foreground">{cognate.name}</h1>
+            <p className="text-muted-foreground mt-1">Manage SOPs for this Cognate</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
           <Link
             to={`/studio/cognates/${id}/bootstrap`}
-            className="flex items-center gap-2 px-4 py-2 border border-zinc-700 text-zinc-300 rounded-lg hover:bg-zinc-800 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 border border-border text-muted-foreground rounded-lg hover:bg-card transition-colors"
           >
             <Sparkles className="w-4 h-4" />
             Bootstrap
           </Link>
           <Link
             to={`/studio/cognates/${id}/packs`}
-            className="flex items-center gap-2 px-4 py-2 border border-zinc-700 text-zinc-300 rounded-lg hover:bg-zinc-800 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 border border-border text-muted-foreground rounded-lg hover:bg-card transition-colors"
           >
             <Package className="w-4 h-4" />
             Packs
           </Link>
           <Link
             to={`/studio/cognates/${id}/sops/new`}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-foreground rounded-lg hover:bg-blue-500 transition-colors"
           >
             <Plus className="w-4 h-4" />
             New SOP
@@ -157,22 +157,22 @@ export function CognateSOPsPage(): JSX.Element {
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4 flex-1">
           <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search SOPs..."
-              className="w-full pl-10 pr-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none"
+              className="w-full pl-10 pr-4 py-2 bg-surface-base border border-border rounded-lg text-foreground placeholder-muted-foreground focus:border-blue-500 focus:outline-none"
             />
           </div>
 
           <div className="flex items-center gap-2">
-            <Filter className="w-4 h-4 text-zinc-500" />
+            <Filter className="w-4 h-4 text-muted-foreground" />
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as SOPStatus | 'all')}
-              className="px-3 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-white text-sm focus:border-blue-500 focus:outline-none"
+              className="px-3 py-2 bg-surface-base border border-border rounded-lg text-foreground text-sm focus:border-blue-500 focus:outline-none"
             >
               <option value="all">All Statuses</option>
               <option value="active">Active</option>
@@ -183,12 +183,12 @@ export function CognateSOPsPage(): JSX.Element {
         </div>
 
         {/* View Toggle */}
-        <div className="flex items-center gap-1 p-1 bg-zinc-900 border border-zinc-700 rounded-lg">
+        <div className="flex items-center gap-1 p-1 bg-surface-base border border-border rounded-lg">
           <button
             type="button"
             onClick={() => setViewMode('grid')}
             className={`p-2 rounded transition-colors ${
-              viewMode === 'grid' ? 'bg-zinc-700 text-white' : 'text-zinc-400 hover:text-white'
+              viewMode === 'grid' ? 'bg-muted text-foreground' : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             <Grid className="w-4 h-4" />
@@ -197,7 +197,7 @@ export function CognateSOPsPage(): JSX.Element {
             type="button"
             onClick={() => setViewMode('list')}
             className={`p-2 rounded transition-colors ${
-              viewMode === 'list' ? 'bg-zinc-700 text-white' : 'text-zinc-400 hover:text-white'
+              viewMode === 'list' ? 'bg-muted text-foreground' : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             <List className="w-4 h-4" />
@@ -207,9 +207,9 @@ export function CognateSOPsPage(): JSX.Element {
 
       {/* SOP List */}
       {filteredSOPs.length === 0 ? (
-        <div className="p-12 text-center border border-dashed border-zinc-700 rounded-lg">
-          <h3 className="text-lg font-medium text-white mb-2">No SOPs Found</h3>
-          <p className="text-zinc-400 mb-4">
+        <div className="p-12 text-center border border-dashed border-border rounded-lg">
+          <h3 className="text-lg font-medium text-foreground mb-2">No SOPs Found</h3>
+          <p className="text-muted-foreground mb-4">
             {searchQuery || statusFilter !== 'all'
               ? 'Try adjusting your search or filters'
               : 'Create your first SOP or install a pack to get started'}
@@ -218,14 +218,14 @@ export function CognateSOPsPage(): JSX.Element {
             <div className="flex items-center justify-center gap-4">
               <Link
                 to={`/studio/cognates/${id}/sops/new`}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-foreground rounded-lg hover:bg-blue-500 transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 Create SOP
               </Link>
               <Link
                 to={`/studio/cognates/${id}/packs`}
-                className="inline-flex items-center gap-2 px-4 py-2 border border-zinc-700 text-zinc-300 rounded-lg hover:bg-zinc-800 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 border border-border text-muted-foreground rounded-lg hover:bg-card transition-colors"
               >
                 <Package className="w-4 h-4" />
                 Browse Packs

@@ -13,8 +13,8 @@ const TriggerNode = memo(({ data, selected }: NodeProps<TriggerNodeData>) => {
       style={{
         padding: '12px 16px',
         borderRadius: '12px',
-        background: 'linear-gradient(135deg, #1a1a2e 0%, #16162a 100%)',
-        border: selected ? '2px solid #f59e0b' : '1px solid #2a2a3e',
+        background: 'linear-gradient(135deg, var(--color-surface-card) 0%, #16162a 100%)',
+        border: selected ? '2px solid var(--color-gold)' : '1px solid var(--color-surface-elevated)',
         minWidth: '180px',
         boxShadow: selected
           ? '0 0 20px rgba(245, 158, 11, 0.3)'
@@ -34,7 +34,7 @@ const TriggerNode = memo(({ data, selected }: NodeProps<TriggerNodeData>) => {
             width: '32px',
             height: '32px',
             borderRadius: '8px',
-            background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+            background: 'linear-gradient(135deg, var(--color-gold), #d97706)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -56,7 +56,7 @@ const TriggerNode = memo(({ data, selected }: NodeProps<TriggerNodeData>) => {
           <div
             style={{
               fontSize: '10px',
-              color: '#f59e0b',
+              color: 'var(--color-gold)',
               fontWeight: 500,
             }}
           >
@@ -68,7 +68,7 @@ const TriggerNode = memo(({ data, selected }: NodeProps<TriggerNodeData>) => {
         <div
           style={{
             fontSize: '11px',
-            color: '#94a3b8',
+            color: 'var(--color-text-muted)',
             marginTop: '4px',
           }}
         >
@@ -79,10 +79,10 @@ const TriggerNode = memo(({ data, selected }: NodeProps<TriggerNodeData>) => {
         type="source"
         position={Position.Bottom}
         style={{
-          background: '#f59e0b',
+          background: 'var(--color-gold)',
           width: '12px',
           height: '12px',
-          border: '2px solid #0a0a0f',
+          border: '2px solid var(--color-surface-base)',
         }}
       />
     </div>

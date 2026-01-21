@@ -81,11 +81,11 @@ export function CognateCard({
             />
           ) : (
             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center" aria-hidden="true">
-              <Brain className="w-6 h-6 text-white" />
+              <Brain className="w-6 h-6 text-foreground" />
             </div>
           )}
           <div>
-            <h3 className="font-medium text-white">{cognate.name}</h3>
+            <h3 className="font-medium text-foreground">{cognate.name}</h3>
             <p className="text-sm text-muted-foreground">
               {cognate.role || 'No role assigned'}
             </p>
@@ -180,14 +180,14 @@ function CompactCognateCard({
         />
       ) : (
         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-          <Brain className="w-5 h-5 text-white" />
+          <Brain className="w-5 h-5 text-foreground" />
         </div>
       )}
 
       {/* Info */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <h3 className="font-medium text-white truncate">{cognate.name}</h3>
+          <h3 className="font-medium text-foreground truncate">{cognate.name}</h3>
           <StatusDot status={cognate.availability} />
         </div>
         <p className="text-xs text-muted-foreground truncate">
@@ -198,7 +198,7 @@ function CompactCognateCard({
       {/* Level Badge */}
       <div className="flex items-center gap-2">
         <div className="w-6 h-6 rounded bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center" aria-label={`Level ${cognate.level}`}>
-          <span className="text-xs font-bold text-white" aria-hidden="true">{cognate.level}</span>
+          <span className="text-xs font-bold text-foreground" aria-hidden="true">{cognate.level}</span>
         </div>
         <AutonomyBadge level={cognate.autonomyLevel} />
       </div>

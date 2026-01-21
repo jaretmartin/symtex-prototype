@@ -115,7 +115,7 @@ function NexisNodeComponent({ data, selected }: NodeProps): JSX.Element {
             {data.label}
           </p>
           {data.subtitle && (
-            <p className="text-xs text-slate-400 truncate">{data.subtitle}</p>
+            <p className="text-xs text-muted-foreground truncate">{data.subtitle}</p>
           )}
         </div>
         {data.strength && (
@@ -258,7 +258,7 @@ function NexisGraphInner({ onNodeSelect, className }: NexisGraphProps): JSX.Elem
             borderColor: '#2a2a3e',
             borderRadius: 8,
           }}
-          className="!border !border-symtex-border !rounded-lg overflow-hidden"
+          className="!border !border-border !rounded-lg overflow-hidden"
         />
         <MiniMap
           style={{

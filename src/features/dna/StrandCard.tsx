@@ -75,13 +75,13 @@ function StrandCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       className={cn(
-        'bg-symtex-card rounded-xl border border-symtex-border overflow-hidden',
+        'bg-card rounded-xl border border-border overflow-hidden',
         className
       )}
     >
       {/* Header */}
       <div
-        className="p-4 border-b border-symtex-border"
+        className="p-4 border-b border-border"
         style={{ backgroundColor: `${strand.color}10` }}
       >
         <div className="flex items-start gap-3">
@@ -109,15 +109,15 @@ function StrandCard({
                 {strengthInfo.text}
               </span>
             </div>
-            <h3 className="text-lg font-semibold text-white mt-1">
+            <h3 className="text-lg font-semibold text-foreground mt-1">
               {strand.name}
             </h3>
-            <p className="text-sm text-slate-400">{strand.description}</p>
+            <p className="text-sm text-muted-foreground">{strand.description}</p>
           </div>
           {onClose && (
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg hover:bg-slate-700/50 text-slate-400 hover:text-white transition-colors"
+              className="p-1.5 rounded-lg hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -126,37 +126,37 @@ function StrandCard({
       </div>
 
       {/* Metrics */}
-      <div className="p-4 grid grid-cols-3 gap-3 border-b border-symtex-border">
+      <div className="p-4 grid grid-cols-3 gap-3 border-b border-border">
         <div className="text-center">
           <div className="flex items-center justify-center gap-1 mb-1">
             <TrendingUp className="w-4 h-4" style={{ color: strand.color }} />
           </div>
-          <p className="text-2xl font-bold text-white">{strand.strength}%</p>
-          <p className="text-xs text-slate-500">Strength</p>
+          <p className="text-2xl font-bold text-foreground">{strand.strength}%</p>
+          <p className="text-xs text-muted-foreground">Strength</p>
         </div>
-        <div className="text-center border-x border-symtex-border">
+        <div className="text-center border-x border-border">
           <div className="flex items-center justify-center gap-1 mb-1">
-            <Shield className="w-4 h-4 text-slate-400" />
+            <Shield className="w-4 h-4 text-muted-foreground" />
           </div>
-          <p className="text-2xl font-bold text-white">{strand.confidence}%</p>
-          <p className="text-xs text-slate-500">Confidence</p>
+          <p className="text-2xl font-bold text-foreground">{strand.confidence}%</p>
+          <p className="text-xs text-muted-foreground">Confidence</p>
         </div>
         <div className="text-center">
           <div className="flex items-center justify-center gap-1 mb-1">
-            <Database className="w-4 h-4 text-slate-400" />
+            <Database className="w-4 h-4 text-muted-foreground" />
           </div>
-          <p className="text-2xl font-bold text-white">{strand.dataPoints}</p>
-          <p className="text-xs text-slate-500">Data Points</p>
+          <p className="text-2xl font-bold text-foreground">{strand.dataPoints}</p>
+          <p className="text-xs text-muted-foreground">Data Points</p>
         </div>
       </div>
 
       {/* Strength Bar */}
       <div className="px-4 py-3">
-        <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+        <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
           <span>Strand Strength</span>
           <span>{strand.strength}%</span>
         </div>
-        <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+        <div className="h-2 bg-muted rounded-full overflow-hidden">
           <motion.div
             className="h-full rounded-full"
             style={{ backgroundColor: strand.color }}
@@ -165,15 +165,15 @@ function StrandCard({
             transition={{ duration: 0.8, ease: 'easeOut' }}
           />
         </div>
-        <p className="text-xs text-slate-500 mt-1">
+        <p className="text-xs text-muted-foreground mt-1">
           Last updated: {strand.lastUpdated}
         </p>
       </div>
 
       {/* Insights */}
       {strand.insights && strand.insights.length > 0 && (
-        <div className="px-4 py-3 border-t border-symtex-border">
-          <h4 className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
+        <div className="px-4 py-3 border-t border-border">
+          <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1">
             <Lightbulb className="w-3 h-3" />
             Insights
           </h4>
@@ -181,7 +181,7 @@ function StrandCard({
             {strand.insights.map((insight, index) => (
               <li
                 key={index}
-                className="text-sm text-slate-300 flex items-start gap-2"
+                className="text-sm text-muted-foreground flex items-start gap-2"
               >
                 <span style={{ color: strand.color }}>-</span>
                 {insight}
@@ -193,8 +193,8 @@ function StrandCard({
 
       {/* Recommendations */}
       {strand.recommendations && strand.recommendations.length > 0 && (
-        <div className="px-4 py-3 border-t border-symtex-border bg-slate-800/30">
-          <h4 className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
+        <div className="px-4 py-3 border-t border-border bg-card/30">
+          <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-1">
             <ArrowRight className="w-3 h-3" />
             Recommendations
           </h4>
@@ -202,7 +202,7 @@ function StrandCard({
             {strand.recommendations.map((rec, index) => (
               <li
                 key={index}
-                className="text-sm text-slate-300 flex items-start gap-2"
+                className="text-sm text-muted-foreground flex items-start gap-2"
               >
                 <span className="text-symtex-primary">-</span>
                 {rec}
@@ -214,7 +214,7 @@ function StrandCard({
 
       {/* Actions */}
       {onImprove && (
-        <div className="p-4 border-t border-symtex-border">
+        <div className="p-4 border-t border-border">
           <button
             onClick={() => onImprove(strand.id)}
             className={cn(

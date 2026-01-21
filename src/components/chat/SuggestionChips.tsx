@@ -108,10 +108,10 @@ export function SuggestionChips({
               border transition-all duration-200
               ${
                 disabled
-                  ? 'opacity-50 cursor-not-allowed bg-slate-800/30 border-slate-700/30 text-slate-500'
+                  ? 'opacity-50 cursor-not-allowed bg-card/30 border-border/30 text-muted-foreground'
                   : isHovered
                   ? 'bg-symtex-primary/10 border-symtex-primary/50 text-symtex-primary shadow-sm shadow-symtex-primary/20'
-                  : 'bg-slate-800/50 border-slate-700/50 text-slate-300 hover:bg-slate-700/50'
+                  : 'bg-card/50 border-border/50 text-muted-foreground hover:bg-muted/50'
               }
             `}
             aria-label={`Send: ${suggestion.message}`}
@@ -119,7 +119,7 @@ export function SuggestionChips({
             {icon && (
               <span
                 className={`transition-colors ${
-                  isHovered ? 'text-symtex-primary' : 'text-slate-400'
+                  isHovered ? 'text-symtex-primary' : 'text-muted-foreground'
                 }`}
               >
                 {icon}
@@ -135,7 +135,7 @@ export function SuggestionChips({
         <button
           onClick={onRefresh}
           disabled={disabled}
-          className="p-2 text-slate-400 hover:text-slate-200 rounded-full hover:bg-slate-700/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="p-2 text-muted-foreground hover:text-muted-foreground rounded-full hover:bg-muted/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Show more suggestions"
         >
           <RefreshCw className="w-4 h-4" />

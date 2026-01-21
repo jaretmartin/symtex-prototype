@@ -65,7 +65,7 @@ const categories: { value: LedgerCategory; label: string }[] = [
 ];
 
 const severities: { value: LedgerSeverity; label: string; color: string }[] = [
-  { value: 'debug', label: 'Debug', color: 'text-slate-400' },
+  { value: 'debug', label: 'Debug', color: 'text-muted-foreground' },
   { value: 'info', label: 'Info', color: 'text-blue-400' },
   { value: 'notice', label: 'Notice', color: 'text-cyan-400' },
   { value: 'warning', label: 'Warning', color: 'text-yellow-400' },
@@ -176,27 +176,27 @@ export function LedgerFilters({
       <div className="flex items-center gap-3 flex-wrap">
         {/* Search */}
         <div className="relative flex-1 min-w-[200px] max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
             placeholder="Search entries..."
             value={filters.search || ''}
             onChange={(e) => handleSearchChange(e.target.value)}
-            className="pl-9 bg-slate-800 border-slate-700 text-white placeholder:text-slate-500"
+            className="pl-9 bg-card border-border text-foreground placeholder:text-muted-foreground"
           />
           {filters.search && (
             <button
               onClick={() => handleSearchChange('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded hover:bg-slate-700"
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded hover:bg-muted"
             >
-              <X className="w-3.5 h-3.5 text-slate-400" />
+              <X className="w-3.5 h-3.5 text-muted-foreground" />
             </button>
           )}
         </div>
 
         {/* Date Range */}
         <Select value={selectedDateRange} onValueChange={handleDateRangeChange}>
-          <SelectTrigger className="w-[160px] bg-slate-800 border-slate-700">
-            <Calendar className="w-4 h-4 mr-2 text-slate-400" />
+          <SelectTrigger className="w-[160px] bg-card border-border">
+            <Calendar className="w-4 h-4 mr-2 text-muted-foreground" />
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -216,26 +216,26 @@ export function LedgerFilters({
                 'flex items-center gap-2 px-3 py-2 rounded-lg border transition-colors',
                 activeFilterCount > 0
                   ? 'border-indigo-500 bg-indigo-500/10 text-indigo-400'
-                  : 'border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-600'
+                  : 'border-border bg-card text-muted-foreground hover:border-border'
               )}
             >
               <Filter className="w-4 h-4" />
               <span className="text-sm">Filters</span>
               {activeFilterCount > 0 && (
-                <Badge className="ml-1 h-5 min-w-[20px] px-1 bg-indigo-500 text-white">
+                <Badge className="ml-1 h-5 min-w-[20px] px-1 bg-indigo-500 text-foreground">
                   {activeFilterCount}
                 </Badge>
               )}
             </button>
           </PopoverTrigger>
           <PopoverContent
-            className="w-[400px] p-4 bg-slate-800 border-slate-700"
+            className="w-[400px] p-4 bg-card border-border"
             align="start"
           >
             <div className="space-y-4">
               {/* Actor Types */}
               <div>
-                <label className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2 block">
+                <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 block">
                   Actor Type
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -247,7 +247,7 @@ export function LedgerFilters({
                         'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs transition-colors',
                         filters.actorType?.includes(value)
                           ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30'
-                          : 'bg-slate-700/50 text-slate-400 border border-slate-600 hover:border-slate-500'
+                          : 'bg-muted/50 text-muted-foreground border border-border hover:border-border'
                       )}
                     >
                       <Icon className="w-3.5 h-3.5" />
@@ -259,7 +259,7 @@ export function LedgerFilters({
 
               {/* Categories */}
               <div>
-                <label className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2 block">
+                <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 block">
                   Category
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -271,7 +271,7 @@ export function LedgerFilters({
                         'px-2.5 py-1.5 rounded-lg text-xs transition-colors',
                         filters.category?.includes(value)
                           ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30'
-                          : 'bg-slate-700/50 text-slate-400 border border-slate-600 hover:border-slate-500'
+                          : 'bg-muted/50 text-muted-foreground border border-border hover:border-border'
                       )}
                     >
                       {label}
@@ -282,7 +282,7 @@ export function LedgerFilters({
 
               {/* Severity */}
               <div>
-                <label className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2 block">
+                <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2 block">
                   Severity
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -294,7 +294,7 @@ export function LedgerFilters({
                         'px-2.5 py-1.5 rounded-lg text-xs transition-colors',
                         filters.severity?.includes(value)
                           ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30'
-                          : 'bg-slate-700/50 border border-slate-600 hover:border-slate-500',
+                          : 'bg-muted/50 border border-border hover:border-border',
                         !filters.severity?.includes(value) && color
                       )}
                     >
@@ -305,16 +305,16 @@ export function LedgerFilters({
               </div>
 
               {/* Flagged Only */}
-              <div className="flex items-center justify-between pt-2 border-t border-slate-700">
+              <div className="flex items-center justify-between pt-2 border-t border-border">
                 <div className="flex items-center gap-2">
                   <Flag className="w-4 h-4 text-amber-400" />
-                  <span className="text-sm text-slate-300">Flagged entries only</span>
+                  <span className="text-sm text-muted-foreground">Flagged entries only</span>
                 </div>
                 <button
                   onClick={handleFlaggedToggle}
                   className={cn(
                     'relative w-10 h-5 rounded-full transition-colors',
-                    filters.flaggedOnly ? 'bg-indigo-500' : 'bg-slate-600'
+                    filters.flaggedOnly ? 'bg-indigo-500' : 'bg-muted'
                   )}
                 >
                   <span
@@ -333,7 +333,7 @@ export function LedgerFilters({
         {activeFilterCount > 0 && (
           <button
             onClick={onReset}
-            className="flex items-center gap-1.5 px-3 py-2 text-sm text-slate-400 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <RotateCcw className="w-4 h-4" />
             Reset
@@ -344,7 +344,7 @@ export function LedgerFilters({
       {/* Active Filters Display */}
       {activeFilterCount > 0 && (
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-xs text-slate-500">Active filters:</span>
+          <span className="text-xs text-muted-foreground">Active filters:</span>
 
           {filters.actorType?.map((type) => (
             <Badge
@@ -355,7 +355,7 @@ export function LedgerFilters({
               {type}
               <button
                 onClick={() => handleActorTypeToggle(type)}
-                className="ml-0.5 hover:text-white"
+                className="ml-0.5 hover:text-foreground"
               >
                 <X className="w-3 h-3" />
               </button>
@@ -371,7 +371,7 @@ export function LedgerFilters({
               {cat}
               <button
                 onClick={() => handleCategoryToggle(cat)}
-                className="ml-0.5 hover:text-white"
+                className="ml-0.5 hover:text-foreground"
               >
                 <X className="w-3 h-3" />
               </button>
@@ -387,7 +387,7 @@ export function LedgerFilters({
               {sev}
               <button
                 onClick={() => handleSeverityToggle(sev)}
-                className="ml-0.5 hover:text-white"
+                className="ml-0.5 hover:text-foreground"
               >
                 <X className="w-3 h-3" />
               </button>
@@ -400,14 +400,14 @@ export function LedgerFilters({
               className="text-xs border-amber-500/30 text-amber-400 bg-amber-500/10 gap-1"
             >
               Flagged
-              <button onClick={handleFlaggedToggle} className="ml-0.5 hover:text-white">
+              <button onClick={handleFlaggedToggle} className="ml-0.5 hover:text-foreground">
                 <X className="w-3 h-3" />
               </button>
             </Badge>
           )}
 
           {/* Results Count */}
-          <span className="text-xs text-slate-500 ml-auto">
+          <span className="text-xs text-muted-foreground ml-auto">
             Showing {filteredCount} of {totalCount} entries
           </span>
         </div>

@@ -72,8 +72,8 @@ const statusConfig: Record<
   },
   idle: {
     label: 'Idle',
-    color: 'text-slate-400',
-    bgColor: 'bg-slate-500/20',
+    color: 'text-muted-foreground',
+    bgColor: 'bg-muted/20',
     icon: Bot,
   },
   paused: {
@@ -160,8 +160,8 @@ export default function CognateInstanceDetail({
   const renderOverview = (): JSX.Element => (
     <div className="space-y-6">
       {/* Status Card */}
-      <div className="bg-slate-800/50 rounded-xl p-4">
-        <h4 className="text-sm font-medium text-slate-400 mb-3">Current Status</h4>
+      <div className="bg-card/50 rounded-xl p-4">
+        <h4 className="text-sm font-medium text-muted-foreground mb-3">Current Status</h4>
         <div className="flex items-center gap-4">
           <div className="relative">
             <ProgressRing
@@ -193,7 +193,7 @@ export default function CognateInstanceDetail({
               </span>
             </div>
             {instance.startedAt && (
-              <p className="text-sm text-slate-400 mt-1">
+              <p className="text-sm text-muted-foreground mt-1">
                 Started: {formatTime(instance.startedAt)}
               </p>
             )}
@@ -203,17 +203,17 @@ export default function CognateInstanceDetail({
 
       {/* Mission Info */}
       {missionName && (
-        <div className="bg-slate-800/50 rounded-xl p-4">
-          <h4 className="text-sm font-medium text-slate-400 mb-3">
+        <div className="bg-card/50 rounded-xl p-4">
+          <h4 className="text-sm font-medium text-muted-foreground mb-3">
             Assigned Mission
           </h4>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Target className="w-5 h-5 text-symtex-primary" />
               <div>
-                <p className="font-medium text-white">{missionName}</p>
+                <p className="font-medium text-foreground">{missionName}</p>
                 {projectName && (
-                  <p className="text-sm text-slate-400">{projectName}</p>
+                  <p className="text-sm text-muted-foreground">{projectName}</p>
                 )}
               </div>
             </div>
@@ -233,8 +233,8 @@ export default function CognateInstanceDetail({
 
       {/* Current Action */}
       {currentExecution?.input && (
-        <div className="bg-slate-800/50 rounded-xl p-4">
-          <h4 className="text-sm font-medium text-slate-400 mb-3">
+        <div className="bg-card/50 rounded-xl p-4">
+          <h4 className="text-sm font-medium text-muted-foreground mb-3">
             Current Action
           </h4>
           <p className="text-white">{currentExecution.input}</p>
@@ -243,20 +243,20 @@ export default function CognateInstanceDetail({
 
       {/* Template Info */}
       {template && (
-        <div className="bg-slate-800/50 rounded-xl p-4">
-          <h4 className="text-sm font-medium text-slate-400 mb-3">
+        <div className="bg-card/50 rounded-xl p-4">
+          <h4 className="text-sm font-medium text-muted-foreground mb-3">
             Cognate Template
           </h4>
           <div className="flex items-center gap-3 mb-3">
             <Bot className="w-5 h-5 text-symtex-primary" />
-            <span className="font-medium text-white">{template.name}</span>
+            <span className="font-medium text-foreground">{template.name}</span>
           </div>
-          <p className="text-sm text-slate-400 mb-3">{template.description}</p>
+          <p className="text-sm text-muted-foreground mb-3">{template.description}</p>
           <div className="flex flex-wrap gap-2">
             {template.capabilities.map((cap) => (
               <span
                 key={cap}
-                className="text-xs px-2 py-1 rounded bg-slate-700/50 text-slate-300"
+                className="text-xs px-2 py-1 rounded bg-muted/50 text-muted-foreground"
               >
                 {cap}
               </span>
@@ -267,21 +267,21 @@ export default function CognateInstanceDetail({
 
       {/* Quick Stats */}
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-slate-800/50 rounded-xl p-4 text-center">
-          <p className="text-2xl font-bold text-white">
+        <div className="bg-card/50 rounded-xl p-4 text-center">
+          <p className="text-2xl font-bold text-foreground">
             {instance.totalExecutions}
           </p>
-          <p className="text-sm text-slate-400">Total Runs</p>
+          <p className="text-sm text-muted-foreground">Total Runs</p>
         </div>
-        <div className="bg-slate-800/50 rounded-xl p-4 text-center">
+        <div className="bg-card/50 rounded-xl p-4 text-center">
           <p className="text-2xl font-bold text-green-400">{successRate}%</p>
-          <p className="text-sm text-slate-400">Success Rate</p>
+          <p className="text-sm text-muted-foreground">Success Rate</p>
         </div>
-        <div className="bg-slate-800/50 rounded-xl p-4 text-center">
-          <p className="text-2xl font-bold text-white">
+        <div className="bg-card/50 rounded-xl p-4 text-center">
+          <p className="text-2xl font-bold text-foreground">
             {formatDuration(avgDuration)}
           </p>
-          <p className="text-sm text-slate-400">Avg Duration</p>
+          <p className="text-sm text-muted-foreground">Avg Duration</p>
         </div>
       </div>
     </div>
@@ -301,7 +301,7 @@ export default function CognateInstanceDetail({
           return (
             <div
               key={execution.id}
-              className="bg-slate-800/50 rounded-lg p-4 border border-slate-700"
+              className="bg-card/50 rounded-lg p-4 border border-border"
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
@@ -314,21 +314,21 @@ export default function CognateInstanceDetail({
                   {execStatus === 'running' && (
                     <Loader2 className="w-4 h-4 text-blue-400 animate-spin" />
                   )}
-                  <span className="text-sm text-slate-300">
+                  <span className="text-sm text-muted-foreground">
                     {execution.id.slice(0, 8)}
                   </span>
                 </div>
-                <span className="text-xs text-slate-500">
+                <span className="text-xs text-muted-foreground">
                   {formatTime(execution.startedAt)}
                 </span>
               </div>
               {execution.input && (
-                <p className="text-sm text-slate-400 mb-2 line-clamp-2">
+                <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
                   {execution.input}
                 </p>
               )}
               {execution.duration && (
-                <div className="flex items-center gap-1 text-xs text-slate-500">
+                <div className="flex items-center gap-1 text-xs text-muted-foreground">
                   <Clock className="w-3 h-3" />
                   {formatDuration(execution.duration)}
                 </div>
@@ -340,7 +340,7 @@ export default function CognateInstanceDetail({
           );
         })
       ) : (
-        <div className="text-center py-8 text-slate-400">
+        <div className="text-center py-8 text-muted-foreground">
           No executions recorded yet.
         </div>
       )}
@@ -348,9 +348,9 @@ export default function CognateInstanceDetail({
   );
 
   const renderLogs = (): JSX.Element => (
-    <div className="bg-slate-900 rounded-lg p-4 font-mono text-sm">
+    <div className="bg-surface-base rounded-lg p-4 font-mono text-sm">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-slate-400">Output Log</span>
+        <span className="text-muted-foreground">Output Log</span>
         <Button
           variant="ghost"
           size="icon-sm"
@@ -366,13 +366,13 @@ export default function CognateInstanceDetail({
       <div className="space-y-2 max-h-96 overflow-y-auto">
         {executions.length > 0 ? (
           executions.map((execution, idx) => (
-            <div key={execution.id} className="text-slate-300">
-              <span className="text-slate-600">[{idx + 1}] </span>
+            <div key={execution.id} className="text-muted-foreground">
+              <span className="text-muted-foreground">[{idx + 1}] </span>
               {execution.output || '(no output)'}
             </div>
           ))
         ) : (
-          <div className="text-slate-500">No logs available.</div>
+          <div className="text-muted-foreground">No logs available.</div>
         )}
       </div>
     </div>
@@ -387,32 +387,32 @@ export default function CognateInstanceDetail({
     return (
       <div className="space-y-6">
         {/* Performance Overview */}
-        <div className="bg-slate-800/50 rounded-xl p-4">
-          <h4 className="text-sm font-medium text-slate-400 mb-4">
+        <div className="bg-card/50 rounded-xl p-4">
+          <h4 className="text-sm font-medium text-muted-foreground mb-4">
             Performance Overview
           </h4>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
                 Success Rate
               </p>
               <div className="flex items-center gap-2">
-                <div className="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
                   <div
                     className="h-full bg-green-500 rounded-full"
                     style={{ width: `${successRate}%` }}
                   />
                 </div>
-                <span className="text-sm font-medium text-white">
+                <span className="text-sm font-medium text-foreground">
                   {successRate}%
                 </span>
               </div>
             </div>
             <div>
-              <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
                 Avg Response Time
               </p>
-              <p className="text-lg font-semibold text-white">
+              <p className="text-lg font-semibold text-foreground">
                 {formatDuration(avgDuration)}
               </p>
             </div>
@@ -421,8 +421,8 @@ export default function CognateInstanceDetail({
 
         {/* Recent Execution Times */}
         {recentExecutions.length > 0 && (
-          <div className="bg-slate-800/50 rounded-xl p-4">
-            <h4 className="text-sm font-medium text-slate-400 mb-4">
+          <div className="bg-card/50 rounded-xl p-4">
+            <h4 className="text-sm font-medium text-muted-foreground mb-4">
               Recent Execution Times
             </h4>
             <div className="flex items-end gap-1 h-24">
@@ -446,7 +446,7 @@ export default function CognateInstanceDetail({
                       )}
                       style={{ height: `${Math.max(height, 5)}%` }}
                     />
-                    <span className="text-xs text-slate-500 text-center mt-1">
+                    <span className="text-xs text-muted-foreground text-center mt-1">
                       {idx + 1}
                     </span>
                   </div>
@@ -457,24 +457,24 @@ export default function CognateInstanceDetail({
         )}
 
         {/* Timestamps */}
-        <div className="bg-slate-800/50 rounded-xl p-4">
-          <h4 className="text-sm font-medium text-slate-400 mb-3">
+        <div className="bg-card/50 rounded-xl p-4">
+          <h4 className="text-sm font-medium text-muted-foreground mb-3">
             Activity Timeline
           </h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-slate-400">Created</span>
+              <span className="text-muted-foreground">Created</span>
               <span className="text-white">{formatTime(instance.createdAt)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Last Active</span>
+              <span className="text-muted-foreground">Last Active</span>
               <span className="text-white">
                 {formatTime(instance.lastActiveAt)}
               </span>
             </div>
             {instance.completedAt && (
               <div className="flex justify-between">
-                <span className="text-slate-400">Completed</span>
+                <span className="text-muted-foreground">Completed</span>
                 <span className="text-white">
                   {formatTime(instance.completedAt)}
                 </span>
@@ -487,19 +487,19 @@ export default function CognateInstanceDetail({
   };
 
   return (
-    <div className="h-full flex flex-col bg-symtex-card border-l border-symtex-border">
+    <div className="h-full flex flex-col bg-card border-l border-border">
       {/* Header */}
-      <div className="p-4 border-b border-symtex-border">
+      <div className="p-4 border-b border-border">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-symtex-primary/10 flex items-center justify-center">
               <Bot className="w-5 h-5 text-symtex-primary" />
             </div>
             <div>
-              <h3 className="font-semibold text-white">
+              <h3 className="font-semibold text-foreground">
                 {template?.name || `Cognate ${instance.id.slice(0, 8)}`}
               </h3>
-              <span className="text-sm text-slate-400">
+              <span className="text-sm text-muted-foreground">
                 ID: {instance.id.slice(0, 12)}...
               </span>
             </div>
@@ -557,7 +557,7 @@ export default function CognateInstanceDetail({
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-symtex-border">
+      <div className="flex border-b border-border">
         {tabs.map((tab) => {
           const TabIcon = tab.icon;
           const isActiveTab = activeTab === tab.id;
@@ -571,7 +571,7 @@ export default function CognateInstanceDetail({
                 'transition-colors duration-200',
                 isActiveTab
                   ? 'text-symtex-primary border-b-2 border-symtex-primary'
-                  : 'text-slate-400 hover:text-white'
+                  : 'text-muted-foreground hover:text-white'
               )}
               aria-selected={isActiveTab}
             >

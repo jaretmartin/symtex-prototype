@@ -81,7 +81,7 @@ function StarRating({
                 'w-6 h-6 transition-colors duration-150',
                 isFilled
                   ? 'fill-yellow-400 text-yellow-400'
-                  : 'text-slate-600 hover:text-slate-500'
+                  : 'text-muted-foreground hover:text-muted-foreground'
               )}
             />
           </button>
@@ -105,8 +105,8 @@ function ThankYouState({ className }: { className?: string }): JSX.Element {
       <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center mb-3">
         <CheckCircle className="w-6 h-6 text-green-400" />
       </div>
-      <h4 className="text-sm font-medium text-white mb-1">Thank you for your feedback!</h4>
-      <p className="text-xs text-slate-400">
+      <h4 className="text-sm font-medium text-foreground mb-1">Thank you for your feedback!</h4>
+      <p className="text-xs text-muted-foreground">
         Your input helps improve AI reasoning quality.
       </p>
     </div>
@@ -186,21 +186,21 @@ export default function FeedbackWidget({
   return (
     <div
       className={clsx(
-        'p-4 rounded-lg border border-symtex-border bg-slate-800/30',
+        'p-4 rounded-lg border border-border bg-card/30',
         className
       )}
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h4 className="text-sm font-medium text-white flex items-center gap-2">
-          <MessageSquare className="w-4 h-4 text-slate-400" />
+        <h4 className="text-sm font-medium text-foreground flex items-center gap-2">
+          <MessageSquare className="w-4 h-4 text-muted-foreground" />
           Rate this reasoning
         </h4>
         {(rating || comment || improvements.length > 0) && (
           <button
             type="button"
             onClick={handleReset}
-            className="text-xs text-slate-500 hover:text-slate-400 transition-colors"
+            className="text-xs text-muted-foreground hover:text-muted-foreground transition-colors"
             aria-label="Reset feedback"
           >
             <X className="w-4 h-4" />
@@ -210,7 +210,7 @@ export default function FeedbackWidget({
 
       {/* Star Rating */}
       <div className="mb-4">
-        <p className="text-xs text-slate-400 mb-2">
+        <p className="text-xs text-muted-foreground mb-2">
           How helpful was this reasoning?
         </p>
         <StarRating value={rating} onChange={setRating} disabled={disabled} />
@@ -219,7 +219,7 @@ export default function FeedbackWidget({
       {/* Improvement Suggestions */}
       {rating && rating <= 3 && (
         <div className="mb-4">
-          <p className="text-xs text-slate-400 mb-2">
+          <p className="text-xs text-muted-foreground mb-2">
             What could be improved? (optional)
           </p>
           <div className="flex flex-wrap gap-2">
@@ -233,7 +233,7 @@ export default function FeedbackWidget({
                   'px-2.5 py-1 rounded-full text-xs transition-all duration-150',
                   improvements.includes(option)
                     ? 'bg-symtex-primary/20 text-symtex-primary border border-symtex-primary/30'
-                    : 'bg-slate-700/50 text-slate-400 border border-slate-600 hover:border-slate-500',
+                    : 'bg-muted/50 text-muted-foreground border border-border hover:border-border',
                   disabled && 'opacity-50 cursor-not-allowed'
                 )}
               >
@@ -252,7 +252,7 @@ export default function FeedbackWidget({
             onClick={() => setShowCommentField(true)}
             disabled={disabled}
             className={clsx(
-              'text-xs text-slate-500 hover:text-slate-400 transition-colors',
+              'text-xs text-muted-foreground hover:text-muted-foreground transition-colors',
               disabled && 'opacity-50 cursor-not-allowed'
             )}
           >
@@ -262,7 +262,7 @@ export default function FeedbackWidget({
           <div className="space-y-2">
             <label
               htmlFor="feedback-comment"
-              className="text-xs text-slate-400 block"
+              className="text-xs text-muted-foreground block"
             >
               Additional comments (optional)
             </label>
@@ -274,8 +274,8 @@ export default function FeedbackWidget({
               placeholder="Share your thoughts..."
               className={clsx(
                 'w-full px-3 py-2 rounded-lg text-sm',
-                'bg-slate-900/50 border border-slate-700',
-                'text-slate-200 placeholder-slate-500',
+                'bg-surface-base/50 border border-border',
+                'text-muted-foreground placeholder-muted-foreground',
                 'focus:outline-none focus:ring-2 focus:ring-symtex-primary/50 focus:border-symtex-primary/50',
                 'resize-none transition-colors',
                 disabled && 'opacity-50 cursor-not-allowed'
@@ -283,7 +283,7 @@ export default function FeedbackWidget({
               rows={3}
               maxLength={500}
             />
-            <div className="text-xs text-slate-500 text-right">
+            <div className="text-xs text-muted-foreground text-right">
               {comment.length}/500
             </div>
           </div>
@@ -326,7 +326,7 @@ export function FeedbackTrigger({
         'transition-all duration-200',
         hasFeedback
           ? 'bg-green-500/10 text-green-400 border border-green-500/30'
-          : 'bg-slate-700/50 text-slate-400 border border-slate-600 hover:border-slate-500 hover:text-slate-300',
+          : 'bg-muted/50 text-muted-foreground border border-border hover:border-border hover:text-muted-foreground',
         className
       )}
       aria-label={hasFeedback ? 'View submitted feedback' : 'Provide feedback'}

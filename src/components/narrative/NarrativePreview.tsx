@@ -47,8 +47,8 @@ interface ChapterTypeIcon {
 const statusBadge: Record<NarrativeStatus, StatusBadgeConfig> = {
   draft: {
     label: 'Draft',
-    color: 'text-slate-400',
-    bgColor: 'bg-slate-500/10',
+    color: 'text-muted-foreground',
+    bgColor: 'bg-muted/10',
   },
   active: {
     label: 'Active',
@@ -120,24 +120,24 @@ export function NarrativePreview({
           onSelect && 'cursor-pointer',
           isSelected
             ? 'bg-symtex-primary/10 border-symtex-primary'
-            : 'bg-symtex-card border-symtex-border hover:border-slate-500'
+            : 'bg-card border-border hover:border-border'
         )}
       >
         <div className="flex items-center gap-3">
           <div
             className={clsx(
               'flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center',
-              isSelected ? 'bg-symtex-primary/20' : 'bg-slate-700/50'
+              isSelected ? 'bg-symtex-primary/20' : 'bg-muted/50'
             )}
           >
             <BookOpen
-              className={clsx('w-4 h-4', isSelected ? 'text-symtex-primary' : 'text-slate-400')}
+              className={clsx('w-4 h-4', isSelected ? 'text-symtex-primary' : 'text-muted-foreground')}
             />
           </div>
 
           <div className="flex-1 min-w-0">
-            <h4 className="text-sm font-medium text-white truncate">{story.title}</h4>
-            <div className="flex items-center gap-2 text-xs text-slate-500">
+            <h4 className="text-sm font-medium text-foreground truncate">{story.title}</h4>
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <span>{story.chapters.length} chapters</span>
               <span className={badge.color}>{badge.label}</span>
             </div>
@@ -147,7 +147,7 @@ export function NarrativePreview({
             <ChevronRight
               className={clsx(
                 'w-4 h-4 transition-transform',
-                isSelected ? 'text-symtex-primary' : 'text-slate-500',
+                isSelected ? 'text-symtex-primary' : 'text-muted-foreground',
                 'group-hover:translate-x-0.5'
               )}
             />
@@ -160,17 +160,17 @@ export function NarrativePreview({
   return (
     <div
       className={clsx(
-        'group bg-symtex-card rounded-xl border transition-all duration-200',
+        'group bg-card rounded-xl border transition-all duration-200',
         isSelected
           ? 'border-symtex-primary ring-2 ring-symtex-primary/20'
-          : 'border-symtex-border hover:border-slate-500',
+          : 'border-border hover:border-border',
         onSelect && 'cursor-pointer',
         className
       )}
       onClick={handleClick}
     >
       {/* Header */}
-      <div className="p-4 border-b border-symtex-border/50">
+      <div className="p-4 border-b border-border/50">
         <div className="flex items-start gap-3">
           {/* Icon */}
           <div
@@ -178,34 +178,34 @@ export function NarrativePreview({
               'flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center',
               isSelected
                 ? 'bg-gradient-to-br from-symtex-primary/20 to-symtex-accent/20'
-                : 'bg-slate-700/50'
+                : 'bg-muted/50'
             )}
           >
             <BookOpen
-              className={clsx('w-5 h-5', isSelected ? 'text-symtex-primary' : 'text-slate-400')}
+              className={clsx('w-5 h-5', isSelected ? 'text-symtex-primary' : 'text-muted-foreground')}
             />
           </div>
 
           {/* Content */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <h3 className="font-semibold text-white truncate">{story.title}</h3>
+              <h3 className="font-semibold text-foreground truncate">{story.title}</h3>
               <span
                 className={clsx('text-xs font-medium px-1.5 py-0.5 rounded', badge.bgColor, badge.color)}
               >
                 {badge.label}
               </span>
             </div>
-            <p className="text-sm text-slate-400 line-clamp-2">{story.description}</p>
+            <p className="text-sm text-muted-foreground line-clamp-2">{story.description}</p>
           </div>
         </div>
       </div>
 
       {/* Chapter Distribution */}
       {chapterDistribution.length > 0 && (
-        <div className="px-4 py-3 border-b border-symtex-border/50">
+        <div className="px-4 py-3 border-b border-border/50">
           <div className="flex items-center gap-3">
-            <span className="text-xs text-slate-500">Chapters:</span>
+            <span className="text-xs text-muted-foreground">Chapters:</span>
             <div className="flex items-center gap-2">
               {chapterDistribution.map(({ type, count }) => {
                 const config = chapterTypeIcons[type];
@@ -217,7 +217,7 @@ export function NarrativePreview({
                     title={`${count} ${type} chapter${count !== 1 ? 's' : ''}`}
                   >
                     <Icon className={clsx('w-3.5 h-3.5', config.color)} />
-                    <span className="text-slate-400">{count}</span>
+                    <span className="text-muted-foreground">{count}</span>
                   </div>
                 );
               })}
@@ -227,7 +227,7 @@ export function NarrativePreview({
       )}
 
       {/* Stats */}
-      <div className="px-4 py-3 flex items-center gap-4 text-xs text-slate-400">
+      <div className="px-4 py-3 flex items-center gap-4 text-xs text-muted-foreground">
         <div className="flex items-center gap-1.5">
           <BookOpen className="w-3.5 h-3.5" />
           <span>{story.chapters.length} chapters</span>
@@ -248,7 +248,7 @@ export function NarrativePreview({
 
       {/* Actions */}
       {showActions && (onPreview || onRun) && (
-        <div className="px-4 py-3 border-t border-symtex-border/50 flex items-center justify-end gap-2">
+        <div className="px-4 py-3 border-t border-border/50 flex items-center justify-end gap-2">
           {onPreview && (
             <Button
               variant="ghost"

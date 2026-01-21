@@ -169,18 +169,18 @@ export default function ActiveMissionsWidget({
         'bg-card rounded-xl border border-border overflow-hidden',
         className
       )}>
-        <div className="p-5 border-b border-symtex-border">
-          <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+        <div className="p-5 border-b border-border">
+          <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
             <Target className="w-5 h-5 text-symtex-primary" />
             Active Missions
           </h2>
         </div>
         <div className="p-8 flex flex-col items-center justify-center text-center">
-          <div className="p-4 rounded-full bg-slate-800 mb-4">
-            <Target className="w-8 h-8 text-slate-500" />
+          <div className="p-4 rounded-full bg-card mb-4">
+            <Target className="w-8 h-8 text-muted-foreground" />
           </div>
-          <h3 className="text-lg font-semibold text-white mb-2">No Active Missions</h3>
-          <p className="text-sm text-slate-400 max-w-xs mb-4">
+          <h3 className="text-lg font-semibold text-foreground mb-2">No Active Missions</h3>
+          <p className="text-sm text-muted-foreground max-w-xs mb-4">
             Create a mission to track your AI operations goals and progress.
           </p>
           <button
@@ -201,8 +201,8 @@ export default function ActiveMissionsWidget({
       className
     )}>
       {/* Header */}
-      <div className="p-5 border-b border-symtex-border flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+      <div className="p-5 border-b border-border flex items-center justify-between">
+        <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
           <Target className="w-5 h-5 text-symtex-primary" />
           Active Missions
           <span className="text-xs bg-symtex-primary/20 text-symtex-primary px-2 py-0.5 rounded-full">
@@ -211,14 +211,14 @@ export default function ActiveMissionsWidget({
         </h2>
         <button
           onClick={handleCreateMission}
-          className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 transition-colors"
+          className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
         >
           <Plus className="w-4 h-4" />
         </button>
       </div>
 
       {/* Missions List */}
-      <div className="divide-y divide-symtex-border">
+      <div className="divide-y divide-border">
         {activeMissions.map((mission) => {
           const priority = priorityConfig[mission.priority]
           const status = statusConfig[mission.status]
@@ -229,7 +229,7 @@ export default function ActiveMissionsWidget({
             <div
               key={mission.id}
               onClick={() => handleMissionClick(mission)}
-              className="p-4 hover:bg-slate-800/30 transition-colors cursor-pointer group"
+              className="p-4 hover:bg-card/30 transition-colors cursor-pointer group"
             >
               <div className="flex items-start gap-3">
                 {/* Status Icon */}
@@ -243,7 +243,7 @@ export default function ActiveMissionsWidget({
                 {/* Content */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <h4 className="font-medium text-white truncate group-hover:text-symtex-primary transition-colors">
+                    <h4 className="font-medium text-foreground truncate group-hover:text-symtex-primary transition-colors">
                       {mission.title}
                     </h4>
                     <span className={clsx(
@@ -256,20 +256,20 @@ export default function ActiveMissionsWidget({
 
                   {/* Progress Bar */}
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="flex-1 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                    <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
                       <div
                         className="h-full rounded-full bg-symtex-primary transition-all duration-500"
                         style={{ width: `${mission.progress}%` }}
                       />
                     </div>
-                    <span className="text-xs text-slate-400 flex-shrink-0">
+                    <span className="text-xs text-muted-foreground flex-shrink-0">
                       {mission.progress}%
                     </span>
                   </div>
 
                   {/* Meta */}
                   <div className="flex items-center gap-4 text-xs">
-                    <span className="text-slate-500">
+                    <span className="text-muted-foreground">
                       {mission.subtasks.completed}/{mission.subtasks.total} tasks
                     </span>
                     <span className={getDueDateColor(mission.dueDate)}>
@@ -283,7 +283,7 @@ export default function ActiveMissionsWidget({
                 </div>
 
                 {/* Arrow */}
-                <button className="p-1.5 rounded-lg text-slate-500 group-hover:text-symtex-primary transition-colors">
+                <button className="p-1.5 rounded-lg text-muted-foreground group-hover:text-symtex-primary transition-colors">
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -293,14 +293,14 @@ export default function ActiveMissionsWidget({
       </div>
 
       {/* Footer */}
-      <div className="p-4 border-t border-symtex-border bg-slate-800/30 flex items-center justify-between">
-        <p className="text-xs text-slate-500">
+      <div className="p-4 border-t border-border bg-card/30 flex items-center justify-between">
+        <p className="text-xs text-muted-foreground">
           {missions.filter(m => m.status === 'active').length} active,{' '}
           {missions.filter(m => m.status === 'pending').length} pending
         </p>
         <button
           onClick={() => navigate('/missions')}
-          className="text-sm text-slate-400 hover:text-white transition-colors"
+          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           View All Missions
         </button>

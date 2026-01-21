@@ -91,9 +91,9 @@ const priorityConfig: Record<
   }
 > = {
   low: {
-    color: 'text-slate-400',
-    bgColor: 'bg-slate-500/20',
-    borderColor: 'border-slate-500/30',
+    color: 'text-muted-foreground',
+    bgColor: 'bg-muted/20',
+    borderColor: 'border-border/30',
     label: 'Low Risk',
     icon: Shield,
   },
@@ -204,12 +204,12 @@ export function ApprovalCard({
   return (
     <div
       className={clsx(
-        'bg-zinc-900/50 border rounded-lg overflow-hidden transition-all',
+        'bg-surface-base/50 border rounded-lg overflow-hidden transition-all',
         approval.riskLevel === 'critical'
           ? 'border-red-500/50'
           : approval.riskLevel === 'high'
           ? 'border-amber-500/30'
-          : 'border-zinc-800',
+          : 'border-border',
         className
       )}
     >
@@ -225,7 +225,7 @@ export function ApprovalCard({
           <div className="flex-1 min-w-0">
             {/* Title Row */}
             <div className="flex items-center gap-2 mb-1">
-              <h3 className="font-semibold text-white truncate">{approval.title}</h3>
+              <h3 className="font-semibold text-foreground truncate">{approval.title}</h3>
               <span
                 className={clsx(
                   'flex items-center gap-1 text-xs px-2 py-0.5 rounded-full border',
@@ -240,7 +240,7 @@ export function ApprovalCard({
             </div>
 
             {/* Description */}
-            <p className="text-sm text-zinc-400 mb-2">{approval.description}</p>
+            <p className="text-sm text-muted-foreground mb-2">{approval.description}</p>
 
             {/* Cognate Attribution */}
             <div className="flex items-center gap-2 text-sm">
@@ -253,25 +253,25 @@ export function ApprovalCard({
                   />
                 ) : (
                   <div className="w-5 h-5 rounded bg-gradient-to-br from-symtex-primary to-purple-600 flex items-center justify-center">
-                    <Brain className="w-3 h-3 text-white" />
+                    <Brain className="w-3 h-3 text-foreground" />
                   </div>
                 )}
-                <span className="text-zinc-400">
+                <span className="text-muted-foreground">
                   Requested by{' '}
                   <span className="text-symtex-primary font-medium">
                     {approval.cognateName}
                   </span>
                 </span>
               </div>
-              <span className="text-zinc-600">|</span>
-              <span className="text-zinc-500">{formatRequestTime(approval.requestedAt)}</span>
+              <span className="text-muted-foreground">|</span>
+              <span className="text-muted-foreground">{formatRequestTime(approval.requestedAt)}</span>
             </div>
           </div>
 
           {/* Expand/Collapse Button */}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-card transition-colors"
           >
             {isExpanded ? (
               <ChevronUp className="w-4 h-4" />
@@ -283,41 +283,41 @@ export function ApprovalCard({
       </div>
 
       {/* Policy Reason Banner */}
-      <div className="px-4 py-2 bg-zinc-800/50 border-y border-zinc-800 flex items-center gap-2">
-        <Shield className="w-4 h-4 text-zinc-500" />
-        <span className="text-sm text-zinc-400">
-          <strong className="text-zinc-300">Policy:</strong> {approval.policyReason}
+      <div className="px-4 py-2 bg-card/50 border-y border-border flex items-center gap-2">
+        <Shield className="w-4 h-4 text-muted-foreground" />
+        <span className="text-sm text-muted-foreground">
+          <strong className="text-muted-foreground">Policy:</strong> {approval.policyReason}
         </span>
       </div>
 
       {/* Expandable Preview Section */}
       {isExpanded && (
-        <div className="p-4 border-b border-zinc-800 bg-zinc-800/30">
+        <div className="p-4 border-b border-border bg-card/30">
           <div className="flex items-center gap-2 mb-3">
-            <Eye className="w-4 h-4 text-zinc-500" />
-            <h4 className="text-sm font-medium text-zinc-300">Preview</h4>
+            <Eye className="w-4 h-4 text-muted-foreground" />
+            <h4 className="text-sm font-medium text-muted-foreground">Preview</h4>
           </div>
 
           {/* Preview Content */}
-          <div className="bg-zinc-900 rounded-lg border border-zinc-700 p-4">
+          <div className="bg-surface-base rounded-lg border border-border p-4">
             {approval.preview.type === 'email' && (
               <div className="space-y-2">
                 {approval.preview.to && (
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="text-zinc-500 w-16">To:</span>
-                    <span className="text-zinc-300">{approval.preview.to}</span>
+                    <span className="text-muted-foreground w-16">To:</span>
+                    <span className="text-muted-foreground">{approval.preview.to}</span>
                   </div>
                 )}
                 {approval.preview.subject && (
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="text-zinc-500 w-16">Subject:</span>
-                    <span className="text-white font-medium">
+                    <span className="text-muted-foreground w-16">Subject:</span>
+                    <span className="text-foreground font-medium">
                       {approval.preview.subject}
                     </span>
                   </div>
                 )}
-                <div className="pt-2 mt-2 border-t border-zinc-800">
-                  <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-sans">
+                <div className="pt-2 mt-2 border-t border-border">
+                  <pre className="text-sm text-muted-foreground whitespace-pre-wrap font-sans">
                     {approval.preview.content}
                   </pre>
                 </div>
@@ -327,10 +327,10 @@ export function ApprovalCard({
             {approval.preview.type === 'document' && (
               <div className="space-y-2">
                 {approval.preview.subject && (
-                  <h5 className="font-medium text-white">{approval.preview.subject}</h5>
+                  <h5 className="font-medium text-foreground">{approval.preview.subject}</h5>
                 )}
                 <div className="prose prose-invert prose-sm max-w-none">
-                  <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-sans">
+                  <pre className="text-sm text-muted-foreground whitespace-pre-wrap font-sans">
                     {approval.preview.content}
                   </pre>
                 </div>
@@ -338,7 +338,7 @@ export function ApprovalCard({
             )}
 
             {approval.preview.type === 'text' && (
-              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-sans">
+              <pre className="text-sm text-muted-foreground whitespace-pre-wrap font-sans">
                 {approval.preview.content}
               </pre>
             )}
@@ -370,8 +370,8 @@ export function ApprovalCard({
               onClick={cancelReject}
               className={clsx(
                 'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium',
-                'border border-zinc-600 text-zinc-300',
-                'hover:bg-zinc-700 hover:border-zinc-500',
+                'border border-border text-muted-foreground',
+                'hover:bg-muted hover:border-border',
                 'transition-colors'
               )}
             >
@@ -382,14 +382,14 @@ export function ApprovalCard({
       )}
 
       {/* Footer with Actions */}
-      <div className="p-4 flex items-center justify-between bg-zinc-800/20">
+      <div className="p-4 flex items-center justify-between bg-card/20">
         {/* Expiry Warning */}
         <div className="flex items-center gap-2">
           {expiryText && (
             <span
               className={clsx(
                 'flex items-center gap-1 text-sm',
-                isExpiringSoon ? 'text-amber-400' : 'text-zinc-500'
+                isExpiringSoon ? 'text-amber-400' : 'text-muted-foreground'
               )}
             >
               {isExpiringSoon ? (
@@ -422,8 +422,8 @@ export function ApprovalCard({
             onClick={handleModify}
             className={clsx(
               'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium',
-              'border border-zinc-600 text-zinc-300',
-              'hover:bg-zinc-700 hover:border-zinc-500',
+              'border border-border text-muted-foreground',
+              'hover:bg-muted hover:border-border',
               'transition-colors'
             )}
           >

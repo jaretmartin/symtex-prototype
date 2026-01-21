@@ -80,22 +80,22 @@ function NexisInsightPanel({
   return (
     <div
       className={cn(
-        'bg-symtex-card rounded-xl border border-symtex-border overflow-hidden',
+        'bg-card rounded-xl border border-border overflow-hidden',
         className
       )}
     >
       {/* Header */}
-      <div className="p-4 border-b border-symtex-border">
+      <div className="p-4 border-b border-border">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-symtex-primary" />
             Relationship Insights
           </h3>
-          <span className="text-xs text-slate-500 bg-slate-700/50 px-2 py-0.5 rounded">
+          <span className="text-xs text-muted-foreground bg-muted/50 px-2 py-0.5 rounded">
             AI-Powered
           </span>
         </div>
-        <p className="text-xs text-slate-400 mt-1">
+        <p className="text-xs text-muted-foreground mt-1">
           Actionable intelligence from your network
         </p>
       </div>
@@ -104,9 +104,9 @@ function NexisInsightPanel({
       <div className="divide-y divide-symtex-border">
         {displayInsights.length === 0 ? (
           <div className="p-6 text-center">
-            <Users className="w-8 h-8 text-slate-500 mx-auto mb-2" />
-            <p className="text-sm text-slate-400">No insights available yet</p>
-            <p className="text-xs text-slate-500 mt-1">
+            <Users className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
+            <p className="text-sm text-muted-foreground">No insights available yet</p>
+            <p className="text-xs text-muted-foreground mt-1">
               Add more connections to generate insights
             </p>
           </div>
@@ -121,7 +121,7 @@ function NexisInsightPanel({
                 key={insight.id}
                 onClick={() => onInsightClick?.(insight)}
                 className={cn(
-                  'w-full p-4 text-left hover:bg-slate-800/50 transition-colors',
+                  'w-full p-4 text-left hover:bg-card/50 transition-colors',
                   'group'
                 )}
               >
@@ -155,26 +155,26 @@ function NexisInsightPanel({
                         {prioConfig.label}
                       </span>
                     </div>
-                    <h4 className="text-sm font-medium text-white mb-1 group-hover:text-symtex-primary transition-colors">
+                    <h4 className="text-sm font-medium text-foreground mb-1 group-hover:text-symtex-primary transition-colors">
                       {insight.title}
                     </h4>
-                    <p className="text-xs text-slate-400 line-clamp-2">
+                    <p className="text-xs text-muted-foreground line-clamp-2">
                       {insight.description}
                     </p>
                     {insight.relatedNodes.length > 0 && (
                       <div className="flex items-center gap-1.5 mt-2">
-                        <span className="text-xs text-slate-500">Related:</span>
+                        <span className="text-xs text-muted-foreground">Related:</span>
                         <div className="flex items-center gap-1 flex-wrap">
                           {insight.relatedNodes.slice(0, 3).map((nodeId) => (
                             <span
                               key={nodeId}
-                              className="text-xs px-1.5 py-0.5 rounded bg-slate-700/50 text-slate-300"
+                              className="text-xs px-1.5 py-0.5 rounded bg-muted/50 text-muted-foreground"
                             >
                               {nodeId.replace(/^(person|company|topic|event)-/, '')}
                             </span>
                           ))}
                           {insight.relatedNodes.length > 3 && (
-                            <span className="text-xs text-slate-500">
+                            <span className="text-xs text-muted-foreground">
                               +{insight.relatedNodes.length - 3}
                             </span>
                           )}
@@ -182,7 +182,7 @@ function NexisInsightPanel({
                       </div>
                     )}
                   </div>
-                  <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-white transition-colors flex-shrink-0" />
+                  <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0" />
                 </div>
               </button>
             );
@@ -192,10 +192,10 @@ function NexisInsightPanel({
 
       {/* Footer */}
       {insights.length > 3 && compact && onViewAll && (
-        <div className="p-3 border-t border-symtex-border bg-slate-800/30">
+        <div className="p-3 border-t border-border bg-card/30">
           <button
             onClick={onViewAll}
-            className="w-full flex items-center justify-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors"
+            className="w-full flex items-center justify-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
           >
             View all {insights.length} insights
             <ArrowUpRight className="w-3 h-3" />
@@ -205,25 +205,25 @@ function NexisInsightPanel({
 
       {/* Quick Stats */}
       {!compact && (
-        <div className="p-4 border-t border-symtex-border bg-slate-800/30">
+        <div className="p-4 border-t border-border bg-card/30">
           <div className="grid grid-cols-3 gap-3">
             <div className="text-center">
-              <div className="text-lg font-semibold text-white">
+              <div className="text-lg font-semibold text-foreground">
                 {insights.filter((i) => i.type === 'opportunity').length}
               </div>
-              <div className="text-xs text-slate-500">Opportunities</div>
+              <div className="text-xs text-muted-foreground">Opportunities</div>
             </div>
-            <div className="text-center border-x border-symtex-border">
-              <div className="text-lg font-semibold text-white">
+            <div className="text-center border-x border-border">
+              <div className="text-lg font-semibold text-foreground">
                 {insights.filter((i) => i.priority === 'high').length}
               </div>
-              <div className="text-xs text-slate-500">High Priority</div>
+              <div className="text-xs text-muted-foreground">High Priority</div>
             </div>
             <div className="text-center">
-              <div className="text-lg font-semibold text-white">
+              <div className="text-lg font-semibold text-foreground">
                 {insights.filter((i) => i.type === 'reminder').length}
               </div>
-              <div className="text-xs text-slate-500">Reminders</div>
+              <div className="text-xs text-muted-foreground">Reminders</div>
             </div>
           </div>
         </div>

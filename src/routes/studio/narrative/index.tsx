@@ -134,17 +134,17 @@ export default function NarrativePage(): JSX.Element {
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-card transition-colors"
             aria-label="Go back"
           >
             <ArrowLeft className="w-5 h-5" aria-hidden="true" />
           </button>
           <div>
-            <h1 className="text-3xl font-bold text-white flex items-center gap-3">
+            <h1 className="text-3xl font-bold text-foreground flex items-center gap-3">
               <BookText className="w-8 h-8 text-symtex-primary" />
               Narrative Builder
             </h1>
-            <p className="text-slate-400 mt-1">
+            <p className="text-muted-foreground mt-1">
               Create story-driven Automations with natural language
             </p>
           </div>
@@ -153,7 +153,7 @@ export default function NarrativePage(): JSX.Element {
         <button
           type="button"
           onClick={handleNewStory}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-lg gradient-primary text-white font-medium hover:opacity-90 transition-opacity"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-lg gradient-primary text-foreground font-medium hover:opacity-90 transition-opacity"
         >
           <Plus className="w-5 h-5" aria-hidden="true" />
           New Story
@@ -175,7 +175,7 @@ export default function NarrativePage(): JSX.Element {
                 'px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all',
                 selectedStoryId === story.id
                   ? 'bg-symtex-primary/20 text-symtex-primary border border-symtex-primary/30'
-                  : 'bg-symtex-card text-slate-400 border border-symtex-border hover:text-white hover:border-slate-500'
+                  : 'bg-card text-muted-foreground border border-border hover:text-foreground hover:border-muted'
               )}
             >
               {story.title || 'Untitled'}
@@ -199,16 +199,16 @@ export default function NarrativePage(): JSX.Element {
           isSaving={isSaving}
         />
       ) : (
-        <div className="flex flex-col items-center justify-center min-h-[400px] bg-symtex-card rounded-xl border border-symtex-border">
-          <BookText className="w-16 h-16 text-slate-600 mb-4" aria-hidden="true" />
-          <h2 className="text-xl font-semibold text-white mb-2">No Stories Yet</h2>
-          <p className="text-slate-400 mb-6">
+        <div className="flex flex-col items-center justify-center min-h-[400px] bg-card rounded-xl border border-border">
+          <BookText className="w-16 h-16 text-muted-foreground mb-4" aria-hidden="true" />
+          <h2 className="text-xl font-semibold text-foreground mb-2">No Stories Yet</h2>
+          <p className="text-muted-foreground mb-6">
             Create your first narrative-driven Automation
           </p>
           <button
             type="button"
             onClick={handleNewStory}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg gradient-primary text-white font-medium hover:opacity-90 transition-opacity"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg gradient-primary text-foreground font-medium hover:opacity-90 transition-opacity"
           >
             <Plus className="w-5 h-5" aria-hidden="true" />
             Create Your First Story

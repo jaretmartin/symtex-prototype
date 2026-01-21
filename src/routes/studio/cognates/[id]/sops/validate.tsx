@@ -266,8 +266,8 @@ export function SOPValidationDashboardRoute(): JSX.Element {
   if (!cognate) {
     return (
       <div className="p-6 text-center">
-        <h2 className="text-xl font-medium text-white mb-2">Cognate Not Found</h2>
-        <p className="text-zinc-400 mb-4">The requested Cognate does not exist.</p>
+        <h2 className="text-xl font-medium text-foreground mb-2">Cognate Not Found</h2>
+        <p className="text-muted-foreground mb-4">The requested Cognate does not exist.</p>
         <Link
           to="/studio/cognates"
           className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300"
@@ -282,8 +282,8 @@ export function SOPValidationDashboardRoute(): JSX.Element {
   if (!sop) {
     return (
       <div className="p-6 text-center">
-        <h2 className="text-xl font-medium text-white mb-2">SOP Not Found</h2>
-        <p className="text-zinc-400 mb-4">The requested SOP does not exist.</p>
+        <h2 className="text-xl font-medium text-foreground mb-2">SOP Not Found</h2>
+        <p className="text-muted-foreground mb-4">The requested SOP does not exist.</p>
         <Link
           to={`/studio/cognates/${id}/sops`}
           className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300"
@@ -324,31 +324,31 @@ export function SOPValidationDashboardRoute(): JSX.Element {
   return (
     <div className="h-[calc(100vh-64px)] flex flex-col">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-zinc-800 bg-zinc-900/50">
+      <div className="px-6 py-4 border-b border-border bg-surface-base/50">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link
               to={`/studio/cognates/${id}/sops`}
-              className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
+              className="p-2 hover:bg-card rounded-lg transition-colors"
             >
-              <ArrowLeft className="w-5 h-5 text-zinc-400" />
+              <ArrowLeft className="w-5 h-5 text-muted-foreground" />
             </Link>
             <div>
-              <div className="flex items-center gap-2 text-sm text-zinc-400 mb-1">
-                <Link to="/studio/cognates" className="hover:text-white transition-colors">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
+                <Link to="/studio/cognates" className="hover:text-foreground transition-colors">
                   Cognates
                 </Link>
                 <ChevronRight className="w-4 h-4" />
                 <Link
                   to={`/studio/cognates/${id}/sops`}
-                  className="hover:text-white transition-colors"
+                  className="hover:text-foreground transition-colors"
                 >
                   {cognate.name}
                 </Link>
                 <ChevronRight className="w-4 h-4" />
-                <span className="text-white">{sop.name}</span>
+                <span className="text-foreground">{sop.name}</span>
               </div>
-              <h1 className="text-xl font-bold text-white flex items-center gap-2">
+              <h1 className="text-xl font-bold text-foreground flex items-center gap-2">
                 <Shield className="w-5 h-5 text-green-400" />
                 Validation Dashboard
               </h1>
@@ -359,7 +359,7 @@ export function SOPValidationDashboardRoute(): JSX.Element {
             <button
               type="button"
               onClick={() => navigate(`/studio/cognates/${id}/sops/${sopId}/rules`)}
-              className="flex items-center gap-2 px-3 py-2 border border-zinc-700 text-zinc-300 rounded-lg hover:bg-zinc-800 transition-colors"
+              className="flex items-center gap-2 px-3 py-2 border border-border text-muted-foreground rounded-lg hover:bg-card transition-colors"
             >
               <Code2 className="w-4 h-4" />
               View S1
@@ -367,7 +367,7 @@ export function SOPValidationDashboardRoute(): JSX.Element {
             <button
               type="button"
               onClick={() => navigate(`/studio/cognates/${id}/sops/${sopId}/edit`)}
-              className="flex items-center gap-2 px-3 py-2 border border-zinc-700 text-zinc-300 rounded-lg hover:bg-zinc-800 transition-colors"
+              className="flex items-center gap-2 px-3 py-2 border border-border text-muted-foreground rounded-lg hover:bg-card transition-colors"
             >
               <Pencil className="w-4 h-4" />
               Edit SOP
@@ -376,7 +376,7 @@ export function SOPValidationDashboardRoute(): JSX.Element {
               type="button"
               onClick={runValidation}
               disabled={isValidating}
-              className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors disabled:opacity-50"
+              className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-foreground rounded-lg hover:bg-blue-500 transition-colors disabled:opacity-50"
             >
               {isValidating ? (
                 <RefreshCw className="w-4 h-4 animate-spin" />
@@ -393,35 +393,35 @@ export function SOPValidationDashboardRoute(): JSX.Element {
       <div className="flex-1 overflow-auto p-6">
         {/* Summary Cards */}
         <div className="grid grid-cols-4 gap-4 mb-6">
-          <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
+          <div className="p-4 bg-surface-base/50 border border-card rounded-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-zinc-400">Validation Score</span>
+              <span className="text-sm text-muted-foreground">Validation Score</span>
               <FileCheck className="w-5 h-5 text-blue-400" />
             </div>
-            <div className="text-3xl font-bold text-white">
+            <div className="text-3xl font-bold text-foreground">
               {summary.score}%
             </div>
           </div>
 
-          <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
+          <div className="p-4 bg-surface-base/50 border border-card rounded-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-zinc-400">Passed</span>
+              <span className="text-sm text-muted-foreground">Passed</span>
               <CheckCircle className="w-5 h-5 text-green-400" />
             </div>
             <div className="text-3xl font-bold text-green-400">{summary.passed}</div>
           </div>
 
-          <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
+          <div className="p-4 bg-surface-base/50 border border-card rounded-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-zinc-400">Warnings</span>
+              <span className="text-sm text-muted-foreground">Warnings</span>
               <AlertTriangle className="w-5 h-5 text-yellow-400" />
             </div>
             <div className="text-3xl font-bold text-yellow-400">{summary.warnings}</div>
           </div>
 
-          <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
+          <div className="p-4 bg-surface-base/50 border border-card rounded-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-zinc-400">Errors</span>
+              <span className="text-sm text-muted-foreground">Errors</span>
               <XCircle className="w-5 h-5 text-red-400" />
             </div>
             <div className="text-3xl font-bold text-red-400">{summary.errors}</div>
@@ -430,14 +430,14 @@ export function SOPValidationDashboardRoute(): JSX.Element {
 
         {/* Category Filters */}
         <div className="flex items-center gap-2 mb-4">
-          <span className="text-sm text-zinc-400 mr-2">Filter:</span>
+          <span className="text-sm text-muted-foreground mr-2">Filter:</span>
           <button
             type="button"
             onClick={() => setSelectedCategory(null)}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors ${
               selectedCategory === null
-                ? 'bg-blue-600 text-white'
-                : 'bg-zinc-800 text-zinc-400 hover:text-white'
+                ? 'bg-blue-600 text-foreground'
+                : 'bg-card text-muted-foreground hover:text-foreground'
             }`}
           >
             All
@@ -449,8 +449,8 @@ export function SOPValidationDashboardRoute(): JSX.Element {
               onClick={() => setSelectedCategory(cat)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors capitalize ${
                 selectedCategory === cat
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-zinc-800 text-zinc-400 hover:text-white'
+                  ? 'bg-blue-600 text-foreground'
+                  : 'bg-card text-muted-foreground hover:text-foreground'
               }`}
             >
               {getCategoryIcon(cat)}
@@ -463,12 +463,12 @@ export function SOPValidationDashboardRoute(): JSX.Element {
         {isValidating ? (
           <div className="flex flex-col items-center justify-center py-12">
             <RefreshCw className="w-8 h-8 text-blue-500 animate-spin mb-4" />
-            <p className="text-zinc-400">Running validation checks...</p>
+            <p className="text-muted-foreground">Running validation checks...</p>
           </div>
         ) : (
           <div className="space-y-3">
             {filteredResults.length === 0 ? (
-              <div className="text-center py-12 text-zinc-400">
+              <div className="text-center py-12 text-muted-foreground">
                 <Clock className="w-8 h-8 mx-auto mb-2 opacity-50" />
                 <p>No validation results yet. Click "Run Validation" to start.</p>
               </div>
@@ -476,7 +476,7 @@ export function SOPValidationDashboardRoute(): JSX.Element {
               filteredResults.map((result) => (
                 <div
                   key={result.id}
-                  className={`p-4 bg-zinc-900/50 border rounded-lg ${
+                  className={`p-4 bg-surface-base/50 border rounded-lg ${
                     result.type === 'error'
                       ? 'border-red-500/30'
                       : result.type === 'warning'
@@ -490,13 +490,13 @@ export function SOPValidationDashboardRoute(): JSX.Element {
                     {getTypeIcon(result.type)}
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-medium text-white">{result.title}</h3>
-                        <span className="flex items-center gap-1 px-2 py-0.5 rounded text-xs bg-zinc-800 text-zinc-400 capitalize">
+                        <h3 className="font-medium text-foreground">{result.title}</h3>
+                        <span className="flex items-center gap-1 px-2 py-0.5 rounded text-xs bg-card text-muted-foreground capitalize">
                           {getCategoryIcon(result.category)}
                           {result.category}
                         </span>
                       </div>
-                      <p className="text-sm text-zinc-400 mb-2">{result.description}</p>
+                      <p className="text-sm text-muted-foreground mb-2">{result.description}</p>
                       {result.suggestion && (
                         <p className="text-sm text-blue-400">
                           <strong>Suggestion:</strong> {result.suggestion}

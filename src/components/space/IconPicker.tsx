@@ -140,26 +140,26 @@ export function IconPicker({
         disabled={disabled}
         className={clsx(
           'w-full flex items-center justify-between gap-2',
-          'px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg',
+          'px-4 py-3 bg-surface-base border border-border rounded-lg',
           'text-left transition-colors',
           disabled
             ? 'opacity-50 cursor-not-allowed'
-            : 'hover:border-zinc-600 focus:border-symtex-primary focus:outline-none'
+            : 'hover:border-border focus:border-symtex-primary focus:outline-none'
         )}
       >
         {SelectedIcon ? (
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-zinc-800 flex items-center justify-center">
-              <SelectedIcon className="w-5 h-5 text-white" />
+            <div className="w-8 h-8 rounded-lg bg-card flex items-center justify-center">
+              <SelectedIcon className="w-5 h-5 text-foreground" />
             </div>
-            <span className="text-white">{value}</span>
+            <span className="text-foreground">{value}</span>
           </div>
         ) : (
-          <span className="text-zinc-400">{placeholder}</span>
+          <span className="text-muted-foreground">{placeholder}</span>
         )}
         <ChevronDown
           className={clsx(
-            'w-5 h-5 text-zinc-400 transition-transform',
+            'w-5 h-5 text-muted-foreground transition-transform',
             isOpen && 'rotate-180'
           )}
         />
@@ -170,14 +170,14 @@ export function IconPicker({
         <div
           className={clsx(
             'absolute z-50 w-full mt-2',
-            'bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl',
+            'bg-surface-base border border-border rounded-lg shadow-xl',
             'max-h-96 overflow-hidden'
           )}
         >
           {/* Search Input */}
-          <div className="p-2 border-b border-zinc-800">
+          <div className="p-2 border-b border-border">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 ref={inputRef}
                 type="text"
@@ -185,7 +185,7 @@ export function IconPicker({
                 onChange={(e): void => setSearchQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Search icons..."
-                className="w-full pl-10 pr-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm placeholder-zinc-500 focus:border-symtex-primary focus:outline-none"
+                className="w-full pl-10 pr-4 py-2 bg-card border border-border rounded-lg text-foreground text-sm placeholder-muted-foreground focus:border-symtex-primary focus:outline-none"
               />
             </div>
           </div>
@@ -213,13 +213,13 @@ export function IconPicker({
                         'flex items-center justify-center',
                         isSelected
                           ? 'bg-symtex-primary/20 border border-symtex-primary'
-                          : 'bg-zinc-800 hover:bg-zinc-700 border border-transparent'
+                          : 'bg-card hover:bg-muted border border-transparent'
                       )}
                     >
                       <IconComponent
                         className={clsx(
                           'w-5 h-5',
-                          isSelected ? 'text-symtex-primary' : 'text-zinc-300'
+                          isSelected ? 'text-symtex-primary' : 'text-muted-foreground'
                         )}
                       />
                       {isSelected && (
@@ -231,19 +231,19 @@ export function IconPicker({
               </div>
             ) : (
               <div className="py-8 text-center">
-                <Search className="w-8 h-8 text-zinc-600 mx-auto mb-2" />
-                <p className="text-zinc-400 text-sm">No icons found</p>
+                <Search className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
+                <p className="text-muted-foreground text-sm">No icons found</p>
               </div>
             )}
           </div>
 
           {/* Preview */}
           {value && (
-            <div className="p-3 border-t border-zinc-800 flex items-center justify-between">
-              <span className="text-sm text-zinc-400">Selected:</span>
+            <div className="p-3 border-t border-border flex items-center justify-between">
+              <span className="text-sm text-muted-foreground">Selected:</span>
               <div className="flex items-center gap-2">
-                {SelectedIcon && <SelectedIcon className="w-5 h-5 text-white" />}
-                <span className="text-sm text-white">{value}</span>
+                {SelectedIcon && <SelectedIcon className="w-5 h-5 text-foreground" />}
+                <span className="text-sm text-foreground">{value}</span>
               </div>
             </div>
           )}

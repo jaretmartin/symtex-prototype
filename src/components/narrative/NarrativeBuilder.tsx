@@ -177,7 +177,7 @@ export function NarrativeBuilder({
   return (
     <div className={clsx('h-full flex flex-col', className)}>
       {/* Header */}
-      <div className="flex-shrink-0 bg-symtex-card border-b border-symtex-border px-6 py-4">
+      <div className="flex-shrink-0 bg-card border-b border-border px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             {onBack && (
@@ -191,8 +191,8 @@ export function NarrativeBuilder({
                 <BookOpen className="w-5 h-5 text-symtex-primary" />
               </div>
               <div>
-                <h1 className="text-lg font-bold text-white">Narrative Builder</h1>
-                <p className="text-sm text-slate-400">Create story-driven automations</p>
+                <h1 className="text-lg font-bold text-foreground">Narrative Builder</h1>
+                <p className="text-sm text-muted-foreground">Create story-driven automations</p>
               </div>
             </div>
           </div>
@@ -243,12 +243,12 @@ export function NarrativeBuilder({
           {viewMode === 'edit' ? (
             <div className="max-w-3xl mx-auto space-y-6">
               {/* Story Metadata */}
-              <div className="bg-symtex-card rounded-xl border border-symtex-border p-6 space-y-4">
-                <h2 className="font-semibold text-white">Story Details</h2>
+              <div className="bg-card rounded-xl border border-border p-6 space-y-4">
+                <h2 className="font-semibold text-foreground">Story Details</h2>
 
                 {/* Title */}
                 <div>
-                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                  <label className="block text-sm font-medium text-muted-foreground mb-2">
                     Story Title
                   </label>
                   <input
@@ -257,11 +257,11 @@ export function NarrativeBuilder({
                     onChange={handleTitleChange}
                     placeholder="Enter a title for your story..."
                     className={clsx(
-                      'w-full px-4 py-2.5 rounded-lg bg-symtex-dark border border-symtex-border',
-                      'text-white placeholder-slate-500 text-sm',
+                      'w-full px-4 py-2.5 rounded-lg bg-symtex-dark border border-border',
+                      'text-foreground placeholder-muted-foreground text-sm',
                       'transition-colors duration-200',
                       'focus:outline-none focus:ring-2 focus:ring-symtex-primary focus:border-transparent',
-                      'hover:border-slate-500'
+                      'hover:border-border'
                     )}
                   />
                 </div>
@@ -281,7 +281,7 @@ export function NarrativeBuilder({
               {/* Chapters Section */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <h2 className="font-semibold text-white">Chapters</h2>
+                  <h2 className="font-semibold text-foreground">Chapters</h2>
                   <Button
                     variant="secondary"
                     size="sm"
@@ -295,11 +295,11 @@ export function NarrativeBuilder({
                 {/* Add Chapter Panel */}
                 {showAddChapter && (
                   <div className="bg-symtex-elevated rounded-xl border border-symtex-primary/30 p-4 space-y-4">
-                    <h3 className="font-medium text-white">New Chapter</h3>
+                    <h3 className="font-medium text-foreground">New Chapter</h3>
 
                     {/* Chapter Type Selection */}
                     <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-muted-foreground mb-2">
                         Chapter Type
                       </label>
                       <div className="grid grid-cols-5 gap-2">
@@ -314,11 +314,11 @@ export function NarrativeBuilder({
                                 'flex flex-col items-center gap-1 p-3 rounded-lg border transition-all',
                                 isSelected
                                   ? `${option.bgColor} border-current ${option.color}`
-                                  : 'border-symtex-border hover:border-slate-500'
+                                  : 'border-border hover:border-border'
                               )}
                             >
                               <Icon className={clsx('w-5 h-5', option.color)} />
-                              <span className="text-xs text-slate-300">{option.label}</span>
+                              <span className="text-xs text-muted-foreground">{option.label}</span>
                             </button>
                           );
                         })}
@@ -327,7 +327,7 @@ export function NarrativeBuilder({
 
                     {/* Chapter Title */}
                     <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-2">
+                      <label className="block text-sm font-medium text-muted-foreground mb-2">
                         Chapter Title
                       </label>
                       <input
@@ -336,8 +336,8 @@ export function NarrativeBuilder({
                         onChange={(e) => setNewChapterTitle(e.target.value)}
                         placeholder="Enter chapter title..."
                         className={clsx(
-                          'w-full px-4 py-2.5 rounded-lg bg-symtex-dark border border-symtex-border',
-                          'text-white placeholder-slate-500 text-sm',
+                          'w-full px-4 py-2.5 rounded-lg bg-symtex-dark border border-border',
+                          'text-foreground placeholder-muted-foreground text-sm',
                           'transition-colors duration-200',
                           'focus:outline-none focus:ring-2 focus:ring-symtex-primary focus:border-transparent'
                         )}
@@ -398,9 +398,9 @@ export function NarrativeBuilder({
 
         {/* Cost Panel (Right Sidebar) */}
         {showCostPanel && viewMode === 'edit' && (
-          <div className="w-80 flex-shrink-0 border-l border-symtex-border bg-symtex-dark/50 p-4 overflow-y-auto">
+          <div className="w-80 flex-shrink-0 border-l border-border bg-surface-base/50 p-4 overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-medium text-white">Cost Analysis</h3>
+              <h3 className="font-medium text-foreground">Cost Analysis</h3>
               <Button
                 variant="ghost"
                 size="icon-sm"
@@ -416,7 +416,7 @@ export function NarrativeBuilder({
             {/* Tips */}
             <div className="mt-4 p-3 rounded-lg bg-symtex-primary/5 border border-symtex-primary/20">
               <h4 className="text-sm font-medium text-symtex-primary mb-2">Tips</h4>
-              <ul className="text-xs text-slate-400 space-y-1.5">
+              <ul className="text-xs text-muted-foreground space-y-1.5">
                 <li>Action chapters cost more due to API calls</li>
                 <li>Decision chapters branch your Automation</li>
                 <li>Milestones help track progress</li>

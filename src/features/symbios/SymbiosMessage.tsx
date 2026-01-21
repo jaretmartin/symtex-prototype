@@ -65,7 +65,7 @@ export function SymbiosMessage({
   if (isSystem) {
     return (
       <div className={cn('flex justify-center py-2', className)}>
-        <div className="px-3 py-1 text-xs text-zinc-500 bg-zinc-800/50 rounded-full">
+        <div className="px-3 py-1 text-xs text-muted-foreground bg-card/50 rounded-full">
           {message.content}
         </div>
       </div>
@@ -90,9 +90,9 @@ export function SymbiosMessage({
         )}
       >
         {isUser ? (
-          <User className="w-4 h-4 text-white" />
+          <User className="w-4 h-4 text-foreground" />
         ) : (
-          <Sparkles className="w-4 h-4 text-white" />
+          <Sparkles className="w-4 h-4 text-foreground" />
         )}
       </div>
 
@@ -105,14 +105,14 @@ export function SymbiosMessage({
             isUser ? 'flex-row-reverse' : ''
           )}
         >
-          <span className="text-sm font-medium text-zinc-200">
+          <span className="text-sm font-medium text-foreground">
             {isUser ? 'You' : message.cognateName || 'Aria'}
           </span>
-          <span className="text-xs text-zinc-500">
+          <span className="text-xs text-muted-foreground">
             {formatTime(message.createdAt)}
           </span>
           {message.status === 'pending' && (
-            <Clock className="w-3 h-3 text-zinc-500" />
+            <Clock className="w-3 h-3 text-muted-foreground" />
           )}
           {message.status === 'error' && (
             <AlertCircle className="w-3 h-3 text-red-500" />
@@ -124,8 +124,8 @@ export function SymbiosMessage({
           className={cn(
             'rounded-xl px-4 py-2.5 max-w-[85%]',
             isUser
-              ? 'bg-indigo-600 text-white ml-auto'
-              : 'bg-zinc-800 text-zinc-100 border border-zinc-700'
+              ? 'bg-indigo-600 text-foreground ml-auto'
+              : 'bg-card text-foreground border border-border'
           )}
         >
           {/* Content with markdown-like formatting */}
@@ -135,7 +135,7 @@ export function SymbiosMessage({
 
           {/* Attachments */}
           {message.attachments && message.attachments.length > 0 && (
-            <div className="mt-2 pt-2 border-t border-zinc-600/50">
+            <div className="mt-2 pt-2 border-t border-border/50">
               <AttachmentList attachments={message.attachments} />
             </div>
           )}
@@ -174,7 +174,7 @@ export function SymbiosMessage({
         >
           <button
             onClick={handleCopy}
-            className="p-1 text-zinc-500 hover:text-zinc-300 transition-colors"
+            className="p-1 text-muted-foreground hover:text-muted-foreground transition-colors"
             title="Copy message"
           >
             {isCopied ? (
@@ -208,7 +208,7 @@ function MessageContent({ content }: { content: string }): JSX.Element {
         // Code inline
         formattedLine = formattedLine.replace(
           /`([^`]+)`/g,
-          '<code class="px-1 py-0.5 bg-zinc-700 rounded text-xs font-mono">$1</code>'
+          '<code class="px-1 py-0.5 bg-muted rounded text-xs font-mono">$1</code>'
         );
 
         // Check if it's a list item
@@ -218,7 +218,7 @@ function MessageContent({ content }: { content: string }): JSX.Element {
         if (isListItem || isNumberedItem) {
           const sanitizedHtml = DOMPurify.sanitize(
             isListItem
-              ? `<span class="text-zinc-400">-</span><span>${formattedLine.replace(/^[-*]\s/, '')}</span>`
+              ? `<span class="text-muted-foreground">-</span><span>${formattedLine.replace(/^[-*]\s/, '')}</span>`
               : formattedLine
           );
           return (
@@ -271,7 +271,7 @@ function AttachmentList({
           href={attachment.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-2 py-1 bg-zinc-700/50 rounded text-xs text-zinc-300 hover:bg-zinc-600/50 transition-colors"
+          className="inline-flex items-center gap-2 px-2 py-1 bg-muted/50 rounded text-xs text-muted-foreground hover:bg-muted/50 transition-colors"
         >
           {getIcon(attachment.type)}
           <span className="truncate max-w-[120px]">{attachment.name}</span>
@@ -307,21 +307,21 @@ function CitationList({
 
   return (
     <div className="space-y-1">
-      <p className="text-xs text-zinc-500 mb-1">Sources:</p>
+      <p className="text-xs text-muted-foreground mb-1">Sources:</p>
       {citations.map((citation) => (
         <div
           key={citation.id}
-          className="flex items-start gap-2 p-2 bg-zinc-800/50 rounded border border-zinc-700/50"
+          className="flex items-start gap-2 p-2 bg-card/50 rounded border border-border/50"
         >
-          <span className="flex-shrink-0 px-1.5 py-0.5 bg-zinc-700 rounded text-[10px] font-medium text-zinc-400">
+          <span className="flex-shrink-0 px-1.5 py-0.5 bg-muted rounded text-[10px] font-medium text-muted-foreground">
             {getSourceIcon(citation.sourceType)}
           </span>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-medium text-zinc-300 truncate">
+            <p className="text-xs font-medium text-muted-foreground truncate">
               {citation.title}
             </p>
             {citation.snippet && (
-              <p className="text-xs text-zinc-500 line-clamp-2 mt-0.5">
+              <p className="text-xs text-muted-foreground line-clamp-2 mt-0.5">
                 {citation.snippet}
               </p>
             )}
@@ -331,7 +331,7 @@ function CitationList({
               href={citation.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-shrink-0 p-1 text-zinc-500 hover:text-zinc-300"
+              className="flex-shrink-0 p-1 text-muted-foreground hover:text-muted-foreground"
             >
               <ExternalLink className="w-3 h-3" />
             </a>
@@ -380,14 +380,14 @@ function ApprovalButtons({
     <div className="mt-3 flex items-center gap-2">
       <button
         onClick={() => onApprove?.(messageId)}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium rounded-lg transition-colors"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-foreground text-sm font-medium rounded-lg transition-colors"
       >
         <Check className="w-4 h-4" />
         Approve
       </button>
       <button
         onClick={() => onReject?.(messageId)}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-700 hover:bg-zinc-600 text-zinc-200 text-sm font-medium rounded-lg transition-colors"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-muted hover:bg-muted text-foreground text-sm font-medium rounded-lg transition-colors"
       >
         <X className="w-4 h-4" />
         Reject
@@ -404,16 +404,16 @@ export function TypingIndicator({ cognateName = 'Aria' }: { cognateName?: string
     <div className="flex gap-3 py-3 px-4">
       {/* Avatar */}
       <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-        <Sparkles className="w-4 h-4 text-white" />
+        <Sparkles className="w-4 h-4 text-foreground" />
       </div>
 
       {/* Typing animation */}
       <div className="flex items-center gap-2">
-        <span className="text-sm text-zinc-400">{cognateName} is typing</span>
+        <span className="text-sm text-muted-foreground">{cognateName} is typing</span>
         <div className="flex gap-1">
-          <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-          <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-          <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+          <span className="w-1.5 h-1.5 bg-muted rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+          <span className="w-1.5 h-1.5 bg-muted rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+          <span className="w-1.5 h-1.5 bg-muted rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
         </div>
       </div>
     </div>

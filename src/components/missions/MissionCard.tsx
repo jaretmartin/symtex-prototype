@@ -81,7 +81,7 @@ export default function MissionCard({ mission, viewMode, onClick }: MissionCardP
       <div
         onClick={onClick}
         className={clsx(
-          'mission-card bg-symtex-card rounded-lg p-4 border border-symtex-border cursor-pointer',
+          'mission-card bg-card rounded-lg p-4 border border-border cursor-pointer',
           'flex items-center gap-6',
           `border-l-4 ${priority.border}`
         )}
@@ -89,8 +89,8 @@ export default function MissionCard({ mission, viewMode, onClick }: MissionCardP
         <ProgressRing progress={mission.progress} size={48} color={priority.color} />
 
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-white truncate">{mission.title}</h3>
-          <p className="text-sm text-slate-400 truncate">{mission.description}</p>
+          <h3 className="font-semibold text-foreground truncate">{mission.title}</h3>
+          <p className="text-sm text-muted-foreground truncate">{mission.description}</p>
         </div>
 
         <div className="flex items-center gap-6">
@@ -98,17 +98,17 @@ export default function MissionCard({ mission, viewMode, onClick }: MissionCardP
             {status.label}
           </div>
 
-          <div className="flex items-center gap-2 text-slate-400 text-sm">
+          <div className="flex items-center gap-2 text-muted-foreground text-sm">
             <Calendar className="w-4 h-4" />
             {mission.dueDate}
           </div>
 
-          <div className="flex items-center gap-2 text-slate-400 text-sm">
+          <div className="flex items-center gap-2 text-muted-foreground text-sm">
             <Users className="w-4 h-4" />
             {mission.assignees}
           </div>
 
-          <ArrowRight className="w-5 h-5 text-slate-500" />
+          <ArrowRight className="w-5 h-5 text-muted-foreground" />
         </div>
       </div>
     )
@@ -119,7 +119,7 @@ export default function MissionCard({ mission, viewMode, onClick }: MissionCardP
     <div
       onClick={onClick}
       className={clsx(
-        'mission-card bg-symtex-card rounded-xl p-5 border border-symtex-border cursor-pointer',
+        'mission-card bg-card rounded-xl p-5 border border-border cursor-pointer',
         `border-l-4 ${priority.border}`,
         viewMode === 'kanban' && 'w-full'
       )}
@@ -139,21 +139,21 @@ export default function MissionCard({ mission, viewMode, onClick }: MissionCardP
       </div>
 
       {/* Title and Description */}
-      <h3 className="font-semibold text-white mb-2 line-clamp-2">{mission.title}</h3>
-      <p className="text-sm text-slate-400 mb-4 line-clamp-2">{mission.description}</p>
+      <h3 className="font-semibold text-foreground mb-2 line-clamp-2">{mission.title}</h3>
+      <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{mission.description}</p>
 
       {/* Progress Section */}
       <div className="flex items-center gap-4 mb-4">
         <ProgressRing progress={mission.progress} size={56} color={priority.color} />
         <div className="flex-1">
-          <div className="text-sm text-slate-400 mb-1">Progress</div>
-          <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+          <div className="text-sm text-muted-foreground mb-1">Progress</div>
+          <div className="h-2 bg-muted rounded-full overflow-hidden">
             <div
               className="h-full rounded-full transition-all duration-500"
               style={{ width: `${mission.progress}%`, backgroundColor: priority.color }}
             />
           </div>
-          <div className="text-xs text-slate-500 mt-1">
+          <div className="text-xs text-muted-foreground mt-1">
             {mission.subtasks.completed}/{mission.subtasks.total} subtasks
           </div>
         </div>
@@ -165,7 +165,7 @@ export default function MissionCard({ mission, viewMode, onClick }: MissionCardP
         <span className="text-xs text-symtex-primary font-medium">
           {mission.automationLevel}% AI Automated
         </span>
-        <div className="flex-1 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+        <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
           <div
             className="h-full bg-symtex-primary rounded-full"
             style={{ width: `${mission.automationLevel}%` }}
@@ -178,25 +178,25 @@ export default function MissionCard({ mission, viewMode, onClick }: MissionCardP
         {mission.tags.slice(0, 3).map((tag) => (
           <span
             key={tag}
-            className="text-xs px-2 py-1 rounded bg-slate-700/50 text-slate-300"
+            className="text-xs px-2 py-1 rounded bg-muted/50 text-muted-foreground"
           >
             {tag}
           </span>
         ))}
         {mission.tags.length > 3 && (
-          <span className="text-xs px-2 py-1 rounded bg-slate-700/50 text-slate-400">
+          <span className="text-xs px-2 py-1 rounded bg-muted/50 text-muted-foreground">
             +{mission.tags.length - 3}
           </span>
         )}
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between pt-3 border-t border-symtex-border">
-        <div className="flex items-center gap-2 text-slate-400 text-sm">
+      <div className="flex items-center justify-between pt-3 border-t border-border">
+        <div className="flex items-center gap-2 text-muted-foreground text-sm">
           <Calendar className="w-4 h-4" />
           <span>{mission.dueDate}</span>
         </div>
-        <div className="flex items-center gap-2 text-slate-400 text-sm">
+        <div className="flex items-center gap-2 text-muted-foreground text-sm">
           <Users className="w-4 h-4" />
           <span>{mission.assignees} assigned</span>
         </div>

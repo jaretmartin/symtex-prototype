@@ -48,9 +48,9 @@ interface StatusConfig {
 const statusConfig: Record<NarrativeStatus, StatusConfig> = {
   draft: {
     label: 'Draft',
-    color: 'text-slate-400',
-    bgColor: 'bg-slate-500/10',
-    borderColor: 'border-slate-500/30',
+    color: 'text-muted-foreground',
+    bgColor: 'bg-muted/10',
+    borderColor: 'border-muted/30',
   },
   active: {
     label: 'Active',
@@ -107,7 +107,7 @@ export function NarrativeStoryView({
   return (
     <div className={clsx('space-y-6', className)}>
       {/* Story Header */}
-      <div className="bg-symtex-card rounded-xl border border-symtex-border p-6">
+      <div className="bg-card rounded-xl border border-border p-6">
         <div className="flex items-start gap-4">
           {/* Icon */}
           <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-symtex-primary/20 to-symtex-accent/20 flex items-center justify-center">
@@ -117,7 +117,7 @@ export function NarrativeStoryView({
           {/* Content */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-2">
-              <h2 className="text-xl font-bold text-white truncate">{story.title}</h2>
+              <h2 className="text-xl font-bold text-foreground truncate">{story.title}</h2>
               <span
                 className={clsx(
                   'flex-shrink-0 text-xs font-medium px-2 py-0.5 rounded border',
@@ -130,23 +130,23 @@ export function NarrativeStoryView({
               </span>
             </div>
 
-            <p className="text-sm text-slate-400 line-clamp-2 mb-4">{story.description}</p>
+            <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{story.description}</p>
 
             {/* Meta Info */}
             <div className="flex items-center gap-6 text-sm">
-              <div className="flex items-center gap-1.5 text-slate-400">
+              <div className="flex items-center gap-1.5 text-muted-foreground">
                 <BookOpen className="w-4 h-4" />
                 <span>{story.chapters.length} chapters</span>
               </div>
 
               {estimatedCost > 0 && (
-                <div className="flex items-center gap-1.5 text-slate-400">
+                <div className="flex items-center gap-1.5 text-muted-foreground">
                   <DollarSign className="w-4 h-4" />
                   <span>${estimatedCost.toFixed(2)} estimated</span>
                 </div>
               )}
 
-              <div className="flex items-center gap-1.5 text-slate-400">
+              <div className="flex items-center gap-1.5 text-muted-foreground">
                 <Clock className="w-4 h-4" />
                 <span>~{Math.ceil(story.chapters.length * 2)} min</span>
               </div>
@@ -196,11 +196,11 @@ export function NarrativeStoryView({
               </Button>
 
               {showMenu && (
-                <div className="absolute right-0 top-full mt-1 w-48 bg-symtex-elevated rounded-lg border border-symtex-border shadow-xl z-20">
+                <div className="absolute right-0 top-full mt-1 w-48 bg-symtex-elevated rounded-lg border border-border shadow-xl z-20">
                   {onEdit && (
                     <button
                       onClick={() => handleMenuAction(onEdit)}
-                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-slate-300 hover:text-white hover:bg-slate-700/50 first:rounded-t-lg transition-colors"
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 first:rounded-t-lg transition-colors"
                     >
                       <Edit3 className="w-4 h-4" />
                       Edit Story
@@ -209,7 +209,7 @@ export function NarrativeStoryView({
                   {onDuplicate && (
                     <button
                       onClick={() => handleMenuAction(onDuplicate)}
-                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
                     >
                       <Copy className="w-4 h-4" />
                       Duplicate
@@ -218,7 +218,7 @@ export function NarrativeStoryView({
                   {onConfigure && (
                     <button
                       onClick={() => handleMenuAction(onConfigure)}
-                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
                     >
                       <Settings className="w-4 h-4" />
                       Configure
@@ -226,7 +226,7 @@ export function NarrativeStoryView({
                   )}
                   {onDelete && (
                     <>
-                      <div className="border-t border-symtex-border" />
+                      <div className="border-t border-border" />
                       <button
                         onClick={() => handleMenuAction(onDelete)}
                         className="w-full flex items-center gap-2 px-3 py-2 text-sm text-error hover:bg-error/10 last:rounded-b-lg transition-colors"
@@ -246,9 +246,9 @@ export function NarrativeStoryView({
       {/* Chapters Timeline */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-white">Story Timeline</h3>
+          <h3 className="text-lg font-semibold text-foreground">Story Timeline</h3>
           {hasChapters && (
-            <span className="text-sm text-slate-400">
+            <span className="text-sm text-muted-foreground">
               {story.chapters.length} chapter{story.chapters.length !== 1 ? 's' : ''}
             </span>
           )}
@@ -271,7 +271,7 @@ export function NarrativeStoryView({
                         ? 'bg-symtex-primary border-symtex-primary shadow-lg shadow-symtex-primary/50'
                         : currentChapterIndex !== undefined && index < currentChapterIndex
                           ? 'bg-success border-success'
-                          : 'bg-symtex-dark border-symtex-border'
+                          : 'bg-surface-base border-border'
                     )}
                   />
 
@@ -300,10 +300,10 @@ export function NarrativeStoryView({
             </div>
           </div>
         ) : (
-          <div className="bg-symtex-card rounded-xl border border-dashed border-symtex-border p-12 text-center">
-            <BookOpen className="w-12 h-12 text-slate-600 mx-auto mb-4" />
-            <h4 className="text-lg font-medium text-white mb-2">No chapters yet</h4>
-            <p className="text-sm text-slate-400 max-w-md mx-auto">
+          <div className="bg-card rounded-xl border border-dashed border-border p-12 text-center">
+            <BookOpen className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+            <h4 className="text-lg font-medium text-foreground mb-2">No chapters yet</h4>
+            <p className="text-sm text-muted-foreground max-w-md mx-auto">
               Start building your story by adding chapters. Each chapter represents a step in
               your Automation with narrative context.
             </p>

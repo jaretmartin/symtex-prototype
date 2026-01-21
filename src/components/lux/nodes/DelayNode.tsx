@@ -13,8 +13,8 @@ const DelayNode = memo(({ data, selected }: NodeProps<DelayNodeData>) => {
       style={{
         padding: '12px 16px',
         borderRadius: '12px',
-        background: 'linear-gradient(135deg, #1a1a2e 0%, #16162a 100%)',
-        border: selected ? '2px solid #64748b' : '1px solid #2a2a3e',
+        background: 'linear-gradient(135deg, var(--color-surface-card) 0%, #16162a 100%)',
+        border: selected ? '2px solid var(--color-text-muted)' : '1px solid var(--color-surface-elevated)',
         minWidth: '160px',
         boxShadow: selected
           ? '0 0 20px rgba(100, 116, 139, 0.3)'
@@ -25,10 +25,10 @@ const DelayNode = memo(({ data, selected }: NodeProps<DelayNodeData>) => {
         type="target"
         position={Position.Top}
         style={{
-          background: '#64748b',
+          background: 'var(--color-text-muted)',
           width: '12px',
           height: '12px',
-          border: '2px solid #0a0a0f',
+          border: '2px solid var(--color-surface-base)',
         }}
       />
       <div
@@ -44,7 +44,7 @@ const DelayNode = memo(({ data, selected }: NodeProps<DelayNodeData>) => {
             width: '32px',
             height: '32px',
             borderRadius: '8px',
-            background: 'linear-gradient(135deg, #64748b, #475569)',
+            background: 'linear-gradient(135deg, var(--color-text-muted), #475569)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -66,7 +66,7 @@ const DelayNode = memo(({ data, selected }: NodeProps<DelayNodeData>) => {
           <div
             style={{
               fontSize: '10px',
-              color: '#64748b',
+              color: 'var(--color-text-muted)',
               fontWeight: 500,
             }}
           >
@@ -78,7 +78,7 @@ const DelayNode = memo(({ data, selected }: NodeProps<DelayNodeData>) => {
         <div
           style={{
             fontSize: '11px',
-            color: '#94a3b8',
+            color: 'var(--color-text-muted)',
             marginTop: '4px',
           }}
         >
@@ -89,7 +89,7 @@ const DelayNode = memo(({ data, selected }: NodeProps<DelayNodeData>) => {
         <div
           style={{
             fontSize: '12px',
-            color: '#f59e0b',
+            color: 'var(--color-gold)',
             marginTop: '8px',
             fontWeight: 500,
           }}
@@ -101,10 +101,10 @@ const DelayNode = memo(({ data, selected }: NodeProps<DelayNodeData>) => {
         type="source"
         position={Position.Bottom}
         style={{
-          background: '#64748b',
+          background: 'var(--color-text-muted)',
           width: '12px',
           height: '12px',
-          border: '2px solid #0a0a0f',
+          border: '2px solid var(--color-surface-base)',
         }}
       />
     </div>

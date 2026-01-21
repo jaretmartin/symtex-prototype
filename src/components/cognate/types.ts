@@ -102,7 +102,7 @@ export interface Skill {
 }
 
 export const SKILL_PROFICIENCY_CONFIG: Record<SkillProficiency, { label: string; color: string; bgColor: string }> = {
-  beginner: { label: 'Beginner', color: 'text-slate-400', bgColor: 'bg-slate-500/20' },
+  beginner: { label: 'Beginner', color: 'text-muted-foreground', bgColor: 'bg-muted/20' },
   intermediate: { label: 'Intermediate', color: 'text-blue-400', bgColor: 'bg-blue-500/20' },
   advanced: { label: 'Advanced', color: 'text-purple-400', bgColor: 'bg-purple-500/20' },
   expert: { label: 'Expert', color: 'text-amber-400', bgColor: 'bg-amber-500/20' },
@@ -201,7 +201,7 @@ export type CognateAvailabilityStatus = 'available' | 'busy' | 'offline';
 export const AVAILABILITY_STATUS_CONFIG: Record<CognateAvailabilityStatus, { label: string; color: string; dotColor: string }> = {
   available: { label: 'Available', color: 'text-green-400', dotColor: 'bg-green-400' },
   busy: { label: 'Busy', color: 'text-yellow-400', dotColor: 'bg-yellow-400' },
-  offline: { label: 'Offline', color: 'text-slate-500', dotColor: 'bg-slate-500' },
+  offline: { label: 'Offline', color: 'text-muted-foreground', dotColor: 'bg-muted-foreground' },
 };
 
 // =============================================================================

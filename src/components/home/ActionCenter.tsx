@@ -287,7 +287,7 @@ export default function ActionCenter({ className }: ActionCenterProps): JSX.Elem
                   'text-xs px-3 py-1.5 rounded-full border transition-colors flex items-center gap-1.5',
                   activeFilter === type
                     ? `${config.bg} ${config.border} ${config.color}`
-                    : 'border-border text-muted-foreground hover:text-foreground hover:border-slate-500'
+                    : 'border-border text-muted-foreground hover:text-foreground hover:border-border'
                 )}
               >
                 <config.icon className="w-3 h-3" />
@@ -315,7 +315,7 @@ export default function ActionCenter({ className }: ActionCenterProps): JSX.Elem
       )}
 
       {/* Actions List */}
-      <div className="divide-y divide-symtex-border max-h-[400px] overflow-y-auto">
+      <div className="divide-y divide-border max-h-[400px] overflow-y-auto">
         {filteredActions.length === 0 ? (
           <div className="p-6 text-center">
             <p className="text-sm text-muted-foreground">No actions match this filter</p>

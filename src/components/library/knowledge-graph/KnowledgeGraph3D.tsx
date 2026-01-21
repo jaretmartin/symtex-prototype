@@ -212,7 +212,7 @@ export function KnowledgeGraph3D({
   };
 
   return (
-    <div ref={containerRef} className={clsx('relative h-full w-full bg-zinc-950', className)}>
+    <div ref={containerRef} className={clsx('relative h-full w-full bg-surface-base', className)}>
       {/* SVG Canvas */}
       <svg
         width={dimensions.width - (selectedNode ? 320 : 0)}
@@ -277,25 +277,25 @@ export function KnowledgeGraph3D({
       </svg>
 
       {/* 3D Mode Banner */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-zinc-800/80 backdrop-blur-sm rounded-lg px-4 py-2 flex items-center gap-2 text-sm text-zinc-400 border border-zinc-700">
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-card/80 backdrop-blur-sm rounded-lg px-4 py-2 flex items-center gap-2 text-sm text-muted-foreground border border-border">
         <Box className="w-4 h-4" />
         <span>2D Preview Mode</span>
-        <span className="text-zinc-600">|</span>
+        <span className="text-muted-foreground">|</span>
         <span className="text-xs">Install react-force-graph-3d for full 3D</span>
       </div>
 
       {/* Layer Filter Panel */}
       {showControls && (
-        <div className="absolute top-16 left-4 bg-zinc-800 rounded-xl shadow-lg border border-zinc-700 overflow-hidden">
+        <div className="absolute top-16 left-4 bg-card rounded-xl shadow-lg border border-border overflow-hidden">
           <button
             onClick={() => setFilterPanelOpen(!filterPanelOpen)}
-            className="flex items-center gap-2 px-4 py-3 w-full hover:bg-zinc-700 transition-colors"
+            className="flex items-center gap-2 px-4 py-3 w-full hover:bg-muted transition-colors"
           >
-            <Layers className="w-4 h-4 text-zinc-400" />
-            <span className="text-sm font-medium text-zinc-200">Layers</span>
+            <Layers className="w-4 h-4 text-muted-foreground" />
+            <span className="text-sm font-medium text-muted-foreground">Layers</span>
             <ChevronRight
               className={clsx(
-                'w-4 h-4 text-zinc-400 ml-auto transition-transform',
+                'w-4 h-4 text-muted-foreground ml-auto transition-transform',
                 filterPanelOpen && 'rotate-90'
               )}
             />
@@ -322,15 +322,15 @@ export function KnowledgeGraph3D({
                     <span
                       className={clsx(
                         'text-sm',
-                        visibleLayers[layer] ? 'text-zinc-200' : 'text-zinc-500'
+                        visibleLayers[layer] ? 'text-muted-foreground' : 'text-muted-foreground'
                       )}
                     >
                       {config.label}
                     </span>
                     {visibleLayers[layer] ? (
-                      <Eye className="w-4 h-4 text-zinc-500 ml-auto opacity-0 group-hover:opacity-100" />
+                      <Eye className="w-4 h-4 text-muted-foreground ml-auto opacity-0 group-hover:opacity-100" />
                     ) : (
-                      <EyeOff className="w-4 h-4 text-zinc-500 ml-auto opacity-0 group-hover:opacity-100" />
+                      <EyeOff className="w-4 h-4 text-muted-foreground ml-auto opacity-0 group-hover:opacity-100" />
                     )}
                   </button>
                 );
@@ -342,39 +342,39 @@ export function KnowledgeGraph3D({
 
       {/* Zoom Controls */}
       {showControls && (
-        <div className="absolute bottom-4 left-4 flex flex-col gap-1 bg-zinc-800 rounded-lg shadow-lg border border-zinc-700 overflow-hidden">
+        <div className="absolute bottom-4 left-4 flex flex-col gap-1 bg-card rounded-lg shadow-lg border border-border overflow-hidden">
           <button
             onClick={() => setZoom((z) => Math.min(z * 1.2, 3))}
-            className="p-2 hover:bg-zinc-700 transition-colors"
+            className="p-2 hover:bg-muted transition-colors"
             title="Zoom In"
           >
-            <ZoomIn className="w-5 h-5 text-zinc-400" />
+            <ZoomIn className="w-5 h-5 text-muted-foreground" />
           </button>
           <button
             onClick={() => setZoom((z) => Math.max(z * 0.8, 0.3))}
-            className="p-2 hover:bg-zinc-700 transition-colors"
+            className="p-2 hover:bg-muted transition-colors"
             title="Zoom Out"
           >
-            <ZoomOut className="w-5 h-5 text-zinc-400" />
+            <ZoomOut className="w-5 h-5 text-muted-foreground" />
           </button>
-          <div className="h-px bg-zinc-700" />
+          <div className="h-px bg-muted" />
           <button
             onClick={() => {
               setZoom(1);
               setPan({ x: 0, y: 0 });
             }}
-            className="p-2 hover:bg-zinc-700 transition-colors"
+            className="p-2 hover:bg-muted transition-colors"
             title="Reset View"
           >
-            <RotateCcw className="w-5 h-5 text-zinc-400" />
+            <RotateCcw className="w-5 h-5 text-muted-foreground" />
           </button>
         </div>
       )}
 
       {/* Legend */}
       {showLegend && (
-        <div className="absolute bottom-4 right-4 bg-zinc-800 rounded-lg shadow-lg border border-zinc-700 p-3">
-          <p className="text-xs font-medium text-zinc-400 mb-2">Legend</p>
+        <div className="absolute bottom-4 right-4 bg-card rounded-lg shadow-lg border border-border p-3">
+          <p className="text-xs font-medium text-muted-foreground mb-2">Legend</p>
           <div className="space-y-1.5">
             {uniqueLayers.map((layer) => {
               const config = colorScheme[layer as NodeLayer];
@@ -388,7 +388,7 @@ export function KnowledgeGraph3D({
                       boxShadow: `0 0 6px ${config.glow}`,
                     }}
                   />
-                  <span className="text-xs text-zinc-300">{config.label}</span>
+                  <span className="text-xs text-muted-foreground">{config.label}</span>
                 </div>
               );
             })}
@@ -397,22 +397,22 @@ export function KnowledgeGraph3D({
       )}
 
       {/* Node Stats Overlay */}
-      <div className="absolute top-16 right-4 bg-zinc-800/80 backdrop-blur-sm rounded-lg px-3 py-2 text-xs text-zinc-300 border border-zinc-700">
+      <div className="absolute top-16 right-4 bg-card/80 backdrop-blur-sm rounded-lg px-3 py-2 text-xs text-muted-foreground border border-border">
         <span className="font-medium">{filteredData.nodes.length}</span> nodes
-        <span className="mx-2 text-zinc-500">|</span>
+        <span className="mx-2 text-muted-foreground">|</span>
         <span className="font-medium">{filteredData.edges.length}</span> connections
       </div>
 
       {/* Node Detail Panel */}
       {selectedNode && (
-        <div className="absolute top-0 right-0 w-80 h-full bg-zinc-800 border-l border-zinc-700 overflow-y-auto">
-          <div className="sticky top-0 bg-zinc-800 px-4 py-3 border-b border-zinc-700 flex items-center justify-between">
-            <h3 className="font-semibold text-zinc-100">Node Details</h3>
+        <div className="absolute top-0 right-0 w-80 h-full bg-card border-l border-border overflow-y-auto">
+          <div className="sticky top-0 bg-card px-4 py-3 border-b border-border flex items-center justify-between">
+            <h3 className="font-semibold text-muted-foreground">Node Details</h3>
             <button
               onClick={() => setSelectedNode(null)}
-              className="p-1 hover:bg-zinc-700 rounded"
+              className="p-1 hover:bg-muted rounded"
             >
-              <X className="w-4 h-4 text-zinc-400" />
+              <X className="w-4 h-4 text-muted-foreground" />
             </button>
           </div>
 
@@ -420,7 +420,7 @@ export function KnowledgeGraph3D({
             {/* Type Badge */}
             <div className="flex items-center gap-2">
               <span
-                className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium text-white"
+                className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium text-foreground"
                 style={{
                   backgroundColor:
                     colorScheme[(selectedNode.layer || 'default') as NodeLayer]?.primary || '#6B7280',
@@ -433,17 +433,17 @@ export function KnowledgeGraph3D({
               </span>
             </div>
 
-            <h4 className="text-lg font-semibold text-zinc-100">{selectedNode.label}</h4>
+            <h4 className="text-lg font-semibold text-muted-foreground">{selectedNode.label}</h4>
 
             {selectedNode.summary && (
-              <p className="text-sm text-zinc-400">{selectedNode.summary}</p>
+              <p className="text-sm text-muted-foreground">{selectedNode.summary}</p>
             )}
 
             <div className="space-y-3 pt-2">
               {selectedNode.timestamp && (
                 <div className="flex items-center gap-2 text-sm">
-                  <Clock className="w-4 h-4 text-zinc-500" />
-                  <span className="text-zinc-400">
+                  <Clock className="w-4 h-4 text-muted-foreground" />
+                  <span className="text-muted-foreground">
                     {new Date(selectedNode.timestamp).toLocaleDateString('en-US', {
                       month: 'short',
                       day: 'numeric',
@@ -455,12 +455,12 @@ export function KnowledgeGraph3D({
 
               {selectedNode.participants && selectedNode.participants.length > 0 && (
                 <div className="flex items-start gap-2 text-sm">
-                  <User className="w-4 h-4 text-zinc-500 mt-0.5" />
+                  <User className="w-4 h-4 text-muted-foreground mt-0.5" />
                   <div className="flex flex-wrap gap-1">
                     {selectedNode.participants.map((p, i) => (
                       <span
                         key={i}
-                        className="px-2 py-0.5 bg-zinc-700 rounded text-xs text-zinc-300"
+                        className="px-2 py-0.5 bg-muted rounded text-xs text-muted-foreground"
                       >
                         {p}
                       </span>
@@ -471,7 +471,7 @@ export function KnowledgeGraph3D({
 
               {selectedNode.tags && selectedNode.tags.length > 0 && (
                 <div className="flex items-start gap-2 text-sm">
-                  <Tag className="w-4 h-4 text-zinc-500 mt-0.5" />
+                  <Tag className="w-4 h-4 text-muted-foreground mt-0.5" />
                   <div className="flex flex-wrap gap-1">
                     {selectedNode.tags.map((tag, i) => (
                       <span
@@ -487,9 +487,9 @@ export function KnowledgeGraph3D({
 
               {selectedNode.importance && (
                 <div className="text-sm">
-                  <span className="text-zinc-500">Importance: </span>
+                  <span className="text-muted-foreground">Importance: </span>
                   <div className="inline-flex items-center gap-1">
-                    <div className="w-20 h-1.5 bg-zinc-700 rounded-full overflow-hidden">
+                    <div className="w-20 h-1.5 bg-muted rounded-full overflow-hidden">
                       <div
                         className="h-full bg-purple-500 rounded-full"
                         style={{
@@ -498,7 +498,7 @@ export function KnowledgeGraph3D({
                         }}
                       />
                     </div>
-                    <span className="text-xs text-zinc-400">
+                    <span className="text-xs text-muted-foreground">
                       {Math.round(selectedNode.importance * 100)}%
                     </span>
                   </div>
@@ -507,8 +507,8 @@ export function KnowledgeGraph3D({
             </div>
 
             {/* Connected Nodes */}
-            <div className="pt-4 border-t border-zinc-700">
-              <h5 className="text-sm font-medium text-zinc-300 mb-2">Connections</h5>
+            <div className="pt-4 border-t border-border">
+              <h5 className="text-sm font-medium text-muted-foreground mb-2">Connections</h5>
               <div className="space-y-2">
                 {edges
                   .filter((edge) => {
@@ -537,7 +537,7 @@ export function KnowledgeGraph3D({
                       <button
                         key={i}
                         onClick={() => handleNodeClick(connectedNode)}
-                        className="flex items-center gap-2 w-full p-2 rounded-lg hover:bg-zinc-700 text-left transition-colors"
+                        className="flex items-center gap-2 w-full p-2 rounded-lg hover:bg-muted text-left transition-colors"
                       >
                         <div
                           className="w-2 h-2 rounded-full"
@@ -546,10 +546,10 @@ export function KnowledgeGraph3D({
                             boxShadow: `0 0 4px ${connectedColor?.glow || '#9CA3AF'}`,
                           }}
                         />
-                        <span className="text-sm text-zinc-300 flex-1 truncate">
+                        <span className="text-sm text-muted-foreground flex-1 truncate">
                           {connectedNode.label}
                         </span>
-                        <span className="text-xs text-zinc-500">
+                        <span className="text-xs text-muted-foreground">
                           {(edge.type || 'related').replace('_', ' ')}
                         </span>
                       </button>

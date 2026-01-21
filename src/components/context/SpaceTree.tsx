@@ -233,7 +233,7 @@ export function SpaceTree({ className, onNavigate }: SpaceTreeProps): JSX.Elemen
   const renderPersonalSpace = (): JSX.Element | null => {
     if (!personal) {
       return (
-        <div className="px-4 py-8 text-center text-slate-500 text-sm">
+        <div className="px-4 py-8 text-center text-muted-foreground text-sm">
           No personal space configured
         </div>
       );

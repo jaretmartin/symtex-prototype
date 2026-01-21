@@ -72,8 +72,8 @@ export function BootstrapWizardPage(): JSX.Element {
   if (!cognate) {
     return (
       <div className="p-6 text-center">
-        <h2 className="text-xl font-medium text-white mb-2">Cognate Not Found</h2>
-        <p className="text-zinc-400 mb-4">The requested cognate does not exist.</p>
+        <h2 className="text-xl font-medium text-foreground mb-2">Cognate Not Found</h2>
+        <p className="text-muted-foreground mb-4">The requested cognate does not exist.</p>
         <Link
           to="/studio/cognates"
           className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300"
@@ -139,30 +139,30 @@ export function BootstrapWizardPage(): JSX.Element {
         return (
           <div className="text-center max-w-2xl mx-auto">
             <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-              <Sparkles className="w-10 h-10 text-white" />
+              <Sparkles className="w-10 h-10 text-foreground" />
             </div>
-            <h2 className="text-3xl font-bold text-white mb-4">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
               Bootstrap Your Cognate
             </h2>
-            <p className="text-lg text-zinc-400 mb-8">
-              Configure <span className="text-white font-medium">{cognate.name}</span> with
+            <p className="text-lg text-muted-foreground mb-8">
+              Configure <span className="text-foreground font-medium">{cognate.name}</span> with
               industry-specific and role-specific SOPs to get started quickly.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
-              <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
+              <div className="p-4 bg-surface-base/50 border border-card rounded-lg">
                 <Building2 className="w-8 h-8 text-blue-400 mb-3" />
-                <h3 className="font-medium text-white mb-1">Industry SOPs</h3>
-                <p className="text-sm text-zinc-400">Domain-specific rules and compliance</p>
+                <h3 className="font-medium text-foreground mb-1">Industry SOPs</h3>
+                <p className="text-sm text-muted-foreground">Domain-specific rules and compliance</p>
               </div>
-              <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
+              <div className="p-4 bg-surface-base/50 border border-card rounded-lg">
                 <User className="w-8 h-8 text-green-400 mb-3" />
-                <h3 className="font-medium text-white mb-1">Role SOPs</h3>
-                <p className="text-sm text-zinc-400">Task-specific behaviors and responses</p>
+                <h3 className="font-medium text-foreground mb-1">Role SOPs</h3>
+                <p className="text-sm text-muted-foreground">Task-specific behaviors and responses</p>
               </div>
-              <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
+              <div className="p-4 bg-surface-base/50 border border-card rounded-lg">
                 <Package className="w-8 h-8 text-purple-400 mb-3" />
-                <h3 className="font-medium text-white mb-1">SOP Packs</h3>
-                <p className="text-sm text-zinc-400">Pre-built collections for common use cases</p>
+                <h3 className="font-medium text-foreground mb-1">SOP Packs</h3>
+                <p className="text-sm text-muted-foreground">Pre-built collections for common use cases</p>
               </div>
             </div>
           </div>
@@ -171,10 +171,10 @@ export function BootstrapWizardPage(): JSX.Element {
       case 1:
         return (
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-white mb-2 text-center">
+            <h2 className="text-2xl font-bold text-foreground mb-2 text-center">
               Select Industry
             </h2>
-            <p className="text-zinc-400 mb-8 text-center">
+            <p className="text-muted-foreground mb-8 text-center">
               Choose the primary industry for this Cognate
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -187,12 +187,12 @@ export function BootstrapWizardPage(): JSX.Element {
                     p-4 rounded-lg border text-left transition-all
                     ${selectedIndustry === industry.id
                       ? 'border-blue-500 bg-blue-500/10'
-                      : 'border-zinc-800 bg-zinc-900/50 hover:border-zinc-700'
+                      : 'border-border bg-surface-base/50 hover:border-muted'
                     }
                   `}
                 >
-                  <h3 className="font-medium text-white mb-1">{industry.name}</h3>
-                  <p className="text-sm text-zinc-400">{industry.description}</p>
+                  <h3 className="font-medium text-foreground mb-1">{industry.name}</h3>
+                  <p className="text-sm text-muted-foreground">{industry.description}</p>
                   {selectedIndustry === industry.id && (
                     <div className="mt-3 flex items-center gap-1 text-sm text-blue-400">
                       <Check className="w-4 h-4" />
@@ -208,10 +208,10 @@ export function BootstrapWizardPage(): JSX.Element {
       case 2:
         return (
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-white mb-2 text-center">
+            <h2 className="text-2xl font-bold text-foreground mb-2 text-center">
               Select Role
             </h2>
-            <p className="text-zinc-400 mb-8 text-center">
+            <p className="text-muted-foreground mb-8 text-center">
               Choose the primary role for this Cognate
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -224,12 +224,12 @@ export function BootstrapWizardPage(): JSX.Element {
                     p-4 rounded-lg border text-left transition-all
                     ${selectedRole === role.id
                       ? 'border-green-500 bg-green-500/10'
-                      : 'border-zinc-800 bg-zinc-900/50 hover:border-zinc-700'
+                      : 'border-border bg-surface-base/50 hover:border-muted'
                     }
                   `}
                 >
-                  <h3 className="font-medium text-white mb-1">{role.name}</h3>
-                  <p className="text-sm text-zinc-400">{role.description}</p>
+                  <h3 className="font-medium text-foreground mb-1">{role.name}</h3>
+                  <p className="text-sm text-muted-foreground">{role.description}</p>
                   {selectedRole === role.id && (
                     <div className="mt-3 flex items-center gap-1 text-sm text-green-400">
                       <Check className="w-4 h-4" />
@@ -245,10 +245,10 @@ export function BootstrapWizardPage(): JSX.Element {
       case 3:
         return (
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-white mb-2 text-center">
+            <h2 className="text-2xl font-bold text-foreground mb-2 text-center">
               Select SOP Packs
             </h2>
-            <p className="text-zinc-400 mb-8 text-center">
+            <p className="text-muted-foreground mb-8 text-center">
               Choose pre-built SOP packs to install (optional)
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -261,32 +261,32 @@ export function BootstrapWizardPage(): JSX.Element {
                     p-4 rounded-lg border text-left transition-all flex items-center justify-between
                     ${selectedPacks.includes(pack.id)
                       ? 'border-purple-500 bg-purple-500/10'
-                      : 'border-zinc-800 bg-zinc-900/50 hover:border-zinc-700'
+                      : 'border-border bg-surface-base/50 hover:border-muted'
                     }
                   `}
                 >
                   <div>
-                    <h3 className="font-medium text-white mb-1">{pack.name}</h3>
-                    <p className="text-sm text-zinc-400">{pack.sopCount} SOPs included</p>
+                    <h3 className="font-medium text-foreground mb-1">{pack.name}</h3>
+                    <p className="text-sm text-muted-foreground">{pack.sopCount} SOPs included</p>
                   </div>
                   <div
                     className={`
                       w-6 h-6 rounded border-2 flex items-center justify-center
                       ${selectedPacks.includes(pack.id)
                         ? 'border-purple-500 bg-purple-500'
-                        : 'border-zinc-600'
+                        : 'border-border'
                       }
                     `}
                   >
                     {selectedPacks.includes(pack.id) && (
-                      <Check className="w-4 h-4 text-white" />
+                      <Check className="w-4 h-4 text-foreground" />
                     )}
                   </div>
                 </button>
               ))}
             </div>
             {selectedPacks.length > 0 && (
-              <p className="mt-4 text-center text-sm text-zinc-400">
+              <p className="mt-4 text-center text-sm text-muted-foreground">
                 {selectedPacks.length} pack{selectedPacks.length !== 1 ? 's' : ''} selected
                 ({SUGGESTED_PACKS.filter((p) => selectedPacks.includes(p.id)).reduce(
                   (acc, p) => acc + p.sopCount,
@@ -300,40 +300,40 @@ export function BootstrapWizardPage(): JSX.Element {
       case 4:
         return (
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-2xl font-bold text-white mb-2 text-center">
+            <h2 className="text-2xl font-bold text-foreground mb-2 text-center">
               Review Configuration
             </h2>
-            <p className="text-zinc-400 mb-8 text-center">
+            <p className="text-muted-foreground mb-8 text-center">
               Confirm your bootstrap settings
             </p>
             <div className="space-y-4">
-              <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
+              <div className="p-4 bg-surface-base/50 border border-card rounded-lg">
                 <div className="flex items-center gap-3 mb-2">
                   <Building2 className="w-5 h-5 text-blue-400" />
-                  <span className="text-sm text-zinc-400">Industry</span>
+                  <span className="text-sm text-muted-foreground">Industry</span>
                 </div>
-                <p className="font-medium text-white">
+                <p className="font-medium text-foreground">
                   {INDUSTRIES.find((i) => i.id === selectedIndustry)?.name || 'Not selected'}
                 </p>
               </div>
 
-              <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
+              <div className="p-4 bg-surface-base/50 border border-card rounded-lg">
                 <div className="flex items-center gap-3 mb-2">
                   <User className="w-5 h-5 text-green-400" />
-                  <span className="text-sm text-zinc-400">Role</span>
+                  <span className="text-sm text-muted-foreground">Role</span>
                 </div>
-                <p className="font-medium text-white">
+                <p className="font-medium text-foreground">
                   {ROLES.find((r) => r.id === selectedRole)?.name || 'Not selected'}
                 </p>
               </div>
 
-              <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
+              <div className="p-4 bg-surface-base/50 border border-card rounded-lg">
                 <div className="flex items-center gap-3 mb-2">
                   <Package className="w-5 h-5 text-purple-400" />
-                  <span className="text-sm text-zinc-400">SOP Packs</span>
+                  <span className="text-sm text-muted-foreground">SOP Packs</span>
                 </div>
                 {selectedPacks.length === 0 ? (
-                  <p className="text-zinc-500">No packs selected</p>
+                  <p className="text-muted-foreground">No packs selected</p>
                 ) : (
                   <div className="flex flex-wrap gap-2">
                     {selectedPacks.map((packId) => {
@@ -362,23 +362,23 @@ export function BootstrapWizardPage(): JSX.Element {
   return (
     <div className="min-h-[calc(100vh-64px)] flex flex-col">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-zinc-800">
+      <div className="px-6 py-4 border-b border-border">
         <div className="flex items-center gap-4">
           <Link
             to={`/studio/cognates/${id}/sops`}
-            className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
+            className="p-2 hover:bg-card rounded-lg transition-colors"
           >
-            <ArrowLeft className="w-5 h-5 text-zinc-400" />
+            <ArrowLeft className="w-5 h-5 text-muted-foreground" />
           </Link>
           <div>
-            <h1 className="text-lg font-semibold text-white">Bootstrap Wizard</h1>
-            <p className="text-sm text-zinc-400">{cognate.name}</p>
+            <h1 className="text-lg font-semibold text-foreground">Bootstrap Wizard</h1>
+            <p className="text-sm text-muted-foreground">{cognate.name}</p>
           </div>
         </div>
       </div>
 
       {/* Progress Steps */}
-      <div className="px-6 py-4 border-b border-zinc-800">
+      <div className="px-6 py-4 border-b border-border">
         <div className="flex items-center justify-center gap-2 max-w-3xl mx-auto">
           {STEPS.map((step, index) => {
             const Icon = step.icon;
@@ -392,7 +392,7 @@ export function BootstrapWizardPage(): JSX.Element {
                     flex items-center gap-2 px-3 py-2 rounded-lg
                     ${isActive ? 'bg-blue-500/20 text-blue-400' : ''}
                     ${isCompleted ? 'text-green-400' : ''}
-                    ${!isActive && !isCompleted ? 'text-zinc-500' : ''}
+                    ${!isActive && !isCompleted ? 'text-muted-foreground' : ''}
                   `}
                 >
                   {isCompleted ? (
@@ -405,7 +405,7 @@ export function BootstrapWizardPage(): JSX.Element {
                 {index < STEPS.length - 1 && (
                   <div
                     className={`w-8 h-0.5 mx-1 ${
-                      isCompleted ? 'bg-green-500' : 'bg-zinc-700'
+                      isCompleted ? 'bg-green-500' : 'bg-muted'
                     }`}
                   />
                 )}
@@ -419,7 +419,7 @@ export function BootstrapWizardPage(): JSX.Element {
       <div className="flex-1 p-6 overflow-auto">{renderStepContent()}</div>
 
       {/* Footer */}
-      <div className="px-6 py-4 border-t border-zinc-800">
+      <div className="px-6 py-4 border-t border-border">
         <div className="flex items-center justify-between max-w-3xl mx-auto">
           <button
             type="button"
@@ -428,8 +428,8 @@ export function BootstrapWizardPage(): JSX.Element {
             className={`
               flex items-center gap-2 px-4 py-2 rounded-lg transition-colors
               ${currentStep === 0
-                ? 'text-zinc-600 cursor-not-allowed'
-                : 'text-zinc-300 hover:bg-zinc-800'
+                ? 'text-muted-foreground cursor-not-allowed'
+                : 'text-muted-foreground hover:bg-card'
               }
             `}
           >
@@ -445,8 +445,8 @@ export function BootstrapWizardPage(): JSX.Element {
               className={`
                 flex items-center gap-2 px-4 py-2 rounded-lg transition-colors
                 ${canProceed()
-                  ? 'bg-blue-600 text-white hover:bg-blue-500'
-                  : 'bg-zinc-700 text-zinc-400 cursor-not-allowed'
+                  ? 'bg-blue-600 text-foreground hover:bg-blue-500'
+                  : 'bg-muted text-muted-foreground cursor-not-allowed'
                 }
               `}
             >
@@ -457,7 +457,7 @@ export function BootstrapWizardPage(): JSX.Element {
             <button
               type="button"
               onClick={handleComplete}
-              className="flex items-center gap-2 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-500 transition-colors"
+              className="flex items-center gap-2 px-6 py-2 bg-green-600 text-foreground rounded-lg hover:bg-green-500 transition-colors"
             >
               <Check className="w-4 h-4" />
               Complete Setup

@@ -93,8 +93,8 @@ export function SymbiosChat({
   const statusColors = {
     online: 'bg-emerald-500',
     busy: 'bg-amber-500',
-    away: 'bg-zinc-500',
-    offline: 'bg-zinc-600',
+    away: 'bg-muted',
+    offline: 'bg-muted',
   };
 
   // Calculate symbolic percentage
@@ -102,7 +102,7 @@ export function SymbiosChat({
   const symbolicPercent = total > 0 ? Math.round((routingStats.symbolic / total) * 100) : 0;
 
   const containerClasses = cn(
-    'flex flex-col bg-zinc-900 border border-zinc-800',
+    'flex flex-col bg-surface-base border border-border',
     variant === 'panel' && 'fixed bottom-24 right-6 w-[420px] h-[600px] rounded-2xl shadow-2xl z-40',
     variant === 'modal' && 'fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-[600px] md:h-[700px] rounded-2xl shadow-2xl z-50',
     variant === 'embedded' && 'w-full h-full rounded-xl',
@@ -129,16 +129,16 @@ export function SymbiosChat({
         aria-busy={isTyping}
       >
         {/* Header */}
-        <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-zinc-800">
+        <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-border">
           <div className="flex items-center gap-3">
             {/* Aria avatar with status */}
             <div className="relative">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
+                <Sparkles className="w-5 h-5 text-foreground" />
               </div>
               <span
                 className={cn(
-                  'absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-zinc-900',
+                  'absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-surface-base',
                   statusColors[ariaStatus]
                 )}
               />
@@ -146,10 +146,10 @@ export function SymbiosChat({
 
             {/* Title and status */}
             <div>
-              <h2 id="symbios-chat-title" className="font-semibold text-zinc-100">Symbios</h2>
-              <div className="flex items-center gap-2 text-xs text-zinc-400" role="status" aria-live="polite">
+              <h2 id="symbios-chat-title" className="font-semibold text-foreground">Symbios</h2>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground" role="status" aria-live="polite">
                 <span className="capitalize" aria-label={`Status: ${ariaStatus}`}>{ariaStatus}</span>
-                <span className="text-zinc-600">|</span>
+                <span className="text-muted-foreground">|</span>
                 <span className="flex items-center gap-1">
                   <Zap className="w-3 h-3 text-emerald-400" />
                   {symbolicPercent}% symbolic
@@ -162,7 +162,7 @@ export function SymbiosChat({
           <div className="flex items-center gap-1">
             <button
               onClick={() => setMinimized(!isMinimized)}
-              className="p-2 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 rounded-lg transition-colors"
+              className="p-2 text-muted-foreground hover:text-foreground hover:bg-card rounded-lg transition-colors"
               title={isMinimized ? 'Expand' : 'Minimize'}
               aria-label={isMinimized ? 'Expand chat' : 'Minimize chat'}
             >
@@ -174,7 +174,7 @@ export function SymbiosChat({
             </button>
             <button
               onClick={clearMessages}
-              className="p-2 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 rounded-lg transition-colors"
+              className="p-2 text-muted-foreground hover:text-foreground hover:bg-card rounded-lg transition-colors"
               title="Clear chat"
               aria-label="Clear chat history"
             >
@@ -182,7 +182,7 @@ export function SymbiosChat({
             </button>
             <button
               onClick={onClose}
-              className="p-2 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 rounded-lg transition-colors"
+              className="p-2 text-muted-foreground hover:text-foreground hover:bg-card rounded-lg transition-colors"
               title="Close"
               aria-label="Close chat"
             >
@@ -192,7 +192,7 @@ export function SymbiosChat({
         </div>
 
         {/* Routing stats bar */}
-        <div className="flex-shrink-0 px-4 py-2 border-b border-zinc-800/50 bg-zinc-900/50" role="status" aria-label="Routing statistics">
+        <div className="flex-shrink-0 px-4 py-2 border-b border-border/50 bg-surface-base/50" role="status" aria-label="Routing statistics">
           <p id="symbios-chat-description" className="sr-only">AI assistant chat with symbolic and neural processing</p>
           <div className="flex items-center gap-3 text-xs">
             <div className="flex items-center gap-1.5 text-emerald-400">
@@ -203,13 +203,13 @@ export function SymbiosChat({
               <Brain className="w-3.5 h-3.5" />
               <span>{routingStats.neural} neural</span>
             </div>
-            <div className="flex-1 h-1.5 rounded-full bg-zinc-800 overflow-hidden">
+            <div className="flex-1 h-1.5 rounded-full bg-card overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 transition-all duration-500"
                 style={{ width: `${symbolicPercent}%` }}
               />
             </div>
-            <div className="flex items-center gap-1 text-zinc-400">
+            <div className="flex items-center gap-1 text-muted-foreground">
               <DollarSign className="w-3 h-3" />
               <span>{routingStats.totalCost.toFixed(3)}</span>
             </div>
@@ -221,7 +221,7 @@ export function SymbiosChat({
           ref={messagesContainerRef}
           className={cn(
             'flex-1 overflow-y-auto',
-            'scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent',
+            'scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent',
             isMinimized && 'hidden'
           )}
           role="log"
@@ -257,7 +257,7 @@ export function SymbiosChat({
 
         {/* Suggestions */}
         {!isMinimized && suggestions.length > 0 && messages.length > 1 && (
-          <div className="flex-shrink-0 px-4 py-2 border-t border-zinc-800/50">
+          <div className="flex-shrink-0 px-4 py-2 border-t border-border/50">
             <SymbiosSuggestions
               suggestions={suggestions}
               onSelect={handleSuggestionSelect}

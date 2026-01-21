@@ -123,11 +123,11 @@ function DNAStrengthGauge({
 
         {/* Center content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className={cn('font-bold text-white', config.fontSize)}>
+          <span className={cn('font-bold text-foreground', config.fontSize)}>
             {strand.strength}
           </span>
           {size !== 'sm' && (
-            <span className="text-xs text-slate-400">strength</span>
+            <span className="text-xs text-muted-foreground">strength</span>
           )}
         </div>
       </div>
@@ -135,14 +135,14 @@ function DNAStrengthGauge({
       {/* Labels */}
       {showLabels && (
         <div className="mt-3 text-center">
-          <p className="text-sm font-medium text-white">{strand.name}</p>
+          <p className="text-sm font-medium text-foreground">{strand.name}</p>
           <div className="flex items-center justify-center gap-1 mt-1">
             <StatusIcon className={cn('w-3 h-3', status.color)} />
             <span className={cn('text-xs', status.color)}>{status.label}</span>
           </div>
 
           {/* Stats */}
-          <div className="flex items-center justify-center gap-3 mt-2 text-xs text-slate-500">
+          <div className="flex items-center justify-center gap-3 mt-2 text-xs text-muted-foreground">
             <div className="flex items-center gap-1">
               <Shield className="w-3 h-3" />
               <span>{strand.confidence}% conf.</span>

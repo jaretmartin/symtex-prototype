@@ -32,7 +32,7 @@ export interface SOPListItemProps {
 }
 
 const priorityColors: Record<SOPPriority, string> = {
-  low: 'bg-zinc-500/20 text-zinc-400',
+  low: 'bg-muted/20 text-muted-foreground',
   medium: 'bg-blue-500/20 text-blue-400',
   high: 'bg-orange-500/20 text-orange-400',
   critical: 'bg-red-500/20 text-red-400',
@@ -41,7 +41,7 @@ const priorityColors: Record<SOPPriority, string> = {
 const statusConfig = {
   draft: { label: 'Draft', color: 'bg-yellow-500/20 text-yellow-400', icon: Clock },
   active: { label: 'Active', color: 'bg-green-500/20 text-green-400', icon: CheckCircle },
-  archived: { label: 'Archived', color: 'bg-zinc-500/20 text-zinc-400', icon: Clock },
+  archived: { label: 'Archived', color: 'bg-muted/20 text-muted-foreground', icon: Clock },
 };
 
 export function SOPListItem({
@@ -70,8 +70,8 @@ export function SOPListItem({
   return (
     <div
       className={`
-        relative p-4 rounded-lg border border-zinc-800 bg-zinc-900/50
-        hover:bg-zinc-800/50 hover:border-zinc-700
+        relative p-4 rounded-lg border border-border bg-surface-base/50
+        hover:bg-card/50 hover:border-border
         transition-all duration-200
         ${className}
       `}
@@ -80,12 +80,12 @@ export function SOPListItem({
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-lg font-medium text-white truncate">{sop.name}</h3>
+            <h3 className="text-lg font-medium text-foreground truncate">{sop.name}</h3>
             {!sop.isValid && (
               <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0" />
             )}
           </div>
-          <p className="text-sm text-zinc-400 line-clamp-2">{sop.description}</p>
+          <p className="text-sm text-muted-foreground line-clamp-2">{sop.description}</p>
         </div>
 
         {/* Actions Menu */}
@@ -93,9 +93,9 @@ export function SOPListItem({
           <button
             type="button"
             onClick={() => setShowMenu(!showMenu)}
-            className="p-1.5 rounded-lg hover:bg-zinc-700 transition-colors"
+            className="p-1.5 rounded-lg hover:bg-muted transition-colors"
           >
-            <MoreVertical className="w-5 h-5 text-zinc-400" />
+            <MoreVertical className="w-5 h-5 text-muted-foreground" />
           </button>
 
           {showMenu && (
@@ -104,7 +104,7 @@ export function SOPListItem({
                 className="fixed inset-0 z-10"
                 onClick={() => setShowMenu(false)}
               />
-              <div className="absolute right-0 top-full mt-1 z-20 w-48 py-1 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl">
+              <div className="absolute right-0 top-full mt-1 z-20 w-48 py-1 bg-card border border-border rounded-lg shadow-xl">
                 {onEdit && (
                   <button
                     type="button"
@@ -112,7 +112,7 @@ export function SOPListItem({
                       onEdit(sop);
                       setShowMenu(false);
                     }}
-                    className="flex items-center gap-2 w-full px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-700 transition-colors"
+                    className="flex items-center gap-2 w-full px-3 py-2 text-sm text-muted-foreground hover:bg-muted transition-colors"
                   >
                     <Edit className="w-4 h-4" />
                     Edit SOP
@@ -125,7 +125,7 @@ export function SOPListItem({
                       onDuplicate(sop);
                       setShowMenu(false);
                     }}
-                    className="flex items-center gap-2 w-full px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-700 transition-colors"
+                    className="flex items-center gap-2 w-full px-3 py-2 text-sm text-muted-foreground hover:bg-muted transition-colors"
                   >
                     <Copy className="w-4 h-4" />
                     Duplicate
@@ -138,7 +138,7 @@ export function SOPListItem({
                       onToggleStatus(sop);
                       setShowMenu(false);
                     }}
-                    className="flex items-center gap-2 w-full px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-700 transition-colors"
+                    className="flex items-center gap-2 w-full px-3 py-2 text-sm text-muted-foreground hover:bg-muted transition-colors"
                   >
                     {sop.status === 'active' ? (
                       <>
@@ -155,14 +155,14 @@ export function SOPListItem({
                 )}
                 {onDelete && (
                   <>
-                    <div className="my-1 border-t border-zinc-700" />
+                    <div className="my-1 border-t border-border" />
                     <button
                       type="button"
                       onClick={() => {
                         onDelete(sop);
                         setShowMenu(false);
                       }}
-                      className="flex items-center gap-2 w-full px-3 py-2 text-sm text-red-400 hover:bg-zinc-700 transition-colors"
+                      className="flex items-center gap-2 w-full px-3 py-2 text-sm text-red-400 hover:bg-muted transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
                       Delete
@@ -184,7 +184,7 @@ export function SOPListItem({
         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${priorityColors[sop.priority]}`}>
           {sop.priority.charAt(0).toUpperCase() + sop.priority.slice(1)}
         </span>
-        <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-zinc-700 text-zinc-300">
+        <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-muted text-muted-foreground">
           v{sop.version}
         </span>
       </div>
@@ -192,11 +192,11 @@ export function SOPListItem({
       {/* Tags */}
       {sop.tags.length > 0 && (
         <div className="flex flex-wrap items-center gap-1.5 mt-3">
-          <Tag className="w-3.5 h-3.5 text-zinc-500" />
+          <Tag className="w-3.5 h-3.5 text-muted-foreground" />
           {sop.tags.map((tag) => (
             <span
               key={tag}
-              className="px-2 py-0.5 rounded text-xs bg-zinc-800 text-zinc-400"
+              className="px-2 py-0.5 rounded text-xs bg-card text-muted-foreground"
             >
               {tag}
             </span>
@@ -205,7 +205,7 @@ export function SOPListItem({
       )}
 
       {/* Metadata */}
-      <div className="flex flex-wrap items-center gap-4 mt-4 pt-3 border-t border-zinc-800 text-xs text-zinc-500">
+      <div className="flex flex-wrap items-center gap-4 mt-4 pt-3 border-t border-border text-xs text-muted-foreground">
         <span className="flex items-center gap-1">
           <GitBranch className="w-3.5 h-3.5" />
           {sop.rules.length} rule{sop.rules.length !== 1 ? 's' : ''}

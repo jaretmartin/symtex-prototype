@@ -45,7 +45,7 @@ function getSpaceIcon(type: SpaceType): JSX.Element {
 function getSpaceColor(type: SpaceType): string {
   switch (type) {
     case 'personal':
-      return 'text-slate-400';
+      return 'text-muted-foreground';
     case 'domain':
       return 'text-blue-400';
     case 'project':
@@ -53,7 +53,7 @@ function getSpaceColor(type: SpaceType): string {
     case 'mission':
       return 'text-symtex-primary';
     default:
-      return 'text-slate-400';
+      return 'text-muted-foreground';
   }
 }
 
@@ -73,7 +73,7 @@ export function ChatContextInfo({
 
   if (displayItems.length === 0) {
     return (
-      <div className={`flex items-center gap-2 text-sm text-slate-500 ${className}`}>
+      <div className={`flex items-center gap-2 text-sm text-muted-foreground ${className}`}>
         <Home className="w-3.5 h-3.5" />
         <span>Personal Space</span>
       </div>
@@ -89,18 +89,18 @@ export function ChatContextInfo({
         return (
           <div key={`${item.type}-${item.id}`} className="flex items-center gap-1">
             {index > 0 && (
-              <ChevronRight className="w-3.5 h-3.5 text-slate-600 flex-shrink-0" />
+              <ChevronRight className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
             )}
             <button
               onClick={() => isClickable && onBreadcrumbClick?.(item)}
               disabled={!isClickable}
               className={`flex items-center gap-1.5 px-2 py-1 rounded-md transition-colors ${
                 isClickable
-                  ? 'hover:bg-slate-700/50 cursor-pointer'
+                  ? 'hover:bg-muted/50 cursor-pointer'
                   : 'cursor-default'
-              } ${isLast ? getSpaceColor(item.type) : 'text-slate-500'}`}
+              } ${isLast ? getSpaceColor(item.type) : 'text-muted-foreground'}`}
             >
-              <span className={isLast ? getSpaceColor(item.type) : 'text-slate-500'}>
+              <span className={isLast ? getSpaceColor(item.type) : 'text-muted-foreground'}>
                 {getSpaceIcon(item.type)}
               </span>
               <span
@@ -117,7 +117,7 @@ export function ChatContextInfo({
 
       {/* Context type badge */}
       <div
-        className={`ml-2 px-2 py-0.5 text-xs font-medium rounded-full bg-slate-800/50 border border-slate-700/50 ${getSpaceColor(
+        className={`ml-2 px-2 py-0.5 text-xs font-medium rounded-full bg-card/50 border border-border/50 ${getSpaceColor(
           currentSpaceType
         )}`}
       >
@@ -143,7 +143,7 @@ export function ChatContextBadge({
   if (!currentItem) {
     return (
       <div
-        className={`inline-flex items-center gap-1.5 px-2 py-1 text-xs font-medium rounded-full bg-slate-800/50 border border-slate-700/50 text-slate-400 ${className}`}
+        className={`inline-flex items-center gap-1.5 px-2 py-1 text-xs font-medium rounded-full bg-card/50 border border-border/50 text-muted-foreground ${className}`}
       >
         <Home className="w-3 h-3" />
         <span>Personal</span>
@@ -153,7 +153,7 @@ export function ChatContextBadge({
 
   return (
     <div
-      className={`inline-flex items-center gap-1.5 px-2 py-1 text-xs font-medium rounded-full bg-slate-800/50 border border-slate-700/50 ${colorClass} ${className}`}
+      className={`inline-flex items-center gap-1.5 px-2 py-1 text-xs font-medium rounded-full bg-card/50 border border-border/50 ${colorClass} ${className}`}
     >
       {getSpaceIcon(currentItem.type)}
       <span className="max-w-[100px] truncate">{currentItem.name}</span>

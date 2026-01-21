@@ -107,7 +107,7 @@ export function AutonomyLevelIndicator({
         >
           <div className="flex items-center gap-2 mb-1">
             <Icon className="w-4 h-4 text-amber-400" />
-            <span className="font-medium text-white">{config.name}</span>
+            <span className="font-medium text-foreground">{config.name}</span>
           </div>
           <p className="text-xs text-muted-foreground">{config.description}</p>
           <div

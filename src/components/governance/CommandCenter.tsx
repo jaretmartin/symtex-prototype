@@ -133,7 +133,7 @@ function StatCard({ stat, onClick }: StatCardProps) {
   return (
     <div
       className={clsx(
-        'bg-zinc-800 border border-zinc-700 rounded-xl p-5',
+        'bg-card border border-border rounded-xl p-5',
         onClick && 'cursor-pointer hover:border-purple-500 transition-colors'
       )}
       onClick={onClick}
@@ -143,8 +143,8 @@ function StatCard({ stat, onClick }: StatCardProps) {
           <Icon className="w-6 h-6" />
         </div>
         <div className="flex-1">
-          <p className="text-sm text-zinc-400">{stat.label}</p>
-          <p className="text-2xl font-bold text-zinc-100">{stat.value}</p>
+          <p className="text-sm text-muted-foreground">{stat.label}</p>
+          <p className="text-2xl font-bold text-muted-foreground">{stat.value}</p>
           {stat.trend && (
             <p className={clsx('text-sm mt-1', stat.trend.positive ? 'text-green-400' : 'text-red-400')}>
               {stat.trend.positive ? '↑' : '↓'} {stat.trend.value}
@@ -162,7 +162,7 @@ function StatCard({ stat, onClick }: StatCardProps) {
 
 function CognateDistribution({ distribution }: { distribution: Record<AutonomyLevelId, number> }) {
   const levels: { id: AutonomyLevelId; name: string; color: string }[] = [
-    { id: 'L0', name: 'Observer', color: 'bg-zinc-500' },
+    { id: 'L0', name: 'Observer', color: 'bg-muted' },
     { id: 'L1', name: 'Suggester', color: 'bg-blue-500' },
     { id: 'L2', name: 'Drafter', color: 'bg-amber-500' },
     { id: 'L3', name: 'Executor', color: 'bg-orange-500' },
@@ -172,8 +172,8 @@ function CognateDistribution({ distribution }: { distribution: Record<AutonomyLe
   const total = Object.values(distribution).reduce((a, b) => a + b, 0);
 
   return (
-    <div className="bg-zinc-800 border border-zinc-700 rounded-xl p-6">
-      <h3 className="font-semibold mb-4 flex items-center gap-2 text-zinc-100">
+    <div className="bg-card border border-border rounded-xl p-6">
+      <h3 className="font-semibold mb-4 flex items-center gap-2 text-muted-foreground">
         <Users className="w-5 h-5 text-purple-400" />
         Cognates by Level
       </h3>
@@ -183,14 +183,14 @@ function CognateDistribution({ distribution }: { distribution: Record<AutonomyLe
           const percentage = total > 0 ? (count / total) * 100 : 0;
           return (
             <div key={level.id} className="flex items-center gap-3">
-              <span className="w-8 text-sm font-medium text-zinc-400">{level.id}</span>
-              <div className="flex-1 h-2 bg-zinc-700 rounded-full overflow-hidden">
+              <span className="w-8 text-sm font-medium text-muted-foreground">{level.id}</span>
+              <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
                 <div
                   className={clsx('h-full rounded-full transition-all', level.color)}
                   style={{ width: `${percentage}%` }}
                 />
               </div>
-              <span className="w-8 text-sm text-zinc-400 text-right">{count}</span>
+              <span className="w-8 text-sm text-muted-foreground text-right">{count}</span>
             </div>
           );
         })}
@@ -213,8 +213,8 @@ function QuickActions({ onPauseAll, onEmergencyStop, onExportAudit }: QuickActio
   const [showEmergencyConfirm, setShowEmergencyConfirm] = useState(false);
 
   return (
-    <div className="bg-zinc-800 border border-zinc-700 rounded-xl p-6">
-      <h3 className="font-semibold mb-4 flex items-center gap-2 text-zinc-100">
+    <div className="bg-card border border-border rounded-xl p-6">
+      <h3 className="font-semibold mb-4 flex items-center gap-2 text-muted-foreground">
         <Settings className="w-5 h-5 text-purple-400" />
         Quick Actions
       </h3>
@@ -242,7 +242,7 @@ function QuickActions({ onPauseAll, onEmergencyStop, onExportAudit }: QuickActio
               </button>
               <button
                 onClick={() => setShowEmergencyConfirm(false)}
-                className="flex-1 px-3 py-2 bg-zinc-700 text-zinc-300 rounded-lg hover:bg-zinc-600 transition-colors"
+                className="flex-1 px-3 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted transition-colors"
               >
                 Cancel
               </button>
@@ -260,7 +260,7 @@ function QuickActions({ onPauseAll, onEmergencyStop, onExportAudit }: QuickActio
         
         <button
           onClick={onExportAudit}
-          className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-xl hover:bg-zinc-700 transition-colors flex items-center gap-3 text-zinc-300"
+          className="w-full px-4 py-3 bg-surface-base border border-border rounded-xl hover:bg-muted transition-colors flex items-center gap-3 text-muted-foreground"
         >
           <Download className="w-5 h-5" />
           <span className="font-medium">Export Audit Log</span>
@@ -303,24 +303,24 @@ export function CommandCenter() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold flex items-center gap-2 text-zinc-100">
+          <h1 className="text-2xl font-bold flex items-center gap-2 text-muted-foreground">
             <Shield className="w-7 h-7 text-purple-400" />
             Command Center
           </h1>
-          <p className="text-zinc-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             System overview and governance controls
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-sm text-zinc-500">
+          <span className="text-sm text-muted-foreground">
             Updated {lastUpdated.toLocaleTimeString()}
           </span>
           <button
             onClick={handleRefresh}
             disabled={isRefreshing}
-            className="p-2 bg-zinc-800 border border-zinc-700 rounded-lg hover:bg-zinc-700 transition-colors disabled:opacity-50"
+            className="p-2 bg-card border border-border rounded-lg hover:bg-muted transition-colors disabled:opacity-50"
           >
-            <RefreshCw className={clsx('w-5 h-5 text-zinc-400', isRefreshing && 'animate-spin')} />
+            <RefreshCw className={clsx('w-5 h-5 text-muted-foreground', isRefreshing && 'animate-spin')} />
           </button>
           <Link
             to="/governance"
@@ -335,8 +335,8 @@ export function CommandCenter() {
       {/* System Health + Stats */}
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* System Health Gauge */}
-        <div className="bg-zinc-800 border border-zinc-700 rounded-xl p-6 flex flex-col items-center justify-center">
-          <h3 className="font-semibold mb-4 text-zinc-100">System Health</h3>
+        <div className="bg-card border border-border rounded-xl p-6 flex flex-col items-center justify-center">
+          <h3 className="font-semibold mb-4 text-muted-foreground">System Health</h3>
           <SystemHealthGauge health={mockSystemHealth.health} status={mockSystemHealth.status} />
         </div>
 

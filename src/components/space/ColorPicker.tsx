@@ -95,32 +95,32 @@ export function ColorPicker({
         disabled={disabled}
         className={clsx(
           'w-full flex items-center justify-between gap-2',
-          'px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg',
+          'px-4 py-3 bg-surface-base border border-border rounded-lg',
           'text-left transition-colors',
           disabled
             ? 'opacity-50 cursor-not-allowed'
-            : 'hover:border-zinc-600 focus:border-symtex-primary focus:outline-none'
+            : 'hover:border-border focus:border-symtex-primary focus:outline-none'
         )}
       >
         {value ? (
           <div className="flex items-center gap-3">
             <div
-              className="w-8 h-8 rounded-lg border border-zinc-600"
+              className="w-8 h-8 rounded-lg border border-border"
               style={{ backgroundColor: value }}
             />
-            <span className="text-white">
+            <span className="text-foreground">
               {selectedPreset?.name || value.toUpperCase()}
             </span>
           </div>
         ) : (
           <div className="flex items-center gap-3">
-            <Palette className="w-5 h-5 text-zinc-400" />
-            <span className="text-zinc-400">{placeholder}</span>
+            <Palette className="w-5 h-5 text-muted-foreground" />
+            <span className="text-muted-foreground">{placeholder}</span>
           </div>
         )}
         <ChevronDown
           className={clsx(
-            'w-5 h-5 text-zinc-400 transition-transform',
+            'w-5 h-5 text-muted-foreground transition-transform',
             isOpen && 'rotate-180'
           )}
         />
@@ -131,13 +131,13 @@ export function ColorPicker({
         <div
           className={clsx(
             'absolute z-50 w-full mt-2',
-            'bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl',
+            'bg-surface-base border border-border rounded-lg shadow-xl',
             'overflow-hidden'
           )}
         >
           {/* Preset Colors */}
           <div className="p-3">
-            <p className="text-xs text-zinc-500 uppercase tracking-wider mb-3">
+            <p className="text-xs text-muted-foreground uppercase tracking-wider mb-3">
               Preset Colors
             </p>
             <div className="grid grid-cols-7 gap-2">
@@ -162,7 +162,7 @@ export function ColorPicker({
                     style={{ backgroundColor: color.value }}
                   >
                     {isSelected && (
-                      <Check className="absolute inset-0 m-auto w-4 h-4 text-white drop-shadow-md" />
+                      <Check className="absolute inset-0 m-auto w-4 h-4 text-foreground drop-shadow-md" />
                     )}
                   </button>
                 );
@@ -172,8 +172,8 @@ export function ColorPicker({
 
           {/* Custom Color */}
           {showCustom && (
-            <div className="p-3 border-t border-zinc-800">
-              <p className="text-xs text-zinc-500 uppercase tracking-wider mb-3">
+            <div className="p-3 border-t border-border">
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-3">
                 Custom Color
               </p>
               <div className="flex items-center gap-3">
@@ -187,7 +187,7 @@ export function ColorPicker({
                     aria-label="Pick custom color"
                   />
                   <div
-                    className="w-10 h-10 rounded-lg border border-zinc-600 cursor-pointer"
+                    className="w-10 h-10 rounded-lg border border-border cursor-pointer"
                     style={{ backgroundColor: customColor }}
                   />
                 </div>
@@ -205,12 +205,12 @@ export function ColorPicker({
                   }}
                   placeholder="#6366F1"
                   aria-label="Custom color hex value"
-                  className="flex-1 px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm font-mono placeholder-zinc-500 focus:border-symtex-primary focus:outline-none"
+                  className="flex-1 px-3 py-2 bg-card border border-border rounded-lg text-foreground text-sm font-mono placeholder-muted-foreground focus:border-symtex-primary focus:outline-none"
                 />
                 <button
                   type="button"
                   onClick={(): void => handleSelectPreset(customColor)}
-                  className="px-3 py-2 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-lg text-sm text-white transition-colors"
+                  className="px-3 py-2 bg-card hover:bg-muted border border-border rounded-lg text-sm text-foreground transition-colors"
                 >
                   Apply
                 </button>
@@ -220,14 +220,14 @@ export function ColorPicker({
 
           {/* Selected Preview */}
           {value && (
-            <div className="p-3 border-t border-zinc-800 flex items-center justify-between">
-              <span className="text-sm text-zinc-400">Selected:</span>
+            <div className="p-3 border-t border-border flex items-center justify-between">
+              <span className="text-sm text-muted-foreground">Selected:</span>
               <div className="flex items-center gap-2">
                 <div
-                  className="w-5 h-5 rounded border border-zinc-600"
+                  className="w-5 h-5 rounded border border-border"
                   style={{ backgroundColor: value }}
                 />
-                <span className="text-sm text-white font-mono">
+                <span className="text-sm text-foreground font-mono">
                   {value.toUpperCase()}
                 </span>
               </div>

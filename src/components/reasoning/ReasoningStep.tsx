@@ -131,7 +131,7 @@ export default function ReasoningStep({
   return (
     <div
       className={clsx(
-        'border border-symtex-border rounded-lg overflow-hidden',
+        'border border-border rounded-lg overflow-hidden',
         'transition-all duration-200',
         isExpanded && 'bg-card/30',
         className
@@ -249,14 +249,14 @@ export function LoadingReasoningSteps({ className }: { className?: string }): JS
       {[1, 2, 3].map((i) => (
         <div
           key={i}
-          className="border border-symtex-border rounded-lg p-3 animate-pulse"
+          className="border border-border rounded-lg p-3 animate-pulse"
         >
           <div className="flex items-center gap-3">
-            <div className="w-7 h-7 rounded-full bg-slate-700" />
+            <div className="w-7 h-7 rounded-full bg-muted" />
             <div className="flex-1 space-y-2">
-              <div className="h-4 bg-slate-700 rounded w-3/4" />
+              <div className="h-4 bg-muted rounded w-3/4" />
             </div>
-            <div className="w-20 h-2 bg-slate-700 rounded" />
+            <div className="w-20 h-2 bg-muted rounded" />
           </div>
         </div>
       ))}

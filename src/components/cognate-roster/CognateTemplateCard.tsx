@@ -90,11 +90,11 @@ export default function CognateTemplateCard({
     <div
       onClick={onSelect}
       className={clsx(
-        'bg-symtex-card rounded-xl p-5 border cursor-pointer',
+        'bg-card rounded-xl p-5 border cursor-pointer',
         'transition-all duration-200',
         isSelected
           ? 'border-symtex-primary ring-2 ring-symtex-primary/30'
-          : 'border-symtex-border hover:border-slate-600',
+          : 'border-border hover:border-border',
         'hover:shadow-lg hover:shadow-symtex-primary/5'
       )}
     >
@@ -105,7 +105,7 @@ export default function CognateTemplateCard({
             <IconComponent className="w-6 h-6 text-symtex-primary" />
           </div>
           <div>
-            <h3 className="font-semibold text-white">{template.name}</h3>
+            <h3 className="font-semibold text-foreground">{template.name}</h3>
             <span
               className={clsx(
                 'text-xs px-2 py-0.5 rounded',
@@ -120,7 +120,7 @@ export default function CognateTemplateCard({
 
         {/* Instance count badge */}
         {instanceCount > 0 && (
-          <div className="flex items-center gap-1 text-xs bg-slate-700/50 text-slate-300 px-2 py-1 rounded">
+          <div className="flex items-center gap-1 text-xs bg-muted/50 text-muted-foreground px-2 py-1 rounded">
             <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
             {instanceCount} running
           </div>
@@ -128,26 +128,26 @@ export default function CognateTemplateCard({
       </div>
 
       {/* Description */}
-      <p className="text-sm text-slate-400 mb-4 line-clamp-2">
+      <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
         {template.description}
       </p>
 
       {/* Capabilities */}
       <div className="mb-4">
-        <p className="text-xs text-slate-500 uppercase tracking-wider mb-2">
+        <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
           Capabilities
         </p>
         <div className="flex flex-wrap gap-1.5">
           {template.capabilities.slice(0, 4).map((capability) => (
             <span
               key={capability}
-              className="text-xs px-2 py-1 rounded bg-slate-700/50 text-slate-300"
+              className="text-xs px-2 py-1 rounded bg-muted/50 text-muted-foreground"
             >
               {capability}
             </span>
           ))}
           {template.capabilities.length > 4 && (
-            <span className="text-xs px-2 py-1 rounded bg-slate-700/30 text-slate-500">
+            <span className="text-xs px-2 py-1 rounded bg-muted/30 text-muted-foreground">
               +{template.capabilities.length - 4} more
             </span>
           )}
@@ -155,7 +155,7 @@ export default function CognateTemplateCard({
       </div>
 
       {/* Actions */}
-      <div className="flex gap-2 pt-3 border-t border-symtex-border">
+      <div className="flex gap-2 pt-3 border-t border-border">
         <Button
           variant="primary"
           size="sm"

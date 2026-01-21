@@ -157,8 +157,8 @@ export const CommandPalette = memo(function CommandPalette() {
           <div
             className={clsx(
               'relative z-10 w-full max-w-xl mx-4',
-              'bg-zinc-900 rounded-2xl shadow-2xl',
-              'border border-zinc-700',
+              'bg-surface-base rounded-2xl shadow-2xl',
+              'border border-border',
               'overflow-hidden flex flex-col',
               'max-h-[70vh]',
               'animate-in slide-in-from-top-4 fade-in duration-200'
@@ -166,8 +166,8 @@ export const CommandPalette = memo(function CommandPalette() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Search Input */}
-            <div className="flex items-center gap-3 px-4 py-4 border-b border-zinc-700">
-              <Search className="w-5 h-5 text-zinc-400 flex-shrink-0" aria-hidden="true" />
+            <div className="flex items-center gap-3 px-4 py-4 border-b border-border">
+              <Search className="w-5 h-5 text-muted-foreground flex-shrink-0" aria-hidden="true" />
               <input
                 ref={inputRef}
                 id="command-palette-title"
@@ -177,7 +177,7 @@ export const CommandPalette = memo(function CommandPalette() {
                 onChange={(e) => setQuery(e.target.value)}
                 className={clsx(
                   'flex-1 bg-transparent border-none outline-none',
-                  'text-zinc-100 placeholder:text-zinc-500',
+                  'text-muted-foreground placeholder:text-muted-foreground',
                   'text-lg'
                 )}
                 autoComplete="off"
@@ -190,19 +190,19 @@ export const CommandPalette = memo(function CommandPalette() {
               {query && (
                 <button
                   onClick={handleClearInput}
-                  className="p-1 rounded transition-colors hover:bg-zinc-800"
+                  className="p-1 rounded transition-colors hover:bg-card"
                   aria-label="Clear search"
                 >
-                  <X className="w-4 h-4 text-zinc-400" />
+                  <X className="w-4 h-4 text-muted-foreground" />
                 </button>
               )}
 
               <button
                 onClick={close}
-                className="p-1.5 rounded-lg transition-colors hover:bg-zinc-800"
+                className="p-1.5 rounded-lg transition-colors hover:bg-card"
                 aria-label="Close command palette"
               >
-                <X className="w-5 h-5 text-zinc-400" />
+                <X className="w-5 h-5 text-muted-foreground" />
               </button>
             </div>
 
@@ -255,31 +255,31 @@ export const CommandPalette = memo(function CommandPalette() {
             {/* Footer */}
             <div
               className={clsx(
-                'px-4 py-2.5 border-t border-zinc-700',
-                'bg-zinc-800/50',
-                'flex items-center justify-between text-xs text-zinc-500'
+                'px-4 py-2.5 border-t border-border',
+                'bg-card/50',
+                'flex items-center justify-between text-xs text-muted-foreground'
               )}
             >
               <div className="flex items-center gap-4">
                 <span className="flex items-center gap-1.5">
-                  <kbd className="inline-flex items-center px-1.5 py-0.5 bg-zinc-700 rounded text-[10px] font-medium text-zinc-300">
+                  <kbd className="inline-flex items-center px-1.5 py-0.5 bg-muted rounded text-[10px] font-medium text-muted-foreground">
                     <Command className="w-2.5 h-2.5 mr-0.5" aria-hidden="true" />K
                   </kbd>
                   <span className="hidden sm:inline">to open</span>
                 </span>
 
                 <span className="flex items-center gap-1.5">
-                  <kbd className="px-1.5 py-0.5 bg-zinc-700 rounded text-[10px] font-medium text-zinc-300">
+                  <kbd className="px-1.5 py-0.5 bg-muted rounded text-[10px] font-medium text-muted-foreground">
                     &#8593;
                   </kbd>
-                  <kbd className="px-1.5 py-0.5 bg-zinc-700 rounded text-[10px] font-medium text-zinc-300">
+                  <kbd className="px-1.5 py-0.5 bg-muted rounded text-[10px] font-medium text-muted-foreground">
                     &#8595;
                   </kbd>
                   <span className="hidden sm:inline">to navigate</span>
                 </span>
 
                 <span className="flex items-center gap-1.5">
-                  <kbd className="px-1.5 py-0.5 bg-zinc-700 rounded text-[10px] font-medium text-zinc-300">
+                  <kbd className="px-1.5 py-0.5 bg-muted rounded text-[10px] font-medium text-muted-foreground">
                     &#9166;
                   </kbd>
                   <span className="hidden sm:inline">to select</span>
@@ -287,7 +287,7 @@ export const CommandPalette = memo(function CommandPalette() {
               </div>
 
               <span className="flex items-center gap-1.5">
-                <kbd className="px-1.5 py-0.5 bg-zinc-700 rounded text-[10px] font-medium text-zinc-300">
+                <kbd className="px-1.5 py-0.5 bg-muted rounded text-[10px] font-medium text-muted-foreground">
                   Esc
                 </kbd>
                 <span className="hidden sm:inline">to close</span>

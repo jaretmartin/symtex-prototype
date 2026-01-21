@@ -67,15 +67,15 @@ export function ROIDashboard({ className }: ROIDashboardProps) {
     return (
       <div className={cn('p-6', className)}>
         <div className="animate-pulse space-y-6">
-          <div className="h-8 bg-slate-700 rounded w-1/4" />
+          <div className="h-8 bg-muted rounded w-1/4" />
           <div className="grid grid-cols-4 gap-4">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-32 bg-slate-700 rounded-lg" />
+              <div key={i} className="h-32 bg-muted rounded-lg" />
             ))}
           </div>
           <div className="grid grid-cols-2 gap-6">
-            <div className="h-80 bg-slate-700 rounded-lg" />
-            <div className="h-80 bg-slate-700 rounded-lg" />
+            <div className="h-80 bg-muted rounded-lg" />
+            <div className="h-80 bg-muted rounded-lg" />
           </div>
         </div>
       </div>
@@ -87,8 +87,8 @@ export function ROIDashboard({ className }: ROIDashboardProps) {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 id="roi-dashboard-title" className="text-2xl font-bold text-white">ROI Dashboard</h1>
-          <p id="roi-dashboard-description" className="text-sm text-slate-400 mt-1">
+          <h1 id="roi-dashboard-title" className="text-2xl font-bold text-foreground">ROI Dashboard</h1>
+          <p id="roi-dashboard-description" className="text-sm text-muted-foreground mt-1">
             Track your return on investment with Symtex
           </p>
         </div>
@@ -98,8 +98,8 @@ export function ROIDashboard({ className }: ROIDashboardProps) {
             value={timeRange}
             onValueChange={(value) => setTimeRange(value as typeof timeRange)}
           >
-            <SelectTrigger className="w-[160px] bg-slate-800 border-slate-700" aria-label="Select time range">
-              <Calendar className="w-4 h-4 mr-2 text-slate-400" aria-hidden="true" />
+            <SelectTrigger className="w-[160px] bg-card border-border" aria-label="Select time range">
+              <Calendar className="w-4 h-4 mr-2 text-muted-foreground" aria-hidden="true" />
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -114,7 +114,7 @@ export function ROIDashboard({ className }: ROIDashboardProps) {
           {/* Action Buttons */}
           <button
             onClick={handleRefresh}
-            className="p-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+            className="p-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
             title="Refresh data"
             aria-label="Refresh ROI data"
           >
@@ -122,7 +122,7 @@ export function ROIDashboard({ className }: ROIDashboardProps) {
           </button>
           <button
             onClick={handleExport}
-            className="p-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+            className="p-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
             title="Export report"
             aria-label="Export ROI report"
           >
@@ -166,10 +166,10 @@ export function ROIDashboard({ className }: ROIDashboardProps) {
       >
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm font-medium text-white">
+            <p className="text-sm font-medium text-foreground">
               Symtex is saving you significant time and money
             </p>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-muted-foreground mt-1">
               Based on {timeRange === '6m' ? '6 months' : timeRange} of usage data
             </p>
           </div>
@@ -177,7 +177,7 @@ export function ROIDashboard({ className }: ROIDashboardProps) {
             <p className="text-2xl font-bold text-emerald-400" aria-label={`Total savings: ${costData.reduce((sum, p) => sum + p.savings, 0).toLocaleString()} dollars`}>
               ${costData.reduce((sum, p) => sum + p.savings, 0).toLocaleString()}
             </p>
-            <p className="text-xs text-slate-400">Total Savings</p>
+            <p className="text-xs text-muted-foreground">Total Savings</p>
           </div>
         </div>
       </section>

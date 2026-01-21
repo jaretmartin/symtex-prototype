@@ -184,7 +184,7 @@ export default function AIBudgetStatus({ className }: AIBudgetStatusProps): JSX.
             )} />
           </div>
           <div className="text-left">
-            <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
               AI Budget Status
               {isNearLimit && !isOverLimit && (
                 <span className="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded-full">
@@ -319,7 +319,7 @@ export default function AIBudgetStatus({ className }: AIBudgetStatusProps): JSX.
                           <Icon className="w-4 h-4" style={{ color: category.color }} />
                         </div>
                         <div>
-                          <p className="font-medium text-white text-sm group-hover:text-symtex-primary transition-colors">
+                          <p className="font-medium text-foreground text-sm group-hover:text-symtex-primary transition-colors">
                             {category.name}
                           </p>
                           <p className="text-xs text-muted-foreground">
@@ -421,7 +421,7 @@ export default function AIBudgetStatus({ className }: AIBudgetStatusProps): JSX.
                   e.stopPropagation()
                   handleViewDetails()
                 }}
-                className="px-4 py-2 rounded-lg bg-symtex-primary text-white text-sm font-medium hover:bg-symtex-primary/90 transition-colors"
+                className="px-4 py-2 rounded-lg bg-symtex-primary text-foreground text-sm font-medium hover:bg-symtex-primary/90 transition-colors"
               >
                 Manage Budget
               </button>

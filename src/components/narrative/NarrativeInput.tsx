@@ -183,7 +183,7 @@ export function NarrativeInput({
         />
 
         {/* Bottom Toolbar */}
-        <div className="flex items-center justify-between px-3 py-2 border-t border-symtex-border/50">
+        <div className="flex items-center justify-between px-3 py-2 border-t border-border/50">
           {/* Left Actions */}
           <div className="flex items-center gap-1">
             {/* AI Assist Button */}
@@ -219,14 +219,14 @@ export function NarrativeInput({
 
               {/* Format Dropdown */}
               {showFormatMenu && (
-                <div className="absolute bottom-full left-0 mb-1 w-40 bg-symtex-elevated rounded-lg border border-symtex-border shadow-xl z-10">
+                <div className="absolute bottom-full left-0 mb-1 w-40 bg-symtex-elevated rounded-lg border border-border shadow-xl z-10">
                   {formatOptions.map((option) => {
                     const Icon = option.icon;
                     return (
                       <button
                         key={option.id}
                         onClick={() => handleApplyFormat(option.format)}
-                        className="w-full flex items-center gap-2 px-3 py-2 text-sm text-slate-300 hover:text-white hover:bg-slate-700/50 first:rounded-t-lg last:rounded-b-lg transition-colors"
+                        className="w-full flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 first:rounded-t-lg last:rounded-b-lg transition-colors"
                       >
                         <Icon className="w-4 h-4" />
                         {option.label}
@@ -243,7 +243,7 @@ export function NarrativeInput({
             {/* Character Count */}
             {showCharCount && (
               <div className="flex items-center gap-2">
-                <div className="relative w-16 h-1 bg-slate-700 rounded-full overflow-hidden">
+                <div className="relative w-16 h-1 bg-muted rounded-full overflow-hidden">
                   <div
                     className={clsx(
                       'absolute inset-y-0 left-0 rounded-full transition-all duration-300',
@@ -259,7 +259,7 @@ export function NarrativeInput({
                 <span
                   className={clsx(
                     'text-xs font-medium tabular-nums',
-                    isOverLimit ? 'text-error' : 'text-slate-500'
+                    isOverLimit ? 'text-error' : 'text-muted-foreground'
                   )}
                 >
                   {charCount}/{maxLength}
@@ -290,18 +290,18 @@ export function NarrativeInput({
               {error}
             </p>
           ) : (
-            <p className="text-xs text-slate-500">{helperText}</p>
+            <p className="text-xs text-muted-foreground">{helperText}</p>
           )}
         </div>
       )}
 
       {/* AI Suggestions Dropdown */}
       {showSuggestions && aiSuggestions.length > 0 && (
-        <div className="absolute left-0 right-0 mt-2 bg-symtex-elevated rounded-xl border border-symtex-border shadow-xl z-20">
-          <div className="flex items-center justify-between px-4 py-2 border-b border-symtex-border">
+        <div className="absolute left-0 right-0 mt-2 bg-symtex-elevated rounded-xl border border-border shadow-xl z-20">
+          <div className="flex items-center justify-between px-4 py-2 border-b border-border">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-symtex-primary" />
-              <span className="text-sm font-medium text-white">AI Suggestions</span>
+              <span className="text-sm font-medium text-foreground">AI Suggestions</span>
             </div>
             <Button
               variant="ghost"
@@ -318,7 +318,7 @@ export function NarrativeInput({
               <button
                 key={index}
                 onClick={() => handleApplySuggestion(suggestion)}
-                className="w-full px-4 py-3 text-left text-sm text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors border-b border-symtex-border/50 last:border-b-0"
+                className="w-full px-4 py-3 text-left text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors border-b border-border/50 last:border-b-0"
               >
                 {suggestion}
               </button>

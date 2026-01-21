@@ -127,8 +127,8 @@ export default function CognateRoster({
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-xl font-semibold text-white">Cognate Roster</h2>
-            <p className="text-sm text-slate-400 mt-1">
+            <h2 className="text-xl font-semibold text-foreground">Cognate Roster</h2>
+            <p className="text-sm text-muted-foreground mt-1">
               {templates.length} templates available
             </p>
           </div>
@@ -136,7 +136,7 @@ export default function CognateRoster({
           {/* Search and Filter Controls */}
           <div className="flex items-center gap-3">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
                 placeholder="Search Cognates..."
@@ -144,7 +144,7 @@ export default function CognateRoster({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className={clsx(
                   'w-64 pl-10 pr-4 py-2 rounded-lg',
-                  'bg-symtex-card border border-symtex-border',
+                  'bg-card border border-border',
                   'text-white placeholder-slate-500',
                   'focus:outline-none focus:border-symtex-primary focus:ring-1 focus:ring-symtex-primary'
                 )}
@@ -156,7 +156,7 @@ export default function CognateRoster({
                 'p-2 rounded-lg border transition-colors',
                 showFilters
                   ? 'bg-symtex-primary/10 border-symtex-primary text-symtex-primary'
-                  : 'bg-symtex-card border-symtex-border text-slate-400 hover:text-white'
+                  : 'bg-card border-border text-muted-foreground hover:text-white'
               )}
               aria-label="Toggle filters"
               aria-pressed={showFilters}
@@ -185,7 +185,7 @@ export default function CognateRoster({
                   'transition-all duration-200',
                   isActive
                     ? 'bg-symtex-primary/20 text-symtex-primary border border-symtex-primary/30'
-                    : 'bg-symtex-card border border-symtex-border text-slate-400 hover:text-white hover:border-slate-600'
+                    : 'bg-card border border-border text-muted-foreground hover:text-white hover:border-border'
                 )}
                 aria-pressed={isActive}
               >
@@ -194,7 +194,7 @@ export default function CognateRoster({
                 <span
                   className={clsx(
                     'text-xs px-1.5 py-0.5 rounded',
-                    isActive ? 'bg-symtex-primary/30' : 'bg-slate-700/50'
+                    isActive ? 'bg-symtex-primary/30' : 'bg-muted/50'
                   )}
                 >
                   {count}

@@ -87,13 +87,13 @@ interface ConditionRowProps {
 
 function ConditionRow({ condition, onChange, onDelete }: ConditionRowProps): JSX.Element {
   return (
-    <div className="flex items-center gap-2 p-2 rounded bg-zinc-800/50 group">
-      <GripVertical className="w-4 h-4 text-zinc-600 cursor-grab" />
+    <div className="flex items-center gap-2 p-2 rounded bg-card/50 group">
+      <GripVertical className="w-4 h-4 text-muted-foreground cursor-grab" />
 
       <select
         value={condition.field}
         onChange={(e) => onChange({ ...condition, field: e.target.value })}
-        className="flex-1 px-2 py-1.5 text-sm bg-zinc-900 border border-zinc-700 rounded text-white focus:border-blue-500 focus:outline-none"
+        className="flex-1 px-2 py-1.5 text-sm bg-surface-base border border-border rounded text-foreground focus:border-blue-500 focus:outline-none"
       >
         {FIELD_OPTIONS.map((opt) => (
           <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -103,7 +103,7 @@ function ConditionRow({ condition, onChange, onDelete }: ConditionRowProps): JSX
       <select
         value={condition.operator}
         onChange={(e) => onChange({ ...condition, operator: e.target.value as ConditionOperator })}
-        className="px-2 py-1.5 text-sm bg-zinc-900 border border-zinc-700 rounded text-white focus:border-blue-500 focus:outline-none"
+        className="px-2 py-1.5 text-sm bg-surface-base border border-border rounded text-foreground focus:border-blue-500 focus:outline-none"
       >
         {OPERATOR_OPTIONS.map((opt) => (
           <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -115,13 +115,13 @@ function ConditionRow({ condition, onChange, onDelete }: ConditionRowProps): JSX
         value={condition.value}
         onChange={(e) => onChange({ ...condition, value: e.target.value })}
         placeholder="Value"
-        className="flex-1 px-2 py-1.5 text-sm bg-zinc-900 border border-zinc-700 rounded text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none"
+        className="flex-1 px-2 py-1.5 text-sm bg-surface-base border border-border rounded text-foreground placeholder-muted-foreground focus:border-blue-500 focus:outline-none"
       />
 
       <button
         type="button"
         onClick={onDelete}
-        className="p-1.5 text-zinc-500 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors opacity-0 group-hover:opacity-100"
+        className="p-1.5 text-muted-foreground hover:text-red-400 hover:bg-red-500/10 rounded transition-colors opacity-0 group-hover:opacity-100"
       >
         <Trash2 className="w-4 h-4" />
       </button>
@@ -137,13 +137,13 @@ interface ActionRowProps {
 
 function ActionRow({ action, onChange, onDelete }: ActionRowProps): JSX.Element {
   return (
-    <div className="flex items-center gap-2 p-2 rounded bg-zinc-800/50 group">
-      <GripVertical className="w-4 h-4 text-zinc-600 cursor-grab" />
+    <div className="flex items-center gap-2 p-2 rounded bg-card/50 group">
+      <GripVertical className="w-4 h-4 text-muted-foreground cursor-grab" />
 
       <select
         value={action.type}
         onChange={(e) => onChange({ ...action, type: e.target.value as ActionType })}
-        className="px-2 py-1.5 text-sm bg-zinc-900 border border-zinc-700 rounded text-white focus:border-blue-500 focus:outline-none"
+        className="px-2 py-1.5 text-sm bg-surface-base border border-border rounded text-foreground focus:border-blue-500 focus:outline-none"
       >
         {ACTION_OPTIONS.map((opt) => (
           <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -155,7 +155,7 @@ function ActionRow({ action, onChange, onDelete }: ActionRowProps): JSX.Element 
         value={action.label || ''}
         onChange={(e) => onChange({ ...action, label: e.target.value })}
         placeholder="Label (optional)"
-        className="flex-1 px-2 py-1.5 text-sm bg-zinc-900 border border-zinc-700 rounded text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none"
+        className="flex-1 px-2 py-1.5 text-sm bg-surface-base border border-border rounded text-foreground placeholder-muted-foreground focus:border-blue-500 focus:outline-none"
       />
 
       <input
@@ -170,13 +170,13 @@ function ActionRow({ action, onChange, onDelete }: ActionRowProps): JSX.Element 
           }
         }}
         placeholder="Config (JSON)"
-        className="flex-1 px-2 py-1.5 text-sm bg-zinc-900 border border-zinc-700 rounded text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none font-mono text-xs"
+        className="flex-1 px-2 py-1.5 text-sm bg-surface-base border border-border rounded text-foreground placeholder-muted-foreground focus:border-blue-500 focus:outline-none font-mono text-xs"
       />
 
       <button
         type="button"
         onClick={onDelete}
-        className="p-1.5 text-zinc-500 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors opacity-0 group-hover:opacity-100"
+        className="p-1.5 text-muted-foreground hover:text-red-400 hover:bg-red-500/10 rounded transition-colors opacity-0 group-hover:opacity-100"
       >
         <Trash2 className="w-4 h-4" />
       </button>
@@ -276,20 +276,20 @@ export function RuleBuilder({
   };
 
   return (
-    <div className={`border border-zinc-800 rounded-lg overflow-hidden ${className}`}>
+    <div className={`border border-border rounded-lg overflow-hidden ${className}`}>
       {/* Header */}
-      <div className="flex items-center justify-between p-3 bg-zinc-900/80 border-b border-zinc-800">
+      <div className="flex items-center justify-between p-3 bg-surface-base/80 border-b border-border">
         <div className="flex items-center gap-2">
           {onToggleExpand && (
             <button
               type="button"
               onClick={onToggleExpand}
-              className="p-1 hover:bg-zinc-700 rounded transition-colors"
+              className="p-1 hover:bg-muted rounded transition-colors"
             >
               {isExpanded ? (
-                <ChevronDown className="w-4 h-4 text-zinc-400" />
+                <ChevronDown className="w-4 h-4 text-muted-foreground" />
               ) : (
-                <ChevronRight className="w-4 h-4 text-zinc-400" />
+                <ChevronRight className="w-4 h-4 text-muted-foreground" />
               )}
             </button>
           )}
@@ -298,17 +298,17 @@ export function RuleBuilder({
             value={rule.name}
             onChange={(e) => onChange({ ...rule, name: e.target.value })}
             placeholder="Rule name"
-            className="px-2 py-1 text-sm font-medium bg-transparent border-none text-white placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-blue-500 rounded"
+            className="px-2 py-1 text-sm font-medium bg-transparent border-none text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-blue-500 rounded"
           />
         </div>
 
         <div className="flex items-center gap-2">
-          <label className="flex items-center gap-2 text-sm text-zinc-400">
+          <label className="flex items-center gap-2 text-sm text-muted-foreground">
             <input
               type="checkbox"
               checked={rule.enabled}
               onChange={(e) => onChange({ ...rule, enabled: e.target.checked })}
-              className="w-4 h-4 rounded border-zinc-600 bg-zinc-800 text-blue-500 focus:ring-blue-500"
+              className="w-4 h-4 rounded border-border bg-card text-blue-500 focus:ring-blue-500"
             />
             Enabled
           </label>
@@ -316,7 +316,7 @@ export function RuleBuilder({
             <button
               type="button"
               onClick={onDelete}
-              className="p-1.5 text-zinc-500 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors"
+              className="p-1.5 text-muted-foreground hover:text-red-400 hover:bg-red-500/10 rounded transition-colors"
             >
               <Trash2 className="w-4 h-4" />
             </button>
@@ -340,7 +340,7 @@ export function RuleBuilder({
                   trigger: { ...rule.trigger, type: e.target.value as TriggerType },
                 })
               }
-              className="w-full px-3 py-2 text-sm bg-zinc-900 border border-zinc-700 rounded-lg text-white focus:border-yellow-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-surface-base border border-border rounded-lg text-white focus:border-yellow-500 focus:outline-none"
             >
               {TRIGGER_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -366,7 +366,7 @@ export function RuleBuilder({
             </div>
             <div className="space-y-2 pl-6 border-l-2 border-blue-500/30">
               {rule.conditions.length === 0 ? (
-                <p className="text-sm text-zinc-500 italic py-2">No conditions - rule will always match trigger</p>
+                <p className="text-sm text-muted-foreground italic py-2">No conditions - rule will always match trigger</p>
               ) : (
                 rule.conditions.map((condition, index) => (
                   <ConditionRow
@@ -398,7 +398,7 @@ export function RuleBuilder({
             </div>
             <div className="space-y-2 pl-6 border-l-2 border-green-500/30">
               {rule.thenActions.length === 0 ? (
-                <p className="text-sm text-zinc-500 italic py-2">No actions defined</p>
+                <p className="text-sm text-muted-foreground italic py-2">No actions defined</p>
               ) : (
                 rule.thenActions.map((action, index) => (
                   <ActionRow
@@ -418,7 +418,7 @@ export function RuleBuilder({
               <div className="flex items-center gap-2">
                 <ArrowRightLeft className="w-4 h-4 text-orange-400" />
                 <span className="text-sm font-medium text-orange-400">ELSE</span>
-                <span className="text-xs text-zinc-500">(optional)</span>
+                <span className="text-xs text-muted-foreground">(optional)</span>
               </div>
               {!showElse && (
                 <button

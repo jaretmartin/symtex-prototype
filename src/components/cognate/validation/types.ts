@@ -354,7 +354,7 @@ export const STATUS_COLOR_CLASSES: Record<ValidationStatusConfig['color'], { tex
   green: { text: 'text-green-500', bg: 'bg-green-500', border: 'border-green-500' },
   red: { text: 'text-red-500', bg: 'bg-red-500', border: 'border-red-500' },
   amber: { text: 'text-amber-500', bg: 'bg-amber-500', border: 'border-amber-500' },
-  neutral: { text: 'text-zinc-400', bg: 'bg-zinc-400', border: 'border-zinc-400' },
+  neutral: { text: 'text-muted-foreground', bg: 'bg-muted', border: 'border-border' },
   blue: { text: 'text-blue-500', bg: 'bg-blue-500', border: 'border-blue-500' },
   purple: { text: 'text-purple-500', bg: 'bg-purple-500', border: 'border-purple-500' },
 };

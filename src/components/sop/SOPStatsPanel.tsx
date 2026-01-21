@@ -36,17 +36,17 @@ function StatCard({ label, value, icon, color, onClick }: StatCardProps): JSX.El
       onClick={onClick}
       disabled={!onClick}
       className={`
-        flex items-center gap-3 p-4 rounded-lg border border-zinc-800 bg-zinc-900/50
+        flex items-center gap-3 p-4 rounded-lg border border-border bg-surface-base/50
         transition-all duration-200
-        ${onClick ? 'hover:bg-zinc-800/50 hover:border-zinc-700 cursor-pointer' : 'cursor-default'}
+        ${onClick ? 'hover:bg-card/50 hover:border-border cursor-pointer' : 'cursor-default'}
       `}
     >
       <div className={`p-2 rounded-lg ${color}`}>
         {icon}
       </div>
       <div className="text-left">
-        <p className="text-2xl font-semibold text-white">{value.toLocaleString()}</p>
-        <p className="text-sm text-zinc-400">{label}</p>
+        <p className="text-2xl font-semibold text-foreground">{value.toLocaleString()}</p>
+        <p className="text-sm text-muted-foreground">{label}</p>
       </div>
     </button>
   );

@@ -362,7 +362,7 @@ function StatusIcon({
     green: 'text-green-500',
     red: 'text-red-500',
     amber: 'text-amber-500',
-    neutral: 'text-zinc-400',
+    neutral: 'text-muted-foreground',
     blue: 'text-blue-500',
     purple: 'text-purple-500',
   }[config.color];
@@ -387,15 +387,15 @@ function StatusIcon({
 function StatCard({
   label,
   value,
-  colorClass = 'text-white',
+  colorClass = 'text-foreground',
 }: {
   label: string;
   value: number | string;
   colorClass?: string;
 }): JSX.Element {
   return (
-    <div className="bg-zinc-900/50 rounded-xl border border-zinc-800 p-4">
-      <p className="text-sm text-zinc-400 mb-1">{label}</p>
+    <div className="bg-surface-base/50 rounded-xl border border-border p-4">
+      <p className="text-sm text-muted-foreground mb-1">{label}</p>
       <p className={`text-2xl font-bold ${colorClass}`}>{value}</p>
     </div>
   );
@@ -416,10 +416,10 @@ function CoverageBar({
   return (
     <div>
       <div className="flex justify-between text-sm mb-1">
-        <span className="text-zinc-400">{label}</span>
-        <span className="font-medium text-white">{percentage}%</span>
+        <span className="text-muted-foreground">{label}</span>
+        <span className="font-medium text-foreground">{percentage}%</span>
       </div>
-      <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+      <div className="h-2 bg-card rounded-full overflow-hidden">
         <div
           className={`h-full ${colorClass} rounded-full transition-all duration-300`}
           style={{ width: `${percentage}%` }}
@@ -436,18 +436,18 @@ function LoadingSkeleton(): JSX.Element {
   return (
     <div className="space-y-6 animate-pulse">
       <div className="flex items-center gap-4">
-        <div className="w-10 h-10 bg-zinc-800 rounded-lg" />
+        <div className="w-10 h-10 bg-card rounded-lg" />
         <div className="space-y-2">
-          <div className="w-48 h-6 bg-zinc-800 rounded" />
-          <div className="w-32 h-4 bg-zinc-800 rounded" />
+          <div className="w-48 h-6 bg-card rounded" />
+          <div className="w-32 h-4 bg-card rounded" />
         </div>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="h-24 bg-zinc-800 rounded-xl" />
+          <div key={i} className="h-24 bg-card rounded-xl" />
         ))}
       </div>
-      <div className="h-64 bg-zinc-800 rounded-xl" />
+      <div className="h-64 bg-card rounded-xl" />
     </div>
   );
 }
@@ -467,13 +467,13 @@ function ErrorDisplay({
       <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center mb-6">
         <XCircle className="w-8 h-8 text-red-500" />
       </div>
-      <h3 className="text-xl font-semibold text-white mb-2">Validation Error</h3>
-      <p className="text-zinc-400 mb-6 max-w-md">{message}</p>
+      <h3 className="text-xl font-semibold text-foreground mb-2">Validation Error</h3>
+      <p className="text-muted-foreground mb-6 max-w-md">{message}</p>
       {onRetry && (
         <button
           type="button"
           onClick={onRetry}
-          className="px-4 py-2 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 transition-colors flex items-center gap-2"
+          className="px-4 py-2 bg-card text-foreground rounded-lg hover:bg-muted transition-colors flex items-center gap-2"
         >
           <RefreshCw className="w-4 h-4" />
           Retry
@@ -492,8 +492,8 @@ function EmptyScenarios(): JSX.Element {
       <div className="w-16 h-16 rounded-full bg-symtex-primary/10 flex items-center justify-center mb-6">
         <Shield className="w-8 h-8 text-symtex-primary" />
       </div>
-      <h3 className="text-xl font-semibold text-white mb-2">No Validation Scenarios</h3>
-      <p className="text-zinc-400 mb-6 max-w-md">
+      <h3 className="text-xl font-semibold text-foreground mb-2">No Validation Scenarios</h3>
+      <p className="text-muted-foreground mb-6 max-w-md">
         Create test scenarios to validate your SOP rules and ensure they behave as expected.
       </p>
     </div>
@@ -628,16 +628,16 @@ export function ValidationDashboard({
           <button
             type="button"
             onClick={handleBack}
-            className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
+            className="p-2 hover:bg-muted rounded-lg transition-colors"
           >
-            <ArrowLeft className="w-5 h-5 text-zinc-400" />
+            <ArrowLeft className="w-5 h-5 text-muted-foreground" />
           </button>
           <div>
-            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+            <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
               <Shield className="w-7 h-7 text-symtex-primary" />
               Validation Dashboard
             </h1>
-            <p className="text-zinc-400 mt-1">{sop.title}</p>
+            <p className="text-muted-foreground mt-1">{sop.title}</p>
           </div>
         </div>
         <EmptyScenarios />
@@ -653,16 +653,16 @@ export function ValidationDashboard({
           <button
             type="button"
             onClick={handleBack}
-            className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
+            className="p-2 hover:bg-muted rounded-lg transition-colors"
           >
-            <ArrowLeft className="w-5 h-5 text-zinc-400" />
+            <ArrowLeft className="w-5 h-5 text-muted-foreground" />
           </button>
           <div>
-            <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+            <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
               <Shield className="w-7 h-7 text-symtex-primary" />
               Validation Dashboard
             </h1>
-            <p className="text-zinc-400 mt-1">
+            <p className="text-muted-foreground mt-1">
               {sop.title} - {scenarios.length} scenarios, {sop.ruleCount} rules
             </p>
           </div>
@@ -671,7 +671,7 @@ export function ValidationDashboard({
           <button
             type="button"
             onClick={onExportReport}
-            className="px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-xl hover:bg-zinc-800 transition-colors flex items-center gap-2 text-zinc-300"
+            className="px-4 py-2 bg-surface-base border border-border rounded-xl hover:bg-muted transition-colors flex items-center gap-2 text-foreground"
           >
             <Download className="w-4 h-4" />
             Export Report
@@ -680,7 +680,7 @@ export function ValidationDashboard({
             type="button"
             onClick={handleRunValidation}
             disabled={isRunning}
-            className="px-4 py-2 bg-symtex-primary text-white rounded-xl hover:bg-symtex-primary/90 transition-colors flex items-center gap-2 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 bg-symtex-primary text-foreground rounded-xl hover:bg-symtex-primary/90 transition-colors flex items-center gap-2 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isRunning ? (
               <>
@@ -730,7 +730,7 @@ export function ValidationDashboard({
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 mb-6 border-b border-zinc-800">
+      <div className="flex gap-2 mb-6 border-b border-border">
         {TABS.map((tab) => (
           <button
             key={tab}
@@ -739,7 +739,7 @@ export function ValidationDashboard({
             className={`px-4 py-2 font-medium capitalize transition-colors ${
               activeTab === tab
                 ? 'text-symtex-primary border-b-2 border-symtex-primary'
-                : 'text-zinc-400 hover:text-zinc-200'
+                : 'text-muted-foreground hover:text-foreground'
             }`}
           >
             {tab}
@@ -751,8 +751,8 @@ export function ValidationDashboard({
       {activeTab === 'overview' && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Scenario Breakdown */}
-          <div className="lg:col-span-2 bg-zinc-900/50 rounded-xl border border-zinc-800 p-6">
-            <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
+          <div className="lg:col-span-2 bg-surface-base/50 rounded-xl border border-border p-6">
+            <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
               <BarChart3 className="w-5 h-5 text-symtex-primary" />
               Scenario Breakdown
             </h3>
@@ -792,14 +792,14 @@ export function ValidationDashboard({
                         </span>
                       </div>
                       <div className="flex-1">
-                        <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+                        <div className="h-2 bg-card rounded-full overflow-hidden">
                           <div
                             className={`h-full ${colorClasses[config.color]} rounded-full transition-all`}
                             style={{ width: `${percentage}%` }}
                           />
                         </div>
                       </div>
-                      <div className="w-20 text-right text-sm text-zinc-400">
+                      <div className="w-20 text-right text-sm text-muted-foreground">
                         {passed}/{total} passed
                       </div>
                     </div>
@@ -833,8 +833,8 @@ export function ValidationDashboard({
             )}
 
             {/* Coverage Card */}
-            <div className="bg-zinc-900/50 rounded-xl border border-zinc-800 p-4">
-              <h4 className="font-medium text-white mb-3 flex items-center gap-2">
+            <div className="bg-surface-base/50 rounded-xl border border-border p-4">
+              <h4 className="font-medium text-foreground mb-3 flex items-center gap-2">
                 <Target className="w-4 h-4 text-symtex-primary" />
                 Coverage Analysis
               </h4>
@@ -858,14 +858,14 @@ export function ValidationDashboard({
             </div>
 
             {/* Static Analysis */}
-            <div className="bg-zinc-900/50 rounded-xl border border-zinc-800 p-4">
-              <h4 className="font-medium text-white mb-3 flex items-center gap-2">
+            <div className="bg-surface-base/50 rounded-xl border border-border p-4">
+              <h4 className="font-medium text-foreground mb-3 flex items-center gap-2">
                 <Zap className="w-4 h-4 text-symtex-primary" />
                 Static Analysis
               </h4>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-zinc-400">Syntax Errors</span>
+                  <span className="text-muted-foreground">Syntax Errors</span>
                   <span
                     className={`font-medium ${
                       (report?.staticAnalysis?.syntaxErrors ?? 0) > 0
@@ -877,7 +877,7 @@ export function ValidationDashboard({
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-zinc-400">Unused Variables</span>
+                  <span className="text-muted-foreground">Unused Variables</span>
                   <span
                     className={`font-medium ${
                       (report?.staticAnalysis?.unusedVariables ?? 0) > 0
@@ -889,7 +889,7 @@ export function ValidationDashboard({
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-zinc-400">Potential Conflicts</span>
+                  <span className="text-muted-foreground">Potential Conflicts</span>
                   <span
                     className={`font-medium ${
                       (report?.staticAnalysis?.potentialConflicts ?? 0) > 0
@@ -907,12 +907,12 @@ export function ValidationDashboard({
       )}
 
       {activeTab === 'scenarios' && (
-        <div className="bg-zinc-900/50 rounded-xl border border-zinc-800">
-          <div className="p-4 border-b border-zinc-800 flex items-center justify-between">
-            <h3 className="font-semibold text-white">Test Scenarios</h3>
+        <div className="bg-surface-base/50 rounded-xl border border-border">
+          <div className="p-4 border-b border-border flex items-center justify-between">
+            <h3 className="font-semibold text-foreground">Test Scenarios</h3>
             <button
               type="button"
-              className="px-3 py-1.5 text-sm bg-zinc-800 rounded-lg hover:bg-zinc-700 transition-colors flex items-center gap-2 text-zinc-300"
+              className="px-3 py-1.5 text-sm bg-card rounded-lg hover:bg-muted transition-colors flex items-center gap-2 text-foreground"
             >
               <Filter className="w-4 h-4" />
               Filter
@@ -933,7 +933,7 @@ export function ValidationDashboard({
               return (
                 <div
                   key={scenario.id}
-                  className="p-4 hover:bg-zinc-800/50 transition-colors cursor-pointer"
+                  className="p-4 hover:bg-muted/50 transition-colors cursor-pointer"
                   onClick={() => handleScenarioClick(scenario.id)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -948,7 +948,7 @@ export function ValidationDashboard({
                     <StatusIcon status={scenario.status} />
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-medium text-white">{scenario.name}</h4>
+                        <h4 className="font-medium text-foreground">{scenario.name}</h4>
                         <span
                           className={`text-xs px-2 py-0.5 rounded-full ${
                             badgeColorClasses[typeConfig?.color ?? 'blue']
@@ -957,12 +957,12 @@ export function ValidationDashboard({
                           {typeConfig?.label ?? scenario.type}
                         </span>
                       </div>
-                      <p className="text-sm text-zinc-400">{scenario.description}</p>
+                      <p className="text-sm text-muted-foreground">{scenario.description}</p>
                       {scenario.failureReason && (
                         <p className="text-sm text-red-400 mt-1">{scenario.failureReason}</p>
                       )}
                     </div>
-                    <div className="text-right text-sm text-zinc-500">
+                    <div className="text-right text-sm text-muted-foreground">
                       {scenario.executionTimeMs}ms
                     </div>
                   </div>
@@ -975,8 +975,8 @@ export function ValidationDashboard({
 
       {activeTab === 'coverage' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-zinc-900/50 rounded-xl border border-zinc-800 p-6">
-            <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
+          <div className="bg-surface-base/50 rounded-xl border border-border p-6">
+            <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
               <GitBranch className="w-5 h-5 text-symtex-primary" />
               Rule Coverage
             </h3>
@@ -989,15 +989,15 @@ export function ValidationDashboard({
               ].map((rule, idx) => (
                 <div key={rule} className="flex items-center gap-3">
                   <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="flex-1 font-mono text-sm text-zinc-300">{rule}</span>
-                  <span className="text-sm text-zinc-500">{[100, 100, 75, 50][idx]}%</span>
+                  <span className="flex-1 font-mono text-sm text-foreground">{rule}</span>
+                  <span className="text-sm text-muted-foreground">{[100, 100, 75, 50][idx]}%</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="bg-zinc-900/50 rounded-xl border border-zinc-800 p-6">
-            <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
+          <div className="bg-surface-base/50 rounded-xl border border-border p-6">
+            <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
               <FileText className="w-5 h-5 text-symtex-primary" />
               Uncovered Conditions
             </h3>
@@ -1016,9 +1016,9 @@ export function ValidationDashboard({
       )}
 
       {activeTab === 'issues' && (
-        <div className="bg-zinc-900/50 rounded-xl border border-zinc-800">
-          <div className="p-4 border-b border-zinc-800">
-            <h3 className="font-semibold text-white">Issues Found</h3>
+        <div className="bg-surface-base/50 rounded-xl border border-border">
+          <div className="p-4 border-b border-border">
+            <h3 className="font-semibold text-foreground">Issues Found</h3>
           </div>
           <div className="divide-y divide-zinc-800">
             {(report?.issues ?? []).map((issue, idx) => (
@@ -1033,14 +1033,14 @@ export function ValidationDashboard({
                   )}
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="font-mono text-sm bg-zinc-800 px-2 py-0.5 rounded text-zinc-300">
+                      <span className="font-mono text-sm bg-card px-2 py-0.5 rounded text-foreground">
                         {issue.ruleId}
                       </span>
-                      <span className="text-sm text-zinc-500">Line {issue.line}</span>
+                      <span className="text-sm text-muted-foreground">Line {issue.line}</span>
                     </div>
-                    <p className="text-sm font-medium text-white">{issue.message}</p>
+                    <p className="text-sm font-medium text-foreground">{issue.message}</p>
                     {issue.suggestion && (
-                      <p className="text-sm text-zinc-400 mt-1">Suggestion: {issue.suggestion}</p>
+                      <p className="text-sm text-muted-foreground mt-1">Suggestion: {issue.suggestion}</p>
                     )}
                   </div>
                 </div>
@@ -1049,8 +1049,8 @@ export function ValidationDashboard({
             {(!report?.issues || report.issues.length === 0) && (
               <div className="p-8 text-center">
                 <CheckCircle className="w-12 h-12 mx-auto mb-3 text-green-500" />
-                <p className="font-medium text-white">No issues found</p>
-                <p className="text-sm text-zinc-400 mt-1">All validation checks passed</p>
+                <p className="font-medium text-foreground">No issues found</p>
+                <p className="text-sm text-muted-foreground mt-1">All validation checks passed</p>
               </div>
             )}
           </div>

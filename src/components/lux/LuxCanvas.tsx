@@ -177,7 +177,7 @@ function LuxCanvasInner({
           nodeColor={(node) => {
             switch (node.type) {
               case 'trigger':
-                return '#f59e0b';
+                return 'var(--color-gold)';
               case 'condition':
                 return 'var(--color-accent)';
               case 'action':

@@ -51,9 +51,9 @@ const priorityConfig: Record<
   { color: string; bgColor: string; borderColor: string; label: string }
 > = {
   low: {
-    color: 'text-slate-400',
-    bgColor: 'bg-slate-500/20',
-    borderColor: 'border-slate-500/30',
+    color: 'text-muted-foreground',
+    bgColor: 'bg-muted/20',
+    borderColor: 'border-border/30',
     label: 'Low',
   },
   medium: {
@@ -141,13 +141,13 @@ export function PendingReviewsWidget({
 
   if (isLoading) {
     return (
-      <div className={clsx('bg-zinc-900/50 border border-zinc-800 rounded-lg', className)}>
-        <div className="p-4 border-b border-zinc-800">
-          <div className="h-5 w-36 bg-zinc-800 rounded animate-pulse" />
+      <div className={clsx('bg-surface-base/50 border border-border rounded-lg', className)}>
+        <div className="p-4 border-b border-border">
+          <div className="h-5 w-36 bg-card rounded animate-pulse" />
         </div>
         <div className="p-4 space-y-3">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-20 bg-zinc-800/50 rounded animate-pulse" />
+            <div key={i} className="h-20 bg-card/50 rounded animate-pulse" />
           ))}
         </div>
       </div>
@@ -157,13 +157,13 @@ export function PendingReviewsWidget({
   return (
     <div
       className={clsx(
-        'bg-zinc-900/50 border border-zinc-800 rounded-lg overflow-hidden',
+        'bg-surface-base/50 border border-border rounded-lg overflow-hidden',
         className
       )}
     >
       {/* Header */}
-      <div className="p-4 border-b border-zinc-800 flex items-center justify-between">
-        <h3 className="font-semibold text-white flex items-center gap-2">
+      <div className="p-4 border-b border-border flex items-center justify-between">
+        <h3 className="font-semibold text-foreground flex items-center gap-2">
           <ClipboardCheck className="w-4 h-4 text-symtex-primary" />
           Pending Reviews
         </h3>
@@ -187,17 +187,17 @@ export function PendingReviewsWidget({
 
         {pendingItems.length === 0 && (
           <div className="p-8 text-center">
-            <ClipboardCheck className="w-8 h-8 text-zinc-600 mx-auto mb-2" />
-            <p className="text-sm text-zinc-500">All caught up!</p>
-            <p className="text-xs text-zinc-600">No pending reviews</p>
+            <ClipboardCheck className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
+            <p className="text-sm text-muted-foreground">All caught up!</p>
+            <p className="text-xs text-muted-foreground">No pending reviews</p>
           </div>
         )}
       </div>
 
       {/* Footer */}
       {pendingApprovals.filter((i) => i.status === 'pending').length > maxItems && (
-        <div className="p-3 border-t border-zinc-800 bg-zinc-800/30">
-          <button className="w-full text-xs text-zinc-400 hover:text-white transition-colors">
+        <div className="p-3 border-t border-border bg-card/30">
+          <button className="w-full text-xs text-muted-foreground hover:text-foreground transition-colors">
             View all{' '}
             {pendingApprovals.filter((i) => i.status === 'pending').length} reviews
           </button>
@@ -221,7 +221,7 @@ function ReviewItem({ item, onApprove, onReject }: ReviewItemProps): JSX.Element
   const expiringSoon = isExpiringSoon(item.expiresAt);
 
   return (
-    <div className="p-4 hover:bg-zinc-800/30 transition-colors group">
+    <div className="p-4 hover:bg-card/30 transition-colors group">
       <div className="flex items-start gap-3">
         {/* Type Icon */}
         <div className={clsx('p-2 rounded-lg flex-shrink-0', prioConfig.bgColor)}>
@@ -231,7 +231,7 @@ function ReviewItem({ item, onApprove, onReject }: ReviewItemProps): JSX.Element
         {/* Content */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
-            <h4 className="font-medium text-white text-sm truncate">{item.title}</h4>
+            <h4 className="font-medium text-foreground text-sm truncate">{item.title}</h4>
             <span
               className={clsx(
                 'text-xs px-1.5 py-0.5 rounded border',
@@ -245,7 +245,7 @@ function ReviewItem({ item, onApprove, onReject }: ReviewItemProps): JSX.Element
           </div>
 
           {/* Cognate Attribution */}
-          <p className="text-xs text-zinc-400 mb-2">
+          <p className="text-xs text-muted-foreground mb-2">
             from <span className="text-symtex-primary">{item.cognateName}</span>
           </p>
 
@@ -254,7 +254,7 @@ function ReviewItem({ item, onApprove, onReject }: ReviewItemProps): JSX.Element
             <div
               className={clsx(
                 'flex items-center gap-1 text-xs',
-                expiringSoon ? 'text-amber-400' : 'text-zinc-500'
+                expiringSoon ? 'text-amber-400' : 'text-muted-foreground'
               )}
             >
               {expiringSoon ? (

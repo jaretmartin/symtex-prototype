@@ -148,7 +148,7 @@ const getStatusConfig = (status: StrandStatus): { color: string; label: string }
     case 'strong': return { color: 'text-green-400', label: 'Strong' }
     case 'moderate': return { color: 'text-yellow-400', label: 'Moderate' }
     case 'weak': return { color: 'text-orange-400', label: 'Needs Attention' }
-    case 'not-configured': return { color: 'text-slate-500', label: 'Not Configured' }
+    case 'not-configured': return { color: 'text-muted-foreground', label: 'Not Configured' }
   }
 }
 
@@ -224,13 +224,13 @@ export default function DNAStrength({ className, compact = false }: DNAStrengthP
 
   return (
     <div className={clsx(
-      'bg-symtex-card rounded-xl border border-symtex-border overflow-hidden',
+      'bg-card rounded-xl border border-border overflow-hidden',
       className
     )}>
       {/* Header with Overall Strength */}
-      <div className="p-5 border-b border-symtex-border">
+      <div className="p-5 border-b border-border">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+          <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
             <Dna className="w-5 h-5 text-symtex-primary dna-pulse" />
             DNA Strength
           </h2>
@@ -238,11 +238,11 @@ export default function DNAStrength({ className, compact = false }: DNAStrengthP
             <button
               onClick={handleRefresh}
               disabled={isRefreshing}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 transition-colors disabled:opacity-50"
+              className="p-1.5 rounded-lg text-muted-foreground hover:text-white hover:bg-muted/50 transition-colors disabled:opacity-50"
             >
               <RefreshCcw className={clsx('w-4 h-4', isRefreshing && 'animate-spin')} />
             </button>
-            <span className="text-xs text-slate-400 bg-slate-700/50 px-2 py-1 rounded">
+            <span className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 rounded">
               BETA
             </span>
           </div>
@@ -279,7 +279,7 @@ export default function DNAStrength({ className, compact = false }: DNAStrengthP
               </defs>
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-xl font-bold text-white">{overallStrength}%</span>
+              <span className="text-xl font-bold text-foreground">{overallStrength}%</span>
               {overallTrend !== 0 && (
                 <div className={clsx(
                   'flex items-center gap-0.5 text-xs',
@@ -296,8 +296,8 @@ export default function DNAStrength({ className, compact = false }: DNAStrengthP
             </div>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm text-slate-300 mb-1">Overall AI DNA Health</p>
-            <p className="text-xs text-slate-500">
+            <p className="text-sm text-muted-foreground mb-1">Overall AI DNA Health</p>
+            <p className="text-xs text-muted-foreground">
               {weakStrands.length === 0
                 ? 'All your AI capabilities are performing optimally.'
                 : `Consider improving ${weakStrands.map(s => s.name).join(' and ')} for better performance.`}
@@ -323,7 +323,7 @@ export default function DNAStrength({ className, compact = false }: DNAStrengthP
             <div key={strand.id}>
               <button
                 onClick={() => setExpandedStrand(isExpanded ? null : strand.id)}
-                className="w-full p-4 flex items-center gap-4 hover:bg-slate-800/50 transition-colors"
+                className="w-full p-4 flex items-center gap-4 hover:bg-card/50 transition-colors"
               >
                 <div
                   className="p-2 rounded-lg flex-shrink-0"
@@ -334,7 +334,7 @@ export default function DNAStrength({ className, compact = false }: DNAStrengthP
 
                 <div className="flex-1 text-left min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="font-medium text-white">{strand.name}</span>
+                    <span className="font-medium text-foreground">{strand.name}</span>
                     <span className={clsx('text-xs', statusConfig.color)}>
                       {statusConfig.label}
                     </span>
@@ -348,12 +348,12 @@ export default function DNAStrength({ className, compact = false }: DNAStrengthP
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-slate-500 truncate">{strand.description}</p>
+                  <p className="text-xs text-muted-foreground truncate">{strand.description}</p>
                 </div>
 
                 {/* Strength Bar */}
                 <div className="w-20 flex-shrink-0">
-                  <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                  <div className="h-2 bg-muted rounded-full overflow-hidden">
                     <div
                       className="h-full rounded-full transition-all duration-500"
                       style={{
@@ -362,26 +362,26 @@ export default function DNAStrength({ className, compact = false }: DNAStrengthP
                       }}
                     />
                   </div>
-                  <p className="text-xs text-slate-400 text-right mt-1">{strand.strength}%</p>
+                  <p className="text-xs text-muted-foreground text-right mt-1">{strand.strength}%</p>
                 </div>
 
                 <ChevronRight className={clsx(
-                  'w-5 h-5 text-slate-500 transition-transform duration-200 flex-shrink-0',
+                  'w-5 h-5 text-muted-foreground transition-transform duration-200 flex-shrink-0',
                   isExpanded && 'rotate-90'
                 )} />
               </button>
 
               {/* Expanded Details */}
               {isExpanded && (
-                <div className="px-4 pb-4 bg-slate-800/30 animate-in slide-in-from-top-2 duration-200">
-                  <div className="p-4 rounded-lg border border-symtex-border bg-symtex-dark/50">
+                <div className="px-4 pb-4 bg-card/30 animate-in slide-in-from-top-2 duration-200">
+                  <div className="p-4 rounded-lg border border-border bg-symtex-dark/50">
                     {/* Metrics */}
                     {strand.metrics && strand.metrics.length > 0 && (
                       <div className="grid grid-cols-2 gap-3 mb-4">
                         {strand.metrics.map((metric, idx) => (
-                          <div key={idx} className="bg-slate-800/50 rounded-lg p-3">
-                            <p className="text-xs text-slate-500">{metric.label}</p>
-                            <p className="text-sm font-semibold text-white">{metric.value}</p>
+                          <div key={idx} className="bg-card/50 rounded-lg p-3">
+                            <p className="text-xs text-muted-foreground">{metric.label}</p>
+                            <p className="text-sm font-semibold text-foreground">{metric.value}</p>
                           </div>
                         ))}
                       </div>
@@ -390,13 +390,13 @@ export default function DNAStrength({ className, compact = false }: DNAStrengthP
                     {/* Suggestions */}
                     {strand.suggestions && strand.suggestions.length > 0 && (
                       <div className="mb-4">
-                        <p className="text-xs text-slate-400 mb-2 flex items-center gap-1">
+                        <p className="text-xs text-muted-foreground mb-2 flex items-center gap-1">
                           <Sparkles className="w-3 h-3" />
                           Suggestions to improve
                         </p>
                         <ul className="space-y-1">
                           {strand.suggestions.map((suggestion, idx) => (
-                            <li key={idx} className="text-xs text-slate-300 flex items-start gap-2">
+                            <li key={idx} className="text-xs text-muted-foreground flex items-start gap-2">
                               <span className="text-symtex-primary">-</span>
                               {suggestion}
                             </li>
@@ -423,7 +423,7 @@ export default function DNAStrength({ className, compact = false }: DNAStrengthP
                       </button>
                       <button
                         onClick={() => navigate(`/docs/dna/${strand.id}`)}
-                        className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 transition-colors"
+                        className="p-2 rounded-lg text-muted-foreground hover:text-white hover:bg-muted/50 transition-colors"
                       >
                         <ExternalLink className="w-4 h-4" />
                       </button>
@@ -438,10 +438,10 @@ export default function DNAStrength({ className, compact = false }: DNAStrengthP
 
       {/* Compact mode: Show more link */}
       {compact && strands.length > 3 && (
-        <div className="p-4 border-t border-symtex-border bg-slate-800/30">
+        <div className="p-4 border-t border-border bg-card/30">
           <button
             onClick={() => navigate('/settings/dna')}
-            className="w-full text-center text-sm text-slate-400 hover:text-white transition-colors"
+            className="w-full text-center text-sm text-muted-foreground hover:text-white transition-colors"
           >
             View all {strands.length} strands
           </button>

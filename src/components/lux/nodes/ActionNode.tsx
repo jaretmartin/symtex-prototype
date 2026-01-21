@@ -26,8 +26,8 @@ const ActionNode = memo(({ data, selected }: NodeProps<ActionNodeData>) => {
       style={{
         padding: '12px 16px',
         borderRadius: '12px',
-        background: 'linear-gradient(135deg, #1a1a2e 0%, #16162a 100%)',
-        border: selected ? '2px solid #6366f1' : '1px solid #2a2a3e',
+        background: 'linear-gradient(135deg, var(--color-surface-card) 0%, #16162a 100%)',
+        border: selected ? '2px solid var(--color-primary)' : '1px solid var(--color-surface-elevated)',
         minWidth: '180px',
         boxShadow: selected
           ? '0 0 20px rgba(99, 102, 241, 0.3)'
@@ -38,10 +38,10 @@ const ActionNode = memo(({ data, selected }: NodeProps<ActionNodeData>) => {
         type="target"
         position={Position.Top}
         style={{
-          background: '#6366f1',
+          background: 'var(--color-primary)',
           width: '12px',
           height: '12px',
-          border: '2px solid #0a0a0f',
+          border: '2px solid var(--color-surface-base)',
         }}
       />
       <div
@@ -57,7 +57,7 @@ const ActionNode = memo(({ data, selected }: NodeProps<ActionNodeData>) => {
             width: '32px',
             height: '32px',
             borderRadius: '8px',
-            background: 'linear-gradient(135deg, #6366f1, #4f46e5)',
+            background: 'linear-gradient(135deg, var(--color-primary), #4f46e5)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -79,7 +79,7 @@ const ActionNode = memo(({ data, selected }: NodeProps<ActionNodeData>) => {
           <div
             style={{
               fontSize: '10px',
-              color: '#6366f1',
+              color: 'var(--color-primary)',
               fontWeight: 500,
             }}
           >
@@ -91,7 +91,7 @@ const ActionNode = memo(({ data, selected }: NodeProps<ActionNodeData>) => {
         <div
           style={{
             fontSize: '11px',
-            color: '#94a3b8',
+            color: 'var(--color-text-muted)',
             marginTop: '4px',
           }}
         >
@@ -102,10 +102,10 @@ const ActionNode = memo(({ data, selected }: NodeProps<ActionNodeData>) => {
         type="source"
         position={Position.Bottom}
         style={{
-          background: '#6366f1',
+          background: 'var(--color-primary)',
           width: '12px',
           height: '12px',
-          border: '2px solid #0a0a0f',
+          border: '2px solid var(--color-surface-base)',
         }}
       />
     </div>

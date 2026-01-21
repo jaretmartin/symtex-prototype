@@ -91,10 +91,10 @@ export function SymbolicRatioGauge({
   }, [data.symbolic, animated]);
 
   return (
-    <Card className={cn('bg-slate-800/50 border-slate-700/50', className)}>
+    <Card className={cn('bg-card/50 border-border/50', className)}>
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg font-semibold text-white">Processing Distribution</CardTitle>
-        <CardDescription className="text-slate-400">
+        <CardTitle className="text-lg font-semibold text-foreground">Processing Distribution</CardTitle>
+        <CardDescription className="text-muted-foreground">
           Symbolic (Core) vs Neural (Conductor) routing
         </CardDescription>
       </CardHeader>
@@ -139,10 +139,10 @@ export function SymbolicRatioGauge({
 
           {/* Center content */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className={cn('font-bold text-white', config.fontSize)}>
+            <span className={cn('font-bold text-foreground', config.fontSize)}>
               {Math.round(animatedPercent)}%
             </span>
-            <span className={cn('text-slate-400', config.labelSize)}>Symbolic</span>
+            <span className={cn('text-muted-foreground', config.labelSize)}>Symbolic</span>
           </div>
         </div>
 
@@ -153,20 +153,20 @@ export function SymbolicRatioGauge({
               <Cpu className="w-4 h-4 text-indigo-400" />
             </div>
             <div>
-              <p className="text-sm font-medium text-white">{data.symbolic}% Symbolic</p>
-              <p className="text-xs text-slate-500">
+              <p className="text-sm font-medium text-foreground">{data.symbolic}% Symbolic</p>
+              <p className="text-xs text-muted-foreground">
                 {data.symbolicRequests.toLocaleString()} requests
               </p>
             </div>
           </div>
-          <div className="w-px h-8 bg-slate-700" />
+          <div className="w-px h-8 bg-muted" />
           <div className="flex items-center gap-2">
             <div className="p-1.5 rounded-lg bg-purple-500/10">
               <Brain className="w-4 h-4 text-purple-400" />
             </div>
             <div>
-              <p className="text-sm font-medium text-white">{data.neural}% Neural</p>
-              <p className="text-xs text-slate-500">
+              <p className="text-sm font-medium text-foreground">{data.neural}% Neural</p>
+              <p className="text-xs text-muted-foreground">
                 {data.neuralRequests.toLocaleString()} requests
               </p>
             </div>
@@ -174,11 +174,11 @@ export function SymbolicRatioGauge({
         </div>
 
         {/* Total requests */}
-        <div className="mt-4 pt-4 border-t border-slate-700 w-full text-center">
-          <p className="text-xs text-slate-500">
+        <div className="mt-4 pt-4 border-t border-border w-full text-center">
+          <p className="text-xs text-muted-foreground">
             Total: {data.totalRequests.toLocaleString()} requests processed
           </p>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-muted-foreground mt-1">
             Last updated: {data.lastUpdated.toLocaleTimeString()}
           </p>
         </div>

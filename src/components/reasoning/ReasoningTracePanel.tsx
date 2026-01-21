@@ -54,7 +54,7 @@ function PanelHeader({
       onClick={onToggle}
       className={clsx(
         'w-full flex items-center justify-between p-4',
-        'transition-colors duration-200 hover:bg-slate-800/30'
+        'transition-colors duration-200 hover:bg-card/30'
       )}
       aria-expanded={isExpanded}
       aria-controls="reasoning-content"
@@ -66,7 +66,7 @@ function PanelHeader({
             'p-2 rounded-lg transition-all duration-300',
             isExpanded
               ? 'bg-symtex-primary/20 text-symtex-primary'
-              : 'bg-slate-700/50 text-slate-400'
+              : 'bg-muted/50 text-muted-foreground'
           )}
         >
           <Brain
@@ -76,13 +76,13 @@ function PanelHeader({
         </div>
 
         <div className="text-left">
-          <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
             AI Reasoning Trace
-            <span className="text-xs font-normal text-slate-500">
+            <span className="text-xs font-normal text-muted-foreground">
               ({trace.steps.length} step{trace.steps.length !== 1 ? 's' : ''})
             </span>
           </h3>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-muted-foreground">
             {isExpanded ? 'Click to collapse' : 'Click to see how this decision was made'}
           </p>
         </div>
@@ -91,7 +91,7 @@ function PanelHeader({
       <div className="flex items-center gap-4">
         {/* Overall confidence */}
         <div className="hidden sm:flex items-center gap-2">
-          <span className="text-xs text-slate-500">Confidence</span>
+          <span className="text-xs text-muted-foreground">Confidence</span>
           <ConfidenceMeter
             value={trace.overallConfidence}
             size="sm"
@@ -102,8 +102,8 @@ function PanelHeader({
 
         <ChevronIcon
           className={clsx(
-            'w-5 h-5 text-slate-500 transition-transform duration-200',
-            isExpanded && 'text-slate-400'
+            'w-5 h-5 text-muted-foreground transition-transform duration-200',
+            isExpanded && 'text-muted-foreground'
           )}
           aria-hidden="true"
         />
@@ -126,7 +126,7 @@ function WhyTooltip({ className }: { className?: string }): JSX.Element {
         onMouseLeave={() => setIsVisible(false)}
         onFocus={() => setIsVisible(true)}
         onBlur={() => setIsVisible(false)}
-        className="text-slate-500 hover:text-slate-400 transition-colors"
+        className="text-muted-foreground hover:text-muted-foreground transition-colors"
         aria-label="Why this decision?"
       >
         <HelpCircle className="w-4 h-4" />
@@ -137,14 +137,14 @@ function WhyTooltip({ className }: { className?: string }): JSX.Element {
         className={clsx(
           'absolute bottom-full right-0 mb-2 z-50',
           'w-64 p-3 rounded-lg shadow-lg',
-          'bg-slate-800 border border-slate-700',
+          'bg-card border border-border',
           'transition-all duration-200',
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1 pointer-events-none'
         )}
         role="tooltip"
       >
-        <p className="text-xs text-slate-300">
-          <strong className="text-white">Why this decision?</strong>
+        <p className="text-xs text-muted-foreground">
+          <strong className="text-foreground">Why this decision?</strong>
           <br />
           <br />
           This panel shows the step-by-step reasoning process the AI used to reach its
@@ -168,7 +168,7 @@ function ContextSourcesSection({
 }): JSX.Element {
   if (sources.length === 0) {
     return (
-      <div className="text-xs text-slate-500 py-2">
+      <div className="text-xs text-muted-foreground py-2">
         No context sources recorded
       </div>
     );
@@ -234,7 +234,7 @@ export default function ReasoningTracePanel({
   return (
     <div
       className={clsx(
-        'rounded-xl border border-symtex-border bg-symtex-card overflow-hidden',
+        'rounded-xl border border-border bg-card overflow-hidden',
         'transition-all duration-300',
         className
       )}
@@ -256,12 +256,12 @@ export default function ReasoningTracePanel({
       >
         <div className="px-4 pb-4 space-y-4">
           {/* Divider */}
-          <div className="border-t border-symtex-border" />
+          <div className="border-t border-border" />
 
           {/* Overall Confidence (visible on mobile) */}
           <div className="sm:hidden">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-slate-500">Overall Confidence</span>
+              <span className="text-xs text-muted-foreground">Overall Confidence</span>
               <ConfidenceMeter
                 value={trace.overallConfidence}
                 size="md"
@@ -275,7 +275,7 @@ export default function ReasoningTracePanel({
           {/* Context Sources */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <h4 className="text-xs font-medium text-slate-400 uppercase tracking-wider flex items-center gap-2">
+              <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-2">
                 <Layers className="w-3.5 h-3.5" />
                 Context Sources
               </h4>
@@ -289,7 +289,7 @@ export default function ReasoningTracePanel({
 
           {/* Reasoning Steps */}
           <div>
-            <h4 className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-2">
               <Brain className="w-3.5 h-3.5" />
               Reasoning Steps
             </h4>
@@ -312,7 +312,7 @@ export default function ReasoningTracePanel({
 
           {/* Feedback Section */}
           {onFeedbackSubmit && (
-            <div className="pt-2 border-t border-symtex-border">
+            <div className="pt-2 border-t border-border">
               {showFeedback ? (
                 <FeedbackWidget
                   onSubmit={handleFeedbackSubmit}
@@ -320,7 +320,7 @@ export default function ReasoningTracePanel({
                 />
               ) : (
                 <div className="flex items-center justify-between">
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-muted-foreground">
                     Was this reasoning helpful?
                   </p>
                   <FeedbackTrigger
@@ -348,16 +348,16 @@ export function LoadingReasoningTracePanel({
   return (
     <div
       className={clsx(
-        'rounded-xl border border-symtex-border bg-symtex-card overflow-hidden',
+        'rounded-xl border border-border bg-card overflow-hidden',
         className
       )}
     >
       <div className="p-4 animate-pulse">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-slate-700" />
+          <div className="w-9 h-9 rounded-lg bg-muted" />
           <div className="flex-1 space-y-2">
-            <div className="h-4 bg-slate-700 rounded w-40" />
-            <div className="h-3 bg-slate-700 rounded w-60" />
+            <div className="h-4 bg-muted rounded w-40" />
+            <div className="h-3 bg-muted rounded w-60" />
           </div>
         </div>
       </div>
@@ -376,18 +376,18 @@ export function EmptyReasoningTracePanel({
   return (
     <div
       className={clsx(
-        'rounded-xl border border-dashed border-symtex-border bg-symtex-card/50',
+        'rounded-xl border border-dashed border-border bg-card/50',
         'p-8 text-center',
         className
       )}
     >
-      <div className="w-12 h-12 rounded-full bg-slate-700/50 flex items-center justify-center mx-auto mb-3">
-        <Brain className="w-6 h-6 text-slate-500" />
+      <div className="w-12 h-12 rounded-full bg-muted/50 flex items-center justify-center mx-auto mb-3">
+        <Brain className="w-6 h-6 text-muted-foreground" />
       </div>
-      <h4 className="text-sm font-medium text-slate-400 mb-1">
+      <h4 className="text-sm font-medium text-muted-foreground mb-1">
         No Reasoning Trace
       </h4>
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-muted-foreground">
         Reasoning transparency data will appear here when available.
       </p>
     </div>

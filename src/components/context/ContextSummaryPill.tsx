@@ -98,9 +98,9 @@ function CollapsedPill({
       onClick={onClick}
       className={clsx(
         'flex items-center gap-2 px-3 py-2 rounded-full',
-        'bg-slate-800/80 backdrop-blur-md border border-slate-700/50',
+        'bg-card/80 backdrop-blur-md border border-border/50',
         'shadow-lg shadow-black/20',
-        'hover:bg-slate-700/80 hover:border-slate-600/50',
+        'hover:bg-muted/80 hover:border-border/50',
         'transition-all duration-200 ease-out',
         'focus:outline-none focus:ring-2 focus:ring-symtex-primary/50'
       )}
@@ -109,12 +109,12 @@ function CollapsedPill({
       aria-label={`Context: ${projectName}. Click to expand for more details.`}
     >
       {/* Project Name */}
-      <span className="text-sm font-medium text-slate-200 max-w-[120px] truncate">
+      <span className="text-sm font-medium text-muted-foreground max-w-[120px] truncate">
         {truncateText(projectName, 16)}
       </span>
 
       {/* Divider */}
-      <span className="w-px h-4 bg-slate-600" aria-hidden="true" />
+      <span className="w-px h-4 bg-muted" aria-hidden="true" />
 
       {/* Cognate Avatar */}
       <div
@@ -134,7 +134,7 @@ function CollapsedPill({
       {/* Running Automations Count */}
       {runningCount > 0 && (
         <>
-          <span className="w-px h-4 bg-slate-600" aria-hidden="true" />
+          <span className="w-px h-4 bg-muted" aria-hidden="true" />
           <div
             className={clsx(
               'flex items-center gap-1 px-1.5 py-0.5 rounded-full',
@@ -149,7 +149,7 @@ function CollapsedPill({
 
       {/* Expand Indicator */}
       <ChevronRight
-        className="w-4 h-4 text-slate-400"
+        className="w-4 h-4 text-muted-foreground"
         aria-hidden="true"
       />
     </button>
@@ -217,20 +217,20 @@ function ExpandedPanel({
       aria-label="Context details panel"
       className={clsx(
         'w-80 max-h-[70vh] overflow-hidden',
-        'bg-slate-800/95 backdrop-blur-xl border border-slate-700/50',
+        'bg-card/95 backdrop-blur-xl border border-border/50',
         'rounded-lg shadow-2xl shadow-black/30',
         'animate-in slide-in-from-bottom-4 fade-in duration-200'
       )}
     >
       {/* Header */}
-      <div className="flex items-center justify-between p-3 border-b border-slate-700/50">
-        <h2 className="text-sm font-semibold text-white">Context Details</h2>
+      <div className="flex items-center justify-between p-3 border-b border-border/50">
+        <h2 className="text-sm font-semibold text-foreground">Context Details</h2>
         <button
           type="button"
           onClick={onClose}
           className={clsx(
-            'p-1 rounded-md text-slate-400',
-            'hover:text-white hover:bg-slate-700/50',
+            'p-1 rounded-md text-muted-foreground',
+            'hover:text-white hover:bg-muted/50',
             'focus:outline-none focus:ring-2 focus:ring-symtex-primary/50',
             'transition-colors'
           )}
@@ -243,8 +243,8 @@ function ExpandedPanel({
       {/* Scrollable Content */}
       <div className="overflow-y-auto max-h-[calc(70vh-3rem)]">
         {/* Breadcrumb Path */}
-        <div className="p-3 border-b border-slate-700/30">
-          <h3 className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">
+        <div className="p-3 border-b border-border/30">
+          <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
             Current Path
           </h3>
           <nav aria-label="Breadcrumb navigation">
@@ -264,7 +264,7 @@ function ExpandedPanel({
                         'transition-colors',
                         isLast
                           ? 'bg-symtex-primary/20 text-symtex-primary cursor-default'
-                          : 'text-slate-400 hover:text-white hover:bg-slate-700/50'
+                          : 'text-muted-foreground hover:text-white hover:bg-muted/50'
                       )}
                       aria-current={isLast ? 'page' : undefined}
                     >
@@ -273,7 +273,7 @@ function ExpandedPanel({
                     </button>
                     {!isLast && (
                       <ChevronRight
-                        className="w-3 h-3 text-slate-600 mx-0.5"
+                        className="w-3 h-3 text-muted-foreground mx-0.5"
                         aria-hidden="true"
                       />
                     )}
@@ -285,23 +285,23 @@ function ExpandedPanel({
         </div>
 
         {/* Current Project */}
-        <div className="p-3 border-b border-slate-700/30">
-          <h3 className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">
+        <div className="p-3 border-b border-border/30">
+          <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
             Current Project
           </h3>
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
               <Folder className="w-4 h-4 text-white" aria-hidden="true" />
             </div>
-            <span className="text-sm font-medium text-white">
+            <span className="text-sm font-medium text-foreground">
               {currentProjectName || 'No project selected'}
             </span>
           </div>
         </div>
 
         {/* Active Cognate */}
-        <div className="p-3 border-b border-slate-700/30">
-          <h3 className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">
+        <div className="p-3 border-b border-border/30">
+          <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
             Active Cognate
           </h3>
           {activeCognate ? (
@@ -319,12 +319,12 @@ function ExpandedPanel({
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-white truncate">
+                <p className="text-sm font-medium text-foreground truncate">
                   {activeCognate.name}
                 </p>
                 <div className="flex items-center gap-2 mt-0.5">
-                  <Gauge className="w-3 h-3 text-slate-400" aria-hidden="true" />
-                  <span className="text-xs text-slate-400">
+                  <Gauge className="w-3 h-3 text-muted-foreground" aria-hidden="true" />
+                  <span className="text-xs text-muted-foreground">
                     Autonomy: {autonomyLabels[2] || 'Unknown'}
                   </span>
                 </div>
@@ -334,20 +334,20 @@ function ExpandedPanel({
                   'px-2 py-0.5 rounded-full text-xs font-medium',
                   activeCognate.status === 'active'
                     ? 'bg-green-500/20 text-green-400'
-                    : 'bg-slate-600/50 text-slate-400'
+                    : 'bg-muted/50 text-muted-foreground'
                 )}
               >
                 {activeCognate.status}
               </span>
             </div>
           ) : (
-            <p className="text-sm text-slate-500 italic">No cognate assigned</p>
+            <p className="text-sm text-muted-foreground italic">No cognate assigned</p>
           )}
         </div>
 
         {/* Running Missions/Automations */}
-        <div className="p-3 border-b border-slate-700/30">
-          <h3 className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">
+        <div className="p-3 border-b border-border/30">
+          <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
             Running Automations
           </h3>
           {runningMissions.length > 0 ? (
@@ -357,7 +357,7 @@ function ExpandedPanel({
                   key={mission.id}
                   className={clsx(
                     'flex items-center gap-2 p-2 rounded-md',
-                    'bg-slate-700/30',
+                    'bg-muted/30',
                     'animate-in fade-in slide-in-from-left-2',
                     index === 0 && 'animation-delay-0',
                     index === 1 && 'animation-delay-100',
@@ -368,31 +368,31 @@ function ExpandedPanel({
                   <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
                     <Play className="w-3 h-3 text-green-400" aria-hidden="true" />
                   </div>
-                  <span className="text-sm text-slate-300 truncate flex-1">
+                  <span className="text-sm text-muted-foreground truncate flex-1">
                     {mission.name}
                   </span>
-                  <Clock className="w-3 h-3 text-slate-500" aria-hidden="true" />
+                  <Clock className="w-3 h-3 text-muted-foreground" aria-hidden="true" />
                 </li>
               ))}
               {runningMissions.length > 3 && (
-                <li className="text-xs text-slate-500 text-center py-1">
+                <li className="text-xs text-muted-foreground text-center py-1">
                   +{runningMissions.length - 3} more running
                 </li>
               )}
             </ul>
           ) : (
-            <p className="text-sm text-slate-500 italic">No automations running</p>
+            <p className="text-sm text-muted-foreground italic">No automations running</p>
           )}
         </div>
 
         {/* DNA Progress */}
         {dnaProgress !== undefined && (
-          <div className="p-3 border-b border-slate-700/30">
-            <h3 className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">
+          <div className="p-3 border-b border-border/30">
+            <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
               DNA Completion
             </h3>
             <div className="flex items-center gap-3">
-              <div className="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden">
+              <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
                 <div
                   className="h-full bg-gradient-to-r from-symtex-primary to-purple-500 rounded-full transition-all duration-500"
                   style={{ width: `${dnaProgress}%` }}
@@ -403,7 +403,7 @@ function ExpandedPanel({
                   aria-label={`DNA completion ${dnaProgress}%`}
                 />
               </div>
-              <span className="text-sm font-medium text-slate-300">
+              <span className="text-sm font-medium text-muted-foreground">
                 {dnaProgress}%
               </span>
             </div>
@@ -413,7 +413,7 @@ function ExpandedPanel({
         {/* Quick Navigation */}
         {recentSpaces.length > 0 && (
           <div className="p-3">
-            <h3 className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">
+            <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
               Recent Spaces
             </h3>
             <div className="space-y-1">
@@ -427,7 +427,7 @@ function ExpandedPanel({
                     onClick={() => onNavigate(space.type, space.id)}
                     className={clsx(
                       'w-full flex items-center gap-2 px-2 py-1.5 rounded-md text-left',
-                      'text-slate-400 hover:text-white hover:bg-slate-700/50',
+                      'text-muted-foreground hover:text-white hover:bg-muted/50',
                       'transition-colors',
                       'animate-in fade-in slide-in-from-left-2'
                     )}
@@ -435,7 +435,7 @@ function ExpandedPanel({
                   >
                     <IconComponent className="w-4 h-4" aria-hidden="true" />
                     <span className="text-sm truncate">{space.name}</span>
-                    <span className="text-xs text-slate-600 capitalize ml-auto">
+                    <span className="text-xs text-muted-foreground capitalize ml-auto">
                       {space.type}
                     </span>
                   </button>

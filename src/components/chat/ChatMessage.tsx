@@ -61,7 +61,7 @@ export function ChatMessage({
   if (message.role === 'system') {
     return (
       <div className="flex justify-center py-2">
-        <div className="max-w-md px-4 py-2 text-sm text-slate-500 bg-slate-800/30 rounded-lg text-center">
+        <div className="max-w-md px-4 py-2 text-sm text-muted-foreground bg-card/30 rounded-lg text-center">
           {message.content}
         </div>
       </div>
@@ -86,7 +86,7 @@ export function ChatMessage({
             >
               <button
                 onClick={handleCopy}
-                className="p-1.5 text-slate-500 hover:text-slate-300 rounded-md hover:bg-slate-700/50 transition-colors"
+                className="p-1.5 text-muted-foreground hover:text-muted-foreground rounded-md hover:bg-muted/50 transition-colors"
                 aria-label="Copy message"
               >
                 {copied ? (
@@ -98,7 +98,7 @@ export function ChatMessage({
             </div>
 
             {/* Message bubble */}
-            <div className="px-4 py-2.5 bg-gradient-to-r from-symtex-primary to-symtex-accent text-white rounded-2xl rounded-br-md shadow-lg shadow-symtex-primary/20">
+            <div className="px-4 py-2.5 bg-gradient-to-r from-symtex-primary to-symtex-accent text-foreground rounded-2xl rounded-br-md shadow-lg shadow-symtex-primary/20">
               <p className="text-sm whitespace-pre-wrap break-words">
                 {message.content}
               </p>
@@ -120,7 +120,7 @@ export function ChatMessage({
 
           {/* Timestamp */}
           <div
-            className={`text-xs text-slate-500 transition-opacity duration-200 ${
+            className={`text-xs text-muted-foreground transition-opacity duration-200 ${
               showTimestamp ? 'opacity-100' : 'opacity-0'
             }`}
           >
@@ -153,7 +153,7 @@ export function ChatMessage({
                 <Bot className="w-3.5 h-3.5 text-white" />
               )}
             </div>
-            <span className="text-xs text-slate-400 font-medium">
+            <span className="text-xs text-muted-foreground font-medium">
               {cognate?.name || 'Assistant'}
             </span>
           </div>
@@ -161,7 +161,7 @@ export function ChatMessage({
 
         <div className="relative flex items-center gap-2">
           {/* Message bubble */}
-          <div className="px-4 py-2.5 bg-symtex-card border border-symtex-border text-slate-200 rounded-2xl rounded-bl-md">
+          <div className="px-4 py-2.5 bg-card border border-border text-muted-foreground rounded-2xl rounded-bl-md">
             <p className="text-sm whitespace-pre-wrap break-words">
               {message.content}
             </p>
@@ -175,7 +175,7 @@ export function ChatMessage({
           >
             <button
               onClick={handleCopy}
-              className="p-1.5 text-slate-500 hover:text-slate-300 rounded-md hover:bg-slate-700/50 transition-colors"
+              className="p-1.5 text-muted-foreground hover:text-muted-foreground rounded-md hover:bg-muted/50 transition-colors"
               aria-label="Copy message"
             >
               {copied ? (
@@ -202,7 +202,7 @@ export function ChatMessage({
 
         {/* Timestamp */}
         <div
-          className={`text-xs text-slate-500 transition-opacity duration-200 ${
+          className={`text-xs text-muted-foreground transition-opacity duration-200 ${
             showTimestamp ? 'opacity-100' : 'opacity-0'
           }`}
         >

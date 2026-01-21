@@ -33,14 +33,14 @@ interface LedgerTimelineProps {
 const actorConfig: Record<ActorType, { icon: typeof User; color: string; bg: string; border: string }> = {
   user: { icon: User, color: 'text-blue-400', bg: 'bg-blue-500', border: 'border-blue-500' },
   cognate: { icon: Bot, color: 'text-indigo-400', bg: 'bg-indigo-500', border: 'border-indigo-500' },
-  system: { icon: Server, color: 'text-slate-400', bg: 'bg-slate-500', border: 'border-slate-500' },
+  system: { icon: Server, color: 'text-muted-foreground', bg: 'bg-muted', border: 'border-border' },
   automation: { icon: Zap, color: 'text-amber-400', bg: 'bg-amber-500', border: 'border-amber-500' },
   integration: { icon: Link2, color: 'text-emerald-400', bg: 'bg-emerald-500', border: 'border-emerald-500' },
 };
 
 // Severity colors for the timeline line
 const severityLineColor: Record<LedgerSeverity, string> = {
-  debug: 'bg-slate-600',
+  debug: 'bg-muted',
   info: 'bg-blue-500',
   notice: 'bg-cyan-500',
   warning: 'bg-yellow-500',
@@ -118,10 +118,10 @@ function TimelineEntry({ entry, isSelected, isFirst, isLast, onSelect }: Timelin
             'w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 border-2 transition-all',
             isSelected
               ? `${actor.bg} border-white`
-              : `bg-slate-800 ${actor.border} group-hover:${actor.bg}`
+              : `bg-card ${actor.border} group-hover:${actor.bg}`
           )}
         >
-          <ActorIcon className={cn('w-4 h-4', isSelected ? 'text-white' : actor.color)} />
+          <ActorIcon className={cn('w-4 h-4', isSelected ? 'text-foreground' : actor.color)} />
         </div>
 
         {/* Bottom Line */}
@@ -134,18 +134,18 @@ function TimelineEntry({ entry, isSelected, isFirst, isLast, onSelect }: Timelin
       <div
         className={cn(
           'flex-1 pb-6 pt-1',
-          !isLast && 'border-b border-slate-700/30'
+          !isLast && 'border-b border-border/30'
         )}
       >
         {/* Header */}
         <div className="flex items-start justify-between gap-2 mb-1">
           <div className="flex items-center gap-2">
-            <span className="font-medium text-white text-sm">{entry.who.name}</span>
+            <span className="font-medium text-foreground text-sm">{entry.who.name}</span>
             {entry.isFlagged && (
               <Flag className="w-3.5 h-3.5 text-amber-400" />
             )}
           </div>
-          <div className="flex items-center gap-2 text-xs text-slate-500">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <StatusIcon
               className={cn(
                 'w-3.5 h-3.5',
@@ -153,7 +153,7 @@ function TimelineEntry({ entry, isSelected, isFirst, isLast, onSelect }: Timelin
                   ? 'text-emerald-400'
                   : entry.what.status === 'failed'
                     ? 'text-red-400'
-                    : 'text-slate-400'
+                    : 'text-muted-foreground'
               )}
             />
             <span>{formatTime(entry.when)}</span>
@@ -161,20 +161,20 @@ function TimelineEntry({ entry, isSelected, isFirst, isLast, onSelect }: Timelin
         </div>
 
         {/* Description */}
-        <p className="text-sm text-slate-300 mb-2">{entry.what.description}</p>
+        <p className="text-sm text-muted-foreground mb-2">{entry.what.description}</p>
 
         {/* Meta */}
         <div className="flex items-center gap-2 flex-wrap">
           <Badge
             variant="outline"
-            className="text-xs border-slate-600 text-slate-400"
+            className="text-xs border-border text-muted-foreground"
           >
             {entry.what.category}
           </Badge>
           {entry.where.spaceName && (
             <Badge
               variant="outline"
-              className="text-xs border-slate-600 text-slate-400"
+              className="text-xs border-border text-muted-foreground"
             >
               {entry.where.spaceName}
             </Badge>
@@ -188,7 +188,7 @@ function TimelineEntry({ entry, isSelected, isFirst, isLast, onSelect }: Timelin
                   ? 'border-indigo-500/30 text-indigo-400'
                   : entry.how.approach === 'neural'
                     ? 'border-purple-500/30 text-purple-400'
-                    : 'border-slate-600 text-slate-400'
+                    : 'border-border text-muted-foreground'
               )}
             >
               {entry.how.approach}
@@ -207,7 +207,7 @@ function TimelineEntry({ entry, isSelected, isFirst, isLast, onSelect }: Timelin
             <AlertTriangle className="w-3 h-3" />
             <span className="capitalize">{entry.what.severity}</span>
             {entry.what.result && (
-              <span className="text-slate-400">- {entry.what.result}</span>
+              <span className="text-muted-foreground">- {entry.what.result}</span>
             )}
           </div>
         )}
@@ -243,9 +243,9 @@ export function LedgerTimeline({
   if (entries.length === 0) {
     return (
       <div className={cn('text-center py-12', className)}>
-        <Clock className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-        <p className="text-slate-400">No entries to display</p>
-        <p className="text-sm text-slate-500 mt-1">
+        <Clock className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+        <p className="text-muted-foreground">No entries to display</p>
+        <p className="text-sm text-muted-foreground mt-1">
           Adjust your filters to see more results
         </p>
       </div>
@@ -257,11 +257,11 @@ export function LedgerTimeline({
       {groupedEntries.map((group, groupIndex) => (
         <div key={group.date}>
           {/* Date Header */}
-          <div className="sticky top-0 z-10 bg-slate-900/95 backdrop-blur-sm py-2 mb-4">
-            <h3 className="text-sm font-medium text-slate-400 flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-slate-600" />
+          <div className="sticky top-0 z-10 bg-surface-base/95 backdrop-blur-sm py-2 mb-4">
+            <h3 className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-muted" />
               {group.date}
-              <span className="text-slate-600">
+              <span className="text-muted-foreground">
                 ({group.entries.length} {group.entries.length === 1 ? 'entry' : 'entries'})
               </span>
             </h3>

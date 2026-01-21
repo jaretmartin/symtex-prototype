@@ -125,7 +125,7 @@ export function SymbiosInput({
   const canSend = (value.trim() || attachments.length > 0) && !disabled && !isTyping;
 
   return (
-    <div className={cn('border-t border-zinc-800 bg-zinc-900/50', className)}>
+    <div className={cn('border-t border-border bg-surface-base/50', className)}>
       {/* Attachments preview */}
       {attachments.length > 0 && (
         <div className="px-4 pt-3 flex flex-wrap gap-2">
@@ -148,8 +148,8 @@ export function SymbiosInput({
           className={cn(
             'flex-shrink-0 p-2 rounded-lg transition-colors',
             disabled
-              ? 'text-zinc-600 cursor-not-allowed'
-              : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
+              ? 'text-muted-foreground cursor-not-allowed'
+              : 'text-muted-foreground hover:text-foreground hover:bg-card'
           )}
           title="Attach file"
           aria-label="Attach file"
@@ -183,11 +183,11 @@ export function SymbiosInput({
             disabled={disabled}
             rows={1}
             className={cn(
-              'w-full resize-none rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-2.5',
-              'text-sm text-zinc-100 placeholder:text-zinc-500',
+              'w-full resize-none rounded-xl border border-border bg-card px-4 py-2.5',
+              'text-sm text-foreground placeholder:text-muted-foreground',
               'focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50',
               'disabled:opacity-50 disabled:cursor-not-allowed',
-              'scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent'
+              'scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent'
             )}
             style={{ maxHeight: '150px' }}
           />
@@ -202,8 +202,8 @@ export function SymbiosInput({
             isRecording
               ? 'text-red-400 bg-red-500/10 hover:bg-red-500/20'
               : disabled
-              ? 'text-zinc-600 cursor-not-allowed'
-              : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
+              ? 'text-muted-foreground cursor-not-allowed'
+              : 'text-muted-foreground hover:text-foreground hover:bg-card'
           )}
           title={isRecording ? 'Stop recording' : 'Voice input'}
           aria-label={isRecording ? 'Stop recording' : 'Start voice input'}
@@ -222,8 +222,8 @@ export function SymbiosInput({
           className={cn(
             'flex-shrink-0 p-2 rounded-lg transition-all',
             canSend
-              ? 'bg-indigo-600 text-white hover:bg-indigo-500'
-              : 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+              ? 'bg-indigo-600 text-foreground hover:bg-indigo-500'
+              : 'bg-card text-muted-foreground cursor-not-allowed'
           )}
           title="Send message (Enter)"
           aria-label={isTyping ? 'Sending message' : 'Send message'}
@@ -237,7 +237,7 @@ export function SymbiosInput({
       </div>
 
       {/* Keyboard hint */}
-      <div className="px-4 pb-2 flex items-center justify-between text-xs text-zinc-500">
+      <div className="px-4 pb-2 flex items-center justify-between text-xs text-muted-foreground">
         <span>Press Enter to send, Shift+Enter for new line</span>
         {value.length > 0 && (
           <span>{value.length} characters</span>
@@ -271,7 +271,7 @@ function AttachmentPreview({
   };
 
   return (
-    <div className="inline-flex items-center gap-2 px-2 py-1.5 bg-zinc-800 rounded-lg border border-zinc-700 group">
+    <div className="inline-flex items-center gap-2 px-2 py-1.5 bg-card rounded-lg border border-border group">
       {/* Preview thumbnail for images */}
       {attachment.type === 'image' && attachment.url ? (
         <img
@@ -280,17 +280,17 @@ function AttachmentPreview({
           className="w-8 h-8 rounded object-cover"
         />
       ) : (
-        <div className="w-8 h-8 rounded bg-zinc-700 flex items-center justify-center text-zinc-400">
+        <div className="w-8 h-8 rounded bg-muted flex items-center justify-center text-muted-foreground">
           {getIcon()}
         </div>
       )}
 
       {/* File info */}
       <div className="flex flex-col min-w-0">
-        <span className="text-xs font-medium text-zinc-200 truncate max-w-[100px]">
+        <span className="text-xs font-medium text-foreground truncate max-w-[100px]">
           {attachment.name}
         </span>
-        <span className="text-[10px] text-zinc-500 capitalize">
+        <span className="text-[10px] text-muted-foreground capitalize">
           {attachment.type}
         </span>
       </div>
@@ -298,7 +298,7 @@ function AttachmentPreview({
       {/* Remove button */}
       <button
         onClick={() => onRemove(attachment.id)}
-        className="p-1 text-zinc-500 hover:text-zinc-200 transition-colors"
+        className="p-1 text-muted-foreground hover:text-foreground transition-colors"
         title="Remove attachment"
       >
         <X className="w-3.5 h-3.5" />
@@ -328,8 +328,8 @@ export function QuickActionButton({
       onClick={onClick}
       className={cn(
         'inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg',
-        'text-xs text-zinc-400 hover:text-zinc-200',
-        'bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700/50',
+        'text-xs text-muted-foreground hover:text-foreground',
+        'bg-card/50 hover:bg-muted/50 border border-border/50',
         'transition-colors',
         className
       )}

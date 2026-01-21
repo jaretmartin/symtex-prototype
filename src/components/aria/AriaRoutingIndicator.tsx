@@ -152,13 +152,13 @@ function RoutingNode({
         <p
           className={clsx(
             'text-xs font-medium transition-colors',
-            isActive ? 'text-white' : 'text-slate-400'
+            isActive ? 'text-white' : 'text-muted-foreground'
           )}
         >
           {label}
         </p>
         {sublabel && (
-          <p className="text-[10px] text-slate-500 max-w-[80px] truncate">
+          <p className="text-[10px] text-muted-foreground max-w-[80px] truncate">
             {sublabel}
           </p>
         )}
@@ -184,7 +184,7 @@ function RoutingArrow({ isActive, isCompleted }: RoutingArrowProps): JSX.Element
             ? 'bg-emerald-500/50'
             : isActive
             ? 'bg-violet-500/50'
-            : 'bg-slate-700/50'
+            : 'bg-muted/50'
         )}
       />
 
@@ -212,7 +212,7 @@ function RoutingArrow({ isActive, isCompleted }: RoutingArrowProps): JSX.Element
             ? 'text-emerald-500'
             : isActive
             ? 'text-violet-400'
-            : 'text-slate-600'
+            : 'text-muted-foreground'
         )}
       />
 
@@ -245,7 +245,7 @@ export function AriaRoutingIndicator({
     <div
       className={clsx(
         'px-4 py-3',
-        'bg-slate-800/50 border-b border-violet-500/20',
+        'bg-card/50 border-b border-violet-500/20',
         'animate-in slide-in-from-top fade-in duration-200',
         className
       )}

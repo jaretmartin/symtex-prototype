@@ -66,14 +66,14 @@ export function XPProgressBar({
           <div
             className={clsx(
               'rounded-lg bg-gradient-to-br from-amber-500 to-amber-600',
-              'flex items-center justify-center font-bold text-white shadow-lg shadow-amber-500/25',
+              'flex items-center justify-center font-bold text-foreground shadow-lg shadow-amber-500/25',
               config.levelBadgeSize
             )}
           >
             {level}
           </div>
           <div>
-            <span className={clsx('font-medium text-white', config.fontSize)}>
+            <span className={clsx('font-medium text-foreground', config.fontSize)}>
               Level {level}
             </span>
             {xpToNextLevel > 0 && (

@@ -27,7 +27,7 @@ interface FieldWrapperProps {
 function FieldWrapper({ label, required, error, children }: FieldWrapperProps): JSX.Element {
   return (
     <div className="space-y-1.5">
-      <label className="flex items-center gap-1.5 text-sm font-medium text-slate-300">
+      <label className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
         {label}
         {required && <span className="text-error text-xs">*</span>}
       </label>
@@ -57,11 +57,11 @@ function TextInput({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       className={clsx(
-        'w-full px-3 py-2 rounded-lg bg-symtex-dark border text-white',
-        'placeholder-slate-500 text-sm',
+        'w-full px-3 py-2 rounded-lg bg-symtex-dark border text-foreground',
+        'placeholder-muted-foreground text-sm',
         'transition-colors duration-200',
         'focus:outline-none focus:ring-2 focus:ring-symtex-primary focus:border-transparent',
-        hasError ? 'border-error' : 'border-symtex-border hover:border-slate-500'
+        hasError ? 'border-error' : 'border-border hover:border-border'
       )}
     />
   );
@@ -83,11 +83,11 @@ function SelectInput({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       className={clsx(
-        'w-full px-3 py-2 rounded-lg bg-symtex-dark border text-white',
+        'w-full px-3 py-2 rounded-lg bg-symtex-dark border text-foreground',
         'text-sm cursor-pointer',
         'transition-colors duration-200',
         'focus:outline-none focus:ring-2 focus:ring-symtex-primary focus:border-transparent',
-        hasError ? 'border-error' : 'border-symtex-border hover:border-slate-500'
+        hasError ? 'border-error' : 'border-border hover:border-border'
       )}
     >
       <option value="" className="bg-symtex-dark">
@@ -117,11 +117,11 @@ function NumberInput({
       value={value}
       onChange={(e) => onChange(parseFloat(e.target.value) || 0)}
       className={clsx(
-        'w-full px-3 py-2 rounded-lg bg-symtex-dark border text-white',
-        'placeholder-slate-500 text-sm',
+        'w-full px-3 py-2 rounded-lg bg-symtex-dark border text-foreground',
+        'placeholder-muted-foreground text-sm',
         'transition-colors duration-200',
         'focus:outline-none focus:ring-2 focus:ring-symtex-primary focus:border-transparent',
-        hasError ? 'border-error' : 'border-symtex-border hover:border-slate-500'
+        hasError ? 'border-error' : 'border-border hover:border-border'
       )}
     />
   );
@@ -150,7 +150,7 @@ function BooleanInput({
         className={clsx(
           'w-10 h-6 rounded-full relative transition-colors duration-200',
           'focus:outline-none focus:ring-2 focus:ring-symtex-primary focus:ring-offset-2 focus:ring-offset-symtex-dark',
-          value ? 'bg-symtex-primary' : 'bg-slate-600 group-hover:bg-slate-500'
+          value ? 'bg-symtex-primary' : 'bg-muted group-hover:bg-muted'
         )}
       >
         <span
@@ -160,7 +160,7 @@ function BooleanInput({
           )}
         />
       </div>
-      <span className="text-sm text-slate-300">{value ? 'Enabled' : 'Disabled'}</span>
+      <span className="text-sm text-muted-foreground">{value ? 'Enabled' : 'Disabled'}</span>
     </label>
   );
 }
@@ -214,7 +214,7 @@ export function CustomizableFieldInput({
         );
       default:
         return (
-          <div className="text-sm text-slate-500">
+          <div className="text-sm text-muted-foreground">
             Unsupported field type: {field.type}
           </div>
         );
@@ -226,7 +226,7 @@ export function CustomizableFieldInput({
     return (
       <div className={className}>
         <div className="flex items-center justify-between">
-          <span className="text-sm font-medium text-slate-300">
+          <span className="text-sm font-medium text-muted-foreground">
             {field.label}
             {field.required && <span className="text-error text-xs ml-1">*</span>}
           </span>

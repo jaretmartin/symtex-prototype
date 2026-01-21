@@ -61,8 +61,8 @@ const statusConfig: Record<
   },
   idle: {
     label: 'Idle',
-    color: 'text-slate-400',
-    bgColor: 'bg-slate-500/20',
+    color: 'text-muted-foreground',
+    bgColor: 'bg-muted/20',
     icon: Bot,
   },
   paused: {
@@ -135,9 +135,9 @@ function CognateItem({
   return (
     <div
       className={clsx(
-        'bg-symtex-card rounded-xl p-4 border border-symtex-border',
+        'bg-card rounded-xl p-4 border border-border',
         'transition-all duration-200',
-        'hover:border-slate-600'
+        'hover:border-border'
       )}
     >
       {/* Header */}
@@ -183,7 +183,7 @@ function CognateItem({
           </div>
 
           <div>
-            <h4 className="font-medium text-white">
+            <h4 className="font-medium text-foreground">
               {templateName || `Cognate ${cognate.id.slice(0, 8)}`}
             </h4>
             <div className="flex items-center gap-2">
@@ -202,7 +202,7 @@ function CognateItem({
 
         {/* Elapsed time */}
         {(isActive || isPaused) && (
-          <div className="flex items-center gap-1 text-xs text-slate-400">
+          <div className="flex items-center gap-1 text-xs text-muted-foreground">
             <Clock className="w-3 h-3" />
             {getElapsedTime()}
           </div>
@@ -211,34 +211,34 @@ function CognateItem({
 
       {/* Current mission/task */}
       {missionName && (
-        <div className="flex items-center gap-2 mb-3 p-2 rounded-lg bg-slate-800/50">
-          <Target className="w-4 h-4 text-slate-400" />
-          <span className="text-sm text-slate-300 truncate">{missionName}</span>
+        <div className="flex items-center gap-2 mb-3 p-2 rounded-lg bg-card/50">
+          <Target className="w-4 h-4 text-muted-foreground" />
+          <span className="text-sm text-muted-foreground truncate">{missionName}</span>
         </div>
       )}
 
       {/* Current execution input preview */}
       {execution?.input && (
         <div className="mb-3">
-          <p className="text-xs text-slate-500 mb-1">Current Action</p>
-          <p className="text-sm text-slate-400 line-clamp-2">{execution.input}</p>
+          <p className="text-xs text-muted-foreground mb-1">Current Action</p>
+          <p className="text-sm text-muted-foreground line-clamp-2">{execution.input}</p>
         </div>
       )}
 
       {/* Stats */}
-      <div className="flex items-center gap-4 mb-3 text-xs text-slate-400">
+      <div className="flex items-center gap-4 mb-3 text-xs text-muted-foreground">
         <div>
-          <span className="text-slate-500">Total:</span>{' '}
-          <span className="text-slate-300">{cognate.totalExecutions}</span>
+          <span className="text-muted-foreground">Total:</span>{' '}
+          <span className="text-muted-foreground">{cognate.totalExecutions}</span>
         </div>
         <div>
-          <span className="text-slate-500">Success:</span>{' '}
+          <span className="text-muted-foreground">Success:</span>{' '}
           <span className="text-green-400">{cognate.successfulExecutions}</span>
         </div>
         {cognate.totalExecutions > 0 && (
           <div>
-            <span className="text-slate-500">Rate:</span>{' '}
-            <span className="text-slate-300">
+            <span className="text-muted-foreground">Rate:</span>{' '}
+            <span className="text-muted-foreground">
               {Math.round(
                 (cognate.successfulExecutions / cognate.totalExecutions) * 100
               )}
@@ -249,7 +249,7 @@ function CognateItem({
       </div>
 
       {/* Actions */}
-      <div className="flex gap-2 pt-3 border-t border-symtex-border">
+      <div className="flex gap-2 pt-3 border-t border-border">
         {canPause && (
           <Button
             variant="secondary"
@@ -334,8 +334,8 @@ export default function ActiveCognatesPanel({
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h2 className="text-lg font-semibold text-white">Active Cognates</h2>
-          <p className="text-sm text-slate-400">
+          <h2 className="text-lg font-semibold text-foreground">Active Cognates</h2>
+          <p className="text-sm text-muted-foreground">
             {activeCount} running, {cognates.length} total
           </p>
         </div>

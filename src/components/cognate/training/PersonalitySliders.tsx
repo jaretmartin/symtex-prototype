@@ -30,9 +30,9 @@ export function PersonalitySliders() {
   };
 
   return (
-    <div className="bg-zinc-800 border border-zinc-700 rounded-xl p-6">
+    <div className="bg-card border border-border rounded-xl p-6">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="font-semibold text-zinc-100 flex items-center gap-2">
+        <h3 className="font-semibold text-muted-foreground flex items-center gap-2">
           <Sliders className="w-5 h-5 text-purple-400" />
           Personality Configuration
         </h3>
@@ -40,7 +40,7 @@ export function PersonalitySliders() {
           {hasChanges && (
             <button
               onClick={resetPersonality}
-              className="px-3 py-1.5 text-sm text-zinc-400 hover:text-zinc-200 transition-colors flex items-center gap-1"
+              className="px-3 py-1.5 text-sm text-muted-foreground hover:text-muted-foreground transition-colors flex items-center gap-1"
             >
               <RotateCcw className="w-4 h-4" />
               Reset
@@ -53,7 +53,7 @@ export function PersonalitySliders() {
               'px-4 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center gap-2',
               hasChanges
                 ? 'bg-purple-600 hover:bg-purple-700 text-white'
-                : 'bg-zinc-700 text-zinc-500 cursor-not-allowed'
+                : 'bg-muted text-muted-foreground cursor-not-allowed'
             )}
           >
             {showSaved ? (
@@ -78,12 +78,12 @@ export function PersonalitySliders() {
           return (
             <div key={trait.id} className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-zinc-300">{trait.name}</span>
-                <span className="text-sm text-zinc-500">{value}</span>
+                <span className="text-sm font-medium text-muted-foreground">{trait.name}</span>
+                <span className="text-sm text-muted-foreground">{value}</span>
               </div>
 
               <div className="flex items-center gap-3">
-                <span className="text-xs text-zinc-500 w-20 text-right">{trait.low}</span>
+                <span className="text-xs text-muted-foreground w-20 text-right">{trait.low}</span>
 
                 <div className="flex-1 relative">
                   <input
@@ -94,7 +94,7 @@ export function PersonalitySliders() {
                     onChange={(e) => setPersonalityTrait(trait.id, parseInt(e.target.value))}
                     className={clsx(
                       'w-full h-2 rounded-full appearance-none cursor-pointer',
-                      'bg-zinc-700',
+                      'bg-muted',
                       '[&::-webkit-slider-thumb]:appearance-none',
                       '[&::-webkit-slider-thumb]:w-4',
                       '[&::-webkit-slider-thumb]:h-4',
@@ -111,7 +111,7 @@ export function PersonalitySliders() {
                   />
                 </div>
 
-                <span className="text-xs text-zinc-500 w-20">{trait.high}</span>
+                <span className="text-xs text-muted-foreground w-20">{trait.high}</span>
               </div>
             </div>
           );
@@ -119,11 +119,11 @@ export function PersonalitySliders() {
       </div>
 
       {/* Preview section */}
-      <div className="mt-6 pt-4 border-t border-zinc-700">
-        <h4 className="text-xs font-medium text-zinc-500 uppercase tracking-wide mb-3">
+      <div className="mt-6 pt-4 border-t border-border">
+        <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3">
           Preview Response Style
         </h4>
-        <div className="bg-zinc-900 rounded-lg p-4 text-sm text-zinc-300 italic">
+        <div className="bg-surface-base rounded-lg p-4 text-sm text-muted-foreground italic">
           Based on your configuration, responses will be{' '}
           <span className="text-purple-400">
             {personality.formality > 60 ? 'formal' : 'casual'}

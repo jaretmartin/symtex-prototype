@@ -77,10 +77,10 @@ function EmptyState({
       </div>
 
       {/* Greeting */}
-      <h2 className="text-2xl font-semibold text-white mb-2">
+      <h2 className="text-2xl font-semibold text-foreground mb-2">
         {cognate ? `Hi, I'm ${cognate.name}` : 'Start a conversation'}
       </h2>
-      <p className="text-slate-400 max-w-md mb-8">
+      <p className="text-muted-foreground max-w-md mb-8">
         {cognate?.description ||
           'Ask me anything or choose a suggestion below to get started.'}
       </p>
@@ -158,7 +158,7 @@ export function ChatPanel({
   return (
     <div className={`flex flex-col h-full bg-symtex-background ${className}`}>
       {/* Header */}
-      <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-symtex-border">
+      <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-border">
         <div className="flex items-center gap-3">
           {/* Cognate info */}
           <div className="flex items-center gap-2">
@@ -174,7 +174,7 @@ export function ChatPanel({
               )}
             </div>
             <div>
-              <h3 className="text-sm font-medium text-white">
+              <h3 className="text-sm font-medium text-foreground">
                 {cognate?.name || 'Assistant'}
               </h3>
               {isGenerating && (
@@ -194,7 +194,7 @@ export function ChatPanel({
           {onRegenerate && messages.length > 0 && !isGenerating && (
             <button
               onClick={onRegenerate}
-              className="p-2 text-slate-400 hover:text-slate-200 rounded-lg hover:bg-slate-700/50 transition-colors"
+              className="p-2 text-muted-foreground hover:text-muted-foreground rounded-lg hover:bg-muted/50 transition-colors"
               aria-label="Regenerate response"
             >
               <RefreshCw className="w-4 h-4" />
@@ -202,7 +202,7 @@ export function ChatPanel({
           )}
 
           <button
-            className="p-2 text-slate-400 hover:text-slate-200 rounded-lg hover:bg-slate-700/50 transition-colors"
+            className="p-2 text-muted-foreground hover:text-muted-foreground rounded-lg hover:bg-muted/50 transition-colors"
             aria-label="Chat settings"
           >
             <Settings className="w-4 h-4" />
@@ -211,7 +211,7 @@ export function ChatPanel({
           {expandable && (
             <button
               onClick={() => onExpandChange?.(!isExpanded)}
-              className="p-2 text-slate-400 hover:text-slate-200 rounded-lg hover:bg-slate-700/50 transition-colors"
+              className="p-2 text-muted-foreground hover:text-muted-foreground rounded-lg hover:bg-muted/50 transition-colors"
               aria-label={isExpanded ? 'Minimize chat' : 'Expand chat'}
             >
               {isExpanded ? (
@@ -226,7 +226,7 @@ export function ChatPanel({
 
       {/* Context info (full) */}
       {context && context.breadcrumb.length > 1 && (
-        <div className="flex-shrink-0 px-4 py-2 border-b border-symtex-border/50 bg-slate-900/30">
+        <div className="flex-shrink-0 px-4 py-2 border-b border-border/50 bg-surface-base/30">
           <ChatContextInfo context={context} showFullBreadcrumb />
         </div>
       )}
@@ -265,12 +265,12 @@ export function ChatPanel({
                         <Bot className="w-3.5 h-3.5 text-white" />
                       )}
                     </div>
-                    <span className="text-xs text-slate-400 font-medium">
+                    <span className="text-xs text-muted-foreground font-medium">
                       {cognate?.name || 'Assistant'}
                     </span>
                   </div>
 
-                  <div className="px-4 py-2.5 bg-symtex-card border border-symtex-border text-slate-200 rounded-2xl rounded-bl-md">
+                  <div className="px-4 py-2.5 bg-card border border-border text-muted-foreground rounded-2xl rounded-bl-md">
                     <StreamingText
                       text={streamingText}
                       isStreaming={isGenerating}
@@ -281,7 +281,7 @@ export function ChatPanel({
                   {onStopGeneration && (
                     <button
                       onClick={onStopGeneration}
-                      className="mt-2 px-3 py-1 text-xs text-slate-400 hover:text-slate-200 border border-slate-700 rounded-full hover:border-slate-600 transition-colors"
+                      className="mt-2 px-3 py-1 text-xs text-muted-foreground hover:text-muted-foreground border border-border rounded-full hover:border-border transition-colors"
                     >
                       Stop generating
                     </button>
@@ -298,7 +298,7 @@ export function ChatPanel({
 
       {/* Suggestions */}
       {messages.length > 0 && !isGenerating && (
-        <div className="flex-shrink-0 px-4 py-2 border-t border-symtex-border/50">
+        <div className="flex-shrink-0 px-4 py-2 border-t border-border/50">
           <SuggestionChips
             suggestions={currentSuggestions}
             onSelect={handleSuggestionSelect}
@@ -309,7 +309,7 @@ export function ChatPanel({
       )}
 
       {/* Input area */}
-      <div className="flex-shrink-0 p-4 border-t border-symtex-border bg-slate-900/30">
+      <div className="flex-shrink-0 p-4 border-t border-border bg-surface-base/30">
         <ChatInput
           onSend={onSend}
           disabled={isGenerating}

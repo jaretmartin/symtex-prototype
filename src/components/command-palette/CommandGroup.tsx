@@ -34,7 +34,7 @@ const CATEGORY_CONFIG: Record<CommandCategory, CategoryConfig> = {
   pages: { icon: Layout, label: 'Pages', color: 'text-blue-400' },
   cognates: { icon: Bot, label: 'Cognates', color: 'text-purple-400' },
   governance: { icon: Shield, label: 'Governance', color: 'text-amber-400' },
-  settings: { icon: Settings, label: 'Settings', color: 'text-zinc-400' },
+  settings: { icon: Settings, label: 'Settings', color: 'text-muted-foreground' },
 };
 
 // ============================================================================
@@ -56,11 +56,11 @@ export const CommandGroup = memo(function CommandGroup({
           <Icon className={clsx('w-4 h-4', config.color)} aria-hidden="true" />
           <span
             id={`group-${category}`}
-            className="text-xs font-medium text-zinc-500 uppercase tracking-wide"
+            className="text-xs font-medium text-muted-foreground uppercase tracking-wide"
           >
             {config.label}
           </span>
-          <span className="text-xs text-zinc-600">({count})</span>
+          <span className="text-xs text-muted-foreground">({count})</span>
         </div>
       </div>
 
@@ -82,9 +82,9 @@ export interface EmptyStateProps {
 export const CommandEmptyState = memo(function CommandEmptyState({ query }: EmptyStateProps) {
   return (
     <div className="px-4 py-12 text-center">
-      <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-zinc-800 flex items-center justify-center">
+      <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-card flex items-center justify-center">
         <svg
-          className="w-6 h-6 text-zinc-500"
+          className="w-6 h-6 text-muted-foreground"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -94,8 +94,8 @@ export const CommandEmptyState = memo(function CommandEmptyState({ query }: Empt
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
       </div>
-      <p className="text-sm font-medium text-zinc-100 mb-1">No results found</p>
-      <p className="text-xs text-zinc-500">No matches for "{query}". Try a different search term.</p>
+      <p className="text-sm font-medium text-muted-foreground mb-1">No results found</p>
+      <p className="text-xs text-muted-foreground">No matches for "{query}". Try a different search term.</p>
     </div>
   );
 });
@@ -112,7 +112,7 @@ export const CommandLoadingState = memo(function CommandLoadingState() {
         role="status"
         aria-label="Loading search results"
       />
-      <p className="text-sm text-zinc-500">Searching...</p>
+      <p className="text-sm text-muted-foreground">Searching...</p>
     </div>
   );
 });
@@ -145,7 +145,7 @@ export const CommandDefaultState = memo(function CommandDefaultState({
       {recentSearches.length > 0 && (
         <div className="mb-4">
           <div className="flex items-center justify-between px-2 mb-2">
-            <span className="flex items-center gap-2 text-xs font-medium text-zinc-500 uppercase tracking-wide">
+            <span className="flex items-center gap-2 text-xs font-medium text-muted-foreground uppercase tracking-wide">
               <svg
                 className="w-3 h-3"
                 viewBox="0 0 24 24"
@@ -160,7 +160,7 @@ export const CommandDefaultState = memo(function CommandDefaultState({
             </span>
             <button
               onClick={onClearRecent}
-              className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
+              className="text-xs text-muted-foreground hover:text-muted-foreground transition-colors"
             >
               Clear
             </button>
@@ -170,10 +170,10 @@ export const CommandDefaultState = memo(function CommandDefaultState({
               <li key={idx}>
                 <button
                   onClick={() => onRecentClick(search)}
-                  className="w-full flex items-center gap-3 px-3 py-2 text-sm rounded-lg text-zinc-100 hover:bg-zinc-800 transition-colors"
+                  className="w-full flex items-center gap-3 px-3 py-2 text-sm rounded-lg text-muted-foreground hover:bg-card transition-colors"
                 >
                   <svg
-                    className="w-4 h-4 text-zinc-500"
+                    className="w-4 h-4 text-muted-foreground"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -184,7 +184,7 @@ export const CommandDefaultState = memo(function CommandDefaultState({
                   </svg>
                   <span className="flex-1 text-left truncate">{search}</span>
                   <svg
-                    className="w-4 h-4 text-zinc-600"
+                    className="w-4 h-4 text-muted-foreground"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -203,7 +203,7 @@ export const CommandDefaultState = memo(function CommandDefaultState({
       {/* Suggestions */}
       <div>
         <div className="px-2 mb-2">
-          <span className="flex items-center gap-2 text-xs font-medium text-zinc-500 uppercase tracking-wide">
+          <span className="flex items-center gap-2 text-xs font-medium text-muted-foreground uppercase tracking-wide">
             <svg
               className="w-3 h-3"
               viewBox="0 0 24 24"
@@ -221,15 +221,15 @@ export const CommandDefaultState = memo(function CommandDefaultState({
             <li key={suggestion.id}>
               <button
                 onClick={suggestion.onClick}
-                className="w-full flex items-center gap-3 px-3 py-2 text-sm rounded-lg text-zinc-100 hover:bg-zinc-800 transition-colors"
+                className="w-full flex items-center gap-3 px-3 py-2 text-sm rounded-lg text-muted-foreground hover:bg-card transition-colors"
               >
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-zinc-800">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-card">
                   <Play className="w-4 h-4 text-green-400" />
                 </div>
                 <div className="flex-1 text-left">
                   <div className="font-medium">{suggestion.title}</div>
                   {suggestion.description && (
-                    <div className="text-xs text-zinc-500">{suggestion.description}</div>
+                    <div className="text-xs text-muted-foreground">{suggestion.description}</div>
                   )}
                 </div>
               </button>

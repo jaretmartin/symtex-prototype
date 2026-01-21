@@ -64,9 +64,9 @@ function getTypeColor(type: AttachmentType, extension?: string): string {
     case 'json':
     case 'md':
     case 'txt':
-      return 'text-slate-400';
+      return 'text-muted-foreground';
     default:
-      return 'text-slate-400';
+      return 'text-muted-foreground';
   }
 }
 
@@ -132,12 +132,12 @@ export function AttachmentPreview({
   if (attachment.type === 'image' && attachment.url && !imageError) {
     return (
       <div
-        className={`relative group rounded-lg overflow-hidden border border-symtex-border ${className}`}
+        className={`relative group rounded-lg overflow-hidden border border-border ${className}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         {/* Image preview */}
-        <div className={`${config.imageSize} bg-slate-800`}>
+        <div className={`${config.imageSize} bg-card`}>
           {!imageLoaded && (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-6 h-6 border-2 border-symtex-primary border-t-transparent rounded-full animate-spin" />
@@ -156,14 +156,14 @@ export function AttachmentPreview({
 
         {/* Hover overlay */}
         <div
-          className={`absolute inset-0 bg-slate-900/70 flex items-center justify-center gap-2 transition-opacity duration-200 ${
+          className={`absolute inset-0 bg-surface-base/70 flex items-center justify-center gap-2 transition-opacity duration-200 ${
             isHovered ? 'opacity-100' : 'opacity-0'
           }`}
         >
           {expandable && (
             <button
               onClick={onExpand}
-              className="p-1.5 bg-slate-700/80 text-white rounded-md hover:bg-slate-600 transition-colors"
+              className="p-1.5 bg-muted/80 text-foreground rounded-md hover:bg-muted transition-colors"
               aria-label="View image"
             >
               <Eye className="w-4 h-4" />
@@ -174,7 +174,7 @@ export function AttachmentPreview({
               href={attachment.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 bg-slate-700/80 text-white rounded-md hover:bg-slate-600 transition-colors"
+              className="p-1.5 bg-muted/80 text-foreground rounded-md hover:bg-muted transition-colors"
               aria-label="Open in new tab"
             >
               <ExternalLink className="w-4 h-4" />
@@ -186,7 +186,7 @@ export function AttachmentPreview({
         {removable && (
           <button
             onClick={onRemove}
-            className="absolute -top-1.5 -right-1.5 p-1 bg-slate-700 text-slate-300 rounded-full border border-slate-600 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors opacity-0 group-hover:opacity-100"
+            className="absolute -top-1.5 -right-1.5 p-1 bg-muted text-muted-foreground rounded-full border border-border hover:bg-red-600 hover:text-foreground hover:border-red-600 transition-colors opacity-0 group-hover:opacity-100"
             aria-label={`Remove ${attachment.name}`}
           >
             <X className="w-3 h-3" />
@@ -199,13 +199,13 @@ export function AttachmentPreview({
   // File/code attachment with icon
   return (
     <div
-      className={`relative group flex items-center gap-2 bg-symtex-card border border-symtex-border rounded-lg transition-colors hover:border-slate-600 ${config.container} ${config.padding} ${config.maxWidth} ${className}`}
+      className={`relative group flex items-center gap-2 bg-card border border-border rounded-lg transition-colors hover:border-border ${config.container} ${config.padding} ${config.maxWidth} ${className}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* File type icon/badge */}
       <div
-        className={`flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 ${typeColor}`}
+        className={`flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-lg bg-card/50 ${typeColor}`}
       >
         {attachment.type === 'code' ? (
           <Code className={config.icon} />
@@ -220,12 +220,12 @@ export function AttachmentPreview({
       {/* File info */}
       <div className="flex-1 min-w-0 overflow-hidden">
         <p
-          className={`font-medium text-slate-200 truncate ${config.text}`}
+          className={`font-medium text-muted-foreground truncate ${config.text}`}
           title={attachment.name}
         >
           {attachment.name}
         </p>
-        <p className="text-xs text-slate-500">{extension} file</p>
+        <p className="text-xs text-muted-foreground">{extension} file</p>
       </div>
 
       {/* Actions */}
@@ -237,7 +237,7 @@ export function AttachmentPreview({
         {expandable && attachment.content && (
           <button
             onClick={onExpand}
-            className="p-1.5 text-slate-400 hover:text-slate-200 rounded-md hover:bg-slate-700/50 transition-colors"
+            className="p-1.5 text-muted-foreground hover:text-muted-foreground rounded-md hover:bg-muted/50 transition-colors"
             aria-label="Preview file"
           >
             <Eye className="w-4 h-4" />
@@ -247,7 +247,7 @@ export function AttachmentPreview({
           <a
             href={attachment.url}
             download={attachment.name}
-            className="p-1.5 text-slate-400 hover:text-slate-200 rounded-md hover:bg-slate-700/50 transition-colors"
+            className="p-1.5 text-muted-foreground hover:text-muted-foreground rounded-md hover:bg-muted/50 transition-colors"
             aria-label="Download file"
           >
             <Download className="w-4 h-4" />
@@ -259,7 +259,7 @@ export function AttachmentPreview({
       {removable && (
         <button
           onClick={onRemove}
-          className="absolute -top-1.5 -right-1.5 p-1 bg-slate-700 text-slate-300 rounded-full border border-slate-600 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors opacity-0 group-hover:opacity-100"
+          className="absolute -top-1.5 -right-1.5 p-1 bg-muted text-muted-foreground rounded-full border border-border hover:bg-red-600 hover:text-foreground hover:border-red-600 transition-colors opacity-0 group-hover:opacity-100"
           aria-label={`Remove ${attachment.name}`}
         >
           <X className="w-3 h-3" />

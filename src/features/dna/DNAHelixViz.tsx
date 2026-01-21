@@ -64,12 +64,12 @@ function DNAHelixViz({
   }, [strands, helixPoints]);
 
   return (
-    <div className={cn('relative bg-symtex-card rounded-xl border border-symtex-border overflow-hidden', className)}>
+    <div className={cn('relative bg-card rounded-xl border border-border overflow-hidden', className)}>
       {/* Overall strength indicator */}
       <div className="absolute top-4 left-4 z-10">
-        <div className="text-xs text-slate-500 mb-1">DNA Strength</div>
-        <div className="text-2xl font-bold text-white">{profile.overallStrength}%</div>
-        <div className="text-xs text-slate-400">{profile.totalDataPoints.toLocaleString()} data points</div>
+        <div className="text-xs text-muted-foreground mb-1">DNA Strength</div>
+        <div className="text-2xl font-bold text-foreground">{profile.overallStrength}%</div>
+        <div className="text-xs text-muted-foreground">{profile.totalDataPoints.toLocaleString()} data points</div>
       </div>
 
       {/* SVG Helix */}
@@ -212,8 +212,8 @@ function DNAHelixViz({
               'absolute text-xs whitespace-nowrap pointer-events-auto cursor-pointer',
               'px-2 py-0.5 rounded-full transition-colors',
               selectedStrandId === strand.id
-                ? 'bg-white/10 text-white'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-white/10 text-foreground'
+                : 'text-muted-foreground hover:text-foreground'
             )}
             style={{
               top: y + 55, // Offset from SVG position
@@ -235,14 +235,14 @@ function DNAHelixViz({
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1">
             <div className="w-2 h-2 rounded-full bg-blue-500" />
-            <span className="text-slate-400">Personal</span>
+            <span className="text-muted-foreground">Personal</span>
           </div>
           <div className="flex items-center gap-1">
             <div className="w-2 h-2 rounded-full bg-purple-500" />
-            <span className="text-slate-400">Work</span>
+            <span className="text-muted-foreground">Work</span>
           </div>
         </div>
-        <div className="text-slate-500">
+        <div className="text-muted-foreground">
           Click strand for details
         </div>
       </div>

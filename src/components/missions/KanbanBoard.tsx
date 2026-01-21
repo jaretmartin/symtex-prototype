@@ -32,14 +32,14 @@ export default function KanbanBoard({ missions, onMissionClick }: KanbanBoardPro
         return (
           <div key={column.id} className="flex flex-col">
             {/* Column Header */}
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-symtex-border">
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-border">
               <div className="flex items-center gap-2">
                 <Icon className={clsx('w-5 h-5', column.color)} />
-                <h3 className="font-semibold text-white">{column.label}</h3>
+                <h3 className="font-semibold text-foreground">{column.label}</h3>
               </div>
               <span className={clsx(
                 'px-2.5 py-1 rounded-full text-xs font-medium',
-                'bg-slate-700 text-slate-300'
+                'bg-muted text-muted-foreground'
               )}>
                 {columnMissions.length}
               </span>
@@ -48,7 +48,7 @@ export default function KanbanBoard({ missions, onMissionClick }: KanbanBoardPro
             {/* Column Content */}
             <div className="flex-1 space-y-4 overflow-y-auto pr-2 -mr-2">
               {columnMissions.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-12 text-slate-500">
+                <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
                   <Icon className="w-10 h-10 mb-3 opacity-30" />
                   <p className="text-sm">No missions</p>
                 </div>

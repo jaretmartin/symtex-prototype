@@ -23,7 +23,7 @@ const nodeCategories: { title: string; nodes: PaletteNode[] }[] = [
         description: 'When a new lead arrives',
         icon: 'zap',
         emoji: '⚡',
-        color: '#f59e0b',
+        color: 'var(--color-gold)',
       },
       {
         type: 'trigger',
@@ -31,7 +31,7 @@ const nodeCategories: { title: string; nodes: PaletteNode[] }[] = [
         description: 'When a form is submitted',
         icon: 'file-text',
         emoji: '📝',
-        color: '#f59e0b',
+        color: 'var(--color-gold)',
       },
       {
         type: 'trigger',
@@ -39,7 +39,7 @@ const nodeCategories: { title: string; nodes: PaletteNode[] }[] = [
         description: 'Run on a schedule',
         icon: 'calendar',
         emoji: '📅',
-        color: '#f59e0b',
+        color: 'var(--color-gold)',
       },
       {
         type: 'trigger',
@@ -47,7 +47,7 @@ const nodeCategories: { title: string; nodes: PaletteNode[] }[] = [
         description: 'HTTP webhook trigger',
         icon: 'link',
         emoji: '🔗',
-        color: '#f59e0b',
+        color: 'var(--color-gold)',
       },
     ],
   },
@@ -89,7 +89,7 @@ const nodeCategories: { title: string; nodes: PaletteNode[] }[] = [
         description: 'Send an email message',
         icon: 'mail',
         emoji: '📧',
-        color: '#6366f1',
+        color: 'var(--color-primary)',
       },
       {
         type: 'action',
@@ -97,7 +97,7 @@ const nodeCategories: { title: string; nodes: PaletteNode[] }[] = [
         description: 'Send text message',
         icon: 'message-square',
         emoji: '💬',
-        color: '#6366f1',
+        color: 'var(--color-primary)',
       },
       {
         type: 'action',
@@ -105,7 +105,7 @@ const nodeCategories: { title: string; nodes: PaletteNode[] }[] = [
         description: 'Update database record',
         icon: 'database',
         emoji: '🗄️',
-        color: '#6366f1',
+        color: 'var(--color-primary)',
       },
       {
         type: 'action',
@@ -113,7 +113,7 @@ const nodeCategories: { title: string; nodes: PaletteNode[] }[] = [
         description: 'Create a new Action',
         icon: 'check-square',
         emoji: '✅',
-        color: '#6366f1',
+        color: 'var(--color-primary)',
       },
       {
         type: 'action',
@@ -121,7 +121,7 @@ const nodeCategories: { title: string; nodes: PaletteNode[] }[] = [
         description: 'Send team notification',
         icon: 'bell',
         emoji: '🔔',
-        color: '#6366f1',
+        color: 'var(--color-primary)',
       },
       {
         type: 'action',
@@ -129,7 +129,7 @@ const nodeCategories: { title: string; nodes: PaletteNode[] }[] = [
         description: 'Make HTTP request',
         icon: 'globe',
         emoji: '🌐',
-        color: '#6366f1',
+        color: 'var(--color-primary)',
       },
     ],
   },
@@ -157,8 +157,8 @@ export default function NodePalette(_props: NodePaletteProps) {
     <div
       style={{
         width: '280px',
-        backgroundColor: '#0f0f1a',
-        borderRight: '1px solid #1e1e2e',
+        backgroundColor: 'var(--color-surface-base)',
+        borderRight: '1px solid var(--color-surface-card)',
         overflowY: 'auto',
         padding: '16px',
       }}
@@ -167,7 +167,7 @@ export default function NodePalette(_props: NodePaletteProps) {
         style={{
           fontSize: '12px',
           fontWeight: 600,
-          color: '#64748b',
+          color: 'var(--color-text-muted)',
           textTransform: 'uppercase',
           letterSpacing: '0.05em',
           marginBottom: '16px',
@@ -178,7 +178,7 @@ export default function NodePalette(_props: NodePaletteProps) {
       <p
         style={{
           fontSize: '12px',
-          color: '#94a3b8',
+          color: 'var(--color-text-muted)',
           marginBottom: '20px',
         }}
       >
@@ -191,7 +191,7 @@ export default function NodePalette(_props: NodePaletteProps) {
             style={{
               fontSize: '11px',
               fontWeight: 600,
-              color: '#64748b',
+              color: 'var(--color-text-muted)',
               textTransform: 'uppercase',
               letterSpacing: '0.05em',
               marginBottom: '12px',
@@ -210,20 +210,20 @@ export default function NodePalette(_props: NodePaletteProps) {
                   alignItems: 'center',
                   gap: '12px',
                   padding: '10px 12px',
-                  backgroundColor: '#1a1a2e',
+                  backgroundColor: 'var(--color-surface-card)',
                   borderRadius: '8px',
-                  border: '1px solid #2a2a3e',
+                  border: '1px solid var(--color-surface-elevated)',
                   cursor: 'grab',
                   transition: 'all 0.2s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#252540';
+                  e.currentTarget.style.backgroundColor = 'var(--color-surface-hover)';
                   e.currentTarget.style.borderColor = node.color;
                   e.currentTarget.style.transform = 'translateX(4px)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#1a1a2e';
-                  e.currentTarget.style.borderColor = '#2a2a3e';
+                  e.currentTarget.style.backgroundColor = 'var(--color-surface-card)';
+                  e.currentTarget.style.borderColor = 'var(--color-surface-elevated)';
                   e.currentTarget.style.transform = 'translateX(0)';
                 }}
               >
@@ -258,7 +258,7 @@ export default function NodePalette(_props: NodePaletteProps) {
                   <div
                     style={{
                       fontSize: '11px',
-                      color: '#64748b',
+                      color: 'var(--color-text-muted)',
                       whiteSpace: 'nowrap',
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',

@@ -96,8 +96,8 @@ export function DomainCard({
   return (
     <div
       className={clsx(
-        'group relative bg-zinc-900 rounded-xl border border-zinc-800',
-        'hover:border-zinc-700 transition-all cursor-pointer',
+        'group relative bg-surface-base rounded-xl border border-border',
+        'hover:border-border transition-all cursor-pointer',
         'overflow-hidden',
         className
       )}
@@ -145,10 +145,10 @@ export function DomainCard({
 
             {/* Title */}
             <div>
-              <h3 className="text-lg font-semibold text-white group-hover:text-symtex-primary transition-colors">
+              <h3 className="text-lg font-semibold text-foreground group-hover:text-symtex-primary transition-colors">
                 {domain.name}
               </h3>
-              <p className="text-sm text-zinc-500">
+              <p className="text-sm text-muted-foreground">
                 {totalProjects} {totalProjects === 1 ? 'project' : 'projects'}
               </p>
             </div>
@@ -162,8 +162,8 @@ export function DomainCard({
               className={clsx(
                 'p-2 rounded-lg transition-colors',
                 isMenuOpen
-                  ? 'bg-zinc-800 text-white'
-                  : 'text-zinc-500 hover:text-white hover:bg-zinc-800',
+                  ? 'bg-card text-foreground'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-card',
                 'opacity-0 group-hover:opacity-100 focus:opacity-100'
               )}
               aria-label="Domain actions"
@@ -172,12 +172,12 @@ export function DomainCard({
             </button>
 
             {isMenuOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl z-10 overflow-hidden">
+              <div className="absolute right-0 mt-2 w-48 bg-surface-base border border-border rounded-lg shadow-xl z-10 overflow-hidden">
                 {onAddProject && (
                   <button
                     type="button"
                     onClick={handleAction(onAddProject)}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-left text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors"
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left text-muted-foreground hover:bg-card hover:text-foreground transition-colors"
                   >
                     <FolderPlus className="w-4 h-4" />
                     Add Project
@@ -187,7 +187,7 @@ export function DomainCard({
                   <button
                     type="button"
                     onClick={handleAction(onRename)}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-left text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors"
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left text-muted-foreground hover:bg-card hover:text-foreground transition-colors"
                   >
                     <Edit3 className="w-4 h-4" />
                     Rename
@@ -197,7 +197,7 @@ export function DomainCard({
                   <button
                     type="button"
                     onClick={handleAction(onSettings)}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-left text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors"
+                    className="w-full flex items-center gap-3 px-4 py-3 text-left text-muted-foreground hover:bg-card hover:text-foreground transition-colors"
                   >
                     <Settings className="w-4 h-4" />
                     Settings
@@ -205,7 +205,7 @@ export function DomainCard({
                 )}
                 {onDelete && (
                   <>
-                    <div className="border-t border-zinc-800" />
+                    <div className="border-t border-border" />
                     <button
                       type="button"
                       onClick={handleAction(onDelete)}
@@ -224,23 +224,23 @@ export function DomainCard({
         {/* Stats Row */}
         <div className="grid grid-cols-3 gap-4 mb-4">
           <div className="text-center">
-            <p className="text-2xl font-semibold text-white">{activeProjects}</p>
-            <p className="text-xs text-zinc-500">Active</p>
+            <p className="text-2xl font-semibold text-foreground">{activeProjects}</p>
+            <p className="text-xs text-muted-foreground">Active</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-semibold text-green-400">{completedProjects}</p>
-            <p className="text-xs text-zinc-500">Completed</p>
+            <p className="text-xs text-muted-foreground">Completed</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-semibold text-zinc-400">{avgProgress}%</p>
-            <p className="text-xs text-zinc-500">Avg Progress</p>
+            <p className="text-2xl font-semibold text-muted-foreground">{avgProgress}%</p>
+            <p className="text-xs text-muted-foreground">Avg Progress</p>
           </div>
         </div>
 
         {/* Progress Bar */}
         {totalProjects > 0 && (
           <div className="mb-4">
-            <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+            <div className="h-2 bg-card rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full transition-all"
                 style={{
@@ -253,24 +253,24 @@ export function DomainCard({
         )}
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-3 border-t border-zinc-800">
+        <div className="flex items-center justify-between pt-3 border-t border-border">
           {/* Cognates */}
           {cognateCount > 0 ? (
-            <div className="flex items-center gap-2 text-zinc-400">
+            <div className="flex items-center gap-2 text-muted-foreground">
               <Bot className="w-4 h-4" />
               <span className="text-sm">
                 {cognateCount} {cognateCount === 1 ? 'cognate' : 'cognates'}
               </span>
             </div>
           ) : (
-            <div className="flex items-center gap-2 text-zinc-600">
+            <div className="flex items-center gap-2 text-muted-foreground">
               <Bot className="w-4 h-4" />
               <span className="text-sm">No cognates</span>
             </div>
           )}
 
           {/* Navigate CTA */}
-          <div className="flex items-center gap-1 text-sm text-zinc-400 group-hover:text-symtex-primary transition-colors">
+          <div className="flex items-center gap-1 text-sm text-muted-foreground group-hover:text-symtex-primary transition-colors">
             <span>View</span>
             <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </div>

@@ -168,8 +168,8 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
   if (!conflict) {
     return (
       <div className="p-12 text-center">
-        <AlertOctagon className="w-16 h-16 mx-auto mb-4 text-zinc-600" />
-        <h2 className="text-xl font-semibold text-zinc-300">Conflict Not Found</h2>
+        <AlertOctagon className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
+        <h2 className="text-xl font-semibold text-foreground">Conflict Not Found</h2>
         <button
           onClick={() => navigate(-1)}
           className="mt-4 px-4 py-2 bg-purple-600 text-white rounded-xl"
@@ -190,16 +190,16 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
         <div className="flex items-center gap-4">
           <button
             onClick={() => navigate(-1)}
-            className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
+            className="p-2 hover:bg-card rounded-lg transition-colors"
           >
-            <ArrowLeft className="w-5 h-5 text-zinc-400" />
+            <ArrowLeft className="w-5 h-5 text-muted-foreground" />
           </button>
           <div>
-            <h1 className="text-2xl font-bold flex items-center gap-2 text-zinc-100">
+            <h1 className="text-2xl font-bold flex items-center gap-2 text-foreground">
               <AlertOctagon className="w-7 h-7 text-purple-400" />
               Resolve Conflict
             </h1>
-            <p className="text-zinc-400 mt-1">{conflict.title}</p>
+            <p className="text-muted-foreground mt-1">{conflict.title}</p>
           </div>
         </div>
         <span className={clsx(
@@ -225,9 +225,9 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
             <div className="flex items-start gap-4">
               {getSeverityIcon(conflict.severity)}
               <div>
-                <h2 className="text-lg font-semibold text-zinc-100">{conflict.title}</h2>
-                <p className="text-zinc-400 mt-1">{conflict.description}</p>
-                <div className="flex items-center gap-4 mt-3 text-sm text-zinc-400">
+                <h2 className="text-lg font-semibold text-foreground">{conflict.title}</h2>
+                <p className="text-muted-foreground mt-1">{conflict.description}</p>
+                <div className="flex items-center gap-4 mt-3 text-sm text-muted-foreground">
                   <span className="flex items-center gap-1">
                     <Layers className="w-4 h-4" />
                     {typeConfig?.label}
@@ -240,8 +240,8 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
           </div>
 
           {/* Conflicting Rules */}
-          <div className="bg-zinc-800 border border-zinc-700 rounded-2xl p-6">
-            <h3 className="font-semibold mb-4 flex items-center gap-2 text-zinc-100">
+          <div className="bg-card border border-border rounded-2xl p-6">
+            <h3 className="font-semibold mb-4 flex items-center gap-2 text-foreground">
               <Code className="w-5 h-5 text-purple-400" />
               Conflicting Rules
             </h3>
@@ -253,16 +253,16 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
           </div>
 
           {/* Overlap Scenario */}
-          <div className="bg-zinc-800 border border-zinc-700 rounded-2xl p-6">
-            <h3 className="font-semibold mb-4 flex items-center gap-2 text-zinc-100">
+          <div className="bg-card border border-border rounded-2xl p-6">
+            <h3 className="font-semibold mb-4 flex items-center gap-2 text-foreground">
               <Eye className="w-5 h-5 text-purple-400" />
               Overlap Scenario
             </h3>
-            <p className="text-zinc-400 mb-4">{conflict.overlapScenario.description}</p>
+            <p className="text-muted-foreground mb-4">{conflict.overlapScenario.description}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 bg-zinc-900 rounded-xl">
-                <p className="text-sm font-medium mb-2 text-zinc-300">When these conditions occur:</p>
-                <pre className="text-sm font-mono bg-zinc-800 p-3 rounded-lg border border-zinc-700 text-zinc-300">
+              <div className="p-4 bg-surface-base rounded-xl">
+                <p className="text-sm font-medium mb-2 text-foreground">When these conditions occur:</p>
+                <pre className="text-sm font-mono bg-card p-3 rounded-lg border border-border text-foreground">
                   {JSON.stringify(conflict.overlapScenario.inputs, null, 2)}
                 </pre>
               </div>
@@ -281,8 +281,8 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
           </div>
 
           {/* Resolution Options */}
-          <div className="bg-zinc-800 border border-zinc-700 rounded-2xl p-6">
-            <h3 className="font-semibold mb-4 text-zinc-100">Choose Resolution Strategy</h3>
+          <div className="bg-card border border-border rounded-2xl p-6">
+            <h3 className="font-semibold mb-4 text-foreground">Choose Resolution Strategy</h3>
             <div className="space-y-4">
               {conflict.suggestedResolutions?.map((resolution, idx) => (
                 <label
@@ -291,7 +291,7 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
                     'block p-4 rounded-xl border-2 cursor-pointer transition-all',
                     selectedResolution === idx
                       ? 'border-purple-500 bg-purple-900/20'
-                      : 'border-zinc-700 hover:border-zinc-600'
+                      : 'border-border hover:border-border'
                   )}
                 >
                   <div className="flex items-start gap-3">
@@ -309,7 +309,7 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         {getStrategyIcon(resolution.strategy)}
-                        <span className="font-medium text-zinc-100">
+                        <span className="font-medium text-foreground">
                           {RESOLUTION_STRATEGIES[resolution.strategy]?.label || resolution.strategy}
                         </span>
                         {resolution.recommended && (
@@ -319,14 +319,14 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-zinc-400">{resolution.description}</p>
-                      <p className="text-xs text-zinc-500 mt-2">
+                      <p className="text-sm text-muted-foreground">{resolution.description}</p>
+                      <p className="text-xs text-muted-foreground mt-2">
                         <span className="font-medium">Impact:</span> {resolution.impact}
                       </p>
 
                       {selectedResolution === idx && showPreview && resolution.preview && (
-                        <div className="mt-4 bg-zinc-900 rounded-lg p-4 overflow-x-auto">
-                          <p className="text-xs text-zinc-400 mb-2">Preview:</p>
+                        <div className="mt-4 bg-surface-base rounded-lg p-4 overflow-x-auto">
+                          <p className="text-xs text-muted-foreground mb-2">Preview:</p>
                           <pre className="text-sm text-green-400 font-mono whitespace-pre">
                             {resolution.preview}
                           </pre>
@@ -340,13 +340,13 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
           </div>
 
           {/* Notes */}
-          <div className="bg-zinc-800 border border-zinc-700 rounded-2xl p-6">
-            <h3 className="font-semibold mb-4 text-zinc-100">Resolution Notes</h3>
+          <div className="bg-card border border-border rounded-2xl p-6">
+            <h3 className="font-semibold mb-4 text-foreground">Resolution Notes</h3>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Add context or reasoning for this resolution..."
-              className="w-full px-4 py-3 bg-zinc-900 rounded-xl border border-zinc-700 focus:border-purple-500 outline-none transition-all resize-none text-zinc-100 placeholder-zinc-500"
+              className="w-full px-4 py-3 bg-surface-base rounded-xl border border-border focus:border-purple-500 outline-none transition-all resize-none text-foreground placeholder-muted-foreground"
               rows={3}
             />
           </div>
@@ -355,7 +355,7 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
           <div className="flex justify-end gap-3">
             <button
               onClick={() => navigate(-1)}
-              className="px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-xl hover:bg-zinc-700 transition-colors text-zinc-300"
+              className="px-4 py-2 bg-card border border-border rounded-xl hover:bg-muted transition-colors text-foreground"
             >
               Cancel
             </button>
@@ -382,17 +382,17 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Affected SOPs */}
-          <div className="bg-zinc-800 border border-zinc-700 rounded-2xl p-4">
-            <h4 className="font-medium mb-4 text-zinc-100">Affected SOPs</h4>
+          <div className="bg-card border border-border rounded-2xl p-4">
+            <h4 className="font-medium mb-4 text-foreground">Affected SOPs</h4>
             <div className="space-y-3">
               {conflict.affectedSOPs.map((sop) => (
-                <div key={sop.id} className="p-3 bg-zinc-900 rounded-lg">
-                  <p className="font-medium text-sm text-zinc-200">{sop.title}</p>
+                <div key={sop.id} className="p-3 bg-surface-base rounded-lg">
+                  <p className="font-medium text-sm text-foreground">{sop.title}</p>
                   <div className="flex flex-wrap gap-1 mt-2">
                     {sop.rules.map((rule) => (
                       <span
                         key={rule}
-                        className="px-2 py-0.5 bg-zinc-800 rounded text-xs font-mono border border-zinc-700 text-zinc-400"
+                        className="px-2 py-0.5 bg-card rounded text-xs font-mono border border-border text-muted-foreground"
                       >
                         {rule}
                       </span>
@@ -405,8 +405,8 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
 
           {/* History */}
           {history.length > 0 && (
-            <div className="bg-zinc-800 border border-zinc-700 rounded-2xl p-4">
-              <h4 className="font-medium mb-4 flex items-center gap-2 text-zinc-100">
+            <div className="bg-card border border-border rounded-2xl p-4">
+              <h4 className="font-medium mb-4 flex items-center gap-2 text-foreground">
                 <History className="w-4 h-4 text-purple-400" />
                 History
               </h4>
@@ -420,13 +420,13 @@ export function ConflictResolver({ conflictId: _propConflictId }: ConflictResolv
                       entry.action === 'acknowledged' && 'bg-blue-500'
                     )} />
                     <div className="flex-1">
-                      <p className="text-sm text-zinc-300">
+                      <p className="text-sm text-foreground">
                         <span className="font-medium capitalize">{entry.action}</span> by {entry.user}
                       </p>
                       {entry.notes && (
-                        <p className="text-xs text-zinc-500 mt-1">{entry.notes}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{entry.notes}</p>
                       )}
-                      <p className="text-xs text-zinc-500 mt-1">
+                      <p className="text-xs text-muted-foreground mt-1">
                         {entry.timestamp.toLocaleString()}
                       </p>
                     </div>

@@ -51,8 +51,8 @@ export function SymbiosFloatingButton({
         <div
           className={cn(
             'absolute bottom-full mb-2 px-3 py-2 rounded-lg',
-            'bg-zinc-800 border border-zinc-700 shadow-lg',
-            'text-sm text-zinc-200 whitespace-nowrap',
+            'bg-card border border-border shadow-lg',
+            'text-sm text-foreground whitespace-nowrap',
             'animate-fade-in-up',
             position === 'bottom-right' ? 'right-0' : 'left-0'
           )}
@@ -61,7 +61,7 @@ export function SymbiosFloatingButton({
           {/* Arrow */}
           <div
             className={cn(
-              'absolute -bottom-1.5 w-3 h-3 bg-zinc-800 border-b border-r border-zinc-700 rotate-45',
+              'absolute -bottom-1.5 w-3 h-3 bg-card border-b border-r border-border rotate-45',
               position === 'bottom-right' ? 'right-5' : 'left-5'
             )}
           />
@@ -79,7 +79,7 @@ export function SymbiosFloatingButton({
           'transition-all duration-300 ease-out',
           'focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-zinc-900',
           isOpen
-            ? 'bg-zinc-800 hover:bg-zinc-700 rotate-0'
+            ? 'bg-card hover:bg-muted rotate-0'
             : 'bg-gradient-to-br from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500',
           isActive && !isOpen && 'animate-pulse-subtle',
           isHovered && !isOpen && 'scale-110'
@@ -102,9 +102,9 @@ export function SymbiosFloatingButton({
           )}
         >
           {isOpen ? (
-            <X className="w-6 h-6 text-zinc-200" />
+            <X className="w-6 h-6 text-foreground" />
           ) : (
-            <Sparkles className="w-6 h-6 text-white" />
+            <Sparkles className="w-6 h-6 text-foreground" />
           )}
         </span>
 
@@ -115,7 +115,7 @@ export function SymbiosFloatingButton({
               'absolute -top-1 -right-1',
               'flex items-center justify-center',
               'min-w-[20px] h-5 px-1.5 rounded-full',
-              'bg-red-500 text-white text-xs font-bold',
+              'bg-red-500 text-foreground text-xs font-bold',
               'shadow-lg animate-scale-in'
             )}
           >
@@ -129,15 +129,15 @@ export function SymbiosFloatingButton({
         <div
           className={cn(
             'absolute top-1/2 -translate-y-1/2 px-2 py-1 rounded',
-            'bg-zinc-800/90 border border-zinc-700',
-            'text-xs text-zinc-400 whitespace-nowrap',
+            'bg-card/90 border border-border',
+            'text-xs text-muted-foreground whitespace-nowrap',
             'animate-fade-in',
             position === 'bottom-right' ? 'right-full mr-3' : 'left-full ml-3'
           )}
         >
-          <kbd className="px-1.5 py-0.5 rounded bg-zinc-700 font-mono">Cmd</kbd>
+          <kbd className="px-1.5 py-0.5 rounded bg-muted font-mono">Cmd</kbd>
           {' + '}
-          <kbd className="px-1.5 py-0.5 rounded bg-zinc-700 font-mono">K</kbd>
+          <kbd className="px-1.5 py-0.5 rounded bg-muted font-mono">K</kbd>
         </div>
       )}
     </div>
@@ -167,8 +167,8 @@ export function SymbiosMinimizedBar({
   const statusColors = {
     online: 'bg-emerald-500',
     busy: 'bg-amber-500',
-    away: 'bg-zinc-500',
-    offline: 'bg-zinc-600',
+    away: 'bg-muted',
+    offline: 'bg-muted',
   };
 
   return (
@@ -176,7 +176,7 @@ export function SymbiosMinimizedBar({
       className={cn(
         'fixed bottom-6 right-6 z-50',
         'flex items-center gap-3 px-4 py-3 rounded-xl',
-        'bg-zinc-800 border border-zinc-700 shadow-xl',
+        'bg-card border border-border shadow-xl',
         'animate-slide-in-right',
         className
       )}
@@ -187,16 +187,16 @@ export function SymbiosMinimizedBar({
         className="relative flex-shrink-0"
       >
         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-          <Sparkles className="w-5 h-5 text-white" />
+          <Sparkles className="w-5 h-5 text-foreground" />
         </div>
         <span
           className={cn(
-            'absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-zinc-800',
+            'absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-border',
             statusColors[status]
           )}
         />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-xs font-bold flex items-center justify-center">
+          <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-foreground text-xs font-bold flex items-center justify-center">
             {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )}
@@ -207,15 +207,15 @@ export function SymbiosMinimizedBar({
         onClick={onClick}
         className="flex flex-col items-start min-w-0"
       >
-        <span className="text-sm font-medium text-zinc-200">{cognateName}</span>
-        <span className="text-xs text-zinc-500 capitalize">{status}</span>
+        <span className="text-sm font-medium text-foreground">{cognateName}</span>
+        <span className="text-xs text-muted-foreground capitalize">{status}</span>
       </button>
 
       {/* Actions */}
       <div className="flex items-center gap-1 ml-2">
         <button
           onClick={onClick}
-          className="p-2 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700 rounded-lg transition-colors"
+          className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
           title="Open chat"
         >
           <MessageCircle className="w-4 h-4" />
@@ -225,7 +225,7 @@ export function SymbiosMinimizedBar({
             e.stopPropagation();
             onClose();
           }}
-          className="p-2 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700 rounded-lg transition-colors"
+          className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
           title="Close"
         >
           <X className="w-4 h-4" />

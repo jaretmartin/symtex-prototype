@@ -36,7 +36,7 @@ const statusConfig: Record<
   idle: {
     icon: Pause,
     label: 'Idle',
-    color: 'text-zinc-400',
+    color: 'text-muted-foreground',
   },
   training: {
     icon: BookOpen,
@@ -108,13 +108,13 @@ export function CognateStatusWidget({
 
   if (isLoading) {
     return (
-      <div className={clsx('bg-zinc-900/50 border border-zinc-800 rounded-lg', className)}>
-        <div className="p-4 border-b border-zinc-800">
-          <div className="h-5 w-32 bg-zinc-800 rounded animate-pulse" />
+      <div className={clsx('bg-surface-base/50 border border-border rounded-lg', className)}>
+        <div className="p-4 border-b border-border">
+          <div className="h-5 w-32 bg-card rounded animate-pulse" />
         </div>
         <div className="p-4 space-y-3">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="h-14 bg-zinc-800/50 rounded animate-pulse" />
+            <div key={i} className="h-14 bg-card/50 rounded animate-pulse" />
           ))}
         </div>
       </div>
@@ -124,13 +124,13 @@ export function CognateStatusWidget({
   return (
     <div
       className={clsx(
-        'bg-zinc-900/50 border border-zinc-800 rounded-lg overflow-hidden',
+        'bg-surface-base/50 border border-border rounded-lg overflow-hidden',
         className
       )}
     >
       {/* Header */}
-      <div className="p-4 border-b border-zinc-800 flex items-center justify-between">
-        <h3 className="font-semibold text-white flex items-center gap-2">
+      <div className="p-4 border-b border-border flex items-center justify-between">
+        <h3 className="font-semibold text-foreground flex items-center gap-2">
           <Brain className="w-4 h-4 text-symtex-primary" />
           Cognate Status
         </h3>
@@ -157,8 +157,8 @@ export function CognateStatusWidget({
 
         {cognateStatuses.length === 0 && (
           <div className="p-8 text-center">
-            <Brain className="w-8 h-8 text-zinc-600 mx-auto mb-2" />
-            <p className="text-sm text-zinc-500">No Cognates configured</p>
+            <Brain className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
+            <p className="text-sm text-muted-foreground">No Cognates configured</p>
           </div>
         )}
       </div>
@@ -176,7 +176,7 @@ function CognateStatusRow({ cognate }: CognateStatusRowProps): JSX.Element {
   const StatusIcon = status.icon;
 
   return (
-    <div className="p-4 hover:bg-zinc-800/30 transition-colors">
+    <div className="p-4 hover:bg-card/30 transition-colors">
       <div className="flex items-center gap-3">
         {/* Avatar / Health Indicator */}
         <div className="relative">
@@ -188,13 +188,13 @@ function CognateStatusRow({ cognate }: CognateStatusRowProps): JSX.Element {
             />
           ) : (
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-symtex-primary to-purple-600 flex items-center justify-center">
-              <Brain className="w-5 h-5 text-white" />
+              <Brain className="w-5 h-5 text-foreground" />
             </div>
           )}
           {/* Health dot */}
           <span
             className={clsx(
-              'absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-zinc-900',
+              'absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-surface-base',
               health.color
             )}
             title={health.label}
@@ -204,7 +204,7 @@ function CognateStatusRow({ cognate }: CognateStatusRowProps): JSX.Element {
         {/* Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <h4 className="font-medium text-white text-sm">{cognate.name}</h4>
+            <h4 className="font-medium text-foreground text-sm">{cognate.name}</h4>
             <div className={clsx('flex items-center gap-1 text-xs', status.color)}>
               <StatusIcon
                 className={clsx('w-3 h-3', status.animate && 'animate-spin')}
@@ -215,7 +215,7 @@ function CognateStatusRow({ cognate }: CognateStatusRowProps): JSX.Element {
 
           {/* Current Action */}
           {cognate.currentAction && (
-            <p className="text-xs text-zinc-400 truncate mt-0.5">
+            <p className="text-xs text-muted-foreground truncate mt-0.5">
               {cognate.currentAction}
             </p>
           )}
@@ -224,7 +224,7 @@ function CognateStatusRow({ cognate }: CognateStatusRowProps): JSX.Element {
           {cognate.progress !== undefined &&
             (cognate.status === 'working' || cognate.status === 'training') && (
               <div className="flex items-center gap-2 mt-1.5">
-                <div className="flex-1 h-1 bg-zinc-700 rounded-full overflow-hidden">
+                <div className="flex-1 h-1 bg-muted rounded-full overflow-hidden">
                   <div
                     className={clsx(
                       'h-full rounded-full transition-all duration-500',
@@ -235,13 +235,13 @@ function CognateStatusRow({ cognate }: CognateStatusRowProps): JSX.Element {
                     style={{ width: `${cognate.progress}%` }}
                   />
                 </div>
-                <span className="text-xs text-zinc-500">{cognate.progress}%</span>
+                <span className="text-xs text-muted-foreground">{cognate.progress}%</span>
               </div>
             )}
         </div>
 
         {/* Last Activity */}
-        <div className="text-xs text-zinc-500 flex-shrink-0">
+        <div className="text-xs text-muted-foreground flex-shrink-0">
           {formatLastActivity(cognate.lastActivity)}
         </div>
       </div>

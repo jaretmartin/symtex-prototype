@@ -28,7 +28,7 @@ export function VoiceCommandButton({
           'p-3 rounded-full transition-colors',
           isListening
             ? 'bg-red-500 text-white'
-            : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+            : 'bg-muted text-muted-foreground hover:bg-muted'
         )}
         aria-label={isListening ? 'Stop voice commands' : 'Start voice commands'}
       >
@@ -48,7 +48,7 @@ export function VoiceCommandButton({
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-slate-800 rounded-lg text-sm text-white whitespace-nowrap"
+          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-card rounded-lg text-sm text-foreground whitespace-nowrap"
         >
           {transcript}
         </motion.div>

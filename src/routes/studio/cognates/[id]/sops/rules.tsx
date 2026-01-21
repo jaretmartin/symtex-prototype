@@ -70,8 +70,8 @@ export function S1RuleViewerRoute(): JSX.Element {
   if (!cognate) {
     return (
       <div className="p-6 text-center">
-        <h2 className="text-xl font-medium text-white mb-2">Cognate Not Found</h2>
-        <p className="text-zinc-400 mb-4">The requested Cognate does not exist.</p>
+        <h2 className="text-xl font-medium text-foreground mb-2">Cognate Not Found</h2>
+        <p className="text-muted-foreground mb-4">The requested Cognate does not exist.</p>
         <Link
           to="/studio/cognates"
           className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300"
@@ -86,8 +86,8 @@ export function S1RuleViewerRoute(): JSX.Element {
   if (!sop) {
     return (
       <div className="p-6 text-center">
-        <h2 className="text-xl font-medium text-white mb-2">SOP Not Found</h2>
-        <p className="text-zinc-400 mb-4">The requested SOP does not exist.</p>
+        <h2 className="text-xl font-medium text-foreground mb-2">SOP Not Found</h2>
+        <p className="text-muted-foreground mb-4">The requested SOP does not exist.</p>
         <Link
           to={`/studio/cognates/${id}/sops`}
           className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300"
@@ -120,31 +120,31 @@ export function S1RuleViewerRoute(): JSX.Element {
   return (
     <div className="h-[calc(100vh-64px)] flex flex-col">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-zinc-800 bg-zinc-900/50">
+      <div className="px-6 py-4 border-b border-border bg-surface-base/50">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link
               to={`/studio/cognates/${id}/sops`}
-              className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
+              className="p-2 hover:bg-card rounded-lg transition-colors"
             >
-              <ArrowLeft className="w-5 h-5 text-zinc-400" />
+              <ArrowLeft className="w-5 h-5 text-muted-foreground" />
             </Link>
             <div>
-              <div className="flex items-center gap-2 text-sm text-zinc-400 mb-1">
-                <Link to="/studio/cognates" className="hover:text-white transition-colors">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
+                <Link to="/studio/cognates" className="hover:text-foreground transition-colors">
                   Cognates
                 </Link>
                 <ChevronRight className="w-4 h-4" />
                 <Link
                   to={`/studio/cognates/${id}/sops`}
-                  className="hover:text-white transition-colors"
+                  className="hover:text-foreground transition-colors"
                 >
                   {cognate.name}
                 </Link>
                 <ChevronRight className="w-4 h-4" />
-                <span className="text-white">{sop.name}</span>
+                <span className="text-foreground">{sop.name}</span>
               </div>
-              <h1 className="text-xl font-bold text-white flex items-center gap-2">
+              <h1 className="text-xl font-bold text-foreground flex items-center gap-2">
                 <Code2 className="w-5 h-5 text-blue-400" />
                 S1 Rule Viewer
               </h1>
@@ -155,7 +155,7 @@ export function S1RuleViewerRoute(): JSX.Element {
             <button
               type="button"
               onClick={() => navigate(`/studio/cognates/${id}/sops/${sopId}/validate`)}
-              className="flex items-center gap-2 px-3 py-2 border border-zinc-700 text-zinc-300 rounded-lg hover:bg-zinc-800 transition-colors"
+              className="flex items-center gap-2 px-3 py-2 border border-border text-muted-foreground rounded-lg hover:bg-card transition-colors"
             >
               <Shield className="w-4 h-4" />
               Validate
@@ -163,7 +163,7 @@ export function S1RuleViewerRoute(): JSX.Element {
             <button
               type="button"
               onClick={() => navigate(`/studio/cognates/${id}/sops/${sopId}/edit`)}
-              className="flex items-center gap-2 px-3 py-2 border border-zinc-700 text-zinc-300 rounded-lg hover:bg-zinc-800 transition-colors"
+              className="flex items-center gap-2 px-3 py-2 border border-border text-muted-foreground rounded-lg hover:bg-card transition-colors"
             >
               <Pencil className="w-4 h-4" />
               Edit SOP
@@ -171,7 +171,7 @@ export function S1RuleViewerRoute(): JSX.Element {
             <button
               type="button"
               onClick={handleCopy}
-              className="flex items-center gap-2 px-3 py-2 border border-zinc-700 text-zinc-300 rounded-lg hover:bg-zinc-800 transition-colors"
+              className="flex items-center gap-2 px-3 py-2 border border-border text-muted-foreground rounded-lg hover:bg-card transition-colors"
             >
               {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
               {copied ? 'Copied!' : 'Copy'}
@@ -179,7 +179,7 @@ export function S1RuleViewerRoute(): JSX.Element {
             <button
               type="button"
               onClick={handleDownload}
-              className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors"
+              className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-foreground rounded-lg hover:bg-blue-500 transition-colors"
             >
               <Download className="w-4 h-4" />
               Download .s1
@@ -191,9 +191,9 @@ export function S1RuleViewerRoute(): JSX.Element {
       {/* Content */}
       <div className="flex-1 flex overflow-hidden">
         {/* Rules sidebar */}
-        <div className="w-64 border-r border-zinc-800 bg-zinc-900/30 overflow-y-auto">
+        <div className="w-64 border-r border-border bg-surface-base/30 overflow-y-auto">
           <div className="p-4">
-            <h2 className="text-sm font-medium text-zinc-400 uppercase tracking-wider mb-3">
+            <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-3">
               Rules ({sop.rules?.length || 0})
             </h2>
             <div className="space-y-1">
@@ -203,7 +203,7 @@ export function S1RuleViewerRoute(): JSX.Element {
                 className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left transition-colors ${
                   selectedRuleIndex === null
                     ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30'
-                    : 'text-zinc-400 hover:bg-zinc-800'
+                    : 'text-muted-foreground hover:bg-card'
                 }`}
               >
                 <FileCode className="w-4 h-4" />
@@ -217,7 +217,7 @@ export function S1RuleViewerRoute(): JSX.Element {
                   className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left transition-colors ${
                     selectedRuleIndex === index
                       ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30'
-                      : 'text-zinc-400 hover:bg-zinc-800'
+                      : 'text-muted-foreground hover:bg-muted'
                   }`}
                 >
                   <Eye className="w-4 h-4" />

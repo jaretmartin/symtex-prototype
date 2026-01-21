@@ -67,7 +67,7 @@ export function SymbiosSuggestions({
       case 'follow-up':
         return 'border-amber-500/30 hover:border-amber-500/50 hover:bg-amber-500/5';
       default:
-        return 'border-zinc-700 hover:border-zinc-600 hover:bg-zinc-800/50';
+        return 'border-border hover:border-border hover:bg-card/50';
     }
   };
 
@@ -80,7 +80,7 @@ export function SymbiosSuggestions({
             onClick={() => onSelect(suggestion)}
             className={cn(
               'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full',
-              'text-xs text-zinc-300 border transition-all',
+              'text-xs text-muted-foreground border transition-all',
               getCategoryColor(suggestion.category)
             )}
           >
@@ -101,7 +101,7 @@ export function SymbiosSuggestions({
             onClick={() => onSelect(suggestion)}
             className={cn(
               'flex items-center gap-2 p-3 rounded-lg',
-              'text-left text-sm text-zinc-300 border transition-all',
+              'text-left text-sm text-muted-foreground border transition-all',
               getCategoryColor(suggestion.category)
             )}
           >
@@ -118,7 +118,7 @@ export function SymbiosSuggestions({
               {getIcon(suggestion.action)}
             </div>
             <span className="flex-1">{suggestion.label}</span>
-            <ArrowRight className="w-3.5 h-3.5 text-zinc-500" />
+            <ArrowRight className="w-3.5 h-3.5 text-muted-foreground" />
           </button>
         ))}
       </div>
@@ -135,7 +135,7 @@ export function SymbiosSuggestions({
             onClick={() => onSelect(suggestion)}
             className={cn(
               'flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-lg',
-              'text-xs text-zinc-300 border transition-all whitespace-nowrap',
+              'text-xs text-muted-foreground border transition-all whitespace-nowrap',
               getCategoryColor(suggestion.category)
             )}
           >
@@ -175,7 +175,7 @@ export function SymbiosSuggestionCard({
         'flex items-start gap-3 p-4 rounded-xl text-left transition-all',
         variant === 'featured'
           ? 'bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 hover:border-indigo-500/40'
-          : 'bg-zinc-800/50 border border-zinc-700 hover:border-zinc-600 hover:bg-zinc-800',
+          : 'bg-card/50 border border-border hover:border-border hover:bg-card',
         className
       )}
     >
@@ -184,16 +184,16 @@ export function SymbiosSuggestionCard({
           'flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center',
           variant === 'featured'
             ? 'bg-indigo-500/20 text-indigo-400'
-            : 'bg-zinc-700 text-zinc-300'
+            : 'bg-muted text-muted-foreground'
         )}
       >
         {icon}
       </div>
       <div className="flex-1 min-w-0">
-        <h4 className="font-medium text-zinc-100 mb-0.5">{title}</h4>
-        <p className="text-sm text-zinc-400 line-clamp-2">{description}</p>
+        <h4 className="font-medium text-foreground mb-0.5">{title}</h4>
+        <p className="text-sm text-muted-foreground line-clamp-2">{description}</p>
       </div>
-      <ArrowRight className="flex-shrink-0 w-4 h-4 text-zinc-500 mt-1" />
+      <ArrowRight className="flex-shrink-0 w-4 h-4 text-muted-foreground mt-1" />
     </button>
   );
 }
@@ -241,32 +241,32 @@ export function SymbiosEmptyState({
     <div className={cn('flex flex-col items-center justify-center p-6', className)}>
       {/* Welcome message */}
       <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-4">
-        <Sparkles className="w-8 h-8 text-white" />
+        <Sparkles className="w-8 h-8 text-foreground" />
       </div>
-      <h3 className="text-lg font-semibold text-zinc-100 mb-1">
+      <h3 className="text-lg font-semibold text-foreground mb-1">
         Welcome to Symbios
       </h3>
-      <p className="text-sm text-zinc-400 text-center mb-6 max-w-sm">
+      <p className="text-sm text-muted-foreground text-center mb-6 max-w-sm">
         I'm Aria, your assistant. I can help you with tasks, answer questions,
         and coordinate with your Cognates.
       </p>
 
       {/* Featured actions */}
       <div className="w-full max-w-md space-y-2">
-        <p className="text-xs text-zinc-500 font-medium mb-2">Try asking me to:</p>
+        <p className="text-xs text-muted-foreground font-medium mb-2">Try asking me to:</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {featuredActions.map((action) => (
             <button
               key={action.title}
               onClick={() => onSuggestionSelect(action.prompt)}
-              className="flex items-center gap-3 p-3 rounded-lg text-left bg-zinc-800/50 border border-zinc-700 hover:border-zinc-600 hover:bg-zinc-800 transition-all"
+              className="flex items-center gap-3 p-3 rounded-lg text-left bg-card/50 border border-border hover:border-border hover:bg-card transition-all"
             >
-              <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-zinc-700 flex items-center justify-center text-zinc-300">
+              <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-muted flex items-center justify-center text-muted-foreground">
                 {action.icon}
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-medium text-zinc-200">{action.title}</h4>
-                <p className="text-xs text-zinc-500 truncate">{action.description}</p>
+                <h4 className="text-sm font-medium text-foreground">{action.title}</h4>
+                <p className="text-xs text-muted-foreground truncate">{action.description}</p>
               </div>
             </button>
           ))}

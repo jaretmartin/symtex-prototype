@@ -43,7 +43,7 @@ function DomainCard({
     <div
       className={clsx(
         'bg-card rounded-xl border border-border p-6',
-        'hover:border-slate-600 transition-all duration-200 cursor-pointer group'
+        'hover:border-muted transition-all duration-200 cursor-pointer group'
       )}
       onClick={onSelect}
       onKeyDown={(e) => {
@@ -71,14 +71,14 @@ function DomainCard({
             e.stopPropagation();
             onEdit?.();
           }}
-          className="p-2 rounded-lg text-muted-foreground hover:text-white hover:bg-slate-700 opacity-0 group-hover:opacity-100 transition-all"
+          className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted opacity-0 group-hover:opacity-100 transition-all"
           aria-label={`Edit ${domain.name}`}
         >
           <MoreHorizontal className="w-4 h-4" aria-hidden="true" />
         </button>
       </div>
 
-      <h3 className="text-lg font-semibold text-white mb-1">{domain.name}</h3>
+      <h3 className="text-lg font-semibold text-foreground mb-1">{domain.name}</h3>
       <div className="mb-4" />
 
       <div className="flex items-center justify-between">
@@ -112,14 +112,14 @@ function ProjectCard({
     active: 'bg-green-500/20 text-green-400',
     planning: 'bg-blue-500/20 text-blue-400',
     paused: 'bg-yellow-500/20 text-yellow-400',
-    completed: 'bg-slate-500/20 text-muted-foreground',
+    completed: 'bg-muted/20 text-muted-foreground',
   };
 
   return (
     <div
       className={clsx(
         'bg-card rounded-xl border border-border p-5',
-        'hover:border-slate-600 transition-all duration-200 cursor-pointer group'
+        'hover:border-muted transition-all duration-200 cursor-pointer group'
       )}
       onClick={onSelect}
       onKeyDown={(e) => {
@@ -137,7 +137,7 @@ function ProjectCard({
           <FolderKanban className="w-5 h-5 text-indigo-400" aria-hidden="true" />
         </div>
         <div className="flex-1 min-w-0">
-          <h4 className="font-medium text-white truncate">{project.name}</h4>
+          <h4 className="font-medium text-foreground truncate">{project.name}</h4>
           <span
             className={clsx(
               'inline-block px-2 py-0.5 rounded-full text-xs font-medium mt-1',
@@ -252,7 +252,7 @@ export default function SpacesPage(): JSX.Element {
           navigate('/spaces');
         }}
         className={clsx(
-          'text-muted-foreground hover:text-white transition-colors',
+          'text-muted-foreground hover:text-foreground transition-colors',
           !domainId && 'text-symtex-primary'
         )}
       >
@@ -268,7 +268,7 @@ export default function SpacesPage(): JSX.Element {
               navigate(`/spaces/${selectedDomain.id}`);
             }}
             className={clsx(
-              'text-muted-foreground hover:text-white transition-colors',
+              'text-muted-foreground hover:text-foreground transition-colors',
               !projectId && 'text-symtex-primary'
             )}
           >
@@ -290,7 +290,7 @@ export default function SpacesPage(): JSX.Element {
     <>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-semibold text-white">Domains</h2>
+          <h2 className="text-xl font-semibold text-foreground">Domains</h2>
           <p className="text-muted-foreground text-sm">
             Organize your work into logical domains
           </p>
@@ -298,7 +298,7 @@ export default function SpacesPage(): JSX.Element {
         <button
           type="button"
           onClick={() => handleAddNew('domain')}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border text-slate-300 hover:text-white hover:border-border transition-all text-sm"
+          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground hover:border-border transition-all text-sm"
         >
           <Plus className="w-4 h-4" aria-hidden="true" />
           New Domain
@@ -319,12 +319,12 @@ export default function SpacesPage(): JSX.Element {
       ) : (
         <div className="flex flex-col items-center justify-center min-h-[300px] bg-card rounded-xl border border-border">
           <Folder className="w-12 h-12 text-muted-foreground mb-4" aria-hidden="true" />
-          <h3 className="text-lg font-semibold text-white mb-2">No Domains Yet</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-2">No Domains Yet</h3>
           <p className="text-muted-foreground mb-4">Create your first domain to get started</p>
           <button
             type="button"
             onClick={() => handleAddNew('domain')}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg gradient-primary text-white font-medium hover:opacity-90 transition-opacity"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg gradient-primary text-foreground font-medium hover:opacity-90 transition-opacity"
           >
             <Plus className="w-4 h-4" aria-hidden="true" />
             Create Domain
@@ -339,7 +339,7 @@ export default function SpacesPage(): JSX.Element {
     <>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-semibold text-white">Projects</h2>
+          <h2 className="text-xl font-semibold text-foreground">Projects</h2>
           <p className="text-muted-foreground text-sm">
             Projects in {selectedDomain?.name}
           </p>
@@ -347,7 +347,7 @@ export default function SpacesPage(): JSX.Element {
         <button
           type="button"
           onClick={() => handleAddNew('project')}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border text-slate-300 hover:text-white hover:border-border transition-all text-sm"
+          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground hover:border-border transition-all text-sm"
         >
           <Plus className="w-4 h-4" aria-hidden="true" />
           New Project
@@ -368,14 +368,14 @@ export default function SpacesPage(): JSX.Element {
       ) : (
         <div className="flex flex-col items-center justify-center min-h-[200px] bg-card rounded-xl border border-border">
           <FolderKanban className="w-10 h-10 text-muted-foreground mb-3" aria-hidden="true" />
-          <h3 className="font-semibold text-white mb-2">No Projects Yet</h3>
+          <h3 className="font-semibold text-foreground mb-2">No Projects Yet</h3>
           <p className="text-muted-foreground text-sm mb-4">
             Create your first project in this domain
           </p>
           <button
             type="button"
             onClick={() => handleAddNew('project')}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg gradient-primary text-white text-sm font-medium hover:opacity-90 transition-opacity"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg gradient-primary text-foreground text-sm font-medium hover:opacity-90 transition-opacity"
           >
             <Plus className="w-4 h-4" aria-hidden="true" />
             Create Project
@@ -390,7 +390,7 @@ export default function SpacesPage(): JSX.Element {
     <>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-semibold text-white">Missions</h2>
+          <h2 className="text-xl font-semibold text-foreground">Missions</h2>
           <p className="text-muted-foreground text-sm">
             Missions in {selectedProject?.name}
           </p>
@@ -398,7 +398,7 @@ export default function SpacesPage(): JSX.Element {
         <button
           type="button"
           onClick={() => handleAddNew('mission')}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border text-slate-300 hover:text-white hover:border-border transition-all text-sm"
+          className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground hover:border-border transition-all text-sm"
         >
           <Plus className="w-4 h-4" aria-hidden="true" />
           New Mission
@@ -413,7 +413,7 @@ export default function SpacesPage(): JSX.Element {
               className={clsx(
                 'flex items-center justify-between p-4 rounded-lg',
                 'bg-card border border-border',
-                'hover:border-slate-600 transition-all cursor-pointer'
+                'hover:border-muted transition-all cursor-pointer'
               )}
               onClick={() => handleMissionSelect(mission.id, mission.name)}
               onKeyDown={(e) => {
@@ -430,7 +430,7 @@ export default function SpacesPage(): JSX.Element {
                   <Target className="w-4 h-4 text-amber-400" aria-hidden="true" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-white">{mission.name}</h4>
+                  <h4 className="font-medium text-foreground">{mission.name}</h4>
                   <span className="text-xs text-muted-foreground capitalize">
                     {mission.status}
                   </span>
@@ -443,14 +443,14 @@ export default function SpacesPage(): JSX.Element {
       ) : (
         <div className="flex flex-col items-center justify-center min-h-[200px] bg-card rounded-xl border border-border">
           <Target className="w-10 h-10 text-muted-foreground mb-3" aria-hidden="true" />
-          <h3 className="font-semibold text-white mb-2">No Missions Yet</h3>
+          <h3 className="font-semibold text-foreground mb-2">No Missions Yet</h3>
           <p className="text-muted-foreground text-sm mb-4">
             Create your first mission in this project
           </p>
           <button
             type="button"
             onClick={() => handleAddNew('mission')}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg gradient-primary text-white text-sm font-medium hover:opacity-90 transition-opacity"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg gradient-primary text-foreground text-sm font-medium hover:opacity-90 transition-opacity"
           >
             <Plus className="w-4 h-4" aria-hidden="true" />
             Create Mission
@@ -465,7 +465,7 @@ export default function SpacesPage(): JSX.Element {
       {/* Page Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-white flex items-center gap-3">
+          <h1 className="text-3xl font-bold text-foreground flex items-center gap-3">
             <Layers className="w-8 h-8 text-symtex-primary" />
             Spaces
           </h1>
@@ -479,7 +479,7 @@ export default function SpacesPage(): JSX.Element {
           onClick={() => {
             info('Coming Soon', 'Space settings will be available in a future update.');
           }}
-          className="p-2 rounded-lg text-muted-foreground hover:text-white hover:bg-muted transition-colors"
+          className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
           aria-label="Space settings"
         >
           <Settings className="w-5 h-5" aria-hidden="true" />

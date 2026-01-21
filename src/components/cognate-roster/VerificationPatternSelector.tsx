@@ -164,7 +164,7 @@ export default function VerificationPatternSelector({
                 'transition-all duration-200',
                 isSelected
                   ? `${pattern.bgColor} ${pattern.borderColor} border-2`
-                  : 'bg-symtex-card border-symtex-border hover:border-slate-600',
+                  : 'bg-card border-border hover:border-border',
                 disabled && 'opacity-50 cursor-not-allowed'
               )}
               aria-pressed={isSelected}
@@ -179,13 +179,13 @@ export default function VerificationPatternSelector({
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="font-medium text-white">{pattern.name}</span>
+                  <span className="font-medium text-foreground">{pattern.name}</span>
                   {isSelected && (
                     <Check className={clsx('w-4 h-4', pattern.color)} />
                   )}
                 </div>
                 {showDescriptions && (
-                  <p className="text-sm text-slate-400 truncate">
+                  <p className="text-sm text-muted-foreground truncate">
                     {pattern.description}
                   </p>
                 )}
@@ -215,7 +215,7 @@ export default function VerificationPatternSelector({
               'transition-all duration-200',
               isSelected
                 ? `${pattern.bgColor} ${pattern.borderColor} border-2 ring-2 ring-offset-2 ring-offset-symtex-dark`
-                : 'bg-symtex-card border-symtex-border hover:border-slate-600',
+                : 'bg-card border-border hover:border-border',
               disabled && 'opacity-50 cursor-not-allowed',
               isSelected && pattern.id === 'sibling' && 'ring-blue-500/30',
               isSelected && pattern.id === 'debate' && 'ring-purple-500/30',
@@ -247,7 +247,7 @@ export default function VerificationPatternSelector({
             </div>
 
             {/* Name */}
-            <h4 className="font-semibold text-white mb-1">{pattern.name}</h4>
+            <h4 className="font-semibold text-foreground mb-1">{pattern.name}</h4>
 
             {/* Diagram */}
             <div className={clsx('w-full mb-2', pattern.color)}>
@@ -256,7 +256,7 @@ export default function VerificationPatternSelector({
 
             {/* Description */}
             {showDescriptions && (
-              <p className="text-xs text-slate-400 line-clamp-2">
+              <p className="text-xs text-muted-foreground line-clamp-2">
                 {pattern.description}
               </p>
             )}

@@ -66,8 +66,8 @@ function ShortcutBadge({ shortcut }: ShortcutBadgeProps) {
       className={clsx(
         'hidden sm:inline-flex items-center gap-0.5',
         'px-1.5 py-0.5 text-[10px] font-mono font-medium',
-        'bg-zinc-700 text-zinc-300',
-        'rounded border border-zinc-600'
+        'bg-muted text-muted-foreground',
+        'rounded border border-border'
       )}
     >
       {isMac && <Command className="w-2.5 h-2.5" aria-hidden="true" />}
@@ -89,7 +89,7 @@ interface CategoryIconProps {
 function CategoryIcon({ category, isSelected }: CategoryIconProps) {
   const iconClass = clsx(
     'w-4 h-4',
-    isSelected ? 'text-purple-400' : 'text-zinc-400'
+    isSelected ? 'text-purple-400' : 'text-muted-foreground'
   );
 
   switch (category) {
@@ -155,14 +155,14 @@ export const CommandItem = memo(
           className={clsx(
             'w-full flex items-center gap-3 px-3 py-2.5 text-sm transition-colors duration-150',
             'focus:outline-none focus-visible:outline-none',
-            isSelected ? 'bg-purple-900/30' : 'hover:bg-zinc-800/50'
+            isSelected ? 'bg-purple-900/30' : 'hover:bg-card/50'
           )}
         >
           {/* Icon/Avatar */}
           <div
             className={clsx(
               'flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm',
-              isSelected ? 'bg-purple-800' : 'bg-zinc-800'
+              isSelected ? 'bg-purple-800' : 'bg-card'
             )}
           >
             {item.icon ? (
@@ -177,14 +177,14 @@ export const CommandItem = memo(
             <div
               className={clsx(
                 'font-medium truncate',
-                isSelected ? 'text-purple-200' : 'text-zinc-100'
+                isSelected ? 'text-purple-200' : 'text-muted-foreground'
               )}
             >
               <HighlightedText text={item.title} query={query} />
             </div>
 
             {item.description && (
-              <div className="text-xs text-zinc-400 truncate">
+              <div className="text-xs text-muted-foreground truncate">
                 <HighlightedText text={item.description} query={query} />
               </div>
             )}
@@ -197,7 +197,7 @@ export const CommandItem = memo(
             <ArrowRight
               className={clsx(
                 'w-4 h-4 transition-colors',
-                isSelected ? 'text-purple-400' : 'text-zinc-600'
+                isSelected ? 'text-purple-400' : 'text-muted-foreground'
               )}
               aria-hidden="true"
             />

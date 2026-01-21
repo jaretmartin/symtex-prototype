@@ -177,16 +177,16 @@ export function SpaceSettingsPanel({
   };
 
   return (
-    <div className={clsx('bg-zinc-900 rounded-xl border border-zinc-700', className)}>
+    <div className={clsx('bg-surface-base rounded-xl border border-border', className)}>
       {/* Header */}
-      <div className="px-6 py-4 border-b border-zinc-800 flex items-center justify-between">
+      <div className="px-6 py-4 border-b border-border flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center">
-            <Settings className="w-5 h-5 text-zinc-400" />
+          <div className="w-10 h-10 rounded-lg bg-card flex items-center justify-center">
+            <Settings className="w-5 h-5 text-muted-foreground" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-white">{spaceLabel} Settings</h3>
-            <p className="text-sm text-zinc-400">Configure AI behavior and preferences</p>
+            <h3 className="text-lg font-semibold text-foreground">{spaceLabel} Settings</h3>
+            <p className="text-sm text-muted-foreground">Configure AI behavior and preferences</p>
           </div>
         </div>
 
@@ -200,7 +200,7 @@ export function SpaceSettingsPanel({
               'flex items-center gap-2 px-3 py-2 rounded-lg border transition-colors',
               editedSettings.inheritFromParent
                 ? 'bg-symtex-primary/10 border-symtex-primary text-symtex-primary'
-                : 'bg-zinc-800 border-zinc-700 text-zinc-400 hover:border-zinc-600',
+                : 'bg-card border-border text-muted-foreground hover:border-border',
               readOnly && 'opacity-50 cursor-not-allowed'
             )}
           >
@@ -224,8 +224,8 @@ export function SpaceSettingsPanel({
         <div className="mx-6 mt-4 p-3 bg-symtex-primary/10 border border-symtex-primary/30 rounded-lg flex items-start gap-3">
           <Info className="w-5 h-5 text-symtex-primary flex-shrink-0 mt-0.5" />
           <div>
-            <p className="text-sm text-white">Settings inherited from parent space</p>
-            <p className="text-xs text-zinc-400 mt-1">
+            <p className="text-sm text-foreground">Settings inherited from parent space</p>
+            <p className="text-xs text-muted-foreground mt-1">
               Changes here will override inherited values. Toggle off inheritance to customize all settings.
             </p>
           </div>
@@ -235,21 +235,21 @@ export function SpaceSettingsPanel({
       {/* Settings Sections */}
       <div className="p-6 space-y-4">
         {/* Communication Section */}
-        <div className="border border-zinc-800 rounded-lg overflow-hidden">
+        <div className="border border-border rounded-lg overflow-hidden">
           <button
             type="button"
             onClick={(): void => toggleSection('communication')}
             aria-expanded={expandedSections.has('communication')}
             aria-controls="communication-section"
-            className="w-full px-4 py-3 bg-zinc-800/50 flex items-center justify-between hover:bg-zinc-800 transition-colors"
+            className="w-full px-4 py-3 bg-card/50 flex items-center justify-between hover:bg-card transition-colors"
           >
             <div className="flex items-center gap-3">
               <MessageSquare className="w-5 h-5 text-blue-400" />
-              <span className="font-medium text-white">Communication</span>
+              <span className="font-medium text-foreground">Communication</span>
             </div>
             <ChevronDown
               className={clsx(
-                'w-5 h-5 text-zinc-400 transition-transform',
+                'w-5 h-5 text-muted-foreground transition-transform',
                 expandedSections.has('communication') && 'rotate-180'
               )}
             />
@@ -259,7 +259,7 @@ export function SpaceSettingsPanel({
             <div id="communication-section" className="p-4 space-y-4">
               {/* Tone */}
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Tone
                   {isDifferentFromParent('communication', 'tone') && (
                     <span className="ml-2 text-xs text-amber-400">(overridden)</span>
@@ -275,13 +275,13 @@ export function SpaceSettingsPanel({
                       className={clsx(
                         'p-3 rounded-lg border text-left transition-all',
                         editedSettings.communication.tone === option.value
-                          ? 'bg-blue-500/10 border-blue-500 text-white'
-                          : 'bg-zinc-900 border-zinc-700 text-zinc-400 hover:border-zinc-600',
+                          ? 'bg-blue-500/10 border-blue-500 text-foreground'
+                          : 'bg-surface-base border-border text-muted-foreground hover:border-border',
                         readOnly && 'opacity-50 cursor-not-allowed'
                       )}
                     >
                       <span className="block font-medium">{option.label}</span>
-                      <span className="block text-xs text-zinc-500 mt-1">{option.description}</span>
+                      <span className="block text-xs text-muted-foreground mt-1">{option.description}</span>
                     </button>
                   ))}
                 </div>
@@ -289,7 +289,7 @@ export function SpaceSettingsPanel({
 
               {/* Verbosity */}
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Verbosity
                   {isDifferentFromParent('communication', 'verbosity') && (
                     <span className="ml-2 text-xs text-amber-400">(overridden)</span>
@@ -305,13 +305,13 @@ export function SpaceSettingsPanel({
                       className={clsx(
                         'p-3 rounded-lg border text-left transition-all',
                         editedSettings.communication.verbosity === option.value
-                          ? 'bg-blue-500/10 border-blue-500 text-white'
-                          : 'bg-zinc-900 border-zinc-700 text-zinc-400 hover:border-zinc-600',
+                          ? 'bg-blue-500/10 border-blue-500 text-foreground'
+                          : 'bg-surface-base border-border text-muted-foreground hover:border-border',
                         readOnly && 'opacity-50 cursor-not-allowed'
                       )}
                     >
                       <span className="block font-medium">{option.label}</span>
-                      <span className="block text-xs text-zinc-500 mt-1">{option.description}</span>
+                      <span className="block text-xs text-muted-foreground mt-1">{option.description}</span>
                     </button>
                   ))}
                 </div>
@@ -319,7 +319,7 @@ export function SpaceSettingsPanel({
 
               {/* Proactivity */}
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Proactivity
                   {isDifferentFromParent('communication', 'proactivity') && (
                     <span className="ml-2 text-xs text-amber-400">(overridden)</span>
@@ -335,13 +335,13 @@ export function SpaceSettingsPanel({
                       className={clsx(
                         'p-3 rounded-lg border text-left transition-all',
                         editedSettings.communication.proactivity === option.value
-                          ? 'bg-blue-500/10 border-blue-500 text-white'
-                          : 'bg-zinc-900 border-zinc-700 text-zinc-400 hover:border-zinc-600',
+                          ? 'bg-blue-500/10 border-blue-500 text-foreground'
+                          : 'bg-surface-base border-border text-muted-foreground hover:border-border',
                         readOnly && 'opacity-50 cursor-not-allowed'
                       )}
                     >
                       <span className="block font-medium text-sm">{option.label}</span>
-                      <span className="block text-xs text-zinc-500 mt-1">{option.description}</span>
+                      <span className="block text-xs text-muted-foreground mt-1">{option.description}</span>
                     </button>
                   ))}
                 </div>
@@ -351,21 +351,21 @@ export function SpaceSettingsPanel({
         </div>
 
         {/* Autonomy Section */}
-        <div className="border border-zinc-800 rounded-lg overflow-hidden">
+        <div className="border border-border rounded-lg overflow-hidden">
           <button
             type="button"
             onClick={(): void => toggleSection('autonomy')}
             aria-expanded={expandedSections.has('autonomy')}
             aria-controls="autonomy-section"
-            className="w-full px-4 py-3 bg-zinc-800/50 flex items-center justify-between hover:bg-zinc-800 transition-colors"
+            className="w-full px-4 py-3 bg-card/50 flex items-center justify-between hover:bg-card transition-colors"
           >
             <div className="flex items-center gap-3">
               <Bot className="w-5 h-5 text-purple-400" />
-              <span className="font-medium text-white">Autonomy</span>
+              <span className="font-medium text-foreground">Autonomy</span>
             </div>
             <ChevronDown
               className={clsx(
-                'w-5 h-5 text-zinc-400 transition-transform',
+                'w-5 h-5 text-muted-foreground transition-transform',
                 expandedSections.has('autonomy') && 'rotate-180'
               )}
             />
@@ -375,7 +375,7 @@ export function SpaceSettingsPanel({
             <div id="autonomy-section" className="p-4 space-y-4">
               {/* Autonomy Level */}
               <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-2">
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Autonomy Level
                   {isDifferentFromParent('autonomy', 'level') && (
                     <span className="ml-2 text-xs text-amber-400">(overridden)</span>
@@ -392,7 +392,7 @@ export function SpaceSettingsPanel({
                         'w-full p-4 rounded-lg border text-left transition-all flex items-center gap-4',
                         editedSettings.autonomy.level === item.level
                           ? 'bg-purple-500/10 border-purple-500'
-                          : 'bg-zinc-900 border-zinc-700 hover:border-zinc-600',
+                          : 'bg-surface-base border-border hover:border-border',
                         readOnly && 'opacity-50 cursor-not-allowed'
                       )}
                     >
@@ -400,8 +400,8 @@ export function SpaceSettingsPanel({
                         className={clsx(
                           'w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg',
                           editedSettings.autonomy.level === item.level
-                            ? 'bg-purple-500 text-white'
-                            : 'bg-zinc-800 text-zinc-500'
+                            ? 'bg-purple-500 text-foreground'
+                            : 'bg-card text-muted-foreground'
                         )}
                       >
                         {item.level}
@@ -411,13 +411,13 @@ export function SpaceSettingsPanel({
                           className={clsx(
                             'block font-medium',
                             editedSettings.autonomy.level === item.level
-                              ? 'text-white'
-                              : 'text-zinc-400'
+                              ? 'text-foreground'
+                              : 'text-muted-foreground'
                           )}
                         >
                           {item.label}
                         </span>
-                        <span className="block text-xs text-zinc-500 mt-0.5">
+                        <span className="block text-xs text-muted-foreground mt-0.5">
                           {item.description}
                         </span>
                       </div>
@@ -427,10 +427,10 @@ export function SpaceSettingsPanel({
               </div>
 
               {/* Auto-Approve Toggle */}
-              <div className="flex items-center justify-between p-4 bg-zinc-800/50 rounded-lg">
+              <div className="flex items-center justify-between p-4 bg-card/50 rounded-lg">
                 <div>
-                  <p className="text-sm font-medium text-zinc-300">Auto-Approve Actions</p>
-                  <p className="text-xs text-zinc-500 mt-1">
+                  <p className="text-sm font-medium text-muted-foreground">Auto-Approve Actions</p>
+                  <p className="text-xs text-muted-foreground mt-1">
                     Allow AI to execute routine actions without confirmation
                   </p>
                 </div>
@@ -445,7 +445,7 @@ export function SpaceSettingsPanel({
                   />
                   <div
                     className={clsx(
-                      'w-11 h-6 bg-zinc-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-purple-500/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[\'\'] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-500',
+                      'w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-purple-500/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[\'\'] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-500',
                       readOnly && 'opacity-50 cursor-not-allowed'
                     )}
                   />
@@ -456,24 +456,24 @@ export function SpaceSettingsPanel({
         </div>
 
         {/* Rules Section */}
-        <div className="border border-zinc-800 rounded-lg overflow-hidden">
+        <div className="border border-border rounded-lg overflow-hidden">
           <button
             type="button"
             onClick={(): void => toggleSection('rules')}
             aria-expanded={expandedSections.has('rules')}
             aria-controls="rules-section"
-            className="w-full px-4 py-3 bg-zinc-800/50 flex items-center justify-between hover:bg-zinc-800 transition-colors"
+            className="w-full px-4 py-3 bg-card/50 flex items-center justify-between hover:bg-card transition-colors"
           >
             <div className="flex items-center gap-3">
               <FileText className="w-5 h-5 text-green-400" />
-              <span className="font-medium text-white">Custom Rules</span>
-              <span className="text-xs text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded-full">
+              <span className="font-medium text-foreground">Custom Rules</span>
+              <span className="text-xs text-muted-foreground bg-card px-2 py-0.5 rounded-full">
                 {editedSettings.rules.length}
               </span>
             </div>
             <ChevronDown
               className={clsx(
-                'w-5 h-5 text-zinc-400 transition-transform',
+                'w-5 h-5 text-muted-foreground transition-transform',
                 expandedSections.has('rules') && 'rotate-180'
               )}
             />
@@ -487,17 +487,17 @@ export function SpaceSettingsPanel({
                   {editedSettings.rules.map((rule, index) => (
                     <li
                       key={index}
-                      className="flex items-start gap-3 p-3 bg-zinc-800/50 rounded-lg group"
+                      className="flex items-start gap-3 p-3 bg-card/50 rounded-lg group"
                     >
                       <span className="text-green-400 font-mono text-xs mt-1">
                         {String(index + 1).padStart(2, '0')}
                       </span>
-                      <span className="flex-1 text-sm text-zinc-300">{rule}</span>
+                      <span className="flex-1 text-sm text-muted-foreground">{rule}</span>
                       {!readOnly && (
                         <button
                           type="button"
                           onClick={(): void => removeRule(index)}
-                          className="p-1 text-zinc-500 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all"
+                          className="p-1 text-muted-foreground hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all"
                           aria-label="Remove rule"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -508,9 +508,9 @@ export function SpaceSettingsPanel({
                 </ul>
               ) : (
                 <div className="text-center py-6">
-                  <FileText className="w-8 h-8 text-zinc-600 mx-auto mb-2" />
-                  <p className="text-sm text-zinc-400">No custom rules defined</p>
-                  <p className="text-xs text-zinc-500 mt-1">
+                  <FileText className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
+                  <p className="text-sm text-muted-foreground">No custom rules defined</p>
+                  <p className="text-xs text-muted-foreground mt-1">
                     Add rules to guide AI behavior in this space
                   </p>
                 </div>
@@ -530,7 +530,7 @@ export function SpaceSettingsPanel({
                       }
                     }}
                     placeholder="Add a new rule..."
-                    className="flex-1 px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-white text-sm placeholder-zinc-500 focus:outline-none focus:border-green-500"
+                    className="flex-1 px-4 py-2 bg-surface-base border border-border rounded-lg text-foreground text-sm placeholder-muted-foreground focus:outline-none focus:border-green-500"
                   />
                   <button
                     type="button"
@@ -540,7 +540,7 @@ export function SpaceSettingsPanel({
                       'px-4 py-2 rounded-lg flex items-center gap-2 text-sm transition-colors',
                       newRule.trim()
                         ? 'bg-green-500/20 text-green-400 hover:bg-green-500/30'
-                        : 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+                        : 'bg-card text-muted-foreground cursor-not-allowed'
                     )}
                   >
                     <Plus className="w-4 h-4" />
@@ -555,7 +555,7 @@ export function SpaceSettingsPanel({
 
       {/* Footer Actions */}
       {!readOnly && (
-        <div className="px-6 py-4 border-t border-zinc-800 flex items-center justify-between">
+        <div className="px-6 py-4 border-t border-border flex items-center justify-between">
           <button
             type="button"
             onClick={handleReset}
@@ -563,8 +563,8 @@ export function SpaceSettingsPanel({
             className={clsx(
               'flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors',
               hasChanges
-                ? 'text-zinc-400 hover:text-white hover:bg-zinc-800'
-                : 'text-zinc-600 cursor-not-allowed'
+                ? 'text-muted-foreground hover:text-foreground hover:bg-card'
+                : 'text-muted-foreground cursor-not-allowed'
             )}
           >
             <RotateCcw className="w-4 h-4" />
@@ -577,8 +577,8 @@ export function SpaceSettingsPanel({
             className={clsx(
               'flex items-center gap-2 px-6 py-2 rounded-lg text-sm font-medium transition-all',
               hasChanges
-                ? 'bg-gradient-to-r from-symtex-primary to-symtex-accent text-white hover:opacity-90'
-                : 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+                ? 'bg-gradient-to-r from-symtex-primary to-symtex-accent text-foreground hover:opacity-90'
+                : 'bg-card text-muted-foreground cursor-not-allowed'
             )}
           >
             <Save className="w-4 h-4" />

@@ -93,13 +93,13 @@ function NexisContactCard({
   return (
     <div
       className={cn(
-        'bg-symtex-card rounded-xl border border-symtex-border overflow-hidden',
+        'bg-card rounded-xl border border-border overflow-hidden',
         'animate-in slide-in-from-right-4 duration-300',
         className
       )}
     >
       {/* Header */}
-      <div className={cn('p-4 border-b border-symtex-border', config.bgColor)}>
+      <div className={cn('p-4 border-b border-border', config.bgColor)}>
         <div className="flex items-start gap-3">
           <div
             className={cn(
@@ -134,22 +134,22 @@ function NexisContactCard({
                 </span>
               )}
             </div>
-            <h3 className="text-lg font-semibold text-white mt-1 truncate">
+            <h3 className="text-lg font-semibold text-foreground mt-1 truncate">
               {data.name}
             </h3>
             {data.title && data.company && (
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-muted-foreground">
                 {data.title} at {data.company}
               </p>
             )}
             {data.industry && (
-              <p className="text-sm text-slate-400">{data.industry}</p>
+              <p className="text-sm text-muted-foreground">{data.industry}</p>
             )}
           </div>
           {onClose && (
             <button
               onClick={onClose}
-              className="p-1 rounded-lg hover:bg-slate-700/50 text-slate-400 hover:text-white transition-colors"
+              className="p-1 rounded-lg hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors"
             >
               <ExternalLink className="w-4 h-4" />
             </button>
@@ -164,7 +164,7 @@ function NexisContactCard({
           <div className="space-y-2">
             {data.email && (
               <div className="flex items-center gap-2 text-sm">
-                <Mail className="w-4 h-4 text-slate-500" />
+                <Mail className="w-4 h-4 text-muted-foreground" />
                 <a
                   href={`mailto:${data.email}`}
                   className="text-symtex-primary hover:underline"
@@ -174,20 +174,20 @@ function NexisContactCard({
               </div>
             )}
             {data.lastContact && (
-              <div className="flex items-center gap-2 text-sm text-slate-400">
-                <Clock className="w-4 h-4 text-slate-500" />
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Clock className="w-4 h-4 text-muted-foreground" />
                 <span>Last contact: {data.lastContact}</span>
               </div>
             )}
             {data.location && (
-              <div className="flex items-center gap-2 text-sm text-slate-400">
-                <MapPin className="w-4 h-4 text-slate-500" />
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <MapPin className="w-4 h-4 text-muted-foreground" />
                 <span>{data.location}</span>
               </div>
             )}
             {data.date && (
-              <div className="flex items-center gap-2 text-sm text-slate-400">
-                <Calendar className="w-4 h-4 text-slate-500" />
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Calendar className="w-4 h-4 text-muted-foreground" />
                 <span>{data.date}</span>
               </div>
             )}
@@ -196,7 +196,7 @@ function NexisContactCard({
 
         {/* Description */}
         {data.description && (
-          <p className="text-sm text-slate-300 leading-relaxed">
+          <p className="text-sm text-foreground leading-relaxed">
             {data.description}
           </p>
         )}
@@ -207,7 +207,7 @@ function NexisContactCard({
             {data.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs px-2 py-0.5 rounded-full bg-slate-700/50 text-slate-300"
+                className="text-xs px-2 py-0.5 rounded-full bg-muted/50 text-foreground"
               >
                 #{tag}
               </span>
@@ -217,17 +217,17 @@ function NexisContactCard({
 
         {/* Connections */}
         {edges.length > 0 && (
-          <div className="pt-3 border-t border-symtex-border">
-            <h4 className="text-xs font-medium text-slate-400 mb-2 uppercase tracking-wider">
+          <div className="pt-3 border-t border-border">
+            <h4 className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wider">
               Connections ({edges.length})
             </h4>
             <div className="space-y-1.5 max-h-32 overflow-y-auto">
               {edges.slice(0, 5).map((edge) => (
                 <div
                   key={edge.id}
-                  className="flex items-center gap-2 text-xs text-slate-300"
+                  className="flex items-center gap-2 text-xs text-foreground"
                 >
-                  <span className="text-slate-500">
+                  <span className="text-muted-foreground">
                     {edgeTypeLabels[edge.type] || edge.type}
                   </span>
                   <span className="text-symtex-primary">
@@ -236,7 +236,7 @@ function NexisContactCard({
                 </div>
               ))}
               {edges.length > 5 && (
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-muted-foreground">
                   +{edges.length - 5} more connections
                 </p>
               )}
@@ -247,11 +247,11 @@ function NexisContactCard({
 
       {/* Actions */}
       {node.type === 'person' && (onMessage || onConnect) && (
-        <div className="p-4 border-t border-symtex-border flex gap-2">
+        <div className="p-4 border-t border-border flex gap-2">
           {onMessage && (
             <button
               onClick={() => onMessage(node.id)}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-symtex-primary text-white text-sm font-medium hover:bg-symtex-primary/90 transition-colors"
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-symtex-primary text-foreground text-sm font-medium hover:bg-symtex-primary/90 transition-colors"
             >
               <MessageSquare className="w-4 h-4" />
               Message
@@ -260,7 +260,7 @@ function NexisContactCard({
           {onConnect && (
             <button
               onClick={() => onConnect(node.id)}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-slate-700 text-white text-sm font-medium hover:bg-slate-600 transition-colors"
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-muted text-foreground text-sm font-medium hover:bg-muted transition-colors"
             >
               <UserPlus className="w-4 h-4" />
               Connect

@@ -67,14 +67,14 @@ export function FlowDashboard({ className }: FlowDashboardProps): JSX.Element {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
             <Sparkles className="w-6 h-6 text-symtex-primary" />
             Today's Flow
           </h1>
-          <p className="text-zinc-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             {formatGreeting()}! Here's what needs your attention.
           </p>
-          <p className="text-xs text-zinc-500 mt-0.5">{formatDate()}</p>
+          <p className="text-xs text-muted-foreground mt-0.5">{formatDate()}</p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -97,8 +97,8 @@ export function FlowDashboard({ className }: FlowDashboardProps): JSX.Element {
             onClick={handleRefresh}
             disabled={isLoading}
             className={clsx(
-              'p-2 rounded-lg border border-zinc-700 text-zinc-400',
-              'hover:border-zinc-600 hover:text-white hover:bg-zinc-800/50',
+              'p-2 rounded-lg border border-border text-muted-foreground',
+              'hover:border-border hover:text-foreground hover:bg-card/50',
               'transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
             )}
             title="Refresh"
@@ -128,7 +128,7 @@ export function FlowDashboard({ className }: FlowDashboardProps): JSX.Element {
           'p-4 rounded-lg border',
           pendingCount > 3
             ? 'bg-amber-500/10 border-amber-500/30'
-            : 'bg-zinc-800/50 border-zinc-700'
+            : 'bg-card/50 border-border'
         )}
       >
         <div className="flex items-center justify-between">
@@ -139,10 +139,10 @@ export function FlowDashboard({ className }: FlowDashboardProps): JSX.Element {
                 pendingCount > 0 ? 'bg-amber-400 animate-pulse' : 'bg-green-400'
               )}
             />
-            <span className="text-sm text-zinc-300">
+            <span className="text-sm text-muted-foreground">
               {pendingCount > 0 ? (
                 <>
-                  <strong className="text-white">{pendingCount} items</strong> need your
+                  <strong className="text-foreground">{pendingCount} items</strong> need your
                   attention today
                 </>
               ) : (
@@ -156,10 +156,10 @@ export function FlowDashboard({ className }: FlowDashboardProps): JSX.Element {
 
           {/* Quick Action Shortcut */}
           <div className="hidden sm:flex items-center gap-2">
-            <kbd className="px-2 py-1 text-xs bg-zinc-800 border border-zinc-700 rounded text-zinc-400">
+            <kbd className="px-2 py-1 text-xs bg-card border border-border rounded text-muted-foreground">
               Cmd+K
             </kbd>
-            <span className="text-xs text-zinc-500">Command palette</span>
+            <span className="text-xs text-muted-foreground">Command palette</span>
           </div>
         </div>
       </div>

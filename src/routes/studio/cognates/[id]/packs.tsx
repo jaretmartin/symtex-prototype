@@ -160,22 +160,22 @@ function PackCard({ pack, isInstalled, onInstall, onSelect }: PackCardProps): JS
 
   return (
     <div
-      className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-all cursor-pointer"
+      className="p-4 bg-surface-base/50 border border-border rounded-lg hover:border-muted transition-all cursor-pointer"
       onClick={() => onSelect(pack)}
     >
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-2">
-          <Package className="w-5 h-5 text-zinc-400" />
-          <h3 className="font-medium text-white">{pack.name}</h3>
+          <Package className="w-5 h-5 text-muted-foreground" />
+          <h3 className="font-medium text-foreground">{pack.name}</h3>
         </div>
         <span className={`px-2 py-0.5 text-xs rounded ${typeColors[pack.type]}`}>
           {pack.type}
         </span>
       </div>
 
-      <p className="text-sm text-zinc-400 line-clamp-2 mb-4">{pack.description}</p>
+      <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{pack.description}</p>
 
-      <div className="flex items-center gap-4 text-xs text-zinc-500 mb-4">
+      <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
         <span className="flex items-center gap-1">
           <Star className="w-3.5 h-3.5 text-yellow-400" />
           {pack.rating}
@@ -198,7 +198,7 @@ function PackCard({ pack, isInstalled, onInstall, onSelect }: PackCardProps): JS
           w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors
           ${isInstalled
             ? 'bg-green-500/20 text-green-400 cursor-default'
-            : 'bg-blue-600 text-white hover:bg-blue-500'
+            : 'bg-blue-600 text-foreground hover:bg-blue-500'
           }
         `}
       >
@@ -235,22 +235,22 @@ function PackDetailsPanel({ pack, isInstalled, onInstall }: PackDetailsPanelProp
 
   return (
     <div className="h-full flex flex-col">
-      <div className="p-6 border-b border-zinc-800">
+      <div className="p-6 border-b border-border">
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-3 bg-zinc-800 rounded-lg">
-            <Package className="w-6 h-6 text-zinc-400" />
+          <div className="p-3 bg-card rounded-lg">
+            <Package className="w-6 h-6 text-muted-foreground" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-white">{pack.name}</h2>
+            <h2 className="text-xl font-semibold text-foreground">{pack.name}</h2>
             <span className={`px-2 py-0.5 text-xs rounded ${typeColors[pack.type]}`}>
               {pack.type}
             </span>
           </div>
         </div>
 
-        <p className="text-zinc-400 mb-4">{pack.description}</p>
+        <p className="text-muted-foreground mb-4">{pack.description}</p>
 
-        <div className="flex items-center gap-6 text-sm text-zinc-500">
+        <div className="flex items-center gap-6 text-sm text-muted-foreground">
           <span className="flex items-center gap-1">
             <Star className="w-4 h-4 text-yellow-400" />
             {pack.rating} rating
@@ -265,19 +265,19 @@ function PackDetailsPanel({ pack, isInstalled, onInstall }: PackDetailsPanelProp
 
       <div className="flex-1 overflow-auto p-6 space-y-6">
         <div>
-          <h3 className="text-sm font-medium text-zinc-300 mb-3">Included SOPs</h3>
-          <p className="text-sm text-zinc-400">
+          <h3 className="text-sm font-medium text-muted-foreground mb-3">Included SOPs</h3>
+          <p className="text-sm text-muted-foreground">
             This pack includes {pack.sopCount} pre-configured SOPs.
           </p>
         </div>
 
         <div>
-          <h3 className="text-sm font-medium text-zinc-300 mb-3">Tags</h3>
+          <h3 className="text-sm font-medium text-muted-foreground mb-3">Tags</h3>
           <div className="flex flex-wrap gap-2">
             {pack.tags.map((tag) => (
               <span
                 key={tag}
-                className="flex items-center gap-1 px-2 py-1 bg-zinc-800 text-zinc-400 rounded text-xs"
+                className="flex items-center gap-1 px-2 py-1 bg-card text-muted-foreground rounded text-xs"
               >
                 <Tag className="w-3 h-3" />
                 {tag}
@@ -287,13 +287,13 @@ function PackDetailsPanel({ pack, isInstalled, onInstall }: PackDetailsPanelProp
         </div>
 
         <div>
-          <h3 className="text-sm font-medium text-zinc-300 mb-3">Author</h3>
-          <p className="text-sm text-zinc-400">{pack.author}</p>
+          <h3 className="text-sm font-medium text-muted-foreground mb-3">Author</h3>
+          <p className="text-sm text-muted-foreground">{pack.author}</p>
         </div>
 
         <div>
-          <h3 className="text-sm font-medium text-zinc-300 mb-3">Last Updated</h3>
-          <p className="text-sm text-zinc-400">
+          <h3 className="text-sm font-medium text-muted-foreground mb-3">Last Updated</h3>
+          <p className="text-sm text-muted-foreground">
             {new Date(pack.updatedAt).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
@@ -303,7 +303,7 @@ function PackDetailsPanel({ pack, isInstalled, onInstall }: PackDetailsPanelProp
         </div>
       </div>
 
-      <div className="p-6 border-t border-zinc-800">
+      <div className="p-6 border-t border-border">
         <button
           type="button"
           onClick={() => onInstall(pack)}
@@ -312,7 +312,7 @@ function PackDetailsPanel({ pack, isInstalled, onInstall }: PackDetailsPanelProp
             w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-colors
             ${isInstalled
               ? 'bg-green-500/20 text-green-400 cursor-default'
-              : 'bg-blue-600 text-white hover:bg-blue-500'
+              : 'bg-blue-600 text-foreground hover:bg-blue-500'
             }
           `}
         >
@@ -347,8 +347,8 @@ export function PacksBrowserPage(): JSX.Element {
   if (!cognate) {
     return (
       <div className="p-6 text-center">
-        <h2 className="text-xl font-medium text-white mb-2">Cognate Not Found</h2>
-        <p className="text-zinc-400 mb-4">The requested cognate does not exist.</p>
+        <h2 className="text-xl font-medium text-foreground mb-2">Cognate Not Found</h2>
+        <p className="text-muted-foreground mb-4">The requested cognate does not exist.</p>
         <Link
           to="/studio/cognates"
           className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300"
@@ -398,13 +398,13 @@ export function PacksBrowserPage(): JSX.Element {
         <div className="flex items-center gap-4">
           <Link
             to={`/studio/cognates/${id}/sops`}
-            className="p-2 hover:bg-zinc-800 rounded-lg transition-colors"
+            className="p-2 hover:bg-card rounded-lg transition-colors"
           >
-            <ArrowLeft className="w-5 h-5 text-zinc-400" />
+            <ArrowLeft className="w-5 h-5 text-muted-foreground" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-white">SOP Packs</h1>
-            <p className="text-zinc-400 mt-1">
+            <h1 className="text-2xl font-bold text-foreground">SOP Packs</h1>
+            <p className="text-muted-foreground mt-1">
               Browse and install pre-built SOP collections for {cognate.name}
             </p>
           </div>
@@ -413,17 +413,17 @@ export function PacksBrowserPage(): JSX.Element {
         {/* Filters */}
         <div className="flex items-center gap-4">
           <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search packs..."
-              className="w-full pl-10 pr-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none"
+              className="w-full pl-10 pr-4 py-2 bg-surface-base border border-border rounded-lg text-foreground placeholder-muted-foreground focus:border-blue-500 focus:outline-none"
             />
           </div>
 
-          <div className="flex items-center gap-1 p-1 bg-zinc-900 border border-zinc-700 rounded-lg">
+          <div className="flex items-center gap-1 p-1 bg-surface-base border border-border rounded-lg">
             {PACK_TYPES.map((type) => (
               <button
                 key={type.id}
@@ -432,8 +432,8 @@ export function PacksBrowserPage(): JSX.Element {
                 className={`
                   px-3 py-1.5 text-sm rounded transition-colors
                   ${typeFilter === type.id
-                    ? 'bg-zinc-700 text-white'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-muted text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
                   }
                 `}
               >
@@ -445,7 +445,7 @@ export function PacksBrowserPage(): JSX.Element {
 
         {/* Popular Packs */}
         <div className="mb-8">
-          <h2 className="text-lg font-medium text-white mb-4">Popular Packs</h2>
+          <h2 className="text-lg font-medium text-foreground mb-4">Popular Packs</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {popularPacks.map((pack) => (
               <PackCard
@@ -461,9 +461,9 @@ export function PacksBrowserPage(): JSX.Element {
 
         {/* All Packs */}
         <div>
-          <h2 className="text-lg font-medium text-white mb-4">
+          <h2 className="text-lg font-medium text-foreground mb-4">
             {typeFilter === 'all' ? 'All Packs' : `${PACK_TYPES.find((t) => t.id === typeFilter)?.label} Packs`}
-            <span className="text-sm text-zinc-500 ml-2">({filteredPacks.length})</span>
+            <span className="text-sm text-muted-foreground ml-2">({filteredPacks.length})</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredPacks.map((pack) => (
@@ -481,7 +481,7 @@ export function PacksBrowserPage(): JSX.Element {
 
       {/* Details Sidebar */}
       {selectedPack && (
-        <div className="w-[400px] border-l border-zinc-800 bg-zinc-900/50">
+        <div className="w-[400px] border-l border-border bg-surface-base/50">
           <PackDetailsPanel
             pack={selectedPack}
             isInstalled={installedPacks.includes(selectedPack.id)}

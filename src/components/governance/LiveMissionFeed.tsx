@@ -93,7 +93,7 @@ function MissionCard({
   };
 
   return (
-    <div className="flex items-center gap-4 p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+    <div className="flex items-center gap-4 p-4 bg-card/50 rounded-xl border border-border/50">
       {/* Cognate Avatar */}
       <div className="relative flex-shrink-0">
         <div className="w-12 h-12 bg-symtex-primary/20 rounded-xl flex items-center justify-center text-xl">
@@ -107,23 +107,23 @@ function MissionCard({
       {/* Mission Info */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
-          <h4 className="font-medium text-white truncate">{mission.name}</h4>
+          <h4 className="font-medium text-foreground truncate">{mission.name}</h4>
           <MissionStatusBadge status={mission.status} />
         </div>
-        <p className="text-sm text-slate-400 truncate">
+        <p className="text-sm text-muted-foreground truncate">
           {mission.cognateName} - {mission.owner}
         </p>
 
         {/* Progress Bar */}
         {showProgressBar && (
           <div className="mt-2">
-            <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden">
+            <div className="h-1.5 bg-muted rounded-full overflow-hidden">
               <div
                 className={clsx('h-full rounded-full transition-all', getProgressBarColor())}
                 style={{ width: `${mission.progress}%` }}
               />
             </div>
-            <div className="flex justify-between mt-1 text-xs text-slate-500">
+            <div className="flex justify-between mt-1 text-xs text-muted-foreground">
               <span>{mission.progress}%</span>
               <span>
                 {mission.actionsCompleted}/{mission.actionsCompleted + mission.actionsPending}{' '}
@@ -147,17 +147,17 @@ function MissionCard({
         {mission.status === 'running' && (
           <button
             onClick={() => onPause?.(mission.id)}
-            className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
+            className="p-2 hover:bg-muted rounded-lg transition-colors"
             title="Pause Mission"
             aria-label="Pause Mission"
           >
-            <Pause className="w-4 h-4 text-slate-400" />
+            <Pause className="w-4 h-4 text-muted-foreground" />
           </button>
         )}
         {mission.status === 'paused' && (
           <button
             onClick={() => onResume?.(mission.id)}
-            className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
+            className="p-2 hover:bg-muted rounded-lg transition-colors"
             title="Resume Mission"
             aria-label="Resume Mission"
           >
@@ -167,7 +167,7 @@ function MissionCard({
         {mission.status === 'stuck' && (
           <button
             onClick={() => onResume?.(mission.id)}
-            className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
+            className="p-2 hover:bg-muted rounded-lg transition-colors"
             title="Retry Mission"
             aria-label="Retry Mission"
           >
@@ -176,11 +176,11 @@ function MissionCard({
         )}
         <button
           onClick={() => onView?.(mission.id)}
-          className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
+          className="p-2 hover:bg-muted rounded-lg transition-colors"
           title="View Details"
           aria-label="View Details"
         >
-          <Eye className="w-4 h-4 text-slate-400" />
+          <Eye className="w-4 h-4 text-muted-foreground" />
         </button>
         {['running', 'paused', 'stuck'].includes(mission.status) && (
           <button
@@ -232,13 +232,13 @@ export function LiveMissionFeed({
   ).length;
 
   return (
-    <div className={clsx('bg-symtex-card rounded-xl border border-symtex-border p-6', className)}>
+    <div className={clsx('bg-card rounded-xl border border-border p-6', className)}>
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-semibold text-white flex items-center gap-2">
+        <h3 className="font-semibold text-foreground flex items-center gap-2">
           <Play className="w-5 h-5" />
           Live Mission Feed
-          <span className="text-sm font-normal text-slate-400">({activeMissionCount} active)</span>
+          <span className="text-sm font-normal text-muted-foreground">({activeMissionCount} active)</span>
         </h3>
         <Link
           to="/missions"
@@ -259,7 +259,7 @@ export function LiveMissionFeed({
               'px-3 py-1.5 text-sm rounded-lg transition-colors',
               filter === option.value
                 ? 'bg-symtex-primary/20 text-symtex-primary border border-symtex-primary/30'
-                : 'bg-slate-800 text-slate-400 hover:bg-slate-700 border border-transparent'
+                : 'bg-card text-muted-foreground hover:bg-muted border border-transparent'
             )}
           >
             {option.label}
@@ -280,7 +280,7 @@ export function LiveMissionFeed({
           />
         ))}
         {filteredMissions.length === 0 && (
-          <div className="text-center py-8 text-slate-400">
+          <div className="text-center py-8 text-muted-foreground">
             <Bot className="w-12 h-12 mx-auto mb-3 opacity-50" />
             <p>No {filter === 'all' ? 'active' : filter} missions</p>
           </div>

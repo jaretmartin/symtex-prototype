@@ -79,12 +79,12 @@ export function CognateDetail({
               />
             ) : (
               <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                <Brain className="w-8 h-8 text-white" />
+                <Brain className="w-8 h-8 text-foreground" />
               </div>
             )}
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <h2 className="text-xl font-bold text-white">{cognate.name}</h2>
+                <h2 className="text-xl font-bold text-foreground">{cognate.name}</h2>
                 <StatusBadge status={cognate.availability} />
               </div>
               <p className="text-muted-foreground">{cognate.role || 'No role assigned'}</p>
@@ -99,7 +99,7 @@ export function CognateDetail({
               <button
                 type="button"
                 onClick={(): void => onEdit(cognate)}
-                className="flex items-center gap-2 px-4 py-2 bg-surface-card text-white rounded-lg hover:bg-surface-elevated transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-surface-card text-foreground rounded-lg hover:bg-surface-elevated transition-colors"
               >
                 <Settings className="w-4 h-4" />
                 Configure
@@ -109,7 +109,7 @@ export function CognateDetail({
               <button
                 type="button"
                 onClick={onClose}
-                className="p-2 text-muted-foreground hover:text-white hover:bg-surface-card rounded-lg transition-colors"
+                className="p-2 text-muted-foreground hover:text-foreground hover:bg-surface-card rounded-lg transition-colors"
                 aria-label="Close"
               >
                 <X className="w-5 h-5" />
@@ -143,7 +143,7 @@ export function CognateDetail({
                 'flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors',
                 activeTab === tab.id
                   ? 'text-symtex-primary border-symtex-primary'
-                  : 'text-muted-foreground border-transparent hover:text-white'
+                  : 'text-muted-foreground border-transparent hover:text-foreground'
               )}
             >
               <tab.icon className="w-4 h-4" />
@@ -310,7 +310,7 @@ function SOPsTab({ cognate }: { cognate: ExtendedCognate }): JSX.Element {
               className="flex items-center gap-3 p-3 rounded-lg bg-surface-card/50"
             >
               <FileText className="w-4 h-4 text-muted-foreground" />
-              <span className="text-sm text-white">{sopId}</span>
+              <span className="text-sm text-foreground">{sopId}</span>
             </div>
           ))}
         </div>
@@ -359,7 +359,7 @@ function StatCard({ icon: Icon, label, value }: StatCardProps): JSX.Element {
         <Icon className="w-4 h-4 text-muted-foreground" />
         <span className="text-xs text-muted-foreground">{label}</span>
       </div>
-      <p className="text-2xl font-bold text-white">{value}</p>
+      <p className="text-2xl font-bold text-foreground">{value}</p>
     </div>
   );
 }

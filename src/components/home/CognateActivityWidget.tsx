@@ -171,7 +171,7 @@ export default function CognateActivityWidget({
 
   return (
     <div className={clsx(
-      'bg-symtex-card rounded-xl border border-symtex-border overflow-hidden',
+      'bg-card rounded-xl border border-border overflow-hidden',
       className
     )}>
       {/* Header */}
@@ -196,7 +196,7 @@ export default function CognateActivityWidget({
             <button
               key={cognate.id}
               onClick={() => navigate(`/studio/cognates/${cognate.id}`)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-symtex-border hover:border-symtex-primary/50 transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-card/50 border border-border hover:border-symtex-primary/50 transition-colors"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
@@ -214,7 +214,7 @@ export default function CognateActivityWidget({
       </div>
 
       {/* Activity Feed */}
-      <div className="divide-y divide-symtex-border max-h-[280px] overflow-y-auto">
+      <div className="divide-y divide-border max-h-[280px] overflow-y-auto">
         {activities.slice(0, maxItems).map((activity) => {
           const config = activityTypeConfig[activity.type]
           const Icon = config.icon
@@ -223,7 +223,7 @@ export default function CognateActivityWidget({
             <div
               key={activity.id}
               onClick={() => handleActivityClick(activity)}
-              className="p-4 hover:bg-slate-800/30 transition-colors cursor-pointer group"
+              className="p-4 hover:bg-card/30 transition-colors cursor-pointer group"
             >
               <div className="flex items-start gap-3">
                 <div className={clsx('p-2 rounded-lg flex-shrink-0', config.bg)}>
@@ -233,10 +233,10 @@ export default function CognateActivityWidget({
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-xs text-muted-foreground">{activity.cognateName}</span>
-                    <span className="text-xs text-slate-600">-</span>
+                    <span className="text-xs text-muted-foreground">-</span>
                     <span className="text-xs text-muted-foreground">{activity.timestamp}</span>
                   </div>
-                  <p className="text-sm text-white group-hover:text-symtex-primary transition-colors">
+                  <p className="text-sm text-foreground group-hover:text-symtex-primary transition-colors">
                     {activity.action}
                   </p>
                 </div>
@@ -249,7 +249,7 @@ export default function CognateActivityWidget({
       </div>
 
       {/* Stats Footer */}
-      <div className="p-4 border-t border-symtex-border bg-slate-800/30">
+      <div className="p-4 border-t border-border bg-card/30">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 text-xs">
             <span className="flex items-center gap-1.5">
@@ -263,7 +263,7 @@ export default function CognateActivityWidget({
           </div>
           <button
             onClick={() => navigate('/activity')}
-            className="text-xs text-muted-foreground hover:text-white transition-colors"
+            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
           >
             Full Activity Log
           </button>

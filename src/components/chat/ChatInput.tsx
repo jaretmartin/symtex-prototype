@@ -139,19 +139,19 @@ export function ChatInput({
           {attachments.map((attachment) => (
             <div
               key={attachment.id}
-              className="flex items-center gap-2 px-3 py-1.5 bg-symtex-card border border-symtex-border rounded-lg text-sm"
+              className="flex items-center gap-2 px-3 py-1.5 bg-card border border-border rounded-lg text-sm"
             >
               {attachment.type === 'image' ? (
                 <Image className="w-4 h-4 text-symtex-primary" />
               ) : (
-                <FileText className="w-4 h-4 text-slate-400" />
+                <FileText className="w-4 h-4 text-muted-foreground" />
               )}
-              <span className="text-slate-300 max-w-[150px] truncate">
+              <span className="text-muted-foreground max-w-[150px] truncate">
                 {attachment.name}
               </span>
               <button
                 onClick={() => removeAttachment(attachment.id)}
-                className="p-0.5 text-slate-500 hover:text-slate-300 rounded transition-colors"
+                className="p-0.5 text-muted-foreground hover:text-muted-foreground rounded transition-colors"
                 aria-label={`Remove ${attachment.name}`}
               >
                 <X className="w-4 h-4" />
@@ -162,12 +162,12 @@ export function ChatInput({
       )}
 
       {/* Input area */}
-      <div className="relative flex items-end gap-2 p-2 bg-symtex-card border border-symtex-border rounded-2xl focus-within:border-symtex-primary/50 transition-colors">
+      <div className="relative flex items-end gap-2 p-2 bg-card border border-border rounded-2xl focus-within:border-symtex-primary/50 transition-colors">
         {/* Attachment button */}
         <button
           onClick={handleAttachmentClick}
           disabled={disabled}
-          className="flex-shrink-0 p-2 text-slate-400 hover:text-slate-200 rounded-lg hover:bg-slate-700/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-shrink-0 p-2 text-muted-foreground hover:text-muted-foreground rounded-lg hover:bg-muted/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Add attachment"
         >
           <Paperclip className="w-5 h-5" />
@@ -192,7 +192,7 @@ export function ChatInput({
           placeholder={placeholder}
           disabled={disabled}
           rows={1}
-          className="flex-1 resize-none bg-transparent text-slate-200 placeholder-slate-500 outline-none text-sm py-2 max-h-[200px] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 resize-none bg-transparent text-muted-foreground placeholder-muted-foreground outline-none text-sm py-2 max-h-[200px] disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Message input"
         />
 
@@ -202,7 +202,7 @@ export function ChatInput({
             className={`flex-shrink-0 text-xs mr-2 ${
               content.length > maxLength * 0.9
                 ? 'text-warning'
-                : 'text-slate-500'
+                : 'text-muted-foreground'
             }`}
           >
             {content.length}/{maxLength}
@@ -213,7 +213,7 @@ export function ChatInput({
         <button
           onClick={handleSend}
           disabled={!canSend || disabled}
-          className="flex-shrink-0 p-2 bg-gradient-to-r from-symtex-primary to-symtex-accent text-white rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed enabled:hover:shadow-lg enabled:hover:shadow-symtex-primary/30"
+          className="flex-shrink-0 p-2 bg-gradient-to-r from-symtex-primary to-symtex-accent text-foreground rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed enabled:hover:shadow-lg enabled:hover:shadow-symtex-primary/30"
           aria-label="Send message"
         >
           <Send className="w-5 h-5" />
@@ -221,9 +221,9 @@ export function ChatInput({
       </div>
 
       {/* Keyboard hint */}
-      <p className="text-xs text-slate-500 text-center">
-        Press <kbd className="px-1.5 py-0.5 bg-slate-700 rounded text-slate-400">Enter</kbd> to send,{' '}
-        <kbd className="px-1.5 py-0.5 bg-slate-700 rounded text-slate-400">Shift + Enter</kbd> for new line
+      <p className="text-xs text-muted-foreground text-center">
+        Press <kbd className="px-1.5 py-0.5 bg-muted rounded text-muted-foreground">Enter</kbd> to send,{' '}
+        <kbd className="px-1.5 py-0.5 bg-muted rounded text-muted-foreground">Shift + Enter</kbd> for new line
       </p>
     </div>
   );

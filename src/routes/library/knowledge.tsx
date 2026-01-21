@@ -521,7 +521,7 @@ const Graph3DVisualization: React.FC<Graph3DProps> = ({ nodes, selectedNode, onN
         <button
           onClick={() => setIs3D(true)}
           className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
-            is3D ? 'bg-symtex-purple text-white' : 'text-muted-foreground hover:text-foreground'
+            is3D ? 'bg-symtex-purple text-foreground' : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           <CubeIcon />
@@ -530,7 +530,7 @@ const Graph3DVisualization: React.FC<Graph3DProps> = ({ nodes, selectedNode, onN
         <button
           onClick={() => setIs3D(false)}
           className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
-            !is3D ? 'bg-symtex-purple text-white' : 'text-muted-foreground hover:text-foreground'
+            !is3D ? 'bg-symtex-purple text-foreground' : 'text-muted-foreground hover:text-foreground'
           }`}
         >
           <SquareIcon />
@@ -596,7 +596,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ document, isSelected, onCli
             {config.icon}
           </div>
           <div className="flex-1 min-w-0">
-            <h4 className="text-sm font-medium text-white truncate">{document.title}</h4>
+            <h4 className="text-sm font-medium text-foreground truncate">{document.title}</h4>
             <p className="text-xs text-muted-foreground">{config.label} | {document.connections} connections</p>
           </div>
         </div>
@@ -623,9 +623,9 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ document, isSelected, onCli
             <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${config.bgColor} ${config.color}`}>
               {config.label}
             </span>
-            <span className="text-xs text-gray-500">{document.size}</span>
+            <span className="text-xs text-muted-foreground">{document.size}</span>
           </div>
-          <h3 className="font-semibold text-white group-hover:text-symtex-purple transition-colors line-clamp-1">
+          <h3 className="font-semibold text-foreground group-hover:text-symtex-purple transition-colors line-clamp-1">
             {document.title}
           </h3>
         </div>
@@ -732,7 +732,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
 
       {/* Add Document Button */}
       <div className="p-4 border-t border-border">
-        <button className="w-full py-2.5 px-4 bg-symtex-purple/20 hover:bg-symtex-purple/30 border border-symtex-purple/50 hover:border-symtex-purple text-symtex-purple hover:text-white font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-2">
+        <button className="w-full py-2.5 px-4 bg-symtex-purple/20 hover:bg-symtex-purple/30 border border-symtex-purple/50 hover:border-symtex-purple text-symtex-purple hover:text-foreground font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-2">
           <PlusIcon />
           <span>Add Document</span>
         </button>
@@ -782,7 +782,7 @@ const KnowledgePage: React.FC = () => {
               {viewMode !== 'split' && (
                 <button
                   onClick={() => setIsGraphFullscreen(!isGraphFullscreen)}
-                  className="p-2 text-gray-400 hover:text-white transition-colors"
+                  className="p-2 text-muted-foreground hover:text-foreground transition-colors"
                   title={isGraphFullscreen ? 'Exit fullscreen' : 'Fullscreen graph'}
                 >
                   {isGraphFullscreen ? <CollapseIcon /> : <ExpandIcon />}
@@ -793,7 +793,7 @@ const KnowledgePage: React.FC = () => {
                 <button
                   onClick={() => { setViewMode('3d'); setIsGraphFullscreen(false); }}
                   className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
-                    viewMode === '3d' ? 'bg-symtex-purple text-white' : 'text-muted-foreground hover:text-foreground'
+                    viewMode === '3d' ? 'bg-symtex-purple text-foreground' : 'text-muted-foreground hover:text-foreground'
                   }`}
                   title="Graph View"
                 >
@@ -803,7 +803,7 @@ const KnowledgePage: React.FC = () => {
                 <button
                   onClick={() => { setViewMode('split'); setIsGraphFullscreen(false); }}
                   className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
-                    viewMode === 'split' ? 'bg-symtex-purple text-white' : 'text-muted-foreground hover:text-foreground'
+                    viewMode === 'split' ? 'bg-symtex-purple text-foreground' : 'text-muted-foreground hover:text-foreground'
                   }`}
                   title="Split View"
                 >
@@ -813,7 +813,7 @@ const KnowledgePage: React.FC = () => {
                 <button
                   onClick={() => { setViewMode('2d'); setIsGraphFullscreen(false); }}
                   className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
-                    viewMode === '2d' ? 'bg-symtex-purple text-white' : 'text-muted-foreground hover:text-foreground'
+                    viewMode === '2d' ? 'bg-symtex-purple text-foreground' : 'text-muted-foreground hover:text-foreground'
                   }`}
                   title="Document View"
                 >
@@ -830,7 +830,7 @@ const KnowledgePage: React.FC = () => {
       <div className="flex-1 overflow-hidden">
         {/* Graph-only View */}
         {viewMode === '3d' && (
-          <div className={`h-full relative ${isGraphFullscreen ? 'fixed inset-0 z-50 bg-gray-950' : ''}`}>
+          <div className={`h-full relative ${isGraphFullscreen ? 'fixed inset-0 z-50 bg-surface-base' : ''}`}>
             <Graph3DVisualization
               nodes={graphNodes}
               selectedNode={selectedDocument}
@@ -846,7 +846,7 @@ const KnowledgePage: React.FC = () => {
                     {DOCUMENT_TYPE_CONFIG[selectedDoc.type].icon}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-white truncate">{selectedDoc.title}</h4>
+                    <h4 className="font-semibold text-foreground truncate">{selectedDoc.title}</h4>
                     <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{selectedDoc.excerpt}</p>
                     <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
                       <span>{selectedDoc.connections} connections</span>
@@ -854,7 +854,7 @@ const KnowledgePage: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                <button className="w-full mt-3 py-2 bg-symtex-purple hover:bg-purple-600 text-white text-sm font-medium rounded-lg transition-colors">
+                <button className="w-full mt-3 py-2 bg-symtex-purple hover:bg-purple-600 text-foreground text-sm font-medium rounded-lg transition-colors">
                   Open Document
                 </button>
               </div>
@@ -931,7 +931,7 @@ const KnowledgePage: React.FC = () => {
                       {DOCUMENT_TYPE_CONFIG[selectedDoc.type].icon}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-white">{selectedDoc.title}</h4>
+                      <h4 className="font-semibold text-foreground">{selectedDoc.title}</h4>
                       <p className="text-sm text-muted-foreground mt-1">{selectedDoc.excerpt}</p>
                       <div className="flex items-center gap-4 mt-3">
                         <span className="text-xs text-muted-foreground">{selectedDoc.connections} connections</span>
@@ -939,7 +939,7 @@ const KnowledgePage: React.FC = () => {
                         <span className="text-xs text-muted-foreground">by {selectedDoc.author}</span>
                       </div>
                     </div>
-                    <button className="px-4 py-2 bg-symtex-purple hover:bg-purple-600 text-white text-sm font-medium rounded-lg transition-colors flex-shrink-0">
+                    <button className="px-4 py-2 bg-symtex-purple hover:bg-purple-600 text-foreground text-sm font-medium rounded-lg transition-colors flex-shrink-0">
                       Open
                     </button>
                   </div>

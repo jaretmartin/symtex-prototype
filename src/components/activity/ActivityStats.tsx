@@ -20,7 +20,7 @@ interface StatCardProps {
 
 function StatCard({ title, value, subtitle, trend, icon: Icon, iconColor, iconBg }: StatCardProps) {
   return (
-    <div className="bg-symtex-card rounded-xl p-5 border border-symtex-border hover:border-slate-600 transition-all duration-200">
+    <div className="bg-card rounded-xl p-5 border border-border hover:border-border transition-all duration-200">
       <div className="flex items-start justify-between mb-3">
         <div className={clsx('p-2.5 rounded-lg', iconBg)}>
           <Icon className={clsx('w-5 h-5', iconColor)} />
@@ -35,10 +35,10 @@ function StatCard({ title, value, subtitle, trend, icon: Icon, iconColor, iconBg
           </div>
         )}
       </div>
-      <p className="text-3xl font-bold text-white mb-1">{value}</p>
-      <p className="text-sm text-slate-400">{title}</p>
+      <p className="text-3xl font-bold text-foreground mb-1">{value}</p>
+      <p className="text-sm text-muted-foreground">{title}</p>
       {subtitle && (
-        <p className="text-xs text-slate-500 mt-1">{subtitle}</p>
+        <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>
       )}
     </div>
   )
@@ -63,7 +63,7 @@ export default function ActivityStats() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+        <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
           <BarChart3 className="w-5 h-5 text-symtex-primary" />
           Activity Overview
         </h2>
@@ -103,8 +103,8 @@ export default function ActivityStats() {
       </div>
 
       {/* Recent Activity Timeline */}
-      <div className="bg-symtex-card rounded-xl p-5 border border-symtex-border mt-4">
-        <h3 className="text-sm font-semibold text-slate-300 mb-4 flex items-center gap-2">
+      <div className="bg-card rounded-xl p-5 border border-border mt-4">
+        <h3 className="text-sm font-semibold text-muted-foreground mb-4 flex items-center gap-2">
           <Clock className="w-4 h-4" />
           Recent Activity
         </h3>
@@ -122,8 +122,8 @@ export default function ActivityStats() {
                 item.type === 'info' && 'bg-blue-400',
                 item.type === 'warning' && 'bg-yellow-400'
               )} />
-              <span className="flex-1 text-sm text-slate-300">{item.action}</span>
-              <span className="text-xs text-slate-500">{item.time}</span>
+              <span className="flex-1 text-sm text-muted-foreground">{item.action}</span>
+              <span className="text-xs text-muted-foreground">{item.time}</span>
             </div>
           ))}
         </div>

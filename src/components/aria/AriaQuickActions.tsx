@@ -242,7 +242,7 @@ function QuickActionButton({
       <div className="flex-1 min-w-0">
         <p
           className={clsx(
-            'text-sm font-medium text-slate-200',
+            'text-sm font-medium text-muted-foreground',
             'group-hover:text-white',
             'transition-colors'
           )}
@@ -250,7 +250,7 @@ function QuickActionButton({
           {action.label}
         </p>
         {action.category && (
-          <p className="text-xs text-slate-500 truncate">{action.category}</p>
+          <p className="text-xs text-muted-foreground truncate">{action.category}</p>
         )}
       </div>
     </button>
@@ -326,7 +326,7 @@ export function AriaQuickActions({
       ref={panelRef}
       className={clsx(
         'px-2 py-3',
-        'bg-slate-800/80 backdrop-blur-sm',
+        'bg-card/80 backdrop-blur-sm',
         'border-t border-violet-500/20',
         'animate-in slide-in-from-bottom-2 fade-in duration-200',
         className
@@ -335,12 +335,12 @@ export function AriaQuickActions({
       aria-label="Quick actions"
     >
       {/* Header */}
-      <div className="flex items-center gap-2 px-3 pb-2 mb-2 border-b border-slate-700/50">
+      <div className="flex items-center gap-2 px-3 pb-2 mb-2 border-b border-border/50">
         <Zap className="w-4 h-4 text-violet-400" aria-hidden="true" />
         <span className="text-xs font-medium text-violet-300">
           Quick Actions
         </span>
-        <span className="text-xs text-slate-500">- Try saying...</span>
+        <span className="text-xs text-muted-foreground">- Try saying...</span>
       </div>
 
       {/* Actions */}
@@ -349,7 +349,7 @@ export function AriaQuickActions({
           // Grouped by category
           Object.entries(groupedActions).map(([category, categoryActions]) => (
             <div key={category} className="mb-2 last:mb-0">
-              <p className="px-3 py-1 text-[10px] uppercase tracking-wider text-slate-500 font-medium">
+              <p className="px-3 py-1 text-[10px] uppercase tracking-wider text-muted-foreground font-medium">
                 {category}
               </p>
               {categoryActions.map((action, index) => (
@@ -376,16 +376,16 @@ export function AriaQuickActions({
       </div>
 
       {/* Example prompts */}
-      <div className="mt-3 px-3 pt-3 border-t border-slate-700/50">
-        <p className="text-xs text-slate-500 mb-2">Or try typing:</p>
+      <div className="mt-3 px-3 pt-3 border-t border-border/50">
+        <p className="text-xs text-muted-foreground mb-2">Or try typing:</p>
         <div className="flex flex-wrap gap-2">
           {['Help me with...', 'Create a...', 'Show me...'].map((prompt) => (
             <span
               key={prompt}
               className={clsx(
                 'px-2 py-1 rounded-md text-xs',
-                'bg-slate-700/50 text-slate-400',
-                'border border-slate-600/50'
+                'bg-muted/50 text-muted-foreground',
+                'border border-border/50'
               )}
             >
               "{prompt}"

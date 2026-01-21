@@ -207,7 +207,7 @@ export function CreateProjectModal({
       <div
         className={clsx(
           'relative w-full max-w-2xl max-h-[90vh] overflow-y-auto',
-          'bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl',
+          'bg-card border border-border rounded-xl shadow-2xl',
           'm-4'
         )}
         role="dialog"
@@ -215,16 +215,16 @@ export function CreateProjectModal({
         aria-labelledby="create-project-title"
       >
         {/* Header */}
-        <div className="sticky top-0 bg-zinc-900 px-6 py-4 border-b border-zinc-800 flex items-center justify-between z-10">
+        <div className="sticky top-0 bg-card px-6 py-4 border-b border-border flex items-center justify-between z-10">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-              <FolderPlus className="w-5 h-5 text-white" />
+              <FolderPlus className="w-5 h-5 text-foreground" />
             </div>
             <div>
-              <h2 id="create-project-title" className="text-lg font-semibold text-white">
+              <h2 id="create-project-title" className="text-lg font-semibold text-foreground">
                 Create New Project
               </h2>
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm text-muted-foreground">
                 Define a project with objectives and timeline
               </p>
             </div>
@@ -232,7 +232,7 @@ export function CreateProjectModal({
           <button
             type="button"
             onClick={handleClose}
-            className="p-2 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className="p-2 text-muted-foreground hover:text-foreground hover:bg-card rounded-lg transition-colors"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -243,7 +243,7 @@ export function CreateProjectModal({
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Domain Selector */}
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-2">
+            <label className="block text-sm font-medium text-muted-foreground mb-2">
               Domain <span className="text-red-400">*</span>
             </label>
             <div className="relative">
@@ -252,10 +252,10 @@ export function CreateProjectModal({
                 onClick={(): void => setIsDomainDropdownOpen(!isDomainDropdownOpen)}
                 className={clsx(
                   'w-full flex items-center justify-between gap-2',
-                  'px-4 py-3 bg-zinc-900 border rounded-lg',
+                  'px-4 py-3 bg-surface-base border rounded-lg',
                   'text-left transition-colors',
-                  'hover:border-zinc-600 focus:border-symtex-primary focus:outline-none',
-                  errors.domainId ? 'border-red-500' : 'border-zinc-700'
+                  'hover:border-border focus:border-symtex-primary focus:outline-none',
+                  errors.domainId ? 'border-red-500' : 'border-border'
                 )}
               >
                 {selectedDomain ? (
@@ -271,21 +271,21 @@ export function CreateProjectModal({
                         {selectedDomain.name.charAt(0).toUpperCase()}
                       </span>
                     </div>
-                    <span className="text-white">{selectedDomain.name}</span>
+                    <span className="text-foreground">{selectedDomain.name}</span>
                   </div>
                 ) : (
-                  <span className="text-zinc-400">Select a domain...</span>
+                  <span className="text-muted-foreground">Select a domain...</span>
                 )}
                 <ChevronDown
                   className={clsx(
-                    'w-5 h-5 text-zinc-400 transition-transform',
+                    'w-5 h-5 text-muted-foreground transition-transform',
                     isDomainDropdownOpen && 'rotate-180'
                   )}
                 />
               </button>
 
               {isDomainDropdownOpen && (
-                <div className="absolute z-50 w-full mt-2 bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl max-h-60 overflow-y-auto">
+                <div className="absolute z-50 w-full mt-2 bg-surface-base border border-border rounded-lg shadow-xl max-h-60 overflow-y-auto">
                   {domains.length > 0 ? (
                     domains.map((domain) => (
                       <button
@@ -300,8 +300,8 @@ export function CreateProjectModal({
                         }}
                         className={clsx(
                           'w-full flex items-center justify-between gap-3 px-4 py-3',
-                          'hover:bg-zinc-800 transition-colors',
-                          formData.domainId === domain.id && 'bg-zinc-800'
+                          'hover:bg-card transition-colors',
+                          formData.domainId === domain.id && 'bg-card'
                         )}
                       >
                         <div className="flex items-center gap-3">
@@ -316,7 +316,7 @@ export function CreateProjectModal({
                               {domain.name.charAt(0).toUpperCase()}
                             </span>
                           </div>
-                          <span className="text-white">{domain.name}</span>
+                          <span className="text-foreground">{domain.name}</span>
                         </div>
                         {formData.domainId === domain.id && (
                           <Check className="w-4 h-4 text-symtex-primary" />
@@ -325,8 +325,8 @@ export function CreateProjectModal({
                     ))
                   ) : (
                     <div className="px-4 py-6 text-center">
-                      <p className="text-zinc-400 text-sm">No domains available</p>
-                      <p className="text-zinc-500 text-xs mt-1">Create a domain first</p>
+                      <p className="text-muted-foreground text-sm">No domains available</p>
+                      <p className="text-muted-foreground text-xs mt-1">Create a domain first</p>
                     </div>
                   )}
                 </div>
@@ -339,7 +339,7 @@ export function CreateProjectModal({
 
           {/* Name Field */}
           <div>
-            <label htmlFor="project-name" className="block text-sm font-medium text-zinc-300 mb-2">
+            <label htmlFor="project-name" className="block text-sm font-medium text-muted-foreground mb-2">
               Project Name <span className="text-red-400">*</span>
             </label>
             <input
@@ -354,24 +354,24 @@ export function CreateProjectModal({
               }}
               placeholder="Enter project name"
               className={clsx(
-                'w-full px-4 py-3 bg-zinc-900 border rounded-lg',
-                'text-white placeholder-zinc-500',
+                'w-full px-4 py-3 bg-surface-base border rounded-lg',
+                'text-foreground placeholder-muted-foreground',
                 'focus:outline-none focus:border-symtex-primary',
-                errors.name ? 'border-red-500' : 'border-zinc-700'
+                errors.name ? 'border-red-500' : 'border-border'
               )}
               maxLength={100}
             />
             {errors.name && (
               <p className="mt-1 text-sm text-red-400">{errors.name}</p>
             )}
-            <p className="mt-1 text-xs text-zinc-500">
+            <p className="mt-1 text-xs text-muted-foreground">
               {formData.name.length}/100 characters
             </p>
           </div>
 
           {/* Description */}
           <div>
-            <label htmlFor="project-description" className="block text-sm font-medium text-zinc-300 mb-2">
+            <label htmlFor="project-description" className="block text-sm font-medium text-muted-foreground mb-2">
               Description
             </label>
             <textarea
@@ -386,24 +386,24 @@ export function CreateProjectModal({
               placeholder="Describe what this project aims to achieve..."
               rows={3}
               className={clsx(
-                'w-full px-4 py-3 bg-zinc-900 border rounded-lg',
-                'text-white placeholder-zinc-500 resize-none',
+                'w-full px-4 py-3 bg-surface-base border rounded-lg',
+                'text-foreground placeholder-muted-foreground resize-none',
                 'focus:outline-none focus:border-symtex-primary',
-                errors.description ? 'border-red-500' : 'border-zinc-700'
+                errors.description ? 'border-red-500' : 'border-border'
               )}
               maxLength={1000}
             />
             {errors.description && (
               <p className="mt-1 text-sm text-red-400">{errors.description}</p>
             )}
-            <p className="mt-1 text-xs text-zinc-500">
+            <p className="mt-1 text-xs text-muted-foreground">
               {formData.description.length}/1000 characters
             </p>
           </div>
 
           {/* Status */}
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-2">
+            <label className="block text-sm font-medium text-muted-foreground mb-2">
               Initial Status
             </label>
             <div className="flex gap-3">
@@ -415,8 +415,8 @@ export function CreateProjectModal({
                   className={clsx(
                     'flex items-center gap-2 px-4 py-2 rounded-lg border transition-all',
                     formData.status === option.value
-                      ? 'bg-zinc-800 border-symtex-primary text-white'
-                      : 'bg-zinc-900 border-zinc-700 text-zinc-400 hover:border-zinc-600'
+                      ? 'bg-card border-symtex-primary text-foreground'
+                      : 'bg-surface-base border-border text-muted-foreground hover:border-border'
                   )}
                 >
                   <span className={clsx('w-2 h-2 rounded-full', option.color)} />
@@ -429,7 +429,7 @@ export function CreateProjectModal({
           {/* Objectives */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="block text-sm font-medium text-zinc-300">
+              <label className="block text-sm font-medium text-muted-foreground">
                 Objectives <span className="text-red-400">*</span>
               </label>
               <button
@@ -450,8 +450,8 @@ export function CreateProjectModal({
                     onChange={(e): void => handleObjectiveChange(index, e.target.value)}
                     placeholder={`Objective ${index + 1}`}
                     className={clsx(
-                      'flex-1 px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg',
-                      'text-white placeholder-zinc-500',
+                      'flex-1 px-4 py-2 bg-surface-base border border-border rounded-lg',
+                      'text-foreground placeholder-muted-foreground',
                       'focus:outline-none focus:border-symtex-primary'
                     )}
                   />
@@ -459,7 +459,7 @@ export function CreateProjectModal({
                     <button
                       type="button"
                       onClick={(): void => removeObjective(index)}
-                      className="p-2 text-zinc-500 hover:text-red-400 hover:bg-zinc-800 rounded-lg transition-colors"
+                      className="p-2 text-muted-foreground hover:text-red-400 hover:bg-card rounded-lg transition-colors"
                       aria-label="Remove objective"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -474,13 +474,13 @@ export function CreateProjectModal({
           </div>
 
           {/* Timeline Toggle */}
-          <div className="p-4 bg-zinc-800/50 border border-zinc-700 rounded-lg">
+          <div className="p-4 bg-card/50 border border-border rounded-lg">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Calendar className="w-5 h-5 text-zinc-400" />
+                <Calendar className="w-5 h-5 text-muted-foreground" />
                 <div>
-                  <p className="text-sm font-medium text-zinc-300">Project Timeline</p>
-                  <p className="text-xs text-zinc-500">Set start and end dates</p>
+                  <p className="text-sm font-medium text-muted-foreground">Project Timeline</p>
+                  <p className="text-xs text-muted-foreground">Set start and end dates</p>
                 </div>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
@@ -490,14 +490,14 @@ export function CreateProjectModal({
                   onChange={(e): void => setFormData({ ...formData, hasTimeline: e.target.checked })}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-zinc-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-symtex-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-symtex-primary" />
+                <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-symtex-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-symtex-primary" />
               </label>
             </div>
 
             {formData.hasTimeline && (
               <div className="mt-4 grid grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="start-date" className="block text-xs text-zinc-400 mb-1">
+                  <label htmlFor="start-date" className="block text-xs text-muted-foreground mb-1">
                     Start Date
                   </label>
                   <input
@@ -505,11 +505,11 @@ export function CreateProjectModal({
                     type="date"
                     value={formData.startDate}
                     onChange={(e): void => setFormData({ ...formData, startDate: e.target.value })}
-                    className="w-full px-3 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-white text-sm focus:outline-none focus:border-symtex-primary"
+                    className="w-full px-3 py-2 bg-surface-base border border-border rounded-lg text-foreground text-sm focus:outline-none focus:border-symtex-primary"
                   />
                 </div>
                 <div>
-                  <label htmlFor="end-date" className="block text-xs text-zinc-400 mb-1">
+                  <label htmlFor="end-date" className="block text-xs text-muted-foreground mb-1">
                     End Date (optional)
                   </label>
                   <input
@@ -523,9 +523,9 @@ export function CreateProjectModal({
                       }
                     }}
                     className={clsx(
-                      'w-full px-3 py-2 bg-zinc-900 border rounded-lg text-white text-sm',
+                      'w-full px-3 py-2 bg-surface-base border rounded-lg text-foreground text-sm',
                       'focus:outline-none focus:border-symtex-primary',
-                      errors.endDate ? 'border-red-500' : 'border-zinc-700'
+                      errors.endDate ? 'border-red-500' : 'border-border'
                     )}
                   />
                   {errors.endDate && (
@@ -538,12 +538,12 @@ export function CreateProjectModal({
         </form>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-zinc-900 px-6 py-4 border-t border-zinc-800 flex items-center justify-end gap-3">
+        <div className="sticky bottom-0 bg-surface-base px-6 py-4 border-t border-border flex items-center justify-end gap-3">
           <button
             type="button"
             onClick={handleClose}
             disabled={isSubmitting}
-            className="px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-card rounded-lg transition-colors"
           >
             Cancel
           </button>
@@ -553,7 +553,7 @@ export function CreateProjectModal({
             disabled={isSubmitting || domains.length === 0}
             className={clsx(
               'flex items-center gap-2 px-6 py-2 rounded-lg text-sm font-medium',
-              'bg-gradient-to-r from-blue-500 to-cyan-500 text-white',
+              'bg-gradient-to-r from-blue-500 to-cyan-500 text-foreground',
               'hover:opacity-90 transition-opacity',
               'disabled:opacity-50 disabled:cursor-not-allowed'
             )}

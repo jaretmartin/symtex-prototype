@@ -112,10 +112,10 @@ export function NarrativeChapterCard({
   return (
     <div
       className={clsx(
-        'relative bg-symtex-card rounded-xl border transition-all duration-200',
+        'relative bg-card rounded-xl border transition-all duration-200',
         isDragging
           ? 'shadow-lg shadow-symtex-primary/20 border-symtex-primary scale-[1.02]'
-          : `${config.borderColor} hover:border-slate-500`,
+          : `${config.borderColor} hover:border-border`,
         className
       )}
     >
@@ -126,7 +126,7 @@ export function NarrativeChapterCard({
           {dragHandleProps && (
             <div
               {...dragHandleProps}
-              className="flex-shrink-0 p-1 rounded cursor-grab hover:bg-slate-700/50 text-slate-500 hover:text-slate-300 transition-colors"
+              className="flex-shrink-0 p-1 rounded cursor-grab hover:bg-muted/50 text-muted-foreground hover:text-muted-foreground transition-colors"
             >
               <GripVertical className="w-4 h-4" />
             </div>
@@ -157,16 +157,16 @@ export function NarrativeChapterCard({
               </span>
             </div>
 
-            <h4 className="font-semibold text-white text-base mb-1">
+            <h4 className="font-semibold text-foreground text-base mb-1">
               Chapter {chapterNumber}: {chapter.title}
             </h4>
 
-            <p className="text-sm text-slate-400 leading-relaxed">{chapter.storyText}</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">{chapter.storyText}</p>
 
             {/* Branch Indicators for Decision Chapters */}
             {hasBranches && (
               <div className="mt-3 space-y-1.5">
-                <span className="text-xs text-slate-500 uppercase tracking-wider">
+                <span className="text-xs text-muted-foreground uppercase tracking-wider">
                   Branches:
                 </span>
                 <div className="flex flex-wrap gap-2">
@@ -202,7 +202,7 @@ export function NarrativeChapterCard({
                 size="icon-sm"
                 onClick={() => onDelete(chapter.id)}
                 aria-label="Delete chapter"
-                className="text-slate-400 hover:text-error"
+                className="text-muted-foreground hover:text-error"
               >
                 <Trash2 className="w-4 h-4" />
               </Button>
@@ -214,7 +214,7 @@ export function NarrativeChapterCard({
         {hasCustomizableFields && (
           <button
             onClick={toggleExpand}
-            className="mt-3 flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-300 transition-colors"
+            className="mt-3 flex items-center gap-1.5 text-sm text-muted-foreground hover:text-muted-foreground transition-colors"
           >
             {isExpanded ? (
               <>
@@ -234,7 +234,7 @@ export function NarrativeChapterCard({
 
       {/* Customizable Fields (Expanded) */}
       {hasCustomizableFields && isExpanded && (
-        <div className="px-4 pb-4 pt-2 border-t border-symtex-border">
+        <div className="px-4 pb-4 pt-2 border-t border-border">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {chapter.customizableFields.map((field) => (
               <CustomizableFieldInput

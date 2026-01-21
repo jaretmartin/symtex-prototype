@@ -136,12 +136,12 @@ export function CognateSelector({
               />
             ) : (
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                <Brain className="w-4 h-4 text-white" />
+                <Brain className="w-4 h-4 text-foreground" />
               </div>
             )}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
-                <span className="text-white font-medium truncate">
+                <span className="text-foreground font-medium truncate">
                   {selectedCognate.name}
                 </span>
                 <StatusDot status={selectedCognate.availability} />
@@ -160,7 +160,7 @@ export function CognateSelector({
             <button
               type="button"
               onClick={handleClear}
-              className="p-1 text-muted-foreground hover:text-white rounded-md hover:bg-surface-elevated transition-colors"
+              className="p-1 text-muted-foreground hover:text-foreground rounded-md hover:bg-surface-elevated transition-colors"
               aria-label="Clear selection"
             >
               <X className="w-4 h-4" />
@@ -195,7 +195,7 @@ export function CognateSelector({
                 onChange={(e): void => setSearchQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Search cognates..."
-                className="w-full pl-10 pr-4 py-2 bg-surface-card border border-border rounded-lg text-white text-sm placeholder-zinc-500 focus:border-symtex-primary focus:outline-none"
+                className="w-full pl-10 pr-4 py-2 bg-surface-card border border-border rounded-lg text-foreground text-sm placeholder-muted-foreground focus:border-symtex-primary focus:outline-none"
               />
             </div>
           </div>
@@ -213,7 +213,7 @@ export function CognateSelector({
               ))
             ) : (
               <div className="px-4 py-8 text-center">
-                <Brain className="w-8 h-8 text-zinc-600 mx-auto mb-2" />
+                <Brain className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
                 <p className="text-muted-foreground text-sm">
                   {searchQuery ? 'No cognates found' : 'No cognates available'}
                 </p>
@@ -260,14 +260,14 @@ function CognateSelectorOption({
         />
       ) : (
         <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-          <Brain className="w-5 h-5 text-white" />
+          <Brain className="w-5 h-5 text-foreground" />
         </div>
       )}
 
       {/* Info */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <span className="text-white font-medium truncate">{cognate.name}</span>
+          <span className="text-foreground font-medium truncate">{cognate.name}</span>
           <StatusDot status={cognate.availability} />
           {isBusy && (
             <span className="text-xs text-yellow-400">(Busy)</span>
@@ -281,7 +281,7 @@ function CognateSelectorOption({
       {/* Level and Autonomy */}
       <div className="flex items-center gap-2 flex-shrink-0">
         <div className="w-6 h-6 rounded bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center">
-          <span className="text-xs font-bold text-white">{cognate.level}</span>
+          <span className="text-xs font-bold text-foreground">{cognate.level}</span>
         </div>
         <AutonomyBadge level={cognate.autonomyLevel} />
       </div>
@@ -387,11 +387,11 @@ export function CognateMultiSelector({
                 key={cognate.id}
                 className="inline-flex items-center gap-1 px-2 py-1 bg-surface-card rounded-md text-sm"
               >
-                <span className="text-white">{cognate.name}</span>
+                <span className="text-foreground">{cognate.name}</span>
                 <button
                   type="button"
                   onClick={(e): void => removeSelection(cognate.id, e)}
-                  className="text-muted-foreground hover:text-white"
+                  className="text-muted-foreground hover:text-foreground"
                 >
                   <X className="w-3 h-3" />
                 </button>
@@ -414,7 +414,7 @@ export function CognateMultiSelector({
                 value={searchQuery}
                 onChange={(e): void => setSearchQuery(e.target.value)}
                 placeholder="Search cognates..."
-                className="w-full pl-10 pr-4 py-2 bg-surface-card border border-border rounded-lg text-white text-sm placeholder-zinc-500 focus:border-symtex-primary focus:outline-none"
+                className="w-full pl-10 pr-4 py-2 bg-surface-card border border-border rounded-lg text-foreground text-sm placeholder-muted-foreground focus:border-symtex-primary focus:outline-none"
               />
             </div>
           </div>
@@ -437,7 +437,7 @@ export function CognateMultiSelector({
                     <Check className="w-3 h-3 text-symtex-primary" />
                   )}
                 </div>
-                <span className="text-white flex-1 truncate">{cognate.name}</span>
+                <span className="text-foreground flex-1 truncate">{cognate.name}</span>
                 <span className="text-xs text-muted-foreground">L{cognate.level}</span>
               </button>
             ))}

@@ -160,17 +160,17 @@ export default function ChatPage(): JSX.Element {
               <button
                 type="button"
                 onClick={() => navigate(-1)}
-                className="p-1.5 rounded-lg text-muted-foreground hover:text-white hover:bg-muted transition-colors"
+                className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                 aria-label="Go back"
               >
                 <ArrowLeft className="w-4 h-4" aria-hidden="true" />
               </button>
-              <h2 className="font-semibold text-white">Chats</h2>
+              <h2 className="font-semibold text-foreground">Chats</h2>
             </div>
             <button
               type="button"
               onClick={handleNewConversation}
-              className="p-1.5 rounded-lg text-muted-foreground hover:text-white hover:bg-muted transition-colors"
+              className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               aria-label="New conversation"
             >
               <Plus className="w-4 h-4" aria-hidden="true" />
@@ -188,8 +188,8 @@ export default function ChatPage(): JSX.Element {
                   'flex items-center justify-between p-3 rounded-lg cursor-pointer group',
                   'transition-all duration-150',
                   activeConversationId === conv.id
-                    ? 'bg-symtex-primary/20 text-white'
-                    : 'text-muted-foreground hover:bg-muted hover:text-white'
+                    ? 'bg-symtex-primary/20 text-foreground'
+                    : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                 )}
                 onClick={() => setActiveConversation(conv.id)}
                 onKeyDown={(e) => {
@@ -243,7 +243,7 @@ export default function ChatPage(): JSX.Element {
               <MessageSquare className="w-4 h-4 text-symtex-primary" aria-hidden="true" />
             </div>
             <div>
-              <h1 className="font-medium text-white">
+              <h1 className="font-medium text-foreground">
                 {activeConversation?.title || 'AI Assistant'}
               </h1>
               {activeCognate && (
@@ -255,7 +255,7 @@ export default function ChatPage(): JSX.Element {
           </div>
           <button
             type="button"
-            className="p-2 rounded-lg text-muted-foreground hover:text-white hover:bg-muted transition-colors"
+            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
             aria-label="More options"
           >
             <MoreHorizontal className="w-5 h-5" aria-hidden="true" />

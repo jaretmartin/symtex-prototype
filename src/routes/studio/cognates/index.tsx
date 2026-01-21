@@ -26,7 +26,7 @@ const statusConfig: Record<CognateStatus, { label: string; color: string; icon: 
   draft: { label: 'Draft', color: 'bg-yellow-500/20 text-yellow-400', icon: Clock },
   active: { label: 'Active', color: 'bg-green-500/20 text-green-400', icon: CheckCircle },
   paused: { label: 'Paused', color: 'bg-orange-500/20 text-orange-400', icon: Pause },
-  archived: { label: 'Archived', color: 'bg-zinc-500/20 text-zinc-400', icon: Archive },
+  archived: { label: 'Archived', color: 'bg-muted/20 text-muted-foreground', icon: Archive },
 };
 
 interface CognateCardProps {
@@ -41,15 +41,15 @@ function CognateCard({ cognate, onEdit, onDelete }: CognateCardProps): JSX.Eleme
   const StatusIcon = status.icon;
 
   return (
-    <div className="p-5 bg-zinc-900/50 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-all">
+    <div className="p-5 bg-surface-base/50 border border-border rounded-lg hover:border-muted transition-all">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-            <Brain className="w-6 h-6 text-white" />
+            <Brain className="w-6 h-6 text-foreground" />
           </div>
           <div>
-            <h3 className="font-medium text-white">{cognate.name}</h3>
-            <p className="text-sm text-zinc-400">{cognate.role || 'No role assigned'}</p>
+            <h3 className="font-medium text-foreground">{cognate.name}</h3>
+            <p className="text-sm text-muted-foreground">{cognate.role || 'No role assigned'}</p>
           </div>
         </div>
 
@@ -57,22 +57,22 @@ function CognateCard({ cognate, onEdit, onDelete }: CognateCardProps): JSX.Eleme
           <button
             type="button"
             onClick={() => setShowMenu(!showMenu)}
-            className="p-1.5 rounded-lg hover:bg-zinc-700 transition-colors"
+            className="p-1.5 rounded-lg hover:bg-muted transition-colors"
           >
-            <MoreVertical className="w-5 h-5 text-zinc-400" />
+            <MoreVertical className="w-5 h-5 text-muted-foreground" />
           </button>
 
           {showMenu && (
             <>
               <div className="fixed inset-0 z-10" onClick={() => setShowMenu(false)} />
-              <div className="absolute right-0 top-full mt-1 z-20 w-40 py-1 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl">
+              <div className="absolute right-0 top-full mt-1 z-20 w-40 py-1 bg-card border border-border rounded-lg shadow-xl">
                 <button
                   type="button"
                   onClick={() => {
                     onEdit(cognate);
                     setShowMenu(false);
                   }}
-                  className="flex items-center gap-2 w-full px-3 py-2 text-sm text-zinc-300 hover:bg-zinc-700"
+                  className="flex items-center gap-2 w-full px-3 py-2 text-sm text-muted-foreground hover:bg-muted"
                 >
                   <Edit className="w-4 h-4" />
                   Edit
@@ -83,7 +83,7 @@ function CognateCard({ cognate, onEdit, onDelete }: CognateCardProps): JSX.Eleme
                     onDelete(cognate);
                     setShowMenu(false);
                   }}
-                  className="flex items-center gap-2 w-full px-3 py-2 text-sm text-red-400 hover:bg-zinc-700"
+                  className="flex items-center gap-2 w-full px-3 py-2 text-sm text-red-400 hover:bg-muted"
                 >
                   <Trash2 className="w-4 h-4" />
                   Delete
@@ -94,7 +94,7 @@ function CognateCard({ cognate, onEdit, onDelete }: CognateCardProps): JSX.Eleme
         </div>
       </div>
 
-      <p className="text-sm text-zinc-400 line-clamp-2 mb-4">{cognate.description}</p>
+      <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{cognate.description}</p>
 
       <div className="flex items-center gap-2 mb-4">
         <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium ${status.color}`}>
@@ -102,14 +102,14 @@ function CognateCard({ cognate, onEdit, onDelete }: CognateCardProps): JSX.Eleme
           {status.label}
         </span>
         {cognate.industry && (
-          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-zinc-800 text-zinc-400">
+          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-card text-muted-foreground">
             {cognate.industry}
           </span>
         )}
       </div>
 
-      <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
-        <div className="flex items-center gap-1 text-sm text-zinc-500">
+      <div className="flex items-center justify-between pt-4 border-t border-border">
+        <div className="flex items-center gap-1 text-sm text-muted-foreground">
           <FileText className="w-4 h-4" />
           <span>{cognate.activeSOPCount}/{cognate.sopCount} SOPs active</span>
         </div>
@@ -165,13 +165,13 @@ export function CognatesPage(): JSX.Element {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Cognates</h1>
-          <p className="text-zinc-400 mt-1">Manage your Cognates and their behaviors</p>
+          <h1 className="text-2xl font-bold text-foreground">Cognates</h1>
+          <p className="text-muted-foreground mt-1">Manage your Cognates and their behaviors</p>
         </div>
 
         <Link
           to="/studio/cognates/new"
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-foreground rounded-lg hover:bg-blue-500 transition-colors"
         >
           <Plus className="w-4 h-4" />
           New Cognate
@@ -181,20 +181,20 @@ export function CognatesPage(): JSX.Element {
       {/* Filters */}
       <div className="flex items-center gap-4">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search cognates..."
-            className="w-full pl-10 pr-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-white placeholder-zinc-500 focus:border-blue-500 focus:outline-none"
+            className="w-full pl-10 pr-4 py-2 bg-surface-base border border-border rounded-lg text-foreground placeholder-muted-foreground focus:border-blue-500 focus:outline-none"
           />
         </div>
 
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value as CognateStatus | 'all')}
-          className="px-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+          className="px-4 py-2 bg-surface-base border border-border rounded-lg text-foreground focus:border-blue-500 focus:outline-none"
         >
           <option value="all">All Statuses</option>
           <option value="active">Active</option>
@@ -206,10 +206,10 @@ export function CognatesPage(): JSX.Element {
 
       {/* Cognate Grid */}
       {filteredCognates.length === 0 ? (
-        <div className="p-12 text-center border border-dashed border-zinc-700 rounded-lg">
-          <Brain className="w-12 h-12 text-zinc-600 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-white mb-2">No Cognates Found</h3>
-          <p className="text-zinc-400 mb-4">
+        <div className="p-12 text-center border border-dashed border-border rounded-lg">
+          <Brain className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+          <h3 className="text-lg font-medium text-foreground mb-2">No Cognates Found</h3>
+          <p className="text-muted-foreground mb-4">
             {searchQuery || statusFilter !== 'all'
               ? 'Try adjusting your search or filters'
               : 'Create your first Cognate to get started'}
@@ -217,7 +217,7 @@ export function CognatesPage(): JSX.Element {
           {!searchQuery && statusFilter === 'all' && (
             <Link
               to="/studio/cognates/new"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-foreground rounded-lg hover:bg-blue-500 transition-colors"
             >
               <Plus className="w-4 h-4" />
               Create Cognate

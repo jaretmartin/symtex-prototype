@@ -109,7 +109,7 @@ function BarMeter({
     <div className={clsx('flex items-center gap-2', className)}>
       <div
         className={clsx(
-          'flex-1 bg-slate-700 rounded-full overflow-hidden',
+          'flex-1 bg-muted rounded-full overflow-hidden',
           config.height
         )}
       >

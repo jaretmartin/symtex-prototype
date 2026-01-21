@@ -37,7 +37,7 @@ export function SystemHealthGauge({
           r="45"
           fill="none"
           stroke="currentColor"
-          className="text-slate-700"
+          className="text-muted-foreground"
           strokeWidth="8"
         />
         {/* Progress circle */}
@@ -59,7 +59,7 @@ export function SystemHealthGauge({
         <span className={clsx('text-3xl font-bold', getStatusTextColor(status))}>
           {health}%
         </span>
-        <span className="text-xs text-slate-400 capitalize">{status}</span>
+        <span className="text-xs text-muted-foreground capitalize">{status}</span>
       </div>
     </div>
   );

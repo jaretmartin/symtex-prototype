@@ -176,7 +176,7 @@ export function SkillBadge({
           )}
         >
           <div className="flex items-center gap-2 mb-1">
-            <span className="font-medium text-white">{skill.name}</span>
+            <span className="font-medium text-foreground">{skill.name}</span>
             <span className={clsx('text-xs', SKILL_PROFICIENCY_CONFIG[skill.proficiency].color)}>
               {SKILL_PROFICIENCY_CONFIG[skill.proficiency].label}
             </span>
@@ -253,7 +253,7 @@ export function SkillList({ skills, className }: SkillListProps): JSX.Element {
               const Icon = categoryIcons[skill.category];
               return <Icon className={clsx('w-4 h-4', SKILL_CATEGORY_CONFIG[skill.category].color)} />;
             })()}
-            <span className="text-sm text-white">{skill.name}</span>
+            <span className="text-sm text-foreground">{skill.name}</span>
           </div>
           <div className="flex items-center gap-2">
             <span

@@ -85,7 +85,7 @@ function BreadcrumbSegment({
                 'animate-pulse-subtle',
               ]
             : [
-                'text-slate-400 hover:text-white hover:bg-slate-800/50',
+                'text-muted-foreground hover:text-white hover:bg-card/50',
                 'border border-transparent',
               ]
         )}
@@ -159,8 +159,8 @@ export function BreadcrumbRail({ className }: BreadcrumbRailProps): JSX.Element 
       aria-label="Breadcrumb navigation"
       className={clsx(
         'h-12 px-4 flex items-center',
-        'bg-symtex-card/80 backdrop-blur-sm',
-        'border-b border-symtex-border',
+        'bg-card/80 backdrop-blur-sm',
+        'border-b border-border',
         className
       )}
     >

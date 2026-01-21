@@ -360,7 +360,7 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
   return (
     <div className="flex items-center gap-0.5">
       {[...Array(5)].map((_, i) => (
-        <span key={i} className={i < fullStars ? 'text-symtex-gold' : 'text-gray-600'}>
+        <span key={i} className={i < fullStars ? 'text-symtex-gold' : 'text-muted-foreground'}>
           <StarIcon filled={i < fullStars || (i === fullStars && hasHalfStar)} />
         </span>
       ))}
@@ -375,7 +375,7 @@ const CategoryBadge: React.FC<{ category: TemplateCategory }> = ({ category }) =
   if (!config) return null;
 
   return (
-    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${config.color} text-white shadow-lg shadow-${category === 'research' ? 'blue' : category === 'reports' ? 'emerald' : 'purple'}-500/25`}>
+    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${config.color} text-foreground shadow-lg shadow-${category === 'research' ? 'blue' : category === 'reports' ? 'emerald' : 'purple'}-500/25`}>
       {config.icon}
       {config.label}
     </span>
@@ -395,7 +395,7 @@ const TemplateCard: React.FC<{ template: Template; isMasonry?: boolean }> = ({ t
     <div className={`group relative bg-surface-card/50 backdrop-blur-sm rounded-xl border border-border hover:border-symtex-purple/50 transition-all duration-300 hover:shadow-xl hover:shadow-symtex-purple/10 overflow-hidden ${isMasonry ? '' : 'flex flex-col'}`}>
       {/* Featured Badge */}
       {template.isFeatured && (
-        <div className="absolute top-3 right-3 z-10 flex items-center gap-1 px-2 py-1 bg-symtex-gold/90 backdrop-blur-sm rounded-full text-xs font-semibold text-gray-900">
+        <div className="absolute top-3 right-3 z-10 flex items-center gap-1 px-2 py-1 bg-symtex-gold/90 backdrop-blur-sm rounded-full text-xs font-semibold text-foreground">
           <SparklesIcon />
           Featured
         </div>
@@ -412,7 +412,7 @@ const TemplateCard: React.FC<{ template: Template; isMasonry?: boolean }> = ({ t
         </div>
 
         {/* Title & Description */}
-        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-symtex-purple transition-colors">
+        <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-symtex-purple transition-colors">
           {template.title}
         </h3>
         <p className="text-sm text-muted-foreground mb-4 line-clamp-2 flex-1">
@@ -438,7 +438,7 @@ const TemplateCard: React.FC<{ template: Template; isMasonry?: boolean }> = ({ t
         </div>
 
         {/* Action Button */}
-        <button className="w-full py-2.5 px-4 bg-gradient-to-r from-symtex-purple to-symtex-purple/80 hover:from-symtex-purple hover:to-purple-600 text-white font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-2 group/btn">
+        <button className="w-full py-2.5 px-4 bg-gradient-to-r from-symtex-purple to-symtex-purple/80 hover:from-symtex-purple hover:to-purple-600 text-foreground font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-2 group/btn">
           <span>Use Template</span>
           <ArrowRightIcon />
         </button>
@@ -462,7 +462,7 @@ const FeaturedTemplateCard: React.FC<{ template: Template }> = ({ template }) =>
         {/* Preview Section */}
         <div className={`relative md:w-1/2 h-64 md:h-auto bg-gradient-to-br ${template.previewGradient} overflow-hidden`}>
           {/* Featured Badge */}
-          <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 px-3 py-1.5 bg-symtex-gold backdrop-blur-sm rounded-full text-sm font-bold text-gray-900 shadow-lg">
+          <div className="absolute top-4 left-4 z-10 flex items-center gap-1.5 px-3 py-1.5 bg-symtex-gold backdrop-blur-sm rounded-full text-sm font-bold text-foreground shadow-lg">
             <SparklesIcon />
             Featured Template
           </div>
@@ -486,7 +486,7 @@ const FeaturedTemplateCard: React.FC<{ template: Template }> = ({ template }) =>
         <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
           <CategoryBadge category={template.category} />
 
-          <h3 className="text-2xl font-bold text-white mt-4 mb-3 group-hover:text-symtex-purple transition-colors">
+          <h3 className="text-2xl font-bold text-foreground mt-4 mb-3 group-hover:text-symtex-purple transition-colors">
             {template.title}
           </h3>
 
@@ -513,7 +513,7 @@ const FeaturedTemplateCard: React.FC<{ template: Template }> = ({ template }) =>
           </div>
 
           {/* CTA */}
-          <button className="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-symtex-purple to-purple-600 hover:from-purple-600 hover:to-symtex-purple text-white font-semibold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-symtex-purple/25">
+          <button className="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-symtex-purple to-purple-600 hover:from-purple-600 hover:to-symtex-purple text-foreground font-semibold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-symtex-purple/25">
             <span>Use This Template</span>
             <ArrowRightIcon />
           </button>
@@ -536,7 +536,7 @@ const CategoryFilter: React.FC<{
         onClick={() => onSelect('all')}
         className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium transition-all duration-200 ${
           selected === 'all'
-            ? 'bg-symtex-purple text-white shadow-lg shadow-symtex-purple/25'
+            ? 'bg-symtex-purple text-foreground shadow-lg shadow-symtex-purple/25'
             : 'bg-surface-card/50 text-muted-foreground hover:bg-surface-card hover:text-foreground'
         }`}
       >
@@ -551,7 +551,7 @@ const CategoryFilter: React.FC<{
           onClick={() => onSelect(cat.id)}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium transition-all duration-200 ${
             selected === cat.id
-              ? `bg-gradient-to-r ${cat.color} text-white shadow-lg`
+              ? `bg-gradient-to-r ${cat.color} text-foreground shadow-lg`
               : 'bg-surface-card/50 text-muted-foreground hover:bg-surface-card hover:text-foreground'
           }`}
         >
@@ -617,7 +617,7 @@ const TemplatesPage: React.FC = () => {
                 onClick={() => setViewMode('grid')}
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
                   viewMode === 'grid'
-                    ? 'bg-symtex-purple text-white'
+                    ? 'bg-symtex-purple text-foreground'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
@@ -628,7 +628,7 @@ const TemplatesPage: React.FC = () => {
                 onClick={() => setViewMode('masonry')}
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
                   viewMode === 'masonry'
-                    ? 'bg-symtex-purple text-white'
+                    ? 'bg-symtex-purple text-foreground'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
@@ -671,7 +671,7 @@ const TemplatesPage: React.FC = () => {
               <div className="p-2 bg-symtex-gold/20 rounded-lg">
                 <SparklesIcon />
               </div>
-              <h2 className="text-xl font-semibold text-white">Featured Templates</h2>
+              <h2 className="text-xl font-semibold text-foreground">Featured Templates</h2>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {featuredTemplates.map((template) => (
@@ -684,7 +684,7 @@ const TemplatesPage: React.FC = () => {
         {/* All Templates Section */}
         <section>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold text-white">
+            <h2 className="text-xl font-semibold text-foreground">
               {selectedCategory === 'all' ? 'All Templates' : CATEGORIES.find(c => c.id === selectedCategory)?.label + ' Templates'}
             </h2>
             <span className="text-sm text-muted-foreground">

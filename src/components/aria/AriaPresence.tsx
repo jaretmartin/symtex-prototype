@@ -117,8 +117,8 @@ export function AriaPresence({
         className={clsx(
           'absolute bottom-full right-0 mb-2',
           'px-3 py-1.5 rounded-lg',
-          'bg-slate-800/95 backdrop-blur-sm border border-slate-700/50',
-          'text-sm text-white whitespace-nowrap',
+          'bg-card/95 backdrop-blur-sm border border-border/50',
+          'text-sm text-foreground whitespace-nowrap',
           'shadow-lg shadow-black/20',
           'transition-all duration-200',
           showTooltip
@@ -129,7 +129,7 @@ export function AriaPresence({
         Chat with Aria
         {/* Tooltip arrow */}
         <div
-          className="absolute -bottom-1 right-5 w-2 h-2 bg-slate-800/95 border-r border-b border-slate-700/50 transform rotate-45"
+          className="absolute -bottom-1 right-5 w-2 h-2 bg-card/95 border-r border-b border-border/50 transform rotate-45"
           aria-hidden="true"
         />
       </div>
@@ -218,7 +218,7 @@ export function AriaPresence({
             className={clsx(
               'absolute -top-1 -right-1',
               'w-4 h-4 rounded-full',
-              'bg-rose-500 border-2 border-slate-900',
+              'bg-rose-500 border-2 border-border',
               'flex items-center justify-center'
             )}
             aria-label="Has suggestions"
@@ -232,7 +232,7 @@ export function AriaPresence({
           className={clsx(
             'absolute bottom-0 right-0',
             'w-4 h-4 rounded-full',
-            'border-2 border-slate-900',
+            'border-2 border-border',
             'transition-colors duration-200',
             status === 'available' && 'bg-emerald-400',
             status === 'busy' && 'bg-amber-400',

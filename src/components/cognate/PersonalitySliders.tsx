@@ -76,9 +76,9 @@ function PersonalitySlider({
   if (compact) {
     return (
       <div className="flex items-center gap-3">
-        <span className="text-xs text-slate-400 w-20 truncate">{config.label}</span>
+        <span className="text-xs text-muted-foreground w-20 truncate">{config.label}</span>
         <div className="flex-1 relative">
-          <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden">
+          <div className="h-1.5 bg-muted rounded-full overflow-hidden">
             <div
               className={clsx(
                 'h-full rounded-full bg-gradient-to-r transition-all duration-300',
@@ -88,7 +88,7 @@ function PersonalitySlider({
             />
           </div>
         </div>
-        <span className="text-xs text-slate-400 w-8 text-right">{value}</span>
+        <span className="text-xs text-muted-foreground w-8 text-right">{value}</span>
       </div>
     );
   }
@@ -100,12 +100,12 @@ function PersonalitySlider({
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <label htmlFor={sliderId} className="text-sm font-medium text-white">
+          <label htmlFor={sliderId} className="text-sm font-medium text-foreground">
             {config.label}
           </label>
           <button
             type="button"
-            className="text-slate-500 hover:text-slate-400 transition-colors"
+            className="text-muted-foreground hover:text-muted-foreground transition-colors"
             onMouseEnter={(): void => setShowTooltip(true)}
             onMouseLeave={(): void => setShowTooltip(false)}
             aria-label={`Information about ${config.label}`}
@@ -113,18 +113,18 @@ function PersonalitySlider({
             <Info className="w-3.5 h-3.5" />
           </button>
           {showTooltip && (
-            <div className="absolute z-50 mt-8 px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 shadow-xl max-w-xs">
-              <p className="text-xs text-slate-300">{config.description}</p>
+            <div className="absolute z-50 mt-8 px-3 py-2 rounded-lg bg-card border border-border shadow-xl max-w-xs">
+              <p className="text-xs text-foreground">{config.description}</p>
             </div>
           )}
         </div>
-        <span className="text-sm font-medium text-slate-400" aria-hidden="true">{value}</span>
+        <span className="text-sm font-medium text-muted-foreground" aria-hidden="true">{value}</span>
       </div>
 
       {/* Slider */}
       <div className="relative">
         {/* Custom track background */}
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2 bg-slate-700 rounded-full pointer-events-none">
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2 bg-muted rounded-full pointer-events-none">
           <div
             className={clsx(
               'h-full rounded-full bg-gradient-to-r transition-all duration-300',
@@ -159,7 +159,7 @@ function PersonalitySlider({
       </div>
 
       {/* Labels */}
-      <div className="flex items-center justify-between text-xs text-slate-500" aria-hidden="true">
+      <div className="flex items-center justify-between text-xs text-muted-foreground" aria-hidden="true">
         <span>{config.minLabel}</span>
         <span>{config.maxLabel}</span>
       </div>
@@ -178,14 +178,14 @@ export function PersonalityPreview({ values, className }: PersonalityPreviewProp
     <div className={clsx('space-y-1.5', className)}>
       {PERSONALITY_TRAITS.map((trait) => (
         <div key={trait.trait} className="flex items-center gap-2">
-          <span className="text-xs text-slate-500 w-16 truncate">{trait.label}</span>
-          <div className="flex-1 h-1 bg-slate-700 rounded-full overflow-hidden">
+          <span className="text-xs text-muted-foreground w-16 truncate">{trait.label}</span>
+          <div className="flex-1 h-1 bg-muted rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-symtex-primary to-symtex-accent rounded-full"
               style={{ width: `${values[trait.trait]}%` }}
             />
           </div>
-          <span className="text-xs text-slate-500 w-6 text-right">{values[trait.trait]}</span>
+          <span className="text-xs text-muted-foreground w-6 text-right">{values[trait.trait]}</span>
         </div>
       ))}
     </div>

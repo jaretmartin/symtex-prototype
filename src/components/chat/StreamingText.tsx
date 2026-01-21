@@ -116,7 +116,7 @@ export function StreamingText({
   }
 
   return (
-    <div ref={containerRef} className="text-sm text-slate-200 whitespace-pre-wrap break-words">
+    <div ref={containerRef} className="text-sm text-muted-foreground whitespace-pre-wrap break-words">
       {displayedText}
       {isStreaming && showCursor && <BlinkingCursor />}
     </div>

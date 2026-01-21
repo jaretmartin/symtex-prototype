@@ -266,28 +266,28 @@ function PersonalityRadar({
     const traitConfig = RADAR_TRAITS.find((t) => t.trait === data.traitKey);
 
     return (
-      <div className="bg-symtex-card border border-symtex-border rounded-lg p-2 shadow-xl">
-        <p className="text-sm font-medium text-white">{traitConfig?.label}</p>
-        <p className="text-xs text-slate-400">{traitConfig?.description}</p>
+      <div className="bg-card border border-border rounded-lg p-2 shadow-xl">
+        <p className="text-sm font-medium text-foreground">{traitConfig?.label}</p>
+        <p className="text-xs text-muted-foreground">{traitConfig?.description}</p>
         <p className="text-lg font-bold text-symtex-primary mt-1">{data.value}%</p>
       </div>
     );
   };
 
   return (
-    <div className={cn('bg-symtex-card rounded-xl border border-symtex-border', className)}>
+    <div className={cn('bg-card rounded-xl border border-border', className)}>
       {/* Header with Presets */}
       {showPresets && (
-        <div className="p-4 border-b border-symtex-border">
+        <div className="p-4 border-b border-border">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-symtex-primary" />
               Personality Profile
             </h3>
             <div className="relative">
               <button
                 onClick={() => setShowPresetDropdown(!showPresetDropdown)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-700/50 text-sm text-slate-300 hover:bg-slate-700 transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted/50 text-sm text-foreground hover:bg-muted transition-colors"
                 disabled={readOnly}
               >
                 <Zap className="w-3.5 h-3.5" />
@@ -300,19 +300,19 @@ function PersonalityRadar({
                 />
               </button>
               {showPresetDropdown && (
-                <div className="absolute right-0 top-full mt-2 w-56 bg-symtex-card border border-symtex-border rounded-xl shadow-xl z-50 overflow-hidden animate-in slide-in-from-top-2 duration-200">
+                <div className="absolute right-0 top-full mt-2 w-56 bg-card border border-border rounded-xl shadow-xl z-50 overflow-hidden animate-in slide-in-from-top-2 duration-200">
                   {PERSONALITY_PRESETS.map((preset) => {
                     const PresetIcon = preset.icon;
                     return (
                       <button
                         key={preset.id}
                         onClick={() => handlePresetClick(preset)}
-                        className="w-full p-3 flex items-start gap-3 hover:bg-slate-800/50 transition-colors text-left"
+                        className="w-full p-3 flex items-start gap-3 hover:bg-muted/50 transition-colors text-left"
                       >
                         <PresetIcon className="w-5 h-5 text-symtex-primary flex-shrink-0 mt-0.5" />
                         <div>
-                          <p className="text-sm font-medium text-white">{preset.name}</p>
-                          <p className="text-xs text-slate-400">{preset.description}</p>
+                          <p className="text-sm font-medium text-foreground">{preset.name}</p>
+                          <p className="text-xs text-muted-foreground">{preset.description}</p>
                         </div>
                       </button>
                     );
@@ -373,7 +373,7 @@ function PersonalityRadar({
 
       {/* Trait Values Grid */}
       {showValues && (
-        <div className="p-4 border-t border-symtex-border">
+        <div className="p-4 border-t border-border">
           <div className="grid grid-cols-4 gap-2">
             {RADAR_TRAITS.map((traitConfig) => {
               const isSelected = selectedTrait === traitConfig.trait;
@@ -386,11 +386,11 @@ function PersonalityRadar({
                     'p-2 rounded-lg transition-all duration-200 text-left',
                     isSelected
                       ? 'bg-symtex-primary/20 border border-symtex-primary'
-                      : 'bg-slate-800/50 border border-transparent hover:bg-slate-700/50',
+                      : 'bg-muted/50 border border-transparent hover:bg-muted/50',
                     readOnly && 'cursor-default'
                   )}
                 >
-                  <p className="text-xs text-slate-400 truncate">{traitConfig.shortLabel}</p>
+                  <p className="text-xs text-muted-foreground truncate">{traitConfig.shortLabel}</p>
                   <p
                     className="text-lg font-bold"
                     style={{ color: traitConfig.color }}
@@ -404,9 +404,9 @@ function PersonalityRadar({
 
           {/* Slider for selected trait */}
           {selectedTrait && !readOnly && (
-            <div className="mt-4 p-3 bg-slate-800/50 rounded-lg animate-in slide-in-from-top-2 duration-200">
+            <div className="mt-4 p-3 bg-muted/50 rounded-lg animate-in slide-in-from-top-2 duration-200">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-white">
+                <span className="text-sm font-medium text-foreground">
                   {RADAR_TRAITS.find((t) => t.trait === selectedTrait)?.label}
                 </span>
                 <span className="text-sm font-bold text-symtex-primary">
@@ -419,9 +419,9 @@ function PersonalityRadar({
                 max="100"
                 value={values[selectedTrait]}
                 onChange={(e) => handleValueChange(Number(e.target.value))}
-                className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-symtex-primary"
+                className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-symtex-primary"
               />
-              <p className="text-xs text-slate-500 mt-2">
+              <p className="text-xs text-muted-foreground mt-2">
                 {RADAR_TRAITS.find((t) => t.trait === selectedTrait)?.description}
               </p>
             </div>

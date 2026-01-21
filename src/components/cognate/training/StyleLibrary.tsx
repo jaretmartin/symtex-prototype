@@ -51,15 +51,15 @@ function StyleCard({ style, onApply, onRemove }: StyleCardProps) {
   const CategoryIcon = CATEGORY_ICONS[style.category];
 
   return (
-    <div className="bg-zinc-800/50 border border-zinc-700 rounded-xl p-4 hover:border-zinc-600 transition-colors">
+    <div className="bg-card/50 border border-border rounded-xl p-4 hover:border-border transition-colors">
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
             <CategoryIcon className="w-4 h-4 text-purple-400" />
           </div>
           <div>
-            <h4 className="font-medium text-zinc-100">{style.name}</h4>
-            <span className="text-xs text-zinc-500">{CATEGORY_LABELS[style.category]}</span>
+            <h4 className="font-medium text-muted-foreground">{style.name}</h4>
+            <span className="text-xs text-muted-foreground">{CATEGORY_LABELS[style.category]}</span>
           </div>
         </div>
         {style.isActive ? (
@@ -81,12 +81,12 @@ function StyleCard({ style, onApply, onRemove }: StyleCardProps) {
         )}
       </div>
 
-      <p className="text-sm text-zinc-400 mb-3">{style.description}</p>
+      <p className="text-sm text-muted-foreground mb-3">{style.description}</p>
 
       {/* Example */}
-      <div className="bg-zinc-900 rounded-lg p-3 mb-3">
-        <p className="text-xs text-zinc-500 mb-1">Example:</p>
-        <p className="text-sm text-zinc-300 italic">"{style.examples}"</p>
+      <div className="bg-surface-base rounded-lg p-3 mb-3">
+        <p className="text-xs text-muted-foreground mb-1">Example:</p>
+        <p className="text-sm text-muted-foreground italic">"{style.examples}"</p>
       </div>
 
       {/* Footer */}
@@ -95,13 +95,13 @@ function StyleCard({ style, onApply, onRemove }: StyleCardProps) {
           {style.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="px-2 py-0.5 bg-zinc-700 text-zinc-400 rounded-full text-xs"
+              className="px-2 py-0.5 bg-muted text-muted-foreground rounded-full text-xs"
             >
               {tag}
             </span>
           ))}
         </div>
-        <div className="text-xs text-zinc-500">{style.adoptionRate}% adoption</div>
+        <div className="text-xs text-muted-foreground">{style.adoptionRate}% adoption</div>
       </div>
     </div>
   );
@@ -125,24 +125,24 @@ export function StyleLibrary() {
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="bg-zinc-800 border border-zinc-700 rounded-xl p-6">
+      <div className="bg-card border border-border rounded-xl p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-semibold text-zinc-100 flex items-center gap-2">
+          <h3 className="font-semibold text-muted-foreground flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-purple-400" />
             Style Library
           </h3>
-          <span className="text-sm text-zinc-500">{filteredStyles.length} styles</span>
+          <span className="text-sm text-muted-foreground">{filteredStyles.length} styles</span>
         </div>
 
         {/* Search */}
         <div className="relative mb-4">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search styles..."
             value={styleFilters.search}
             onChange={(e) => setStyleFilters({ search: e.target.value })}
-            className="w-full pl-10 pr-4 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-purple-500"
+            className="w-full pl-10 pr-4 py-2 bg-surface-base border border-border rounded-lg text-sm text-muted-foreground placeholder:text-muted-foreground focus:outline-none focus:border-purple-500"
           />
         </div>
 
@@ -156,7 +156,7 @@ export function StyleLibrary() {
                 'px-3 py-1.5 rounded-lg text-sm font-medium transition-colors',
                 styleFilters.category === cat
                   ? 'bg-purple-600 text-white'
-                  : 'bg-zinc-700 text-zinc-400 hover:text-zinc-200'
+                  : 'bg-muted text-muted-foreground hover:text-muted-foreground'
               )}
             >
               {CATEGORY_LABELS[cat]}
@@ -179,8 +179,8 @@ export function StyleLibrary() {
 
       {filteredStyles.length === 0 && (
         <div className="text-center py-12">
-          <BookOpen className="w-12 h-12 text-zinc-600 mx-auto mb-3" />
-          <p className="text-zinc-400">No styles match your filters</p>
+          <BookOpen className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+          <p className="text-muted-foreground">No styles match your filters</p>
           <button
             onClick={() => setStyleFilters({ search: '', category: 'all', tags: [] })}
             className="mt-2 text-sm text-purple-400 hover:text-purple-300"

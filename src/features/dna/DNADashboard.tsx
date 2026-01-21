@@ -64,15 +64,15 @@ function DNADashboard({ className, compact = false }: DNADashboardProps): JSX.El
 
   if (compact) {
     return (
-      <div className={cn('bg-symtex-card rounded-xl border border-symtex-border', className)}>
+      <div className={cn('bg-card rounded-xl border border-border', className)}>
         {/* Compact Header */}
-        <div className="p-4 border-b border-symtex-border">
+        <div className="p-4 border-b border-border">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
               <Dna className="w-4 h-4 text-symtex-primary dna-pulse" />
               DNA Overview
             </h3>
-            <span className="text-2xl font-bold text-white">{profile.overallStrength}%</span>
+            <span className="text-2xl font-bold text-foreground">{profile.overallStrength}%</span>
           </div>
         </div>
 
@@ -90,8 +90,8 @@ function DNADashboard({ className, compact = false }: DNADashboardProps): JSX.El
         </div>
 
         {/* View More Link */}
-        <div className="p-3 border-t border-symtex-border bg-slate-800/30">
-          <button className="w-full text-center text-xs text-slate-400 hover:text-white transition-colors flex items-center justify-center gap-1">
+        <div className="p-3 border-t border-border bg-card/30">
+          <button className="w-full text-center text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center justify-center gap-1">
             View full DNA profile
             <ChevronRight className="w-3 h-3" />
           </button>
@@ -103,14 +103,14 @@ function DNADashboard({ className, compact = false }: DNADashboardProps): JSX.El
   return (
     <div className={cn('space-y-6', className)}>
       {/* Header */}
-      <div className="bg-symtex-card rounded-xl border border-symtex-border p-6">
+      <div className="bg-card rounded-xl border border-border p-6">
         <div className="flex items-start justify-between mb-6">
           <div>
-            <h2 className="text-xl font-semibold text-white flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
               <Dna className="w-6 h-6 text-symtex-primary dna-pulse" />
               Your AI DNA Profile
             </h2>
-            <p className="text-sm text-slate-400 mt-1">
+            <p className="text-sm text-muted-foreground mt-1">
               {profile.totalDataPoints.toLocaleString()} data points analyzed
             </p>
           </div>
@@ -120,14 +120,14 @@ function DNADashboard({ className, compact = false }: DNADashboardProps): JSX.El
               disabled={isAnalyzing}
               className={cn(
                 'px-3 py-2 rounded-lg text-sm flex items-center gap-2',
-                'bg-slate-700/50 text-slate-300 hover:bg-slate-700 transition-colors',
+                'bg-muted/50 text-muted-foreground hover:bg-muted transition-colors',
                 isAnalyzing && 'opacity-50 cursor-not-allowed'
               )}
             >
               <RefreshCcw className={cn('w-4 h-4', isAnalyzing && 'animate-spin')} />
               {isAnalyzing ? 'Analyzing...' : 'Refresh'}
             </button>
-            <button className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700/50 transition-colors">
+            <button className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
               <Settings className="w-5 h-5" />
             </button>
           </div>
@@ -135,25 +135,25 @@ function DNADashboard({ className, compact = false }: DNADashboardProps): JSX.El
 
         {/* Overall Stats */}
         <div className="grid grid-cols-4 gap-4">
-          <div className="p-4 bg-slate-800/50 rounded-xl text-center">
+          <div className="p-4 bg-card/50 rounded-xl text-center">
             <Sparkles className="w-5 h-5 text-symtex-primary mx-auto mb-2" />
-            <p className="text-3xl font-bold text-white">{profile.overallStrength}%</p>
-            <p className="text-xs text-slate-500">Overall Strength</p>
+            <p className="text-3xl font-bold text-foreground">{profile.overallStrength}%</p>
+            <p className="text-xs text-muted-foreground">Overall Strength</p>
           </div>
-          <div className="p-4 bg-slate-800/50 rounded-xl text-center">
+          <div className="p-4 bg-card/50 rounded-xl text-center">
             <TrendingUp className="w-5 h-5 text-green-400 mx-auto mb-2" />
-            <p className="text-3xl font-bold text-white">{strongStrands.length}</p>
-            <p className="text-xs text-slate-500">Strong Strands</p>
+            <p className="text-3xl font-bold text-foreground">{strongStrands.length}</p>
+            <p className="text-xs text-muted-foreground">Strong Strands</p>
           </div>
-          <div className="p-4 bg-slate-800/50 rounded-xl text-center">
+          <div className="p-4 bg-card/50 rounded-xl text-center">
             <User className="w-5 h-5 text-blue-400 mx-auto mb-2" />
-            <p className="text-3xl font-bold text-white">{personalStrands.length}</p>
-            <p className="text-xs text-slate-500">Personal</p>
+            <p className="text-3xl font-bold text-foreground">{personalStrands.length}</p>
+            <p className="text-xs text-muted-foreground">Personal</p>
           </div>
-          <div className="p-4 bg-slate-800/50 rounded-xl text-center">
+          <div className="p-4 bg-card/50 rounded-xl text-center">
             <Briefcase className="w-5 h-5 text-purple-400 mx-auto mb-2" />
-            <p className="text-3xl font-bold text-white">{workStrands.length}</p>
-            <p className="text-xs text-slate-500">Work</p>
+            <p className="text-3xl font-bold text-foreground">{workStrands.length}</p>
+            <p className="text-xs text-muted-foreground">Work</p>
           </div>
         </div>
       </div>
@@ -171,7 +171,7 @@ function DNADashboard({ className, compact = false }: DNADashboardProps): JSX.El
         {/* Strands Grid */}
         <div className="lg:col-span-2 space-y-4">
           {/* Category Tabs */}
-          <div className="flex items-center gap-2 p-1 bg-slate-800/50 rounded-lg">
+          <div className="flex items-center gap-2 p-1 bg-card/50 rounded-lg">
             {(['all', 'personal', 'work'] as const).map((tab) => (
               <button
                 key={tab}
@@ -179,8 +179,8 @@ function DNADashboard({ className, compact = false }: DNADashboardProps): JSX.El
                 className={cn(
                   'flex-1 px-4 py-2 rounded-md text-sm font-medium transition-colors capitalize',
                   activeTab === tab
-                    ? 'bg-symtex-primary text-white'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-symtex-primary text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
                 )}
               >
                 {tab === 'all' ? 'All Strands' : tab}
@@ -197,10 +197,10 @@ function DNADashboard({ className, compact = false }: DNADashboardProps): JSX.El
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className={cn(
-                  'p-4 bg-symtex-card rounded-xl border transition-colors cursor-pointer',
+                  'p-4 bg-card rounded-xl border transition-colors cursor-pointer',
                   selectedStrandId === strand.id
                     ? 'border-symtex-primary'
-                    : 'border-symtex-border hover:border-slate-600'
+                    : 'border-border hover:border-border'
                 )}
                 onClick={() => handleStrandClick(strand)}
               >
@@ -211,18 +211,18 @@ function DNADashboard({ className, compact = false }: DNADashboardProps): JSX.El
                     showLabels={false}
                   />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-white truncate">
+                    <p className="text-sm font-medium text-foreground truncate">
                       {strand.name}
                     </p>
-                    <p className="text-xs text-slate-500 capitalize">
+                    <p className="text-xs text-muted-foreground capitalize">
                       {strand.category}
                     </p>
                     <div className="flex items-center gap-2 mt-2">
-                      <span className="text-xs text-slate-400">
+                      <span className="text-xs text-muted-foreground">
                         {strand.confidence}% confidence
                       </span>
-                      <span className="text-xs text-slate-500">-</span>
-                      <span className="text-xs text-slate-400">
+                      <span className="text-xs text-muted-foreground">-</span>
+                      <span className="text-xs text-muted-foreground">
                         {strand.dataPoints} pts
                       </span>
                     </div>

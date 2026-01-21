@@ -97,7 +97,7 @@ function Tooltip({
       className={clsx(
         'absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50',
         'w-64 p-3 rounded-lg shadow-lg',
-        'bg-slate-800 border border-slate-700',
+        'bg-card border border-border',
         'transition-all duration-200 pointer-events-none',
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'
       )}
@@ -106,25 +106,25 @@ function Tooltip({
       {/* Header */}
       <div className="flex items-center gap-2 mb-2">
         <config.icon className={clsx('w-4 h-4', config.color)} />
-        <span className="font-medium text-white text-sm">{source.name}</span>
+        <span className="font-medium text-foreground text-sm">{source.name}</span>
       </div>
 
       {/* Details */}
       <div className="space-y-1.5 text-xs">
         <div className="flex justify-between">
-          <span className="text-slate-400">Type</span>
+          <span className="text-muted-foreground">Type</span>
           <span className={config.color}>{config.label}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-slate-400">ID</span>
-          <span className="text-slate-300 font-mono truncate max-w-[120px]">
+          <span className="text-muted-foreground">ID</span>
+          <span className="text-muted-foreground font-mono truncate max-w-[120px]">
             {source.id}
           </span>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-slate-400">Relevance</span>
+          <span className="text-muted-foreground">Relevance</span>
           <div className="flex items-center gap-2">
-            <div className="w-16 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+            <div className="w-16 h-1.5 bg-muted rounded-full overflow-hidden">
               <div
                 className={clsx(
                   'h-full rounded-full',
@@ -137,14 +137,14 @@ function Tooltip({
                 style={{ width: `${relevancePercent}%` }}
               />
             </div>
-            <span className="text-slate-300 tabular-nums">{relevancePercent}%</span>
+            <span className="text-muted-foreground tabular-nums">{relevancePercent}%</span>
           </div>
         </div>
       </div>
 
       {/* Arrow */}
       <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-px">
-        <div className="border-8 border-transparent border-t-slate-800" />
+        <div className="border-8 border-transparent border-t-card" />
       </div>
     </div>
   );
@@ -183,7 +183,7 @@ export default function ContextSourceBadge({
       <Icon className={clsx('w-3.5 h-3.5', config.color)} aria-hidden="true" />
 
       {/* Source Name */}
-      <span className="text-slate-200 text-xs font-medium truncate max-w-[120px]">
+      <span className="text-muted-foreground text-xs font-medium truncate max-w-[120px]">
         {source.name}
       </span>
 
@@ -205,7 +205,7 @@ export default function ContextSourceBadge({
 
       {/* Info indicator for tooltip */}
       <Info
-        className="w-3 h-3 text-slate-500 group-hover:text-slate-400 transition-colors"
+        className="w-3 h-3 text-muted-foreground group-hover:text-muted-foreground transition-colors"
         aria-hidden="true"
       />
     </>

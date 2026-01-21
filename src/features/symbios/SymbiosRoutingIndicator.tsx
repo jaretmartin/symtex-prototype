@@ -91,7 +91,7 @@ export function SymbiosRoutingIndicator({
             )}
           </div>
           {routing.confidence && (
-            <div className="flex items-center gap-1 text-xs text-zinc-400">
+            <div className="flex items-center gap-1 text-xs text-muted-foreground">
               <CheckCircle2 className="w-3 h-3" />
               <span>{Math.round(routing.confidence * 100)}% confidence</span>
             </div>
@@ -100,23 +100,23 @@ export function SymbiosRoutingIndicator({
 
         {/* Pattern info */}
         {routing.patternId && (
-          <div className="text-xs text-zinc-400">
-            <span className="text-zinc-500">Pattern: </span>
-            <span className="font-mono text-zinc-300">{routing.patternId}</span>
+          <div className="text-xs text-muted-foreground">
+            <span className="text-muted-foreground">Pattern: </span>
+            <span className="font-mono text-foreground">{routing.patternId}</span>
             {routing.patternName && (
-              <span className="text-zinc-500"> ({routing.patternName})</span>
+              <span className="text-muted-foreground"> ({routing.patternName})</span>
             )}
           </div>
         )}
 
         {/* Stats */}
         <div className="flex items-center gap-4 text-xs">
-          <div className="flex items-center gap-1 text-zinc-400">
+          <div className="flex items-center gap-1 text-muted-foreground">
             <DollarSign className="w-3 h-3" />
             <span>{formatCost(routing.estimatedCost)}</span>
           </div>
           {routing.latencyMs && (
-            <div className="flex items-center gap-1 text-zinc-400">
+            <div className="flex items-center gap-1 text-muted-foreground">
               <Clock className="w-3 h-3" />
               <span>{formatLatency(routing.latencyMs)}</span>
             </div>
@@ -223,7 +223,7 @@ export function SymbiosRoutingStats({
   return (
     <div
       className={cn(
-        'flex items-center gap-4 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/50 text-xs',
+        'flex items-center gap-4 px-3 py-2 rounded-lg bg-card/50 border border-border/50 text-xs',
         className
       )}
     >
@@ -233,7 +233,7 @@ export function SymbiosRoutingStats({
           <Zap className="w-3 h-3" />
           <span>{symbolic}</span>
         </div>
-        <span className="text-zinc-500">/</span>
+        <span className="text-muted-foreground">/</span>
         <div className="flex items-center gap-1 text-violet-400">
           <Brain className="w-3 h-3" />
           <span>{neural}</span>
@@ -241,7 +241,7 @@ export function SymbiosRoutingStats({
       </div>
 
       {/* Progress bar */}
-      <div className="flex-1 h-1.5 rounded-full bg-zinc-700 overflow-hidden">
+      <div className="flex-1 h-1.5 rounded-full bg-muted overflow-hidden">
         <div
           className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 transition-all duration-500"
           style={{ width: `${symbolicPercent}%` }}
@@ -252,7 +252,7 @@ export function SymbiosRoutingStats({
       <span className="text-emerald-400 font-medium">{symbolicPercent}%</span>
 
       {/* Total cost */}
-      <div className="flex items-center gap-1 text-zinc-400 pl-2 border-l border-zinc-700">
+      <div className="flex items-center gap-1 text-muted-foreground pl-2 border-l border-border">
         <DollarSign className="w-3 h-3" />
         <span>{totalCost.toFixed(2)}</span>
       </div>

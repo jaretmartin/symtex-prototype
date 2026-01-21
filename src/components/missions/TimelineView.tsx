@@ -49,13 +49,13 @@ export default function TimelineView({ missions, onMissionClick }: TimelineViewP
             <div className="flex items-center gap-4 mb-4">
               <div className={clsx(
                 'w-12 h-12 rounded-full flex items-center justify-center z-10',
-                'bg-symtex-card border-2 border-symtex-primary'
+                'bg-card border-2 border-symtex-primary'
               )}>
                 <Calendar className="w-5 h-5 text-symtex-primary" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-white">{group.label}</h3>
-                <p className="text-sm text-slate-400">
+                <h3 className="text-lg font-semibold text-foreground">{group.label}</h3>
+                <p className="text-sm text-muted-foreground">
                   {group.missions.length} mission{group.missions.length !== 1 ? 's' : ''}
                 </p>
               </div>
@@ -68,7 +68,7 @@ export default function TimelineView({ missions, onMissionClick }: TimelineViewP
                   key={mission.id}
                   onClick={() => onMissionClick?.(mission)}
                   className={clsx(
-                    'mission-card bg-symtex-card rounded-xl p-4 border border-symtex-border cursor-pointer',
+                    'mission-card bg-card rounded-xl p-4 border border-border cursor-pointer',
                     'flex items-center gap-4 border-l-4',
                     mission.priority === 'critical' && 'border-l-red-500',
                     mission.priority === 'high' && 'border-l-orange-500',
@@ -85,13 +85,13 @@ export default function TimelineView({ missions, onMissionClick }: TimelineViewP
 
                   {/* Mission Info */}
                   <div className="flex-1 min-w-0">
-                    <h4 className="font-medium text-white truncate">{mission.title}</h4>
-                    <p className="text-sm text-slate-400 truncate">{mission.description}</p>
+                    <h4 className="font-medium text-foreground truncate">{mission.title}</h4>
+                    <p className="text-sm text-muted-foreground truncate">{mission.description}</p>
                   </div>
 
                   {/* Meta */}
                   <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2 text-sm text-slate-400">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Clock className="w-4 h-4" />
                       {mission.dueDate}
                     </div>

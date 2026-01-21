@@ -204,7 +204,7 @@ export function CreateDomainModal({
       <div
         className={clsx(
           'relative w-full max-w-2xl max-h-[90vh] overflow-y-auto',
-          'bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl',
+          'bg-card border border-border rounded-xl shadow-2xl',
           'm-4'
         )}
         role="dialog"
@@ -212,16 +212,16 @@ export function CreateDomainModal({
         aria-labelledby="create-domain-title"
       >
         {/* Header */}
-        <div className="sticky top-0 bg-zinc-900 px-6 py-4 border-b border-zinc-800 flex items-center justify-between z-10">
+        <div className="sticky top-0 bg-card px-6 py-4 border-b border-border flex items-center justify-between z-10">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-symtex-primary to-symtex-accent flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-white" />
+              <Sparkles className="w-5 h-5 text-foreground" />
             </div>
             <div>
-              <h2 id="create-domain-title" className="text-lg font-semibold text-white">
+              <h2 id="create-domain-title" className="text-lg font-semibold text-foreground">
                 Create New Domain
               </h2>
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm text-muted-foreground">
                 Organize your projects with a domain
               </p>
             </div>
@@ -229,7 +229,7 @@ export function CreateDomainModal({
           <button
             type="button"
             onClick={handleClose}
-            className="p-2 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -240,7 +240,7 @@ export function CreateDomainModal({
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Template Presets */}
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-3">
+            <label className="block text-sm font-medium text-muted-foreground mb-3">
               Quick Start Templates
             </label>
             <div className="flex flex-wrap gap-2">
@@ -255,8 +255,8 @@ export function CreateDomainModal({
                       'flex items-center gap-2 px-4 py-2 rounded-lg transition-all',
                       'border',
                       isSelected
-                        ? 'bg-symtex-primary/20 border-symtex-primary text-white'
-                        : 'bg-zinc-800 border-zinc-700 text-zinc-300 hover:border-zinc-600'
+                        ? 'bg-symtex-primary/20 border-symtex-primary text-foreground'
+                        : 'bg-muted border-border text-muted-foreground hover:border-border'
                     )}
                   >
                     <template.IconComponent
@@ -272,7 +272,7 @@ export function CreateDomainModal({
 
           {/* Name Field */}
           <div>
-            <label htmlFor="domain-name" className="block text-sm font-medium text-zinc-300 mb-2">
+            <label htmlFor="domain-name" className="block text-sm font-medium text-muted-foreground mb-2">
               Domain Name <span className="text-red-400">*</span>
             </label>
             <input
@@ -287,17 +287,17 @@ export function CreateDomainModal({
               }}
               placeholder="Enter domain name"
               className={clsx(
-                'w-full px-4 py-3 bg-zinc-900 border rounded-lg',
-                'text-white placeholder-zinc-500',
+                'w-full px-4 py-3 bg-surface-base border rounded-lg',
+                'text-foreground placeholder-muted-foreground',
                 'focus:outline-none focus:border-symtex-primary',
-                errors.name ? 'border-red-500' : 'border-zinc-700'
+                errors.name ? 'border-red-500' : 'border-border'
               )}
               maxLength={50}
             />
             {errors.name && (
               <p className="mt-1 text-sm text-red-400">{errors.name}</p>
             )}
-            <p className="mt-1 text-xs text-zinc-500">
+            <p className="mt-1 text-xs text-muted-foreground">
               {formData.name.length}/50 characters
             </p>
           </div>
@@ -305,7 +305,7 @@ export function CreateDomainModal({
           {/* Icon and Color */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">
+              <label className="block text-sm font-medium text-muted-foreground mb-2">
                 Icon <span className="text-red-400">*</span>
               </label>
               <IconPicker
@@ -324,7 +324,7 @@ export function CreateDomainModal({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">
+              <label className="block text-sm font-medium text-muted-foreground mb-2">
                 Color <span className="text-red-400">*</span>
               </label>
               <ColorPicker
@@ -345,7 +345,7 @@ export function CreateDomainModal({
 
           {/* Description */}
           <div>
-            <label htmlFor="domain-description" className="block text-sm font-medium text-zinc-300 mb-2">
+            <label htmlFor="domain-description" className="block text-sm font-medium text-muted-foreground mb-2">
               Description
             </label>
             <textarea
@@ -360,27 +360,27 @@ export function CreateDomainModal({
               placeholder="Describe what this domain is for..."
               rows={3}
               className={clsx(
-                'w-full px-4 py-3 bg-zinc-900 border rounded-lg',
-                'text-white placeholder-zinc-500 resize-none',
+                'w-full px-4 py-3 bg-surface-base border rounded-lg',
+                'text-foreground placeholder-muted-foreground resize-none',
                 'focus:outline-none focus:border-symtex-primary',
-                errors.description ? 'border-red-500' : 'border-zinc-700'
+                errors.description ? 'border-red-500' : 'border-border'
               )}
               maxLength={500}
             />
             {errors.description && (
               <p className="mt-1 text-sm text-red-400">{errors.description}</p>
             )}
-            <p className="mt-1 text-xs text-zinc-500">
+            <p className="mt-1 text-xs text-muted-foreground">
               {formData.description.length}/500 characters
             </p>
           </div>
 
           {/* Settings Override Toggle */}
-          <div className="p-4 bg-zinc-800/50 border border-zinc-700 rounded-lg">
+          <div className="p-4 bg-muted/50 border border-border rounded-lg">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-zinc-300">Custom Settings</p>
-                <p className="text-xs text-zinc-500 mt-1">
+                <p className="text-sm font-medium text-muted-foreground">Custom Settings</p>
+                <p className="text-xs text-muted-foreground mt-1">
                   Override inherited settings from your personal space
                 </p>
               </div>
@@ -393,11 +393,11 @@ export function CreateDomainModal({
                   }
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-zinc-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-symtex-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-symtex-primary" />
+                <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-symtex-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-foreground after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-foreground after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-symtex-primary" />
               </label>
             </div>
             {formData.useSettingsOverride && (
-              <p className="mt-3 text-xs text-zinc-400 flex items-center gap-1">
+              <p className="mt-3 text-xs text-muted-foreground flex items-center gap-1">
                 <span className="w-1 h-1 rounded-full bg-amber-400" />
                 Configure settings after creation in Domain Settings
               </p>
@@ -405,8 +405,8 @@ export function CreateDomainModal({
           </div>
 
           {/* Preview */}
-          <div className="p-4 bg-zinc-800/30 border border-zinc-700/50 rounded-lg">
-            <p className="text-xs text-zinc-500 uppercase tracking-wider mb-3">Preview</p>
+          <div className="p-4 bg-muted/30 border border-border/50 rounded-lg">
+            <p className="text-xs text-muted-foreground uppercase tracking-wider mb-3">Preview</p>
             <div className="flex items-center gap-4">
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center"
@@ -417,16 +417,16 @@ export function CreateDomainModal({
                   style={{ backgroundColor: formData.color }}
                 >
                   {/* Icon preview would go here - simplified for now */}
-                  <span className="text-xs text-white font-bold">
+                  <span className="text-xs text-foreground font-bold">
                     {formData.name.charAt(0).toUpperCase() || '?'}
                   </span>
                 </div>
               </div>
               <div>
-                <p className="text-white font-medium">
+                <p className="text-foreground font-medium">
                   {formData.name || 'Domain Name'}
                 </p>
-                <p className="text-sm text-zinc-400">
+                <p className="text-sm text-muted-foreground">
                   {formData.description || 'No description'}
                 </p>
               </div>
@@ -435,12 +435,12 @@ export function CreateDomainModal({
         </form>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-zinc-900 px-6 py-4 border-t border-zinc-800 flex items-center justify-end gap-3">
+        <div className="sticky bottom-0 bg-card px-6 py-4 border-t border-border flex items-center justify-end gap-3">
           <button
             type="button"
             onClick={handleClose}
             disabled={isSubmitting}
-            className="px-4 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
           >
             Cancel
           </button>
@@ -450,14 +450,14 @@ export function CreateDomainModal({
             disabled={isSubmitting}
             className={clsx(
               'flex items-center gap-2 px-6 py-2 rounded-lg text-sm font-medium',
-              'bg-gradient-to-r from-symtex-primary to-symtex-accent text-white',
+              'bg-gradient-to-r from-symtex-primary to-symtex-accent text-foreground',
               'hover:opacity-90 transition-opacity',
               'disabled:opacity-50 disabled:cursor-not-allowed'
             )}
           >
             {isSubmitting ? (
               <>
-                <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full" />
+                <span className="animate-spin h-4 w-4 border-2 border-foreground border-t-transparent rounded-full" />
                 Creating...
               </>
             ) : (

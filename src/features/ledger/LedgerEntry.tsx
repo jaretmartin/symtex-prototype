@@ -47,7 +47,7 @@ interface LedgerEntryProps {
 const actorConfig: Record<ActorType, { icon: typeof User; color: string; bg: string }> = {
   user: { icon: User, color: 'text-blue-400', bg: 'bg-blue-500/10' },
   cognate: { icon: Bot, color: 'text-indigo-400', bg: 'bg-indigo-500/10' },
-  system: { icon: Server, color: 'text-slate-400', bg: 'bg-slate-500/10' },
+  system: { icon: Server, color: 'text-muted-foreground', bg: 'bg-muted/10' },
   automation: { icon: Zap, color: 'text-amber-400', bg: 'bg-amber-500/10' },
   integration: { icon: Link2, color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
 };
@@ -65,12 +65,12 @@ const categoryConfig: Record<LedgerCategory, { label: string; color: string }> =
   deletion: { label: 'Deletion', color: 'bg-rose-500/10 text-rose-400 border-rose-500/30' },
   communication: { label: 'Communication', color: 'bg-violet-500/10 text-violet-400 border-violet-500/30' },
   integration: { label: 'Integration', color: 'bg-teal-500/10 text-teal-400 border-teal-500/30' },
-  system: { label: 'System', color: 'bg-slate-500/10 text-slate-400 border-slate-500/30' },
+  system: { label: 'System', color: 'bg-muted/10 text-muted-foreground border-border/30' },
 };
 
 // Severity configuration
 const severityConfig: Record<LedgerSeverity, { icon: typeof Info; color: string }> = {
-  debug: { icon: Info, color: 'text-slate-500' },
+  debug: { icon: Info, color: 'text-muted-foreground' },
   info: { icon: Info, color: 'text-blue-400' },
   notice: { icon: AlertCircle, color: 'text-cyan-400' },
   warning: { icon: AlertTriangle, color: 'text-yellow-400' },
@@ -80,11 +80,11 @@ const severityConfig: Record<LedgerSeverity, { icon: typeof Info; color: string 
 
 // Status configuration
 const statusConfig: Record<string, { icon: typeof CheckCircle2; color: string }> = {
-  initiated: { icon: Clock, color: 'text-slate-400' },
+  initiated: { icon: Clock, color: 'text-muted-foreground' },
   in_progress: { icon: Clock, color: 'text-blue-400' },
   completed: { icon: CheckCircle2, color: 'text-emerald-400' },
   failed: { icon: XCircle, color: 'text-red-400' },
-  cancelled: { icon: XCircle, color: 'text-slate-400' },
+  cancelled: { icon: XCircle, color: 'text-muted-foreground' },
 };
 
 function formatTimeAgo(date: Date): string {
@@ -133,7 +133,7 @@ export function LedgerEntry({
         'border rounded-lg transition-all duration-200',
         isSelected
           ? 'border-indigo-500/50 bg-indigo-500/5'
-          : 'border-slate-700/50 bg-slate-800/30 hover:border-slate-600/50 hover:bg-slate-800/50',
+          : 'border-border/50 bg-card/30 hover:border-border/50 hover:bg-card/50',
         entry.isFlagged && 'border-l-2 border-l-amber-500',
         className
       )}
@@ -147,12 +147,12 @@ export function LedgerEntry({
           {/* Expand Toggle */}
           <button
             onClick={handleToggleExpand}
-            className="p-1 rounded hover:bg-slate-700/50 transition-colors mt-0.5"
+            className="p-1 rounded hover:bg-muted/50 transition-colors mt-0.5"
           >
             {isExpanded ? (
-              <ChevronDown className="w-4 h-4 text-slate-400" />
+              <ChevronDown className="w-4 h-4 text-muted-foreground" />
             ) : (
-              <ChevronRight className="w-4 h-4 text-slate-400" />
+              <ChevronRight className="w-4 h-4 text-muted-foreground" />
             )}
           </button>
 
@@ -166,7 +166,7 @@ export function LedgerEntry({
             {/* Header Row */}
             <div className="flex items-start justify-between gap-2 mb-1">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-medium text-white">{entry.who.name}</span>
+                <span className="font-medium text-foreground">{entry.who.name}</span>
                 <Badge variant="outline" className={cn('text-xs', category.color)}>
                   {category.label}
                 </Badge>
@@ -176,15 +176,15 @@ export function LedgerEntry({
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
                 <StatusIcon className={cn('w-4 h-4', status.color)} />
-                <span className="text-xs text-slate-500">{formatTimeAgo(entry.when)}</span>
+                <span className="text-xs text-muted-foreground">{formatTimeAgo(entry.when)}</span>
               </div>
             </div>
 
             {/* Description */}
-            <p className="text-sm text-slate-300 mb-2">{entry.what.description}</p>
+            <p className="text-sm text-muted-foreground mb-2">{entry.what.description}</p>
 
             {/* Quick Info */}
-            <div className="flex items-center gap-4 text-xs text-slate-500">
+            <div className="flex items-center gap-4 text-xs text-muted-foreground">
               {entry.where.spaceName && (
                 <span className="flex items-center gap-1">
                   <MapPin className="w-3 h-3" />
@@ -215,120 +215,120 @@ export function LedgerEntry({
 
       {/* Expanded Details - 6 W's */}
       {isExpanded && (
-        <div className="px-4 pb-4 pt-0 border-t border-slate-700/50 mt-0">
+        <div className="px-4 pb-4 pt-0 border-t border-border/50 mt-0">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
             {/* WHO */}
             <div className="space-y-1">
-              <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 uppercase tracking-wider">
+              <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 <User className="w-3 h-3" />
                 WHO
               </div>
               <div className="pl-4 space-y-1">
-                <p className="text-sm text-white">{entry.who.name}</p>
-                <p className="text-xs text-slate-400">Type: {entry.who.type}</p>
+                <p className="text-sm text-foreground">{entry.who.name}</p>
+                <p className="text-xs text-muted-foreground">Type: {entry.who.type}</p>
                 {entry.who.metadata?.tier && (
-                  <p className="text-xs text-slate-400">Tier: {entry.who.metadata.tier}</p>
+                  <p className="text-xs text-muted-foreground">Tier: {entry.who.metadata.tier}</p>
                 )}
                 {entry.who.metadata?.autonomyLevel && (
-                  <p className="text-xs text-slate-400">Autonomy: {entry.who.metadata.autonomyLevel}</p>
+                  <p className="text-xs text-muted-foreground">Autonomy: {entry.who.metadata.autonomyLevel}</p>
                 )}
                 {entry.who.metadata?.role && (
-                  <p className="text-xs text-slate-400">Role: {entry.who.metadata.role}</p>
+                  <p className="text-xs text-muted-foreground">Role: {entry.who.metadata.role}</p>
                 )}
               </div>
             </div>
 
             {/* WHAT */}
             <div className="space-y-1">
-              <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 uppercase tracking-wider">
+              <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 <FileText className="w-3 h-3" />
                 WHAT
               </div>
               <div className="pl-4 space-y-1">
-                <p className="text-sm text-white">{entry.what.description}</p>
-                <p className="text-xs text-slate-400">Type: {entry.what.type}</p>
-                <p className="text-xs text-slate-400">Status: {entry.what.status}</p>
+                <p className="text-sm text-foreground">{entry.what.description}</p>
+                <p className="text-xs text-muted-foreground">Type: {entry.what.type}</p>
+                <p className="text-xs text-muted-foreground">Status: {entry.what.status}</p>
                 {entry.what.result && (
-                  <p className="text-xs text-slate-400">Result: {entry.what.result}</p>
+                  <p className="text-xs text-muted-foreground">Result: {entry.what.result}</p>
                 )}
                 {entry.what.duration && (
-                  <p className="text-xs text-slate-400">Duration: {(entry.what.duration / 1000).toFixed(1)}s</p>
+                  <p className="text-xs text-muted-foreground">Duration: {(entry.what.duration / 1000).toFixed(1)}s</p>
                 )}
               </div>
             </div>
 
             {/* WHEN */}
             <div className="space-y-1">
-              <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 uppercase tracking-wider">
+              <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 <Clock className="w-3 h-3" />
                 WHEN
               </div>
               <div className="pl-4 space-y-1">
-                <p className="text-sm text-white">{entry.when.toLocaleString()}</p>
-                <p className="text-xs text-slate-400">{formatTimeAgo(entry.when)}</p>
+                <p className="text-sm text-foreground">{entry.when.toLocaleString()}</p>
+                <p className="text-xs text-muted-foreground">{formatTimeAgo(entry.when)}</p>
               </div>
             </div>
 
             {/* WHERE */}
             <div className="space-y-1">
-              <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 uppercase tracking-wider">
+              <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 <MapPin className="w-3 h-3" />
                 WHERE
               </div>
               <div className="pl-4 space-y-1">
                 {entry.where.spaceName && (
-                  <p className="text-sm text-white">Space: {entry.where.spaceName}</p>
+                  <p className="text-sm text-foreground">Space: {entry.where.spaceName}</p>
                 )}
                 {entry.where.projectName && (
-                  <p className="text-xs text-slate-400">Project: {entry.where.projectName}</p>
+                  <p className="text-xs text-muted-foreground">Project: {entry.where.projectName}</p>
                 )}
                 {entry.where.externalSystem && (
-                  <p className="text-xs text-slate-400">External: {entry.where.externalSystem}</p>
+                  <p className="text-xs text-muted-foreground">External: {entry.where.externalSystem}</p>
                 )}
                 {entry.where.path && (
-                  <p className="text-xs text-slate-400 font-mono">{entry.where.path}</p>
+                  <p className="text-xs text-muted-foreground font-mono">{entry.where.path}</p>
                 )}
               </div>
             </div>
 
             {/* WHY */}
             <div className="space-y-1">
-              <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 uppercase tracking-wider">
+              <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 <HelpCircle className="w-3 h-3" />
                 WHY
               </div>
               <div className="pl-4 space-y-1">
-                <p className="text-sm text-white">Trigger: {entry.why.trigger}</p>
+                <p className="text-sm text-foreground">Trigger: {entry.why.trigger}</p>
                 {entry.why.reasoning && (
-                  <p className="text-xs text-slate-400">{entry.why.reasoning}</p>
+                  <p className="text-xs text-muted-foreground">{entry.why.reasoning}</p>
                 )}
                 {entry.why.triggerRef && (
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-muted-foreground">
                     Ref: {entry.why.triggerRef.type} - {entry.why.triggerRef.name || entry.why.triggerRef.id}
                   </p>
                 )}
                 {entry.why.confidence !== undefined && (
-                  <p className="text-xs text-slate-400">Confidence: {(entry.why.confidence * 100).toFixed(0)}%</p>
+                  <p className="text-xs text-muted-foreground">Confidence: {(entry.why.confidence * 100).toFixed(0)}%</p>
                 )}
               </div>
             </div>
 
             {/* HOW */}
             <div className="space-y-1">
-              <div className="flex items-center gap-1.5 text-xs font-medium text-slate-500 uppercase tracking-wider">
+              <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 <Wrench className="w-3 h-3" />
                 HOW
               </div>
               <div className="pl-4 space-y-1">
-                <p className="text-sm text-white">Approach: {entry.how.approach}</p>
+                <p className="text-sm text-foreground">Approach: {entry.how.approach}</p>
                 {entry.how.model && (
-                  <p className="text-xs text-slate-400">Model: {entry.how.model}</p>
+                  <p className="text-xs text-muted-foreground">Model: {entry.how.model}</p>
                 )}
                 {entry.how.tools && entry.how.tools.length > 0 && (
-                  <p className="text-xs text-slate-400">Tools: {entry.how.tools.join(', ')}</p>
+                  <p className="text-xs text-muted-foreground">Tools: {entry.how.tools.join(', ')}</p>
                 )}
                 {entry.how.steps && entry.how.steps.length > 0 && (
-                  <div className="text-xs text-slate-400">
+                  <div className="text-xs text-muted-foreground">
                     <p>Steps:</p>
                     <ol className="list-decimal list-inside ml-2 mt-1 space-y-0.5">
                       {entry.how.steps.map((step, i) => (
@@ -338,7 +338,7 @@ export function LedgerEntry({
                   </div>
                 )}
                 {entry.how.resources && (
-                  <div className="text-xs text-slate-400 mt-1">
+                  <div className="text-xs text-muted-foreground mt-1">
                     {entry.how.resources.tokens && <span>Tokens: {entry.how.resources.tokens.toLocaleString()} | </span>}
                     {entry.how.resources.cost && <span>Cost: ${entry.how.resources.cost.toFixed(2)}</span>}
                   </div>
@@ -349,14 +349,14 @@ export function LedgerEntry({
 
           {/* Tags */}
           {entry.tags.length > 0 && (
-            <div className="mt-4 pt-4 border-t border-slate-700/50">
+            <div className="mt-4 pt-4 border-t border-border/50">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-xs text-slate-500">Tags:</span>
+                <span className="text-xs text-muted-foreground">Tags:</span>
                 {entry.tags.map((tag) => (
                   <Badge
                     key={tag}
                     variant="outline"
-                    className="text-xs border-slate-600 text-slate-400"
+                    className="text-xs border-border text-muted-foreground"
                   >
                     {tag}
                   </Badge>
@@ -366,8 +366,8 @@ export function LedgerEntry({
           )}
 
           {/* Crypto Hash */}
-          <div className="mt-3 pt-3 border-t border-slate-700/50">
-            <p className="text-xs text-slate-600 font-mono truncate">
+          <div className="mt-3 pt-3 border-t border-border/50">
+            <p className="text-xs text-muted-foreground font-mono truncate">
               Hash: {entry.crypto.contentHash}
             </p>
           </div>

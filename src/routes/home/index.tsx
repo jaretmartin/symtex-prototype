@@ -76,11 +76,11 @@ export default function Home(): JSX.Element {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white flex items-center gap-3">
+          <h1 className="text-3xl font-bold text-foreground flex items-center gap-3">
             <HomeIcon className="w-8 h-8 text-symtex-primary" />
             Dashboard
           </h1>
-          <p className="text-slate-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             Welcome back! Here's an overview of your AI operations.
           </p>
         </div>
@@ -88,21 +88,21 @@ export default function Home(): JSX.Element {
         <div className="flex items-center gap-3 flex-wrap">
           <Link
             to="/studio/lux"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg gradient-primary text-white font-medium hover:opacity-90 transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg gradient-primary text-foreground font-medium hover:opacity-90 transition-all"
           >
             <Workflow className="w-5 h-5" />
             LUX Builder
           </Link>
           <Link
             to="/studio/automations"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-symtex-card border border-symtex-border text-slate-300 hover:text-white hover:border-slate-500 transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground hover:border-border transition-all"
           >
             <Play className="w-5 h-5" />
             Automations
           </Link>
           <Link
             to="/missions"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-symtex-card border border-symtex-border text-slate-300 hover:text-white hover:border-slate-500 transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground hover:border-border transition-all"
           >
             <Target className="w-5 h-5" />
             View Missions
@@ -181,15 +181,15 @@ export default function Home(): JSX.Element {
               <Sparkles className="w-6 h-6 text-symtex-primary" />
             </div>
             <div>
-              <h3 className="font-semibold text-white">AI Operations Summary</h3>
-              <p className="text-sm text-slate-400">
+              <h3 className="font-semibold text-foreground">AI Operations Summary</h3>
+              <p className="text-sm text-muted-foreground">
                 Your AI is handling 94.2% of automated tasks successfully
               </p>
             </div>
           </div>
           <Link
             to="/"
-            className="px-5 py-2.5 rounded-lg gradient-primary text-white font-medium hover:opacity-90 transition-opacity"
+            className="px-5 py-2.5 rounded-lg gradient-primary text-foreground font-medium hover:opacity-90 transition-opacity"
           >
             View Full Report
           </Link>
