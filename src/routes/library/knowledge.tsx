@@ -647,9 +647,21 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ document, isSelected, onCli
 
       {/* Footer */}
       <div className="flex items-center justify-between pt-3 border-t border-border/50">
-        <div className="flex items-center gap-1 text-xs text-muted-foreground">
-          <LinkIcon />
-          <span>{document.connections} connections</span>
+        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+          <div className="flex items-center gap-1">
+            <LinkIcon />
+            <span>{document.connections} connections</span>
+          </div>
+          <a
+            href={`/control/ledger?filter=knowledge&document=${document.id}`}
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center gap-1 hover:text-symtex-purple transition-colors"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span>Ledger</span>
+          </a>
         </div>
         <div className="flex items-center gap-1 text-xs text-muted-foreground">
           <ClockIcon />
@@ -746,7 +758,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
 // ============================================================================
 
 const KnowledgePage: React.FC = () => {
-  const [viewMode, setViewMode] = useState<ViewMode>('split');
+  const [viewMode, setViewMode] = useState<ViewMode>('2d');
   const [selectedDocument, setSelectedDocument] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isGraphFullscreen, setIsGraphFullscreen] = useState(false);

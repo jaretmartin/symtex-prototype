@@ -36,11 +36,15 @@ export interface PendingApproval {
   cognateName: string;
   cognateAvatar?: string;
   policyReason: string;
+  policyId?: string;
+  policyTriggers?: string[];
   riskLevel: ApprovalPriority;
   preview: ApprovalPreview;
   status: ApprovalStatus;
   requestedAt: string;
   expiresAt?: string;
+  runId?: string;
+  rerunCount?: number;
 }
 
 export interface CalendarEvent {
@@ -91,6 +95,29 @@ export interface InboxItem {
 // =============================================================================
 
 export const mockPendingApprovals: PendingApproval[] = [
+  // WF5 Demo: Policy-blocked run awaiting approval
+  {
+    id: 'approval-wf5-demo',
+    type: 'action',
+    title: 'Data Export to External System',
+    description: 'Automated export of customer records to Salesforce integration',
+    cognateId: 'cognate-ops',
+    cognateName: 'OpsBot',
+    cognateAvatar: undefined,
+    policyReason: 'External data transfers require approval for PII compliance',
+    policyId: 'policy-data-export-001',
+    policyTriggers: ['Contains PII fields', 'External destination', 'Over 1000 records'],
+    riskLevel: 'critical',
+    preview: {
+      type: 'text',
+      content: 'Export Details:\n- Records: 2,450 customer records\n- Fields: name, email, company, purchase_history\n- Destination: Salesforce CRM\n- Scheduled: Immediate execution\n\nThis export was blocked because it contains personally identifiable information (PII) and targets an external system.',
+    },
+    status: 'pending',
+    requestedAt: '2026-01-21T10:15:00Z',
+    expiresAt: '2026-01-21T18:00:00Z',
+    runId: 'run-export-001',
+    rerunCount: 0,
+  },
   {
     id: 'approval-1',
     type: 'email',
@@ -100,6 +127,8 @@ export const mockPendingApprovals: PendingApproval[] = [
     cognateName: 'Aria',
     cognateAvatar: undefined,
     policyReason: 'VIP communications require human approval',
+    policyId: 'policy-vip-comms-001',
+    policyTriggers: ['VIP recipient detected', 'External communication'],
     riskLevel: 'high',
     preview: {
       type: 'email',
@@ -110,6 +139,8 @@ export const mockPendingApprovals: PendingApproval[] = [
     status: 'pending',
     requestedAt: '2026-01-21T09:30:00Z',
     expiresAt: '2026-01-21T17:00:00Z',
+    runId: 'run-email-001',
+    rerunCount: 0,
   },
   {
     id: 'approval-2',
@@ -443,6 +474,10 @@ interface CollaborationState {
   markAllInboxAsRead: () => void;
   batchApprove: (ids: string[]) => void;
   updateCognateStatus: (id: string, status: Partial<CognateStatusItem>) => void;
+
+  // WF5: Policy block and rerun
+  rerunApprovedItem: (id: string) => void;
+  addPolicyBlockedApproval: (approval: Omit<PendingApproval, 'id' | 'status' | 'requestedAt'>) => string;
 }
 
 // =============================================================================
@@ -547,6 +582,52 @@ export const useCollaborationStore = create<CollaborationState>()(
             item.id === id ? { ...item, ...statusUpdate } : item
           ),
         }));
+      },
+
+      // WF5: Rerun an approved item
+      rerunApprovedItem: (id: string) => {
+        set((state) => ({
+          pendingApprovals: state.pendingApprovals.map((item) =>
+            item.id === id
+              ? { ...item, rerunCount: (item.rerunCount || 0) + 1 }
+              : item
+          ),
+        }));
+        // In a real implementation, this would trigger the actual rerun
+        // dispatchEvent({ type: 'run_started', cognateId, payload: { runId: `${runId}-retry` } });
+      },
+
+      // WF5: Add a new policy-blocked approval
+      addPolicyBlockedApproval: (approval) => {
+        const id = `approval-${Date.now()}`;
+        const newApproval: PendingApproval = {
+          ...approval,
+          id,
+          status: 'pending',
+          requestedAt: new Date().toISOString(),
+        };
+
+        set((state) => ({
+          pendingApprovals: [newApproval, ...state.pendingApprovals],
+          inboxItems: [
+            {
+              id: `inbox-${Date.now()}`,
+              type: 'approval' as const,
+              title: `Policy Blocked: ${approval.title}`,
+              preview: approval.policyReason,
+              cognateId: approval.cognateId,
+              cognateName: approval.cognateName,
+              priority: approval.riskLevel === 'critical' ? 'urgent' : approval.riskLevel === 'high' ? 'high' : 'normal',
+              read: false,
+              timestamp: new Date().toISOString(),
+              actionRequired: true,
+              relatedApprovalId: id,
+            },
+            ...state.inboxItems,
+          ],
+        }));
+
+        return id;
       },
     }),
     { name: 'collaboration-store' }

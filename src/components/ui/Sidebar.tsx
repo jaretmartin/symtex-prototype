@@ -4,7 +4,8 @@
  * Features:
  * - Mobile responsive with drawer pattern
  * - Accessible navigation with ARIA attributes
- * - Coming Soon badges for unimplemented routes
+ * - Option A (OS-nav) 8-item L1 navigation
+ * - Expandable Spaces section with SpaceTree
  * - Integration with UI store for state management
  */
 
@@ -12,26 +13,20 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   Home,
-  Target,
+  Layers,
+  BookOpen,
+  Activity,
+  Users,
+  Gauge,
+  Shield,
+  MessageCircle,
   Settings,
   Zap,
-  BarChart3,
-  MessageSquare,
-  Dna,
-  Workflow,
-  Play,
   Menu,
   X,
-  BookOpen,
-  FileText,
   Lock,
-  BookText,
-  Layers,
   ChevronDown,
   ChevronRight,
-  Brain,
-  Shield,
-  Users,
 } from 'lucide-react';
 import clsx from 'clsx';
 import { useUIStore } from '../../store';
@@ -42,39 +37,29 @@ interface NavItem {
   name: string;
   href: string;
   icon: React.ElementType;
+  description?: string;
   comingSoon?: boolean;
 }
 
-const navigation: NavItem[] = [
-  { name: 'Home', href: '/', icon: Home },
-  { name: 'Missions', href: '/missions', icon: Target },
-  { name: 'DNA', href: '/dna', icon: Dna, comingSoon: true },
-  { name: 'Analytics', href: '/analytics', icon: BarChart3, comingSoon: true },
-  { name: 'Conversations', href: '/conversations', icon: MessageSquare, comingSoon: true },
-];
-
-const studioNavigation: NavItem[] = [
-  { name: 'LUX Builder', href: '/studio/lux', icon: Workflow },
-  { name: 'Automations', href: '/studio/automations', icon: Play },
-  { name: 'Narrative', href: '/studio/narrative', icon: BookText },
-  { name: 'Cognates', href: '/studio/cognates', icon: Brain },
-];
-
-const governanceNavigation: NavItem[] = [
-  { name: 'Command Center', href: '/governance', icon: Shield },
-  { name: 'Concord', href: '/governance/concord', icon: Users },
-];
-
-const libraryNavigation: NavItem[] = [
-  { name: 'Templates', href: '/library/templates', icon: FileText },
-  { name: 'Knowledge', href: '/library/knowledge', icon: BookOpen },
+/**
+ * Option A (OS-nav) - Primary 8-item L1 navigation
+ */
+const primaryNavigation: NavItem[] = [
+  { name: 'Home', href: '/', icon: Home, description: 'Dashboard' },
+  { name: 'Spaces', href: '/spaces', icon: Layers, description: 'Space hierarchy' },
+  { name: 'Knowledge', href: '/knowledge', icon: BookOpen, description: 'Library, templates, NEXIS' },
+  { name: 'Runs', href: '/runs', icon: Activity, description: 'Automation executions, history' },
+  { name: 'Team', href: '/team', icon: Users, description: 'Cognate roster, training' },
+  { name: 'Signals', href: '/signals', icon: Gauge, description: 'Insights, ROI, patterns' },
+  { name: 'Control', href: '/control', icon: Shield, description: 'Governance, approvals, LUX, C2S2' },
+  { name: 'Symbios', href: '/symbios', icon: MessageCircle, description: 'AI chat interface' },
 ];
 
 export default function Sidebar(): JSX.Element {
   const location = useLocation();
   const navigate = useNavigate();
   const { sidebarOpen, setSidebarOpen } = useUIStore();
-  const [spacesExpanded, setSpacesExpanded] = useState(true);
+  const [spacesExpanded, setSpacesExpanded] = useState(false);
 
   // Close sidebar on route change (mobile)
   useEffect(() => {
@@ -85,7 +70,7 @@ export default function Sidebar(): JSX.Element {
 
   // Handle escape key to close sidebar
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
+    const handleEscape = (e: KeyboardEvent): void => {
       if (e.key === 'Escape' && sidebarOpen) {
         setSidebarOpen(false);
       }
@@ -96,32 +81,78 @@ export default function Sidebar(): JSX.Element {
   }, [sidebarOpen, setSidebarOpen]);
 
   const renderNavItem = (item: NavItem): JSX.Element => {
-    const isActive = location.pathname === item.href ||
+    const isActive =
+      location.pathname === item.href ||
       (item.href !== '/' && location.pathname.startsWith(item.href));
 
-    if (item.comingSoon) {
+    // Special handling for Spaces - render with expandable SpaceTree
+    if (item.name === 'Spaces') {
       return (
-        <Link
-          key={item.name}
-          to={item.href}
-          aria-current={isActive ? 'page' : undefined}
-          className={clsx(
-            'flex items-center justify-between gap-3 px-4 py-3 rounded-lg transition-all duration-200',
-            'text-muted-foreground hover:bg-muted/50 cursor-pointer'
-          )}
-        >
-          <div className="flex items-center gap-3">
-            <item.icon className="w-5 h-5" aria-hidden="true" />
-            <span className="font-medium">{item.name}</span>
+        <div key={item.name}>
+          <div className="flex items-center">
+            <Link
+              to={item.href}
+              aria-current={isActive ? 'page' : undefined}
+              className={clsx(
+                'flex-1 flex items-center gap-3 px-4 py-3 rounded-l-lg transition-all duration-200',
+                isActive
+                  ? 'bg-symtex-primary/20 text-symtex-primary border border-symtex-primary/30 border-r-0'
+                  : 'text-muted-foreground hover:bg-surface-card hover:text-foreground'
+              )}
+            >
+              <item.icon className="w-5 h-5" aria-hidden="true" />
+              <span className="font-medium">{item.name}</span>
+            </Link>
+            <button
+              type="button"
+              onClick={() => setSpacesExpanded(!spacesExpanded)}
+              className={clsx(
+                'p-3 rounded-r-lg transition-all duration-200',
+                isActive
+                  ? 'bg-symtex-primary/20 text-symtex-primary border border-symtex-primary/30 border-l-0'
+                  : 'text-muted-foreground hover:bg-surface-card hover:text-foreground'
+              )}
+              aria-expanded={spacesExpanded}
+              aria-controls="spaces-tree-section"
+              aria-label={`${spacesExpanded ? 'Collapse' : 'Expand'} spaces tree`}
+            >
+              {spacesExpanded ? (
+                <ChevronDown className="w-4 h-4" aria-hidden="true" />
+              ) : (
+                <ChevronRight className="w-4 h-4" aria-hidden="true" />
+              )}
+            </button>
           </div>
-          <span className="flex items-center gap-1 text-xs bg-surface-elevated/50 text-muted-foreground px-2 py-0.5 rounded">
-            <Lock className="w-3 h-3" aria-hidden="true" />
-            Soon
-          </span>
-        </Link>
+          {spacesExpanded && (
+            <div
+              id="spaces-tree-section"
+              role="group"
+              aria-label="Spaces hierarchy"
+              className="ml-4 mt-1 border-l border-border pl-2"
+            >
+              <SpaceTree
+                className="py-2"
+                onNavigate={(type, id) => {
+                  // Navigate to appropriate route based on space type
+                  if (type === 'personal') {
+                    navigate('/spaces');
+                  } else if (type === 'domain') {
+                    navigate(`/spaces/${id}`);
+                  } else if (type === 'project') {
+                    // Find the domain for this project (handled by route)
+                    navigate(`/spaces/domain/${id}`);
+                  } else if (type === 'mission') {
+                    navigate(`/missions/${id}`);
+                  }
+                }}
+              />
+            </div>
+          )}
+        </div>
       );
     }
 
+    // Standard nav item rendering
     return (
       <Link
         key={item.name}
@@ -204,76 +235,15 @@ export default function Sidebar(): JSX.Element {
         </div>
 
         {/* Navigation */}
-        <nav id="main-navigation" className="flex-1 p-4 space-y-1 overflow-y-auto" role="navigation" aria-label="Main navigation">
-          {/* Main Navigation */}
-          <div role="group" aria-label="Main">
-            {navigation.map(renderNavItem)}
-          </div>
-
-          {/* Spaces Section with SpaceTree */}
-          <div className="pt-4 mt-4 border-t border-border">
-            <button
-              type="button"
-              onClick={() => setSpacesExpanded(!spacesExpanded)}
-              className="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider hover:text-foreground transition-colors"
-              aria-expanded={spacesExpanded}
-              aria-controls="spaces-section"
-              aria-label={`Spaces section, ${spacesExpanded ? 'expanded' : 'collapsed'}`}
-            >
-              <div className="flex items-center gap-2">
-                <Layers className="w-4 h-4" aria-hidden="true" />
-                <span>Spaces</span>
-              </div>
-              {spacesExpanded ? (
-                <ChevronDown className="w-4 h-4" aria-hidden="true" />
-              ) : (
-                <ChevronRight className="w-4 h-4" aria-hidden="true" />
-              )}
-            </button>
-            {spacesExpanded && (
-              <div id="spaces-section" role="group" aria-label="Spaces">
-                <SpaceTree
-                  className="mt-2"
-                  onNavigate={(type, id) => {
-                    // Navigate to appropriate route based on space type
-                    if (type === 'personal') {
-                      navigate('/spaces');
-                    } else if (type === 'domain') {
-                      navigate(`/spaces/${id}`);
-                    } else if (type === 'project') {
-                      // Find the domain for this project (handled by route)
-                      navigate(`/spaces/domain/${id}`);
-                    } else if (type === 'mission') {
-                      navigate(`/missions/${id}`);
-                    }
-                  }}
-                />
-              </div>
-            )}
-          </div>
-
-          {/* Studio Section */}
-          <div className="pt-4 mt-4 border-t border-border" role="group" aria-label="Studio">
-            <p id="studio-section-label" className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-              Studio
-            </p>
-            {studioNavigation.map(renderNavItem)}
-          </div>
-
-          {/* Governance Section */}
-          <div className="pt-4 mt-4 border-t border-border" role="group" aria-label="Governance">
-            <p id="governance-section-label" className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-              Governance
-            </p>
-            {governanceNavigation.map(renderNavItem)}
-          </div>
-
-          {/* Library Section */}
-          <div className="pt-4 mt-4 border-t border-border" role="group" aria-label="Library">
-            <p id="library-section-label" className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-              Library
-            </p>
-            {libraryNavigation.map(renderNavItem)}
+        <nav
+          id="main-navigation"
+          className="flex-1 p-4 space-y-1 overflow-y-auto"
+          role="navigation"
+          aria-label="Main navigation"
+        >
+          {/* Primary Navigation - Option A (OS-nav) */}
+          <div role="group" aria-label="Primary navigation">
+            {primaryNavigation.map(renderNavItem)}
           </div>
         </nav>
 

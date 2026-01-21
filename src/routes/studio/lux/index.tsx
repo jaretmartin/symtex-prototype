@@ -3,16 +3,27 @@
  *
  * Visual workflow builder with Zustand state management,
  * undo/redo support, auto-save, and keyboard shortcuts.
+ *
+ * WF2 Integration: Plan -> Simulate -> Run -> Review -> Compile
  */
 
-import { useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Undo2, Redo2, Save, ExternalLink, Circle } from 'lucide-react';
+import { Undo2, Redo2, Save, ExternalLink, Circle, Play, FlaskConical, FileText } from 'lucide-react';
 import LuxCanvas from '../../../components/lux/LuxCanvas';
 import NodePalette from '../../../components/lux/NodePalette';
 import NaturalLanguageBuilder from '../../../components/lux/NaturalLanguageBuilder';
 import { useAutomationStore } from '../../../store';
 import { useToast } from '../../../store/useUIStore';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { ExplainPlan, type ExecutionPlan } from '@/components/runs/ExplainPlan';
+import { SimulationPanel, type SimulationResult } from '@/components/runs/SimulationPanel';
+import { RunReview, type RunResult } from '@/components/runs/RunReview';
 import type { Node, Edge } from 'reactflow';
 
 // Default nodes for new workflows
@@ -85,6 +96,160 @@ const defaultEdges: Edge[] = [
   },
 ];
 
+// Types for WF2 workflow
+type WF2Step = 'builder' | 'plan' | 'simulate' | 'running' | 'review';
+
+// Mock data generators for WF2
+function createMockExecutionPlan(name: string, nodeCount: number): ExecutionPlan {
+  return {
+    automationId: `auto-${Date.now()}`,
+    automationName: name,
+    systems: [
+      {
+        id: 'sys-1',
+        name: 'Salesforce CRM',
+        type: 'crm',
+        action: 'read',
+        description: 'Read contact and lead data',
+      },
+      {
+        id: 'sys-2',
+        name: 'Email Service',
+        type: 'email',
+        action: 'execute',
+        description: 'Send automated emails',
+      },
+      {
+        id: 'sys-3',
+        name: 'Analytics Database',
+        type: 'database',
+        action: 'write',
+        description: 'Log execution metrics',
+      },
+    ],
+    permissions: [
+      { id: 'perm-1', scope: 'salesforce', level: 'read', granted: true },
+      { id: 'perm-2', scope: 'email', level: 'write', granted: true },
+      { id: 'perm-3', scope: 'analytics', level: 'write', granted: true },
+    ],
+    cost: {
+      apiCalls: nodeCount * 3,
+      estimatedCost: nodeCount * 0.012,
+      budgetCap: 50,
+      budgetRemaining: 42.35,
+      withinBudget: true,
+    },
+    estimatedDuration: nodeCount * 2,
+    riskLevel: nodeCount > 5 ? 'medium' : 'low',
+  };
+}
+
+function createMockSimulationResult(automationId: string): SimulationResult {
+  return {
+    automationId,
+    status: 'success',
+    steps: [
+      {
+        id: 'step-1',
+        name: 'Initialize Automation',
+        status: 'success',
+        duration: 45,
+        message: 'Automation context initialized',
+      },
+      {
+        id: 'step-2',
+        name: 'Fetch Input Data',
+        status: 'success',
+        duration: 245,
+        input: { source: 'trigger' },
+        output: { records: 12 },
+        message: 'Successfully retrieved input data',
+      },
+      {
+        id: 'step-3',
+        name: 'Process Conditions',
+        status: 'success',
+        duration: 32,
+        input: { records: 12 },
+        output: { matched: 8, filtered: 4 },
+        message: 'Conditions evaluated',
+      },
+      {
+        id: 'step-4',
+        name: 'Execute Actions',
+        status: 'success',
+        duration: 412,
+        input: { records: 8 },
+        output: { processed: 8 },
+        message: 'All actions completed',
+      },
+    ],
+    warnings: [
+      {
+        id: 'warn-1',
+        severity: 'info',
+        message: 'Simulation completed successfully. Ready to run for real.',
+      },
+    ],
+    totalDuration: 734,
+    completedAt: new Date(),
+  };
+}
+
+function createMockRunResult(automationId: string, name: string): RunResult {
+  const now = new Date();
+  const startedAt = new Date(now.getTime() - 3200);
+  return {
+    runId: `run-${Date.now()}`,
+    automationId,
+    automationName: name,
+    status: 'success',
+    startedAt,
+    completedAt: now,
+    steps: [
+      {
+        id: 'step-1',
+        name: 'Initialize',
+        status: 'success',
+        startedAt,
+        completedAt: new Date(startedAt.getTime() + 50),
+      },
+      {
+        id: 'step-2',
+        name: 'Fetch Data',
+        status: 'success',
+        startedAt: new Date(startedAt.getTime() + 50),
+        completedAt: new Date(startedAt.getTime() + 320),
+        input: { query: 'active leads' },
+        output: { count: 15 },
+        cognateId: 'cog-1',
+        cognateName: 'Data Fetcher',
+      },
+      {
+        id: 'step-3',
+        name: 'Process',
+        status: 'success',
+        startedAt: new Date(startedAt.getTime() + 320),
+        completedAt: new Date(startedAt.getTime() + 850),
+        input: { records: 15 },
+        output: { processed: 15 },
+      },
+      {
+        id: 'step-4',
+        name: 'Complete',
+        status: 'success',
+        startedAt: new Date(startedAt.getTime() + 850),
+        completedAt: now,
+        output: { success: true },
+      },
+    ],
+    totalCost: 0.048,
+    outputSummary: 'Automation completed successfully. 15 records processed.',
+    canCompilePattern: true,
+    patternSuggestion: 'This automation can be compiled to S1 for 60% cost reduction.',
+  };
+}
+
 export default function LuxBuilderPage(): JSX.Element {
   // Store state
   const {
@@ -106,6 +271,15 @@ export default function LuxBuilderPage(): JSX.Element {
   } = useAutomationStore();
 
   const toast = useToast();
+
+  // WF2 workflow state
+  const [currentStep, setCurrentStep] = useState<WF2Step>('builder');
+  const [executionPlan, setExecutionPlan] = useState<ExecutionPlan | null>(null);
+  const [simulationResult, setSimulationResult] = useState<SimulationResult | null>(null);
+  const [runResult, setRunResult] = useState<RunResult | null>(null);
+  const [isSimulating, setIsSimulating] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
+  const [isCompiling, setIsCompiling] = useState(false);
 
   // Initialize with default nodes if empty
   useEffect(() => {
@@ -208,6 +382,54 @@ export default function LuxBuilderPage(): JSX.Element {
       toast.success('Automation saved', 'Your Automation has been saved successfully.');
     }, 500);
   }, [automationName, nodes, edges, markClean, setSaving, toast]);
+
+  // WF2 Workflow Handlers
+  const handleExplainPlan = useCallback((): void => {
+    if (nodes.length === 0) {
+      toast.error('No nodes', 'Add some nodes to the automation before running.');
+      return;
+    }
+    setExecutionPlan(createMockExecutionPlan(automationName, nodes.length));
+    setCurrentStep('plan');
+  }, [nodes, automationName, toast]);
+
+  const handleSimulate = useCallback((): void => {
+    setIsSimulating(true);
+    setTimeout(() => {
+      setSimulationResult(createMockSimulationResult(`auto-${Date.now()}`));
+      setIsSimulating(false);
+      setCurrentStep('simulate');
+    }, 1500);
+  }, []);
+
+  const handleRun = useCallback((): void => {
+    setIsRunning(true);
+    setCurrentStep('running');
+    setTimeout(() => {
+      setRunResult(createMockRunResult(`auto-${Date.now()}`, automationName));
+      setIsRunning(false);
+      setCurrentStep('review');
+    }, 2500);
+  }, [automationName]);
+
+  const handleCompilePattern = useCallback((): void => {
+    setIsCompiling(true);
+    setTimeout(() => {
+      setIsCompiling(false);
+      toast.success('Pattern Compiled', 'Your automation has been compiled to S1 for faster execution.');
+      setCurrentStep('builder');
+      setExecutionPlan(null);
+      setSimulationResult(null);
+      setRunResult(null);
+    }, 2000);
+  }, [toast]);
+
+  const handleCancelWF2 = useCallback((): void => {
+    setCurrentStep('builder');
+    setExecutionPlan(null);
+    setSimulationResult(null);
+    setRunResult(null);
+  }, []);
 
   return (
     <div className="lux-builder-page" style={{
@@ -333,8 +555,85 @@ export default function LuxBuilderPage(): JSX.Element {
             {isSaving ? 'Saving...' : 'Save'}
           </button>
 
+          <div style={{ width: '1px', height: '24px', backgroundColor: '#2a2a3e', margin: '0 4px' }} />
+
+          {/* WF2: Explain Plan */}
+          <button
+            onClick={handleExplainPlan}
+            disabled={nodes.length === 0}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: '1px solid #2a2a3e',
+              background: 'transparent',
+              color: nodes.length > 0 ? '#fff' : '#4b5563',
+              cursor: nodes.length > 0 ? 'pointer' : 'not-allowed',
+              fontWeight: 500,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+            }}
+            title="View execution plan"
+          >
+            <FileText className="w-4 h-4" />
+            Explain Plan
+          </button>
+
+          {/* WF2: Simulate */}
+          <button
+            onClick={() => {
+              handleExplainPlan();
+              setTimeout(() => handleSimulate(), 100);
+            }}
+            disabled={nodes.length === 0}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: '1px solid #a855f7',
+              background: 'rgba(168, 85, 247, 0.1)',
+              color: nodes.length > 0 ? '#a855f7' : '#4b5563',
+              cursor: nodes.length > 0 ? 'pointer' : 'not-allowed',
+              fontWeight: 500,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+            }}
+            title="Simulate automation"
+          >
+            <FlaskConical className="w-4 h-4" />
+            Simulate
+          </button>
+
+          {/* WF2: Run */}
+          <button
+            onClick={() => {
+              handleExplainPlan();
+            }}
+            disabled={nodes.length === 0}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: 'none',
+              background: nodes.length > 0
+                ? 'linear-gradient(135deg, #22c55e, #16a34a)'
+                : '#2a2a3e',
+              color: '#fff',
+              cursor: nodes.length > 0 ? 'pointer' : 'not-allowed',
+              fontWeight: 500,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+            }}
+            title="Run automation"
+          >
+            <Play className="w-4 h-4" />
+            Run
+          </button>
+
+          <div style={{ width: '1px', height: '24px', backgroundColor: '#2a2a3e', margin: '0 4px' }} />
+
           <Link
-            to="/studio/automations"
+            to="/runs"
             style={{
               padding: '8px 16px',
               borderRadius: '6px',
@@ -349,7 +648,7 @@ export default function LuxBuilderPage(): JSX.Element {
             }}
           >
             <ExternalLink className="w-4 h-4" />
-            Automations
+            Runs
           </Link>
         </div>
       </header>
@@ -377,6 +676,84 @@ export default function LuxBuilderPage(): JSX.Element {
           />
         </div>
       </div>
+
+      {/* WF2 Dialogs */}
+
+      {/* Plan Dialog */}
+      <Dialog open={currentStep === 'plan'} onOpenChange={() => handleCancelWF2()}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Execution Plan</DialogTitle>
+          </DialogHeader>
+          {executionPlan && (
+            <ExplainPlan
+              plan={executionPlan}
+              onSimulate={handleSimulate}
+              onRun={handleRun}
+              onCancel={handleCancelWF2}
+              isSimulating={isSimulating}
+              isRunning={isRunning}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Simulate Dialog */}
+      <Dialog open={currentStep === 'simulate'} onOpenChange={() => handleCancelWF2()}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Simulation Results</DialogTitle>
+          </DialogHeader>
+          {simulationResult && (
+            <SimulationPanel
+              result={simulationResult}
+              onRunForReal={handleRun}
+              onReSimulate={handleSimulate}
+              onCancel={handleCancelWF2}
+              isRunning={isRunning}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Running Dialog */}
+      <Dialog open={currentStep === 'running'} onOpenChange={() => {}}>
+        <DialogContent className="max-w-md">
+          <div className="flex flex-col items-center justify-center py-8">
+            <div className="w-16 h-16 rounded-full border-4 border-symtex-primary border-t-transparent animate-spin mb-6" />
+            <h3 className="text-lg font-semibold text-foreground mb-2">
+              Running Automation
+            </h3>
+            <p className="text-muted-foreground text-center">
+              {automationName}
+            </p>
+            <p className="text-sm text-muted-foreground mt-4">
+              Please wait while the automation executes...
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Review Dialog */}
+      <Dialog open={currentStep === 'review'} onOpenChange={() => handleCancelWF2()}>
+        <DialogContent className="max-w-3xl">
+          <DialogHeader>
+            <DialogTitle>Run Complete</DialogTitle>
+          </DialogHeader>
+          {runResult && (
+            <RunReview
+              result={runResult}
+              onCompilePattern={handleCompilePattern}
+              onRunAgain={() => {
+                handleCancelWF2();
+                setTimeout(() => handleExplainPlan(), 100);
+              }}
+              onClose={handleCancelWF2}
+              isCompiling={isCompiling}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

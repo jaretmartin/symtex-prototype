@@ -5,7 +5,8 @@
  * company, topic, or event in the NEXIS relationship graph.
  */
 
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   User,
   Building2,
@@ -18,6 +19,8 @@ import {
   ExternalLink,
   MessageSquare,
   UserPlus,
+  Sparkles,
+  ChevronRight,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { NexisNode, NexisEdge } from './nexis-store';
@@ -28,6 +31,7 @@ interface NexisContactCardProps {
   onClose?: () => void;
   onMessage?: (nodeId: string) => void;
   onConnect?: (nodeId: string) => void;
+  onSendToSymbios?: (nodeId: string) => void;
   className?: string;
 }
 
@@ -77,8 +81,10 @@ function NexisContactCard({
   onClose,
   onMessage,
   onConnect,
+  onSendToSymbios,
   className,
 }: NexisContactCardProps): JSX.Element {
+  const navigate = useNavigate();
   const config = nodeTypeConfig[node.type];
   const Icon = config.icon;
   const { data } = node;
@@ -89,6 +95,16 @@ function NexisContactCard({
     if (strength >= 40) return 'text-orange-400';
     return 'text-red-400';
   };
+
+  // Handle sending entity to Symbios
+  const handleSendToSymbios = useCallback(() => {
+    if (onSendToSymbios) {
+      onSendToSymbios(node.id);
+    } else {
+      // Default navigation if no callback provided
+      navigate(`/symbios?context=nexis&entity=${node.id}`);
+    }
+  }, [node.id, onSendToSymbios, navigate]);
 
   return (
     <div
@@ -246,28 +262,41 @@ function NexisContactCard({
       </div>
 
       {/* Actions */}
-      {node.type === 'person' && (onMessage || onConnect) && (
-        <div className="p-4 border-t border-border flex gap-2">
-          {onMessage && (
-            <button
-              onClick={() => onMessage(node.id)}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-symtex-primary text-foreground text-sm font-medium hover:bg-symtex-primary/90 transition-colors"
-            >
-              <MessageSquare className="w-4 h-4" />
-              Message
-            </button>
-          )}
-          {onConnect && (
-            <button
-              onClick={() => onConnect(node.id)}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-muted text-foreground text-sm font-medium hover:bg-muted transition-colors"
-            >
-              <UserPlus className="w-4 h-4" />
-              Connect
-            </button>
-          )}
-        </div>
-      )}
+      <div className="p-4 border-t border-border space-y-2">
+        {/* Send to Symbios - available for all entity types */}
+        <button
+          onClick={handleSendToSymbios}
+          className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-symtex-primary/20 text-symtex-primary text-sm font-medium hover:bg-symtex-primary/30 transition-colors"
+        >
+          <Sparkles className="w-4 h-4" />
+          Send to Symbios
+          <ChevronRight className="w-4 h-4" />
+        </button>
+
+        {/* Person-specific actions */}
+        {node.type === 'person' && (onMessage || onConnect) && (
+          <div className="flex gap-2">
+            {onMessage && (
+              <button
+                onClick={() => onMessage(node.id)}
+                className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-muted text-foreground text-sm font-medium hover:bg-muted/80 transition-colors"
+              >
+                <MessageSquare className="w-4 h-4" />
+                Message
+              </button>
+            )}
+            {onConnect && (
+              <button
+                onClick={() => onConnect(node.id)}
+                className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-muted text-foreground text-sm font-medium hover:bg-muted/80 transition-colors"
+              >
+                <UserPlus className="w-4 h-4" />
+                Connect
+              </button>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

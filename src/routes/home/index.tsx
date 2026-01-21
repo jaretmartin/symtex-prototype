@@ -188,7 +188,7 @@ export default function Home(): JSX.Element {
             </div>
           </div>
           <Link
-            to="/"
+            to="/signals"
             className="px-5 py-2.5 rounded-lg gradient-primary text-foreground font-medium hover:opacity-90 transition-opacity"
           >
             View Full Report

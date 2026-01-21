@@ -13,7 +13,8 @@ import { ToastContainer } from './components/ui/Toast';
 import { BreadcrumbRail, ContextSummaryPill } from './components/context';
 import { AriaPresence, AriaChat } from './components/aria';
 import { SkipLinks } from './components/a11y';
-import { DemoControlPanel } from './demo';
+import { DemoProvider, DemoControlPanel } from './demo';
+import { CognateDock } from './components/cognate';
 import { analyticsService } from './api';
 import { useUIStore } from './store';
 
@@ -32,60 +33,67 @@ function App(): JSX.Element {
 
   if (isFullScreenRoute) {
     return (
-      <ErrorBoundary>
-        <Outlet />
-        <CommandPalette />
-        <ToastContainer />
-      </ErrorBoundary>
+      <DemoProvider>
+        <ErrorBoundary>
+          <Outlet />
+          <CommandPalette />
+          <ToastContainer />
+          <CognateDock position="bottom-left" />
+          <DemoControlPanel />
+        </ErrorBoundary>
+      </DemoProvider>
     );
   }
 
   return (
-    <ErrorBoundary>
-      <div className="flex min-h-screen bg-background">
-        {/* Skip links for accessibility */}
-        <SkipLinks />
+    <DemoProvider>
+      <ErrorBoundary>
+        <div className="flex min-h-screen bg-background">
+          {/* Skip links for accessibility */}
+          <SkipLinks />
 
-        {/* Sidebar */}
-        <Sidebar />
+          {/* Sidebar */}
+          <Sidebar />
 
-        {/* Main content area */}
-        <main
-          id="main-content"
-          className={`flex-1 flex flex-col transition-all duration-300 ${
-            sidebarOpen ? 'lg:ml-64' : 'ml-0'
-          } overflow-auto`}
-        >
-          {/* Breadcrumb navigation rail */}
-          <BreadcrumbRail className="sticky top-0 z-30" />
+          {/* Main content area */}
+          <main
+            id="main-content"
+            className={`flex-1 flex flex-col transition-all duration-300 ${
+              sidebarOpen ? 'lg:ml-64' : 'ml-0'
+            } overflow-auto`}
+          >
+            {/* Breadcrumb navigation rail */}
+            <BreadcrumbRail className="sticky top-0 z-30" />
 
-          {/* Page content */}
-          <div className="flex-1 p-4 md:p-6 lg:p-8">
-            <ErrorBoundary>
-              <Outlet />
-            </ErrorBoundary>
-          </div>
-        </main>
+            {/* Page content */}
+            <div className="flex-1 p-4 md:p-6 lg:p-8">
+              <ErrorBoundary>
+                <Outlet />
+              </ErrorBoundary>
+            </div>
+          </main>
 
-        {/* Context Summary Pill - floating bottom-right */}
-        <ContextSummaryPill />
+          {/* Context Summary Pill - floating bottom-right */}
+          <ContextSummaryPill />
 
-        {/* Aria Meta-Cognate Presence */}
-        <AriaPresence
-          onOpenChat={() => setAriaChatOpen(true)}
-          status="available"
-        />
-        <AriaChat
-          isOpen={ariaChatOpen}
-          onClose={() => setAriaChatOpen(false)}
-        />
-      </div>
+          {/* Aria Meta-Cognate Presence */}
+          <AriaPresence
+            onOpenChat={() => setAriaChatOpen(true)}
+            status="available"
+          />
+          <AriaChat
+            isOpen={ariaChatOpen}
+            onClose={() => setAriaChatOpen(false)}
+          />
+        </div>
 
-      {/* Global overlays */}
-      <CommandPalette />
-      <ToastContainer />
-      <DemoControlPanel />
-    </ErrorBoundary>
+        {/* Global overlays */}
+        <CommandPalette />
+        <ToastContainer />
+        <CognateDock position="bottom-left" />
+        <DemoControlPanel />
+      </ErrorBoundary>
+    </DemoProvider>
   );
 }
 

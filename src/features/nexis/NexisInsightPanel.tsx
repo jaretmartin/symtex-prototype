@@ -5,7 +5,8 @@
  * and actionable recommendations from the NEXIS relationship graph.
  */
 
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Lightbulb,
   TrendingUp,
@@ -15,6 +16,9 @@ import {
   Sparkles,
   Users,
   ArrowUpRight,
+  Zap,
+  MessageSquare,
+  FileText,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { NexisInsight } from './nexis-store';
@@ -23,6 +27,8 @@ interface NexisInsightPanelProps {
   insights: NexisInsight[];
   onInsightClick?: (insight: NexisInsight) => void;
   onViewAll?: () => void;
+  onCreateAutomation?: (insightId: string) => void;
+  onSendToSymbios?: (entityId: string) => void;
   className?: string;
   compact?: boolean;
 }
@@ -72,10 +78,32 @@ function NexisInsightPanel({
   insights,
   onInsightClick,
   onViewAll,
+  onCreateAutomation,
+  onSendToSymbios,
   className,
   compact = false,
 }: NexisInsightPanelProps): JSX.Element {
   const displayInsights = compact ? insights.slice(0, 3) : insights;
+
+  // Handle creating automation from insight
+  const handleCreateAutomation = useCallback(
+    (e: React.MouseEvent, insightId: string) => {
+      e.stopPropagation();
+      onCreateAutomation?.(insightId);
+    },
+    [onCreateAutomation]
+  );
+
+  // Handle sending first related entity to Symbios
+  const handleSendToSymbios = useCallback(
+    (e: React.MouseEvent, relatedNodes: string[]) => {
+      e.stopPropagation();
+      if (relatedNodes.length > 0) {
+        onSendToSymbios?.(relatedNodes[0]);
+      }
+    },
+    [onSendToSymbios]
+  );
 
   return (
     <div
@@ -181,6 +209,37 @@ function NexisInsightPanel({
                         </div>
                       </div>
                     )}
+
+                    {/* Action Buttons */}
+                    <div className="flex items-center gap-2 mt-3 pt-2 border-t border-border/50">
+                      {onCreateAutomation && (
+                        <button
+                          onClick={(e) => handleCreateAutomation(e, insight.id)}
+                          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-symtex-primary/20 text-symtex-primary hover:bg-symtex-primary/30 transition-colors text-xs font-medium"
+                        >
+                          <Zap className="w-3.5 h-3.5" />
+                          Create Automation
+                        </button>
+                      )}
+                      {onSendToSymbios && insight.relatedNodes.length > 0 && (
+                        <button
+                          onClick={(e) => handleSendToSymbios(e, insight.relatedNodes)}
+                          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors text-xs font-medium"
+                        >
+                          <MessageSquare className="w-3.5 h-3.5" />
+                          Symbios
+                        </button>
+                      )}
+                      {/* View in Ledger Link */}
+                      <Link
+                        to={`/control/ledger?filter=nexis&insight=${insight.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors text-xs"
+                      >
+                        <FileText className="w-3.5 h-3.5" />
+                        Ledger
+                      </Link>
+                    </div>
                   </div>
                   <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0" />
                 </div>

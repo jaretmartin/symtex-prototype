@@ -6,7 +6,8 @@
  * attachments, and approval workflows.
  */
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import {
   User,
@@ -22,7 +23,9 @@ import {
   CheckCircle2,
   AlertCircle,
   Clock,
+  ScrollText,
 } from 'lucide-react';
+import { useCognateEvents } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { SymbiosRoutingIndicator } from './SymbiosRoutingIndicator';
 import type { SymbiosMessage as SymbiosMessageType, SymbiosCitation, SymbiosAttachment } from './symbios-store';
@@ -283,13 +286,16 @@ function AttachmentList({
 }
 
 /**
- * CitationList - Renders message citations
+ * CitationList - Renders message citations with View in Ledger functionality
  */
 function CitationList({
   citations,
 }: {
   citations: SymbiosCitation[];
 }): JSX.Element {
+  const navigate = useNavigate();
+  const { dispatchEvent } = useCognateEvents();
+
   const getSourceIcon = (sourceType: SymbiosCitation['sourceType']): string => {
     switch (sourceType) {
       case 'sop':
@@ -305,19 +311,37 @@ function CitationList({
     }
   };
 
+  const handleViewInLedger = useCallback((citation: SymbiosCitation): void => {
+    // Dispatch audit event for citation view
+    dispatchEvent({
+      type: 'evidence_attached',
+      cognateId: 'aria',
+      payload: {
+        citationId: citation.id,
+        citationTitle: citation.title,
+        sourceType: citation.sourceType,
+        action: 'view_citation',
+        source: 'symbios_chat',
+      },
+    });
+
+    // Navigate to ledger with citation filter
+    navigate(`/control/ledger?citationId=${citation.id}`);
+  }, [dispatchEvent, navigate]);
+
   return (
     <div className="space-y-1">
       <p className="text-xs text-muted-foreground mb-1">Sources:</p>
       {citations.map((citation) => (
         <div
           key={citation.id}
-          className="flex items-start gap-2 p-2 bg-card/50 rounded border border-border/50"
+          className="flex items-start gap-2 p-2 bg-card/50 rounded border border-border/50 group hover:border-symtex-purple/30 transition-colors"
         >
           <span className="flex-shrink-0 px-1.5 py-0.5 bg-muted rounded text-[10px] font-medium text-muted-foreground">
             {getSourceIcon(citation.sourceType)}
           </span>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-medium text-muted-foreground truncate">
+            <p className="text-xs font-medium text-muted-foreground truncate group-hover:text-symtex-purple transition-colors">
               {citation.title}
             </p>
             {citation.snippet && (
@@ -326,16 +350,27 @@ function CitationList({
               </p>
             )}
           </div>
-          {citation.url && (
-            <a
-              href={citation.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-shrink-0 p-1 text-muted-foreground hover:text-muted-foreground"
+          <div className="flex items-center gap-1 flex-shrink-0">
+            {/* View in Ledger button */}
+            <button
+              onClick={() => handleViewInLedger(citation)}
+              className="p-1 text-muted-foreground hover:text-symtex-purple opacity-0 group-hover:opacity-100 transition-all"
+              title="View in Ledger"
             >
-              <ExternalLink className="w-3 h-3" />
-            </a>
-          )}
+              <ScrollText className="w-3 h-3" />
+            </button>
+            {citation.url && (
+              <a
+                href={citation.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-1 text-muted-foreground hover:text-foreground"
+                title="Open source"
+              >
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            )}
+          </div>
         </div>
       ))}
     </div>

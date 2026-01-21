@@ -24,3 +24,15 @@ export { useVoiceCommands } from './useVoiceCommands';
 
 // Accessibility hooks
 export { useFocusOnMount } from './useFocusOnMount';
+
+// Cognate event hooks
+export {
+  useCognateEvents,
+  useCognateEventSubscription,
+  useLatestCognateEvent,
+} from './useCognateEvents';
+export type {
+  CognateEvent,
+  CognateEventType,
+  UseCognateEventsReturn,
+} from './useCognateEvents';

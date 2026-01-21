@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Eye, FileText } from 'lucide-react';
 
 interface Automation {
   id: string;
@@ -7,6 +9,7 @@ interface Automation {
   status: 'active' | 'paused' | 'draft';
   triggerType: string;
   lastRun?: string;
+  lastRunId?: string;
   runs: number;
   createdAt: string;
   updatedAt: string;
@@ -30,6 +33,7 @@ const mockAutomations: Automation[] = [
     status: 'active',
     triggerType: 'New Lead',
     lastRun: '2 hours ago',
+    lastRunId: 'run-auto1-001',
     runs: 1247,
     createdAt: '2024-01-15',
     updatedAt: '2024-01-20',
@@ -41,6 +45,7 @@ const mockAutomations: Automation[] = [
     status: 'active',
     triggerType: 'New Customer',
     lastRun: '30 minutes ago',
+    lastRunId: 'run-auto2-001',
     runs: 3892,
     createdAt: '2024-01-10',
     updatedAt: '2024-01-18',
@@ -52,6 +57,7 @@ const mockAutomations: Automation[] = [
     status: 'active',
     triggerType: 'Schedule',
     lastRun: '3 days ago',
+    lastRunId: 'run-auto3-001',
     runs: 52,
     createdAt: '2024-01-01',
     updatedAt: '2024-01-20',
@@ -63,6 +69,7 @@ const mockAutomations: Automation[] = [
     status: 'paused',
     triggerType: 'Ticket Created',
     lastRun: '1 week ago',
+    lastRunId: 'run-auto4-001',
     runs: 156,
     createdAt: '2024-01-08',
     updatedAt: '2024-01-15',
@@ -429,6 +436,57 @@ export default function AutomationsPage() {
                       <span>Runs: {automation.runs.toLocaleString()}</span>
                       {automation.lastRun && <span>Last run: {automation.lastRun}</span>}
                     </div>
+                    {/* Trace and Ledger Links */}
+                    {automation.lastRunId && (
+                      <div
+                        style={{
+                          display: 'flex',
+                          gap: '12px',
+                          marginTop: '8px',
+                        }}
+                      >
+                        <Link
+                          to={`/runs/${automation.lastRunId}/trace`}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            fontSize: '12px',
+                            color: '#94a3b8',
+                            textDecoration: 'none',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = '#6366f1';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = '#94a3b8';
+                          }}
+                        >
+                          <Eye style={{ width: '14px', height: '14px' }} />
+                          View Trace
+                        </Link>
+                        <Link
+                          to={`/control/ledger?automation=${automation.id}`}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            fontSize: '12px',
+                            color: '#94a3b8',
+                            textDecoration: 'none',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = '#6366f1';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = '#94a3b8';
+                          }}
+                        >
+                          <FileText style={{ width: '14px', height: '14px' }} />
+                          View in Ledger
+                        </Link>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div style={{ display: 'flex', gap: '8px' }}>

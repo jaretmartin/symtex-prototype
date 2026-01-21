@@ -4,8 +4,8 @@
  * Browse and install pre-built SOP packs for a Cognate.
  */
 
-import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useState, useCallback } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft,
   Search,
@@ -15,9 +15,12 @@ import {
   Check,
   Users,
   Tag,
+  CheckCircle,
+  Play,
 } from 'lucide-react';
 import { useCognateStore } from '@/store';
-import type { SOPPack } from '@/types';
+import { useUIStore } from '@/store/useUIStore';
+import type { SOPPack, SOP } from '@/types';
 
 // Mock pack data
 const MOCK_PACKS: SOPPack[] = [
@@ -335,7 +338,9 @@ function PackDetailsPanel({ pack, isInstalled, onInstall }: PackDetailsPanelProp
 
 export function PacksBrowserPage(): JSX.Element {
   const { id } = useParams<{ id: string }>();
-  const { cognates } = useCognateStore();
+  const navigate = useNavigate();
+  const { cognates, addSOP, updateCognate } = useCognateStore();
+  const { addToast } = useUIStore();
 
   const cognate = cognates.find((c) => c.id === id);
 
@@ -379,12 +384,45 @@ export function PacksBrowserPage(): JSX.Element {
     return true;
   });
 
-  const handleInstall = (pack: SOPPack): void => {
-    if (!installedPacks.includes(pack.id)) {
-      setInstalledPacks([...installedPacks, pack.id]);
-      // TODO: Actually install the pack SOPs
+  const handleInstall = useCallback((pack: SOPPack): void => {
+    if (!installedPacks.includes(pack.id) && cognate) {
+      // Mark pack as installed
+      setInstalledPacks((prev) => [...prev, pack.id]);
+
+      // Create mock SOPs from the pack
+      const newSOPs: SOP[] = Array.from({ length: pack.sopCount }, (_, i) => ({
+        id: `sop-${Date.now()}-${i}`,
+        cognateId: cognate.id,
+        name: `${pack.name} - Rule ${i + 1}`,
+        description: `Auto-generated SOP from ${pack.name} pack`,
+        status: 'draft' as const,
+        priority: 'medium' as const,
+        version: '1.0.0',
+        rules: [],
+        tags: pack.tags.slice(0, 2),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        triggerCount: 0,
+        isValid: true,
+      }));
+
+      // Add each SOP to the store
+      newSOPs.forEach((sop) => addSOP(sop));
+
+      // Update cognate SOP count
+      updateCognate(cognate.id, {
+        sopCount: (cognate.sopCount || 0) + pack.sopCount,
+      });
+
+      // Show success toast
+      addToast({
+        title: 'Pack installed',
+        description: `${pack.name} with ${pack.sopCount} SOPs has been added to ${cognate.name}`,
+        variant: 'success',
+        duration: 4000,
+      });
     }
-  };
+  }, [installedPacks, cognate, addSOP, updateCognate, addToast]);
 
   const popularPacks = [...MOCK_PACKS]
     .sort((a, b) => b.installCount - a.installCount)
@@ -395,19 +433,33 @@ export function PacksBrowserPage(): JSX.Element {
       {/* Main Content */}
       <div className="flex-1 overflow-auto p-6 space-y-6">
         {/* Header */}
-        <div className="flex items-center gap-4">
-          <Link
-            to={`/studio/cognates/${id}/sops`}
-            className="p-2 hover:bg-card rounded-lg transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5 text-muted-foreground" />
-          </Link>
-          <div>
-            <h1 className="text-2xl font-bold text-foreground">SOP Packs</h1>
-            <p className="text-muted-foreground mt-1">
-              Browse and install pre-built SOP collections for {cognate.name}
-            </p>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Link
+              to={`/studio/cognates/${id}`}
+              className="p-2 hover:bg-card rounded-lg transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5 text-muted-foreground" />
+            </Link>
+            <div>
+              <h1 className="text-2xl font-bold text-foreground">SOP Packs</h1>
+              <p className="text-muted-foreground mt-1">
+                Browse and install pre-built SOP collections for {cognate.name}
+              </p>
+            </div>
           </div>
+          {installedPacks.length > 0 && (
+            <button
+              type="button"
+              onClick={() => navigate(`/studio/cognates/${id}`)}
+              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-foreground rounded-lg hover:bg-green-500 transition-colors"
+            >
+              <CheckCircle className="w-4 h-4" />
+              {installedPacks.length} Pack{installedPacks.length > 1 ? 's' : ''} Installed
+              <Play className="w-4 h-4 ml-2" />
+              Simulate
+            </button>
+          )}
         </div>
 
         {/* Filters */}

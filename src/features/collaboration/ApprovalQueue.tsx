@@ -59,6 +59,7 @@ export function ApprovalQueue({ className }: ApprovalQueueProps): JSX.Element {
     approveItem,
     rejectItem,
     batchApprove,
+    rerunApprovedItem,
   } = useCollaborationStore();
 
   // Local state
@@ -181,6 +182,12 @@ export function ApprovalQueue({ className }: ApprovalQueueProps): JSX.Element {
   const handleModify = (_id: string): void => {
     // Would open edit modal - placeholder for now
     // Edit approval: _id
+  };
+
+  const handleRerun = (id: string): void => {
+    rerunApprovedItem(id);
+    // In a real implementation, this would trigger the actual rerun
+    // and update the UI to show progress
   };
 
   const clearFilters = (): void => {
@@ -417,6 +424,7 @@ export function ApprovalQueue({ className }: ApprovalQueueProps): JSX.Element {
             onApprove={handleApprove}
             onReject={handleReject}
             onModify={handleModify}
+            onRerun={handleRerun}
           />
         ))}
 

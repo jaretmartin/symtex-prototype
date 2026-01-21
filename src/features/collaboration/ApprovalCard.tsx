@@ -11,6 +11,7 @@
  */
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Mail,
   FileText,
@@ -27,8 +28,13 @@ import {
   ChevronDown,
   ChevronUp,
   Eye,
+  Play,
+  ExternalLink,
+  BookOpen,
+  RotateCcw,
 } from 'lucide-react';
 import clsx from 'clsx';
+import { TraceLink } from '@/components/ui/TraceLink';
 import {
   type PendingApproval,
   type ApprovalType,
@@ -40,6 +46,7 @@ interface ApprovalCardProps {
   onApprove: (id: string) => void;
   onReject: (id: string, reason?: string) => void;
   onModify: (id: string) => void;
+  onRerun?: (id: string) => void;
   className?: string;
   expanded?: boolean;
 }
@@ -158,11 +165,15 @@ export function ApprovalCard({
   onApprove,
   onReject,
   onModify,
+  onRerun,
   className,
   expanded: initialExpanded = false,
 }: ApprovalCardProps): JSX.Element {
   const [isExpanded, setIsExpanded] = useState(initialExpanded);
   const [showRejectConfirm, setShowRejectConfirm] = useState(false);
+  const [isRerunning, setIsRerunning] = useState(false);
+
+  const isApproved = approval.status === 'approved' || approval.status === 'modified';
 
   const typeConfig = approvalTypeConfig[approval.type];
   const prioConfig = priorityConfig[approval.riskLevel];
@@ -199,6 +210,17 @@ export function ApprovalCard({
 
   const handleModify = (): void => {
     onModify(approval.id);
+  };
+
+  const handleRerun = (): void => {
+    if (onRerun) {
+      setIsRerunning(true);
+      onRerun(approval.id);
+      // Simulate rerun completion
+      setTimeout(() => {
+        setIsRerunning(false);
+      }, 2000);
+    }
   };
 
   return (
@@ -283,11 +305,29 @@ export function ApprovalCard({
       </div>
 
       {/* Policy Reason Banner */}
-      <div className="px-4 py-2 bg-card/50 border-y border-border flex items-center gap-2">
-        <Shield className="w-4 h-4 text-muted-foreground" />
-        <span className="text-sm text-muted-foreground">
-          <strong className="text-muted-foreground">Policy:</strong> {approval.policyReason}
-        </span>
+      <div className="px-4 py-2 bg-card/50 border-y border-border flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Shield className="w-4 h-4 text-amber-400" />
+          <span className="text-sm text-muted-foreground">
+            <strong className="text-amber-400">Policy:</strong> {approval.policyReason}
+          </span>
+        </div>
+        <div className="flex items-center gap-3">
+          <Link
+            to={`/control/ledger?approval=${approval.id}`}
+            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-symtex-primary transition-colors"
+          >
+            <BookOpen className="w-3 h-3" />
+            View in Ledger
+          </Link>
+          <button
+            onClick={() => setIsExpanded(true)}
+            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-symtex-primary transition-colors"
+          >
+            <ExternalLink className="w-3 h-3" />
+            View Policy
+          </button>
+        </div>
       </div>
 
       {/* Expandable Preview Section */}
@@ -385,7 +425,7 @@ export function ApprovalCard({
       <div className="p-4 flex items-center justify-between bg-card/20">
         {/* Expiry Warning */}
         <div className="flex items-center gap-2">
-          {expiryText && (
+          {expiryText && !isApproved && (
             <span
               className={clsx(
                 'flex items-center gap-1 text-sm',
@@ -400,49 +440,88 @@ export function ApprovalCard({
               {expiryText}
             </span>
           )}
+          {isApproved && (
+            <span className="flex items-center gap-1 text-sm text-green-400">
+              <Check className="w-4 h-4" />
+              {approval.status === 'modified' ? 'Modified & Approved' : 'Approved'}
+            </span>
+          )}
         </div>
 
         {/* Action Buttons */}
         <div className="flex items-center gap-2">
-          <button
-            onClick={handleReject}
-            className={clsx(
-              'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium',
-              'border border-red-500/30 text-red-400',
-              'hover:bg-red-500/20 hover:border-red-500/50',
-              'transition-colors'
-            )}
-            aria-label={`Reject ${approval.title}`}
-          >
-            <X className="w-4 h-4" />
-            Reject
-          </button>
+          {!isApproved ? (
+            <>
+              <button
+                onClick={handleReject}
+                className={clsx(
+                  'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium',
+                  'border border-red-500/30 text-red-400',
+                  'hover:bg-red-500/20 hover:border-red-500/50',
+                  'transition-colors'
+                )}
+                aria-label={`Reject ${approval.title}`}
+              >
+                <X className="w-4 h-4" />
+                Reject
+              </button>
 
-          <button
-            onClick={handleModify}
-            className={clsx(
-              'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium',
-              'border border-border text-muted-foreground',
-              'hover:bg-muted hover:border-border',
-              'transition-colors'
-            )}
-          >
-            <Edit3 className="w-4 h-4" />
-            Edit & Approve
-          </button>
+              <button
+                onClick={handleModify}
+                className={clsx(
+                  'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium',
+                  'border border-border text-muted-foreground',
+                  'hover:bg-muted hover:border-border',
+                  'transition-colors'
+                )}
+              >
+                <Edit3 className="w-4 h-4" />
+                Edit & Approve
+              </button>
 
-          <button
-            onClick={handleApprove}
-            className={clsx(
-              'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium',
-              'bg-green-500/20 border border-green-500/30 text-green-400',
-              'hover:bg-green-500/30 hover:border-green-500/50',
-              'transition-colors'
-            )}
-          >
-            <Check className="w-4 h-4" />
-            Approve
-          </button>
+              <button
+                onClick={handleApprove}
+                className={clsx(
+                  'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium',
+                  'bg-green-500/20 border border-green-500/30 text-green-400',
+                  'hover:bg-green-500/30 hover:border-green-500/50',
+                  'transition-colors'
+                )}
+              >
+                <Check className="w-4 h-4" />
+                Approve
+              </button>
+            </>
+          ) : (
+            <>
+              {/* View Trace link - shown after approval */}
+              <TraceLink runId={approval.id} label="View Trace" />
+
+              {/* Rerun Button - shown after approval */}
+              <button
+                onClick={handleRerun}
+                disabled={isRerunning}
+                className={clsx(
+                  'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium',
+                  'bg-symtex-primary/20 border border-symtex-primary/30 text-symtex-primary',
+                  'hover:bg-symtex-primary/30 hover:border-symtex-primary/50',
+                  'transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+                )}
+              >
+                {isRerunning ? (
+                  <>
+                    <RotateCcw className="w-4 h-4 animate-spin" />
+                    Rerunning...
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-4 h-4" />
+                    Rerun Automation
+                  </>
+                )}
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

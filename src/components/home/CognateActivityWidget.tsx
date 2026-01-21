@@ -8,11 +8,13 @@ import {
   Zap,
   CheckCircle2,
   AlertCircle,
-  TrendingUp
+  TrendingUp,
 } from 'lucide-react'
 import clsx from 'clsx'
 import { useCognateStore } from '@/store/useCognateStore'
 import WidgetSkeleton from './WidgetSkeleton'
+import { TraceLink } from '@/components/ui/TraceLink'
+import { LedgerLink } from '@/components/ui/LedgerLink'
 
 interface CognateActivity {
   id: string
@@ -21,6 +23,7 @@ interface CognateActivity {
   action: string
   timestamp: string
   type: 'message' | 'action' | 'escalation' | 'success' | 'error'
+  runId?: string // Optional associated run ID for trace linking
 }
 
 interface CognateActivityWidgetProps {
@@ -33,18 +36,20 @@ const mockActivities: CognateActivity[] = [
   {
     id: 'act-1',
     cognateId: 'cog-1',
-    cognateName: 'Customer Support Agent',
+    cognateName: 'Aria Support',
     action: 'Resolved ticket #4521 automatically',
     timestamp: '2 min ago',
-    type: 'success'
+    type: 'success',
+    runId: 'run-001'
   },
   {
     id: 'act-2',
     cognateId: 'cog-1',
-    cognateName: 'Customer Support Agent',
+    cognateName: 'Aria Support',
     action: 'Escalated complex query to human support',
     timestamp: '15 min ago',
-    type: 'escalation'
+    type: 'escalation',
+    runId: 'run-002'
   },
   {
     id: 'act-3',
@@ -52,12 +57,13 @@ const mockActivities: CognateActivity[] = [
     cognateName: 'Sales Assistant',
     action: 'Qualified 3 new leads from chat',
     timestamp: '1 hour ago',
-    type: 'action'
+    type: 'action',
+    runId: 'run-003'
   },
   {
     id: 'act-4',
     cognateId: 'cog-1',
-    cognateName: 'Customer Support Agent',
+    cognateName: 'Aria Support',
     action: 'Handled 47 conversations today',
     timestamp: '2 hours ago',
     type: 'message'
@@ -68,7 +74,8 @@ const mockActivities: CognateActivity[] = [
     cognateName: 'Sales Assistant',
     action: 'Failed to connect to CRM - retrying',
     timestamp: '3 hours ago',
-    type: 'error'
+    type: 'error',
+    runId: 'run-005'
   }
 ]
 
@@ -222,8 +229,7 @@ export default function CognateActivityWidget({
           return (
             <div
               key={activity.id}
-              onClick={() => handleActivityClick(activity)}
-              className="p-4 hover:bg-card/30 transition-colors cursor-pointer group"
+              className="p-4 hover:bg-card/30 transition-colors group"
             >
               <div className="flex items-start gap-3">
                 <div className={clsx('p-2 rounded-lg flex-shrink-0', config.bg)}>
@@ -236,12 +242,25 @@ export default function CognateActivityWidget({
                     <span className="text-xs text-muted-foreground">-</span>
                     <span className="text-xs text-muted-foreground">{activity.timestamp}</span>
                   </div>
-                  <p className="text-sm text-foreground group-hover:text-symtex-primary transition-colors">
+                  <p
+                    onClick={() => handleActivityClick(activity)}
+                    className="text-sm text-foreground group-hover:text-symtex-primary transition-colors cursor-pointer"
+                  >
                     {activity.action}
                   </p>
+                  {/* Trace and Ledger Links */}
+                  {activity.runId && (
+                    <div className="flex items-center gap-3 mt-2">
+                      <TraceLink runId={activity.runId} />
+                      <LedgerLink runId={activity.runId} cognateId={activity.cognateId} />
+                    </div>
+                  )}
                 </div>
 
-                <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                <ArrowRight
+                  onClick={() => handleActivityClick(activity)}
+                  className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 cursor-pointer"
+                />
               </div>
             </div>
           )
