@@ -48,7 +48,7 @@ function RouteLoading(): JSX.Element {
     <div className="flex items-center justify-center min-h-[400px]">
       <div className="flex flex-col items-center gap-4">
         <div className="w-10 h-10 border-4 border-symtex-primary border-t-transparent rounded-full animate-spin" />
-        <p className="text-slate-400 text-sm">Loading...</p>
+        <p className="text-muted-foreground text-sm">Loading...</p>
       </div>
     </div>
   );
@@ -62,8 +62,8 @@ function ComingSoon({ title }: { title: string }): JSX.Element {
         <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-symtex-primary/10 flex items-center justify-center">
           <span className="text-3xl">🚀</span>
         </div>
-        <h1 className="text-2xl font-semibold text-white mb-2">{title}</h1>
-        <p className="text-slate-400">This feature is coming soon!</p>
+        <h1 className="text-2xl font-semibold text-foreground mb-2">{title}</h1>
+        <p className="text-muted-foreground">This feature is coming soon!</p>
       </div>
     </div>
   );
@@ -312,8 +312,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             element={
               <div className="flex items-center justify-center min-h-[400px]">
                 <div className="text-center">
-                  <h1 className="text-4xl font-bold text-white mb-2">404</h1>
-                  <p className="text-slate-400">Page not found</p>
+                  <h1 className="text-4xl font-bold text-foreground mb-2">404</h1>
+                  <p className="text-muted-foreground">Page not found</p>
                 </div>
               </div>
             }

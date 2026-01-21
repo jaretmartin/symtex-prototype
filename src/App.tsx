@@ -12,6 +12,7 @@ import { CommandPalette } from './components/command';
 import { ToastContainer } from './components/ui/Toast';
 import { BreadcrumbRail, ContextSummaryPill } from './components/context';
 import { AriaPresence, AriaChat } from './components/aria';
+import { SkipLinks } from './components/a11y';
 import { DemoControlPanel } from './demo';
 import { analyticsService } from './api';
 import { useUIStore } from './store';
@@ -42,13 +43,8 @@ function App(): JSX.Element {
   return (
     <ErrorBoundary>
       <div className="flex min-h-screen bg-background">
-        {/* Skip to main content link for accessibility */}
-        <a
-          href="#main-content"
-          className="skip-link"
-        >
-          Skip to main content
-        </a>
+        {/* Skip links for accessibility */}
+        <SkipLinks />
 
         {/* Sidebar */}
         <Sidebar />

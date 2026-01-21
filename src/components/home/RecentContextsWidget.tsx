@@ -160,7 +160,7 @@ export default function RecentContextsWidget({
   if (contexts.length === 0) {
     return (
       <div className={clsx(
-        'bg-symtex-card rounded-xl border border-symtex-border overflow-hidden',
+        'bg-card rounded-xl border border-border overflow-hidden',
         className
       )}>
         <div className="p-5 border-b border-symtex-border">

@@ -204,9 +204,11 @@ export default function Sidebar(): JSX.Element {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-1 overflow-y-auto" role="navigation">
+        <nav id="main-navigation" className="flex-1 p-4 space-y-1 overflow-y-auto" role="navigation" aria-label="Main navigation">
           {/* Main Navigation */}
-          {navigation.map(renderNavItem)}
+          <div role="group" aria-label="Main">
+            {navigation.map(renderNavItem)}
+          </div>
 
           {/* Spaces Section with SpaceTree */}
           <div className="pt-4 mt-4 border-t border-border">
@@ -214,6 +216,9 @@ export default function Sidebar(): JSX.Element {
               type="button"
               onClick={() => setSpacesExpanded(!spacesExpanded)}
               className="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider hover:text-foreground transition-colors"
+              aria-expanded={spacesExpanded}
+              aria-controls="spaces-section"
+              aria-label={`Spaces section, ${spacesExpanded ? 'expanded' : 'collapsed'}`}
             >
               <div className="flex items-center gap-2">
                 <Layers className="w-4 h-4" aria-hidden="true" />
@@ -226,44 +231,46 @@ export default function Sidebar(): JSX.Element {
               )}
             </button>
             {spacesExpanded && (
-              <SpaceTree
-                className="mt-2"
-                onNavigate={(type, id) => {
-                  // Navigate to appropriate route based on space type
-                  if (type === 'personal') {
-                    navigate('/spaces');
-                  } else if (type === 'domain') {
-                    navigate(`/spaces/${id}`);
-                  } else if (type === 'project') {
-                    // Find the domain for this project (handled by route)
-                    navigate(`/spaces/domain/${id}`);
-                  } else if (type === 'mission') {
-                    navigate(`/missions/${id}`);
-                  }
-                }}
-              />
+              <div id="spaces-section" role="group" aria-label="Spaces">
+                <SpaceTree
+                  className="mt-2"
+                  onNavigate={(type, id) => {
+                    // Navigate to appropriate route based on space type
+                    if (type === 'personal') {
+                      navigate('/spaces');
+                    } else if (type === 'domain') {
+                      navigate(`/spaces/${id}`);
+                    } else if (type === 'project') {
+                      // Find the domain for this project (handled by route)
+                      navigate(`/spaces/domain/${id}`);
+                    } else if (type === 'mission') {
+                      navigate(`/missions/${id}`);
+                    }
+                  }}
+                />
+              </div>
             )}
           </div>
 
           {/* Studio Section */}
-          <div className="pt-4 mt-4 border-t border-border">
-            <p className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+          <div className="pt-4 mt-4 border-t border-border" role="group" aria-label="Studio">
+            <p id="studio-section-label" className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Studio
             </p>
             {studioNavigation.map(renderNavItem)}
           </div>
 
           {/* Governance Section */}
-          <div className="pt-4 mt-4 border-t border-border">
-            <p className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+          <div className="pt-4 mt-4 border-t border-border" role="group" aria-label="Governance">
+            <p id="governance-section-label" className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Governance
             </p>
             {governanceNavigation.map(renderNavItem)}
           </div>
 
           {/* Library Section */}
-          <div className="pt-4 mt-4 border-t border-border">
-            <p className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+          <div className="pt-4 mt-4 border-t border-border" role="group" aria-label="Library">
+            <p id="library-section-label" className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Library
             </p>
             {libraryNavigation.map(renderNavItem)}
@@ -281,6 +288,7 @@ export default function Sidebar(): JSX.Element {
           {/* Settings Link */}
           <Link
             to="/settings"
+            aria-label="Settings (Coming soon)"
             className="flex items-center justify-between gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:bg-muted/50 transition-all duration-200"
           >
             <div className="flex items-center gap-3">

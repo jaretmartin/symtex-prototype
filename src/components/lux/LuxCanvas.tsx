@@ -65,7 +65,7 @@ function LuxCanvasInner({
           {
             ...params,
             animated: true,
-            style: { stroke: '#6366f1', strokeWidth: 2 },
+            style: { stroke: 'var(--color-primary)', strokeWidth: 2 },
           },
           eds
         )
@@ -130,7 +130,7 @@ function LuxCanvasInner({
       style={{
         width: '100%',
         height: '100%',
-        backgroundColor: '#0a0a0f',
+        backgroundColor: 'var(--color-surface-base)',
       }}
       onDragOver={onDragOver}
       onDrop={onDrop}
@@ -149,11 +149,11 @@ function LuxCanvasInner({
         }}
         defaultEdgeOptions={{
           animated: true,
-          style: { stroke: '#6366f1', strokeWidth: 2 },
+          style: { stroke: 'var(--color-primary)', strokeWidth: 2 },
         }}
-        connectionLineStyle={{ stroke: '#6366f1', strokeWidth: 2 }}
+        connectionLineStyle={{ stroke: 'var(--color-primary)', strokeWidth: 2 }}
         style={{
-          backgroundColor: '#0a0a0f',
+          backgroundColor: 'var(--color-surface-base)',
         }}
         proOptions={{ hideAttribution: true }}
       >
@@ -161,31 +161,31 @@ function LuxCanvasInner({
           variant={BackgroundVariant.Dots}
           gap={20}
           size={1}
-          color="#1e1e2e"
+          color="var(--color-surface-card)"
         />
         <Controls
           style={{
-            backgroundColor: '#1e1e2e',
-            borderColor: '#2a2a3e',
+            backgroundColor: 'var(--color-surface-card)',
+            borderColor: 'var(--color-surface-elevated)',
           }}
         />
         <MiniMap
           style={{
-            backgroundColor: '#0f0f1a',
-            border: '1px solid #2a2a3e',
+            backgroundColor: 'var(--color-surface-base)',
+            border: '1px solid var(--color-surface-elevated)',
           }}
           nodeColor={(node) => {
             switch (node.type) {
               case 'trigger':
                 return '#f59e0b';
               case 'condition':
-                return '#8b5cf6';
+                return 'var(--color-accent)';
               case 'action':
-                return '#6366f1';
+                return 'var(--color-primary)';
               case 'delay':
-                return '#64748b';
+                return 'var(--color-text-muted)';
               default:
-                return '#6366f1';
+                return 'var(--color-primary)';
             }
           }}
           maskColor="rgba(0, 0, 0, 0.8)"

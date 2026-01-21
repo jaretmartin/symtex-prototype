@@ -13,3 +13,14 @@ export type { Theme } from './useTheme';
 export { useDebounce } from './useDebounce';
 export { useLocalStorage } from './useLocalStorage';
 export { useKeyboardShortcut, useCrossPlatformShortcut } from './useKeyboardShortcut';
+
+// Keyboard navigation hooks
+export { useFocusTrap } from './useFocusTrap';
+export { useRovingTabIndex } from './useRovingTabIndex';
+
+// Voice command hooks
+export { useVoiceCommand } from './useVoiceCommand';
+export { useVoiceCommands } from './useVoiceCommands';
+
+// Accessibility hooks
+export { useFocusOnMount } from './useFocusOnMount';

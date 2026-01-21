@@ -205,7 +205,7 @@ function S1SyntaxHighlight({ code, className }: S1SyntaxHighlightProps): JSX.Ele
     // Highlight comments (lines starting with #)
     highlighted = highlighted.replace(
       /^(#.*)$/gm,
-      '<span class="text-zinc-500">$1</span>'
+      '<span class="text-muted-foreground">$1</span>'
     );
 
     return highlighted;
@@ -217,7 +217,7 @@ function S1SyntaxHighlight({ code, className }: S1SyntaxHighlightProps): JSX.Ele
   return (
     <pre
       className={clsx(
-        'text-sm font-mono overflow-x-auto whitespace-pre-wrap text-zinc-300',
+        'text-sm font-mono overflow-x-auto whitespace-pre-wrap text-foreground',
         className
       )}
       dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
@@ -291,13 +291,13 @@ const RuleCard = React.memo(function RuleCard({
     <div
       className={clsx(
         'border rounded-xl overflow-hidden transition-all',
-        isActive ? 'border-zinc-700' : 'border-zinc-700 opacity-60',
+        isActive ? 'border-border' : 'border-border opacity-60',
         className
       )}
     >
       {/* Header */}
       <div
-        className="flex items-center justify-between px-4 py-3 bg-zinc-800/50 cursor-pointer hover:bg-zinc-700/50 transition-colors"
+        className="flex items-center justify-between px-4 py-3 bg-surface-card/50 cursor-pointer hover:bg-muted transition-colors"
         onClick={handleToggle}
         onKeyDown={handleKeyDown}
         role="button"
@@ -306,18 +306,18 @@ const RuleCard = React.memo(function RuleCard({
       >
         <div className="flex items-center gap-3">
           {isExpanded ? (
-            <ChevronDown className="w-4 h-4 text-zinc-400" />
+            <ChevronDown className="w-4 h-4 text-muted-foreground" />
           ) : (
-            <ChevronRight className="w-4 h-4 text-zinc-400" />
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
           )}
           <div className="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center">
             <Code className="w-4 h-4 text-purple-400" />
           </div>
           <div>
-            <h3 className="font-medium text-sm text-white">{sop.name}</h3>
-            <div className="flex items-center gap-2 text-xs text-zinc-400">
+            <h3 className="font-medium text-sm text-foreground">{sop.name}</h3>
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <span>{sop.rules.length} rules</span>
-              <span className="text-zinc-600">|</span>
+              <span className="text-border">|</span>
               <span>Priority: {sop.priority}</span>
             </div>
           </div>
@@ -329,7 +329,7 @@ const RuleCard = React.memo(function RuleCard({
               'px-2 py-0.5 rounded text-xs font-medium',
               isActive
                 ? 'bg-green-500/20 text-green-400'
-                : 'bg-zinc-700 text-zinc-400'
+                : 'bg-muted text-muted-foreground'
             )}
           >
             {isActive ? 'Active' : 'Inactive'}

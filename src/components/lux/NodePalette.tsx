@@ -60,7 +60,7 @@ const nodeCategories: { title: string; nodes: PaletteNode[] }[] = [
         description: 'Branch based on condition',
         icon: 'git-branch',
         emoji: '🔀',
-        color: '#8b5cf6',
+        color: 'var(--color-accent)',
       },
       {
         type: 'condition',
@@ -68,7 +68,7 @@ const nodeCategories: { title: string; nodes: PaletteNode[] }[] = [
         description: 'Filter items by criteria',
         icon: 'filter',
         emoji: '🔍',
-        color: '#8b5cf6',
+        color: 'var(--color-accent)',
       },
       {
         type: 'delay',
@@ -76,7 +76,7 @@ const nodeCategories: { title: string; nodes: PaletteNode[] }[] = [
         description: 'Pause execution',
         icon: 'clock',
         emoji: '⏱️',
-        color: '#64748b',
+        color: 'var(--color-text-muted)',
       },
     ],
   },

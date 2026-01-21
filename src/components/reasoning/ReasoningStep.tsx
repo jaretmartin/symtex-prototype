@@ -61,11 +61,11 @@ function InputOutputPanel({
       {/* Input */}
       {input && (
         <div className="flex-1 min-w-0">
-          <div className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1.5">
+          <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1.5">
             Input
           </div>
-          <div className="p-3 rounded-lg bg-slate-900/50 border border-slate-700/50">
-            <p className="text-xs text-slate-300 font-mono whitespace-pre-wrap break-words">
+          <div className="p-3 rounded-lg bg-surface-base/50 border border-border/50">
+            <p className="text-xs text-muted-foreground font-mono whitespace-pre-wrap break-words">
               {input}
             </p>
           </div>
@@ -76,7 +76,7 @@ function InputOutputPanel({
       {input && output && (
         <div className="flex items-center justify-center px-2">
           <ArrowRight
-            className="w-4 h-4 text-slate-600"
+            className="w-4 h-4 text-muted-foreground"
             aria-hidden="true"
           />
         </div>
@@ -85,11 +85,11 @@ function InputOutputPanel({
       {/* Output */}
       {output && (
         <div className="flex-1 min-w-0">
-          <div className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-1.5">
+          <div className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-1.5">
             Output
           </div>
           <div className="p-3 rounded-lg bg-symtex-primary/5 border border-symtex-primary/20">
-            <p className="text-xs text-slate-300 font-mono whitespace-pre-wrap break-words">
+            <p className="text-xs text-muted-foreground font-mono whitespace-pre-wrap break-words">
               {output}
             </p>
           </div>
@@ -133,7 +133,7 @@ export default function ReasoningStep({
       className={clsx(
         'border border-symtex-border rounded-lg overflow-hidden',
         'transition-all duration-200',
-        isExpanded && 'bg-slate-800/30',
+        isExpanded && 'bg-card/30',
         className
       )}
     >
@@ -145,7 +145,7 @@ export default function ReasoningStep({
         className={clsx(
           'w-full flex items-center gap-3 p-3 text-left',
           'transition-colors duration-200',
-          hasExpandableContent && 'hover:bg-slate-800/50 cursor-pointer',
+          hasExpandableContent && 'hover:bg-muted cursor-pointer',
           !hasExpandableContent && 'cursor-default'
         )}
         aria-expanded={hasExpandableContent ? isExpanded : undefined}
@@ -167,7 +167,7 @@ export default function ReasoningStep({
 
         {/* Description */}
         <div className="flex-1 min-w-0">
-          <p className="text-sm text-slate-200 line-clamp-2">{step.description}</p>
+          <p className="text-sm text-foreground line-clamp-2">{step.description}</p>
         </div>
 
         {/* Metadata */}
@@ -175,7 +175,7 @@ export default function ReasoningStep({
           {/* Duration */}
           {step.duration !== undefined && (
             <div
-              className="flex items-center gap-1 text-xs text-slate-500"
+              className="flex items-center gap-1 text-xs text-muted-foreground"
               title={`Duration: ${formatDuration(step.duration)}`}
             >
               <Clock className="w-3.5 h-3.5" aria-hidden="true" />
@@ -192,8 +192,8 @@ export default function ReasoningStep({
           {hasExpandableContent && (
             <ChevronIcon
               className={clsx(
-                'w-4 h-4 text-slate-500 transition-transform duration-200',
-                isExpanded && 'text-slate-400'
+                'w-4 h-4 text-muted-foreground transition-transform duration-200',
+                isExpanded && 'text-muted-foreground'
               )}
               aria-hidden="true"
             />
@@ -229,11 +229,11 @@ export function EmptyReasoningSteps({ className }: { className?: string }): JSX.
         className
       )}
     >
-      <div className="w-12 h-12 rounded-full bg-slate-700/50 flex items-center justify-center mb-3">
-        <span className="text-slate-500 text-xl">?</span>
+      <div className="w-12 h-12 rounded-full bg-muted/50 flex items-center justify-center mb-3">
+        <span className="text-muted-foreground text-xl">?</span>
       </div>
-      <p className="text-sm text-slate-400">No reasoning steps recorded</p>
-      <p className="text-xs text-slate-500 mt-1">
+      <p className="text-sm text-muted-foreground">No reasoning steps recorded</p>
+      <p className="text-xs text-muted-foreground mt-1">
         Reasoning trace will appear here when available
       </p>
     </div>

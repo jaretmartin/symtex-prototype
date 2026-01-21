@@ -255,7 +255,7 @@ export function CommandPalette(): JSX.Element | null {
         >
           {/* Search Input */}
           <div className="flex items-center gap-3 px-4 py-3 border-b border-symtex-border">
-            <Search className="w-5 h-5 text-slate-400" />
+            <Search className="w-5 h-5 text-slate-400" aria-hidden="true" />
             <input
               ref={inputRef}
               type="text"
@@ -264,8 +264,14 @@ export function CommandPalette(): JSX.Element | null {
               placeholder="Type a command or search..."
               className="flex-1 bg-transparent text-white placeholder-slate-400 focus:outline-none"
               aria-label="Search commands"
+              aria-controls="command-list"
+              aria-autocomplete="list"
+              aria-activedescendant={filteredCommands[selectedIndex] ? `command-${filteredCommands[selectedIndex].id}` : undefined}
+              role="combobox"
+              aria-expanded="true"
+              aria-haspopup="listbox"
             />
-            <kbd className="px-2 py-1 text-xs font-medium text-slate-400 bg-symtex-dark rounded">
+            <kbd className="px-2 py-1 text-xs font-medium text-slate-400 bg-symtex-dark rounded" aria-hidden="true">
               ESC
             </kbd>
           </div>
@@ -273,8 +279,10 @@ export function CommandPalette(): JSX.Element | null {
           {/* Command List */}
           <div
             ref={listRef}
+            id="command-list"
             className="max-h-80 overflow-y-auto py-2"
             role="listbox"
+            aria-label="Available commands"
           >
             {filteredCommands.length === 0 ? (
               <div className="px-4 py-8 text-center text-slate-400">
@@ -293,8 +301,10 @@ export function CommandPalette(): JSX.Element | null {
                     return (
                       <button
                         key={cmd.id}
+                        id={`command-${cmd.id}`}
                         role="option"
                         aria-selected={isSelected}
+                        aria-label={`${cmd.label}${cmd.description ? `, ${cmd.description}` : ''}${cmd.shortcut ? `. Shortcut: ${cmd.shortcut}` : ''}`}
                         onClick={() => {
                           cmd.action();
                           closeCommandPalette();
@@ -312,6 +322,7 @@ export function CommandPalette(): JSX.Element | null {
                             'flex-shrink-0',
                             isSelected ? 'text-symtex-primary' : 'text-slate-400'
                           )}
+                          aria-hidden="true"
                         >
                           {cmd.icon}
                         </span>
@@ -324,12 +335,12 @@ export function CommandPalette(): JSX.Element | null {
                           )}
                         </div>
                         {cmd.shortcut && (
-                          <kbd className="flex-shrink-0 px-2 py-0.5 text-xs font-medium text-slate-400 bg-symtex-dark rounded">
+                          <kbd className="flex-shrink-0 px-2 py-0.5 text-xs font-medium text-slate-400 bg-symtex-dark rounded" aria-hidden="true">
                             {cmd.shortcut}
                           </kbd>
                         )}
                         {isSelected && (
-                          <ArrowRight className="w-4 h-4 text-symtex-primary flex-shrink-0" />
+                          <ArrowRight className="w-4 h-4 text-symtex-primary flex-shrink-0" aria-hidden="true" />
                         )}
                       </button>
                     );
@@ -340,7 +351,7 @@ export function CommandPalette(): JSX.Element | null {
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between px-4 py-2 border-t border-symtex-border text-xs text-slate-500">
+          <div className="flex items-center justify-between px-4 py-2 border-t border-symtex-border text-xs text-slate-500" aria-hidden="true">
             <div className="flex items-center gap-4">
               <span>
                 <kbd className="px-1.5 py-0.5 bg-symtex-dark rounded">↑↓</kbd>{' '}

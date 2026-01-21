@@ -83,18 +83,18 @@ export default function NaturalLanguageBuilder() {
                 width: '100%',
                 padding: '14px 16px 14px 48px',
                 fontSize: '14px',
-                backgroundColor: '#1a1a2e',
-                border: '1px solid #2a2a3e',
+                backgroundColor: 'var(--color-surface-card)',
+                border: '1px solid var(--color-surface-elevated)',
                 borderRadius: '12px',
                 color: '#fff',
                 outline: 'none',
                 transition: 'border-color 0.2s ease',
               }}
               onFocus={(e) => {
-                e.target.style.borderColor = '#6366f1';
+                e.target.style.borderColor = 'var(--color-primary)';
               }}
               onBlur={(e) => {
-                e.target.style.borderColor = '#2a2a3e';
+                e.target.style.borderColor = 'var(--color-surface-elevated)';
               }}
             />
           </div>
@@ -106,8 +106,8 @@ export default function NaturalLanguageBuilder() {
               borderRadius: '12px',
               border: 'none',
               background: isGenerating
-                ? '#4b5563'
-                : 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+                ? 'var(--color-surface-hover)'
+                : 'linear-gradient(135deg, var(--color-primary), var(--color-accent))',
               color: '#fff',
               cursor: isGenerating || !prompt.trim() ? 'not-allowed' : 'pointer',
               fontWeight: 600,
@@ -154,7 +154,7 @@ export default function NaturalLanguageBuilder() {
             margin: '12px auto 0',
           }}
         >
-          <span style={{ fontSize: '12px', color: '#64748b' }}>Try:</span>
+          <span style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>Try:</span>
           {examplePrompts.map((example, idx) => (
             <button
               key={idx}
@@ -162,10 +162,10 @@ export default function NaturalLanguageBuilder() {
               style={{
                 padding: '4px 12px',
                 fontSize: '12px',
-                backgroundColor: '#1a1a2e',
-                border: '1px solid #2a2a3e',
+                backgroundColor: 'var(--color-surface-card)',
+                border: '1px solid var(--color-surface-elevated)',
                 borderRadius: '20px',
-                color: '#94a3b8',
+                color: 'var(--color-text-tertiary)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
                 maxWidth: '300px',
@@ -174,12 +174,12 @@ export default function NaturalLanguageBuilder() {
                 textOverflow: 'ellipsis',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#6366f1';
+                e.currentTarget.style.borderColor = 'var(--color-primary)';
                 e.currentTarget.style.color = '#fff';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#2a2a3e';
-                e.currentTarget.style.color = '#94a3b8';
+                e.currentTarget.style.borderColor = 'var(--color-surface-elevated)';
+                e.currentTarget.style.color = 'var(--color-text-tertiary)';
               }}
             >
               {example.slice(0, 60)}...
@@ -196,8 +196,8 @@ export default function NaturalLanguageBuilder() {
             bottom: '24px',
             right: '24px',
             padding: '16px 24px',
-            backgroundColor: '#1a1a2e',
-            border: '1px solid #6366f1',
+            backgroundColor: 'var(--color-surface-card)',
+            border: '1px solid var(--color-primary)',
             borderRadius: '12px',
             boxShadow: '0 4px 20px rgba(99, 102, 241, 0.3)',
             zIndex: 1000,
@@ -212,7 +212,7 @@ export default function NaturalLanguageBuilder() {
               width: '40px',
               height: '40px',
               borderRadius: '10px',
-              background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+              background: 'linear-gradient(135deg, var(--color-primary), var(--color-accent))',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -232,7 +232,7 @@ export default function NaturalLanguageBuilder() {
             >
               AI Automation Generation Coming Soon!
             </div>
-            <div style={{ fontSize: '12px', color: '#94a3b8' }}>
+            <div style={{ fontSize: '12px', color: 'var(--color-text-tertiary)' }}>
               We're working on AI-powered Automation creation. Stay tuned!
             </div>
           </div>
@@ -241,7 +241,7 @@ export default function NaturalLanguageBuilder() {
             style={{
               background: 'none',
               border: 'none',
-              color: '#64748b',
+              color: 'var(--color-text-muted)',
               cursor: 'pointer',
               fontSize: '18px',
               padding: '4px',

@@ -72,17 +72,17 @@ export function CostEstimateDisplay({
 
   if (chapters.length === 0) {
     return (
-      <div className={clsx('bg-symtex-card rounded-xl border border-symtex-border p-6', className)}>
+      <div className={clsx('bg-card rounded-xl border border-border p-6', className)}>
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 rounded-lg bg-symtex-primary/10 flex items-center justify-center">
             <DollarSign className="w-5 h-5 text-symtex-primary" />
           </div>
           <div>
-            <h3 className="font-semibold text-white">Cost Estimate</h3>
-            <p className="text-sm text-slate-400">Add chapters to see estimated costs</p>
+            <h3 className="font-semibold text-foreground">Cost Estimate</h3>
+            <p className="text-sm text-muted-foreground">Add chapters to see estimated costs</p>
           </div>
         </div>
-        <div className="text-center py-8 text-slate-500">
+        <div className="text-center py-8 text-muted-foreground">
           No chapters to estimate
         </div>
       </div>
@@ -90,40 +90,40 @@ export function CostEstimateDisplay({
   }
 
   return (
-    <div className={clsx('bg-symtex-card rounded-xl border border-symtex-border', className)}>
+    <div className={clsx('bg-card rounded-xl border border-border', className)}>
       {/* Header */}
-      <div className="p-4 border-b border-symtex-border">
+      <div className="p-4 border-b border-border">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-symtex-primary/10 flex items-center justify-center">
             <DollarSign className="w-5 h-5 text-symtex-primary" />
           </div>
           <div>
-            <h3 className="font-semibold text-white">Cost Estimate</h3>
-            <p className="text-sm text-slate-400">Based on {chapters.length} chapters</p>
+            <h3 className="font-semibold text-foreground">Cost Estimate</h3>
+            <p className="text-sm text-muted-foreground">Based on {chapters.length} chapters</p>
           </div>
         </div>
       </div>
 
       {/* Breakdown by Step */}
-      <div className="p-4 border-b border-symtex-border">
-        <h4 className="text-xs uppercase tracking-wider text-slate-500 mb-3">
+      <div className="p-4 border-b border-border">
+        <h4 className="text-xs uppercase tracking-wider text-muted-foreground mb-3">
           Cost Breakdown
         </h4>
         <div className="space-y-2">
           {breakdown.map((item, index) => (
             <div
               key={index}
-              className="flex items-center justify-between py-2 px-3 rounded-lg bg-slate-800/30"
+              className="flex items-center justify-between py-2 px-3 rounded-lg bg-muted/30"
             >
               <div className="flex items-center gap-2 min-w-0">
-                <Zap className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
-                <span className="text-sm text-slate-300 truncate">{item.label}</span>
+                <Zap className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+                <span className="text-sm text-foreground truncate">{item.label}</span>
               </div>
               <div className="flex items-center gap-4 flex-shrink-0">
-                <span className="text-xs text-slate-500">
+                <span className="text-xs text-muted-foreground">
                   {item.apiCalls} API call{item.apiCalls !== 1 ? 's' : ''}
                 </span>
-                <span className="text-sm font-medium text-white">
+                <span className="text-sm font-medium text-foreground">
                   {formatCurrency(item.cost)}
                 </span>
               </div>
@@ -135,32 +135,32 @@ export function CostEstimateDisplay({
       {/* Summary Stats */}
       <div className="p-4 grid grid-cols-3 gap-4">
         {/* Per Run Cost */}
-        <div className="text-center p-3 rounded-lg bg-slate-800/30">
+        <div className="text-center p-3 rounded-lg bg-muted/30">
           <div className="flex items-center justify-center gap-1.5 mb-1">
             <Zap className="w-4 h-4 text-symtex-primary" />
-            <span className="text-xs text-slate-400">Per Run</span>
+            <span className="text-xs text-muted-foreground">Per Run</span>
           </div>
-          <div className="text-lg font-semibold text-white">
+          <div className="text-lg font-semibold text-foreground">
             {formatCurrency(totalCostPerRun)}
           </div>
         </div>
 
         {/* API Calls */}
-        <div className="text-center p-3 rounded-lg bg-slate-800/30">
+        <div className="text-center p-3 rounded-lg bg-muted/30">
           <div className="flex items-center justify-center gap-1.5 mb-1">
             <Cloud className="w-4 h-4 text-blue-400" />
-            <span className="text-xs text-slate-400">API Calls</span>
+            <span className="text-xs text-muted-foreground">API Calls</span>
           </div>
-          <div className="text-lg font-semibold text-white">{totalApiCalls}</div>
+          <div className="text-lg font-semibold text-foreground">{totalApiCalls}</div>
         </div>
 
         {/* Monthly Estimate */}
-        <div className="text-center p-3 rounded-lg bg-slate-800/30">
+        <div className="text-center p-3 rounded-lg bg-muted/30">
           <div className="flex items-center justify-center gap-1.5 mb-1">
             <Calendar className="w-4 h-4 text-purple-400" />
-            <span className="text-xs text-slate-400">Monthly</span>
+            <span className="text-xs text-muted-foreground">Monthly</span>
           </div>
-          <div className="text-lg font-semibold text-white">
+          <div className="text-lg font-semibold text-foreground">
             {formatCurrency(monthlyEstimate)}
           </div>
         </div>
@@ -170,7 +170,7 @@ export function CostEstimateDisplay({
       <div className="px-4 pb-4">
         <div className="flex items-center gap-2 p-3 rounded-lg bg-symtex-primary/5 border border-symtex-primary/20">
           <TrendingUp className="w-4 h-4 text-symtex-primary flex-shrink-0" />
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-muted-foreground">
             Monthly estimate based on{' '}
             <span className="text-symtex-primary font-medium">{frequency}</span> execution
             frequency ({monthlyMultiplier} runs/month)

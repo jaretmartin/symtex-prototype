@@ -120,7 +120,14 @@ export function SymbiosChat({
         />
       )}
 
-      <div className={containerClasses}>
+      <div
+        className={containerClasses}
+        role="dialog"
+        aria-modal={variant === 'modal'}
+        aria-labelledby="symbios-chat-title"
+        aria-describedby="symbios-chat-description"
+        aria-busy={isTyping}
+      >
         {/* Header */}
         <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-zinc-800">
           <div className="flex items-center gap-3">
@@ -139,9 +146,9 @@ export function SymbiosChat({
 
             {/* Title and status */}
             <div>
-              <h2 className="font-semibold text-zinc-100">Symbios</h2>
-              <div className="flex items-center gap-2 text-xs text-zinc-400">
-                <span className="capitalize">{ariaStatus}</span>
+              <h2 id="symbios-chat-title" className="font-semibold text-zinc-100">Symbios</h2>
+              <div className="flex items-center gap-2 text-xs text-zinc-400" role="status" aria-live="polite">
+                <span className="capitalize" aria-label={`Status: ${ariaStatus}`}>{ariaStatus}</span>
                 <span className="text-zinc-600">|</span>
                 <span className="flex items-center gap-1">
                   <Zap className="w-3 h-3 text-emerald-400" />
@@ -185,7 +192,8 @@ export function SymbiosChat({
         </div>
 
         {/* Routing stats bar */}
-        <div className="flex-shrink-0 px-4 py-2 border-b border-zinc-800/50 bg-zinc-900/50">
+        <div className="flex-shrink-0 px-4 py-2 border-b border-zinc-800/50 bg-zinc-900/50" role="status" aria-label="Routing statistics">
+          <p id="symbios-chat-description" className="sr-only">AI assistant chat with symbolic and neural processing</p>
           <div className="flex items-center gap-3 text-xs">
             <div className="flex items-center gap-1.5 text-emerald-400">
               <Zap className="w-3.5 h-3.5" />
@@ -216,6 +224,10 @@ export function SymbiosChat({
             'scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent',
             isMinimized && 'hidden'
           )}
+          role="log"
+          aria-live="polite"
+          aria-label="Chat messages"
+          aria-relevant="additions"
         >
           {messages.length <= 1 ? (
             <SymbiosEmptyState onSuggestionSelect={handleEmptySuggestion} />
@@ -231,7 +243,11 @@ export function SymbiosChat({
               ))}
 
               {/* Typing indicator */}
-              {isTyping && <TypingIndicator cognateName="Aria" />}
+              {isTyping && (
+                <div role="status" aria-live="polite" aria-label="Aria is typing">
+                  <TypingIndicator cognateName="Aria" />
+                </div>
+              )}
 
               {/* Auto-scroll anchor */}
               <div ref={messagesEndRef} />

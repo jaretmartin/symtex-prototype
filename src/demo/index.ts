@@ -5,3 +5,4 @@
  */
 
 export { DemoControlPanel } from './DemoControlPanel';
+export { DemoScenarioSwitcher } from './DemoScenarioSwitcher';

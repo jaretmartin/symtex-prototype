@@ -83,12 +83,12 @@ export function ROIDashboard({ className }: ROIDashboardProps) {
   }
 
   return (
-    <div className={cn('space-y-6', className)}>
+    <div className={cn('space-y-6', className)} role="region" aria-labelledby="roi-dashboard-title">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">ROI Dashboard</h1>
-          <p className="text-sm text-slate-400 mt-1">
+          <h1 id="roi-dashboard-title" className="text-2xl font-bold text-white">ROI Dashboard</h1>
+          <p id="roi-dashboard-description" className="text-sm text-slate-400 mt-1">
             Track your return on investment with Symtex
           </p>
         </div>
@@ -98,8 +98,8 @@ export function ROIDashboard({ className }: ROIDashboardProps) {
             value={timeRange}
             onValueChange={(value) => setTimeRange(value as typeof timeRange)}
           >
-            <SelectTrigger className="w-[160px] bg-slate-800 border-slate-700">
-              <Calendar className="w-4 h-4 mr-2 text-slate-400" />
+            <SelectTrigger className="w-[160px] bg-slate-800 border-slate-700" aria-label="Select time range">
+              <Calendar className="w-4 h-4 mr-2 text-slate-400" aria-hidden="true" />
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -132,30 +132,38 @@ export function ROIDashboard({ className }: ROIDashboardProps) {
       </div>
 
       {/* Key Metrics */}
-      <MetricGrid metrics={metrics} size="md" />
+      <section aria-label="Key metrics overview">
+        <MetricGrid metrics={metrics} size="md" />
+      </section>
 
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Cost Savings Chart - Takes 2 columns */}
-        <div className="lg:col-span-2">
+        <section className="lg:col-span-2" aria-label="Cost savings comparison chart">
           <CostSavingsChart data={costData} height={320} />
-        </div>
+        </section>
 
         {/* Symbolic Ratio Gauge */}
-        <div>
+        <section aria-label="Symbolic to neural processing ratio">
           <SymbolicRatioGauge data={symbolicRatio} size="md" />
-        </div>
+        </section>
       </div>
 
       {/* Pattern Compilation Widget */}
-      <PatternCompilationWidget
-        patterns={patterns}
-        totalCompiled={totalPatternsCompiled}
-        maxVisible={5}
-      />
+      <section aria-label="Pattern compilation statistics">
+        <PatternCompilationWidget
+          patterns={patterns}
+          totalCompiled={totalPatternsCompiled}
+          maxVisible={5}
+        />
+      </section>
 
       {/* Summary Footer */}
-      <div className="p-4 rounded-lg bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20">
+      <section
+        className="p-4 rounded-lg bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20"
+        aria-label="Total savings summary"
+        role="region"
+      >
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-white">
@@ -165,14 +173,14 @@ export function ROIDashboard({ className }: ROIDashboardProps) {
               Based on {timeRange === '6m' ? '6 months' : timeRange} of usage data
             </p>
           </div>
-          <div className="text-right">
-            <p className="text-2xl font-bold text-emerald-400">
+          <div className="text-right" role="status" aria-live="polite">
+            <p className="text-2xl font-bold text-emerald-400" aria-label={`Total savings: ${costData.reduce((sum, p) => sum + p.savings, 0).toLocaleString()} dollars`}>
               ${costData.reduce((sum, p) => sum + p.savings, 0).toLocaleString()}
             </p>
             <p className="text-xs text-slate-400">Total Savings</p>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

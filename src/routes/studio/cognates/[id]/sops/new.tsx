@@ -38,8 +38,8 @@ export function NewSOPPage(): JSX.Element {
   if (!cognate) {
     return (
       <div className="p-6 text-center">
-        <h2 className="text-xl font-medium text-white mb-2">Cognate Not Found</h2>
-        <p className="text-zinc-400 mb-4">The requested cognate does not exist.</p>
+        <h2 className="text-xl font-medium text-foreground mb-2">Cognate Not Found</h2>
+        <p className="text-muted-foreground mb-4">The requested cognate does not exist.</p>
         <Link
           to="/studio/cognates"
           className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300"
@@ -72,17 +72,17 @@ export function NewSOPPage(): JSX.Element {
   return (
     <div className="h-[calc(100vh-64px)] flex flex-col">
       {/* Breadcrumb */}
-      <div className="px-6 py-3 border-b border-zinc-800 bg-zinc-900/50">
-        <div className="flex items-center gap-2 text-sm text-zinc-400">
-          <Link to="/studio/cognates" className="hover:text-white transition-colors">
+      <div className="px-6 py-3 border-b border-border bg-surface-base/50">
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Link to="/studio/cognates" className="hover:text-foreground transition-colors">
             Cognates
           </Link>
           <span>/</span>
-          <Link to={`/studio/cognates/${id}/sops`} className="hover:text-white transition-colors">
+          <Link to={`/studio/cognates/${id}/sops`} className="hover:text-foreground transition-colors">
             {cognate.name}
           </Link>
           <span>/</span>
-          <span className="text-white">New SOP</span>
+          <span className="text-foreground">New SOP</span>
         </div>
       </div>
 

@@ -146,18 +146,18 @@ export function NarrativeInput({
     <div className={clsx('relative', className)}>
       {/* Label */}
       {label && (
-        <label className="block text-sm font-medium text-slate-300 mb-2">{label}</label>
+        <label className="block text-sm font-medium text-foreground mb-2">{label}</label>
       )}
 
       {/* Input Container */}
       <div
         className={clsx(
-          'relative rounded-xl bg-symtex-dark border transition-all duration-200',
+          'relative rounded-xl bg-background border transition-all duration-200',
           isFocused && !error
             ? 'border-symtex-primary ring-2 ring-symtex-primary/20'
             : error
               ? 'border-error ring-2 ring-error/20'
-              : 'border-symtex-border hover:border-slate-500',
+              : 'border-border hover:bg-muted',
           disabled && 'opacity-50 cursor-not-allowed'
         )}
       >
@@ -173,7 +173,7 @@ export function NarrativeInput({
           disabled={disabled}
           rows={rows}
           className={clsx(
-            'w-full px-4 py-3 bg-transparent text-white placeholder-slate-500',
+            'w-full px-4 py-3 bg-transparent text-foreground placeholder-muted-foreground',
             'text-sm leading-relaxed resize-none',
             'focus:outline-none',
             disabled && 'cursor-not-allowed'

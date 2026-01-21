@@ -140,21 +140,21 @@ export default function CognateActivityWidget({
   if (cognates.length === 0) {
     return (
       <div className={clsx(
-        'bg-symtex-card rounded-xl border border-symtex-border overflow-hidden',
+        'bg-card rounded-xl border border-border overflow-hidden',
         className
       )}>
-        <div className="p-5 border-b border-symtex-border">
-          <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+        <div className="p-5 border-b border-border">
+          <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
             <Bot className="w-5 h-5 text-symtex-accent" />
             Cognate Activity
           </h2>
         </div>
         <div className="p-8 flex flex-col items-center justify-center text-center">
-          <div className="p-4 rounded-full bg-slate-800 mb-4">
-            <Bot className="w-8 h-8 text-slate-500" />
+          <div className="p-4 rounded-full bg-surface-card mb-4">
+            <Bot className="w-8 h-8 text-muted-foreground" />
           </div>
-          <h3 className="text-lg font-semibold text-white mb-2">No Cognates Yet</h3>
-          <p className="text-sm text-slate-400 max-w-xs mb-4">
+          <h3 className="text-lg font-semibold text-foreground mb-2">No Cognates Yet</h3>
+          <p className="text-sm text-muted-foreground max-w-xs mb-4">
             Create your first AI cognate to start automating tasks and conversations.
           </p>
           <button
@@ -175,9 +175,9 @@ export default function CognateActivityWidget({
       className
     )}>
       {/* Header */}
-      <div className="p-5 border-b border-symtex-border">
+      <div className="p-5 border-b border-border">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+          <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
             <Bot className="w-5 h-5 text-symtex-accent" />
             Cognate Activity
           </h2>
@@ -202,11 +202,11 @@ export default function CognateActivityWidget({
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
               </span>
-              <span className="text-xs text-slate-300">{cognate.name}</span>
+              <span className="text-xs text-foreground">{cognate.name}</span>
             </button>
           ))}
           {activeCognates.length > 3 && (
-            <span className="text-xs text-slate-500">
+            <span className="text-xs text-muted-foreground">
               +{activeCognates.length - 3} more
             </span>
           )}
@@ -232,16 +232,16 @@ export default function CognateActivityWidget({
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs text-slate-500">{activity.cognateName}</span>
+                    <span className="text-xs text-muted-foreground">{activity.cognateName}</span>
                     <span className="text-xs text-slate-600">-</span>
-                    <span className="text-xs text-slate-500">{activity.timestamp}</span>
+                    <span className="text-xs text-muted-foreground">{activity.timestamp}</span>
                   </div>
                   <p className="text-sm text-white group-hover:text-symtex-primary transition-colors">
                     {activity.action}
                   </p>
                 </div>
 
-                <ArrowRight className="w-4 h-4 text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
               </div>
             </div>
           )
@@ -254,16 +254,16 @@ export default function CognateActivityWidget({
           <div className="flex items-center gap-4 text-xs">
             <span className="flex items-center gap-1.5">
               <Activity className="w-3.5 h-3.5 text-green-400" />
-              <span className="text-slate-400">{activeCognates.length} active</span>
+              <span className="text-muted-foreground">{activeCognates.length} active</span>
             </span>
             <span className="flex items-center gap-1.5">
               <TrendingUp className="w-3.5 h-3.5 text-blue-400" />
-              <span className="text-slate-400">127 actions today</span>
+              <span className="text-muted-foreground">127 actions today</span>
             </span>
           </div>
           <button
             onClick={() => navigate('/activity')}
-            className="text-xs text-slate-400 hover:text-white transition-colors"
+            className="text-xs text-muted-foreground hover:text-white transition-colors"
           >
             Full Activity Log
           </button>
