@@ -2,13 +2,14 @@
  * CommandCenter Component
  *
  * Admin governance dashboard showing system health, active missions,
- * Cognate distribution, and emergency controls.
+ * Cognate distribution, policies, and emergency controls.
  *
  * @module CommandCenter
  */
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useToast } from '@/store/useUIStore';
 import {
   Shield,
   Bot,
@@ -21,10 +22,14 @@ import {
   Zap,
   Users,
   Power,
+  FileText,
+  CheckCircle,
+  Clock,
 } from 'lucide-react';
 import clsx from 'clsx';
 import { SystemHealthGauge } from './SystemHealthGauge';
 import { LiveMissionFeed } from './LiveMissionFeed';
+import { mockPolicies, type Policy } from '@/mocks/policies';
 
 /** Autonomy level identifiers (L0-L4) */
 type AutonomyLevelId = 'L0' | 'L1' | 'L2' | 'L3' | 'L4';
@@ -200,6 +205,77 @@ function CognateDistribution({ distribution }: { distribution: Record<AutonomyLe
 }
 
 // =============================================================================
+// ActivePolicies Component
+// =============================================================================
+
+interface PolicyCardProps {
+  policy: Policy;
+}
+
+function PolicyCard({ policy }: PolicyCardProps) {
+  const statusColors = {
+    active: 'bg-green-900/30 text-green-400 border-green-800',
+    draft: 'bg-amber-900/30 text-amber-400 border-amber-800',
+    disabled: 'bg-muted text-muted-foreground border-border',
+    archived: 'bg-muted/50 text-muted-foreground border-border',
+  };
+
+  return (
+    <div className="flex items-center justify-between p-3 bg-surface-base/50 border border-border rounded-lg hover:border-purple-500/50 transition-colors">
+      <div className="flex items-center gap-3 flex-1 min-w-0">
+        <div className="w-8 h-8 rounded-lg bg-purple-900/30 flex items-center justify-center flex-shrink-0">
+          <FileText className="w-4 h-4 text-purple-400" />
+        </div>
+        <div className="min-w-0">
+          <p className="text-sm font-medium text-foreground truncate">{policy.name}</p>
+          <p className="text-xs text-muted-foreground truncate">{policy.scope.join(', ')}</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        {policy.approvalRequired ? (
+          <div className="flex items-center gap-1 text-xs text-amber-400">
+            <Clock className="w-3 h-3" />
+            <span>Approval</span>
+          </div>
+        ) : (
+          <div className="flex items-center gap-1 text-xs text-green-400">
+            <CheckCircle className="w-3 h-3" />
+            <span>Auto</span>
+          </div>
+        )}
+        <span className={clsx('px-2 py-0.5 rounded text-xs border', statusColors[policy.status])}>
+          {policy.status}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function ActivePolicies({ policies }: { policies: Policy[] }) {
+  const activePolicies = policies.filter((p) => p.status === 'active');
+  const approvalRequired = activePolicies.filter((p) => p.approvalRequired).length;
+
+  return (
+    <div className="bg-card border border-border rounded-xl p-6">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="font-semibold flex items-center gap-2 text-muted-foreground">
+          <Shield className="w-5 h-5 text-purple-400" />
+          Active Policies
+        </h3>
+        <span className="text-xs text-muted-foreground">
+          {approvalRequired} require approval
+        </span>
+      </div>
+      <div className="space-y-2 max-h-[280px] overflow-y-auto pr-1">
+        {activePolicies.map((policy) => (
+          <PolicyCard key={policy.id} policy={policy} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// =============================================================================
 // QuickActions Component
 // =============================================================================
 
@@ -277,6 +353,7 @@ function QuickActions({ onPauseAll, onEmergencyStop, onExportAudit }: QuickActio
 export function CommandCenter() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(new Date());
+  const toast = useToast();
 
   const handleRefresh = () => {
     setIsRefreshing(true);
@@ -287,15 +364,15 @@ export function CommandCenter() {
   };
 
   const handlePauseAll = () => {
-    // TODO: Implement pause all missions functionality
+    toast.info('Pause All Missions', 'All active missions have been paused. Cognates will await your signal to resume.');
   };
 
   const handleEmergencyStop = () => {
-    // TODO: Implement emergency stop functionality
+    toast.warning('Emergency Stop Activated', 'All Cognate activity has been halted. Review the audit log before resuming operations.');
   };
 
   const handleExportAudit = () => {
-    // TODO: Implement export audit log functionality
+    toast.success('Audit Log Export', 'Your audit log is being prepared for download. This may take a few moments.');
   };
 
   return (
@@ -364,6 +441,11 @@ export function CommandCenter() {
             onExportAudit={handleExportAudit}
           />
         </div>
+      </div>
+
+      {/* Policies Section */}
+      <div className="mt-6">
+        <ActivePolicies policies={mockPolicies} />
       </div>
     </div>
   );

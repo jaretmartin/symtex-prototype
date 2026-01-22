@@ -281,7 +281,7 @@ export default function CognateActivityWidget({
             </span>
           </div>
           <button
-            onClick={() => navigate('/activity')}
+            onClick={() => navigate('/')}
             className="text-xs text-muted-foreground hover:text-foreground transition-colors"
           >
             Full Activity Log

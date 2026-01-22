@@ -15,6 +15,13 @@ import {
   X,
   Tag,
 } from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { RuleBuilder } from './RuleBuilder';
 import { S1Preview } from './S1Preview';
 import type { ExtendedSOP, SOPRule, SOPStatus, SOPPriority } from '@/types';
@@ -257,28 +264,40 @@ export function SOPEditor({
 
               <div className="space-y-2">
                 <label className="block text-sm text-muted-foreground">Status</label>
-                <select
+                <Select
                   value={sop.status}
-                  onChange={(e) => onChange({ ...sop, status: e.target.value as SOPStatus })}
-                  className="w-full px-3 py-2 text-sm bg-surface-base border border-border rounded-lg text-foreground focus:border-blue-500 focus:outline-none"
+                  onValueChange={(value) => onChange({ ...sop, status: value as SOPStatus })}
                 >
-                  {STATUS_OPTIONS.map((opt) => (
-                    <option key={opt.value} value={opt.value}>{opt.label}</option>
-                  ))}
-                </select>
+                  <SelectTrigger className="w-full bg-surface-base border-border text-foreground focus:border-blue-500">
+                    <SelectValue placeholder="Select status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {STATUS_OPTIONS.map((opt) => (
+                      <SelectItem key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="space-y-2">
                 <label className="block text-sm text-muted-foreground">Priority</label>
-                <select
+                <Select
                   value={sop.priority}
-                  onChange={(e) => onChange({ ...sop, priority: e.target.value as SOPPriority })}
-                  className="w-full px-3 py-2 text-sm bg-surface-base border border-border rounded-lg text-foreground focus:border-blue-500 focus:outline-none"
+                  onValueChange={(value) => onChange({ ...sop, priority: value as SOPPriority })}
                 >
-                  {PRIORITY_OPTIONS.map((opt) => (
-                    <option key={opt.value} value={opt.value}>{opt.label}</option>
-                  ))}
-                </select>
+                  <SelectTrigger className="w-full bg-surface-base border-border text-foreground focus:border-blue-500">
+                    <SelectValue placeholder="Select priority" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {PRIORITY_OPTIONS.map((opt) => (
+                      <SelectItem key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="space-y-2 md:col-span-2">

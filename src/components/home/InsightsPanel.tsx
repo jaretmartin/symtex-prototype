@@ -381,7 +381,7 @@ export default function InsightsPanel({ className }: InsightsPanelProps): JSX.El
           {activeCategory !== 'all' && ` in ${activeCategory}`}
         </p>
         <button
-          onClick={() => navigate('/insights')}
+          onClick={() => navigate('/signals')}
           className="text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           View All Insights

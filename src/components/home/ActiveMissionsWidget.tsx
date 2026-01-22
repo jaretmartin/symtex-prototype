@@ -127,12 +127,12 @@ export default function ActiveMissionsWidget({
 
   // Handle mission click
   const handleMissionClick = useCallback((mission: Mission): void => {
-    navigate(`/missions/${mission.id}`)
+    navigate(`/runs/${mission.id}`)
   }, [navigate])
 
   // Handle create new mission
   const handleCreateMission = useCallback((): void => {
-    navigate('/missions/new')
+    navigate('/control/lux')
   }, [navigate])
 
   // Filter to active/pending missions and limit
@@ -299,7 +299,7 @@ export default function ActiveMissionsWidget({
           {missions.filter(m => m.status === 'pending').length} pending
         </p>
         <button
-          onClick={() => navigate('/missions')}
+          onClick={() => navigate('/runs')}
           className="text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           View All Missions

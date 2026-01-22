@@ -68,18 +68,6 @@ function RouteLoading(): JSX.Element {
   );
 }
 
-// Placeholder for new route sections
-function SectionIndex({ title, description }: { title: string; description: string }): JSX.Element {
-  return (
-    <div className="flex items-center justify-center min-h-[400px]">
-      <div className="text-center">
-        <h1 className="text-2xl font-semibold text-foreground mb-2">{title}</h1>
-        <p className="text-muted-foreground">{description}</p>
-      </div>
-    </div>
-  );
-}
-
 // Initialize theme before React renders to prevent FOUC
 initializeTheme();
 
@@ -206,7 +194,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           {/* ==================== */}
           <Route
             path="team"
-            element={<SectionIndex title="Team" description="Manage your Cognates and team collaboration." />}
+            element={<Navigate to="/team/cognates" replace />}
           />
           <Route
             path="team/cognates"
@@ -563,6 +551,40 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           {/* Other legacy redirects */}
           <Route path="activity" element={<Navigate to="/" replace />} />
           <Route path="build" element={<Navigate to="/runs" replace />} />
+
+          {/* ==================== */}
+          {/* ADDITIONAL REDIRECTS */}
+          {/* ==================== */}
+
+          {/* Mission redirects (missions concept → runs) */}
+          <Route path="missions/:id" element={<Navigate to="/runs" replace />} />
+          <Route path="missions/new" element={<Navigate to="/control/lux" replace />} />
+
+          {/* Studio redirects */}
+          <Route path="studio/lux/new" element={<Navigate to="/control/lux" replace />} />
+          <Route path="studio/cognates/new" element={<Navigate to="/team/cognates" replace />} />
+
+          {/* Spaces new */}
+          <Route path="spaces/new" element={<Navigate to="/spaces" replace />} />
+
+          {/* Footer/action links */}
+          <Route path="actions" element={<Navigate to="/" replace />} />
+          <Route path="insights" element={<Navigate to="/signals" replace />} />
+
+          {/* Settings sub-routes */}
+          <Route path="settings/budget" element={<Navigate to="/settings" replace />} />
+          <Route path="settings/security" element={<Navigate to="/settings" replace />} />
+          <Route path="settings/dna" element={<Navigate to="/signals" replace />} />
+
+          {/* Help routes */}
+          <Route path="help/shortcuts" element={<Navigate to="/settings" replace />} />
+
+          {/* Projects route */}
+          <Route path="projects/:id" element={<Navigate to="/spaces" replace />} />
+
+          {/* Governance Concord legacy routes */}
+          <Route path="governance/concord/setup" element={<Navigate to="/control/concord" replace />} />
+          <Route path="governance/concord/live" element={<Navigate to="/control/concord" replace />} />
 
           {/* ==================== */}
           {/* 404                  */}

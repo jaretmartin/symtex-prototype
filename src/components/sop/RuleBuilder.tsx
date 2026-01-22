@@ -17,6 +17,13 @@ import {
   ArrowRight,
   ArrowRightLeft,
 } from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import type {
   SOPRule,
   SOPCondition,
@@ -90,25 +97,37 @@ function ConditionRow({ condition, onChange, onDelete }: ConditionRowProps): JSX
     <div className="flex items-center gap-2 p-2 rounded bg-card/50 group">
       <GripVertical className="w-4 h-4 text-muted-foreground cursor-grab" />
 
-      <select
+      <Select
         value={condition.field}
-        onChange={(e) => onChange({ ...condition, field: e.target.value })}
-        className="flex-1 px-2 py-1.5 text-sm bg-surface-base border border-border rounded text-foreground focus:border-blue-500 focus:outline-none"
+        onValueChange={(value) => onChange({ ...condition, field: value })}
       >
-        {FIELD_OPTIONS.map((opt) => (
-          <option key={opt.value} value={opt.value}>{opt.label}</option>
-        ))}
-      </select>
+        <SelectTrigger className="flex-1 h-8 px-2 text-sm bg-surface-base border-border text-foreground focus:border-blue-500">
+          <SelectValue placeholder="Select field" />
+        </SelectTrigger>
+        <SelectContent>
+          {FIELD_OPTIONS.map((opt) => (
+            <SelectItem key={opt.value} value={opt.value}>
+              {opt.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
-      <select
+      <Select
         value={condition.operator}
-        onChange={(e) => onChange({ ...condition, operator: e.target.value as ConditionOperator })}
-        className="px-2 py-1.5 text-sm bg-surface-base border border-border rounded text-foreground focus:border-blue-500 focus:outline-none"
+        onValueChange={(value) => onChange({ ...condition, operator: value as ConditionOperator })}
       >
-        {OPERATOR_OPTIONS.map((opt) => (
-          <option key={opt.value} value={opt.value}>{opt.label}</option>
-        ))}
-      </select>
+        <SelectTrigger className="w-40 h-8 px-2 text-sm bg-surface-base border-border text-foreground focus:border-blue-500">
+          <SelectValue placeholder="Select operator" />
+        </SelectTrigger>
+        <SelectContent>
+          {OPERATOR_OPTIONS.map((opt) => (
+            <SelectItem key={opt.value} value={opt.value}>
+              {opt.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
       <input
         type="text"
@@ -140,15 +159,21 @@ function ActionRow({ action, onChange, onDelete }: ActionRowProps): JSX.Element 
     <div className="flex items-center gap-2 p-2 rounded bg-card/50 group">
       <GripVertical className="w-4 h-4 text-muted-foreground cursor-grab" />
 
-      <select
+      <Select
         value={action.type}
-        onChange={(e) => onChange({ ...action, type: e.target.value as ActionType })}
-        className="px-2 py-1.5 text-sm bg-surface-base border border-border rounded text-foreground focus:border-blue-500 focus:outline-none"
+        onValueChange={(value) => onChange({ ...action, type: value as ActionType })}
       >
-        {ACTION_OPTIONS.map((opt) => (
-          <option key={opt.value} value={opt.value}>{opt.label}</option>
-        ))}
-      </select>
+        <SelectTrigger className="w-40 h-8 px-2 text-sm bg-surface-base border-border text-foreground focus:border-blue-500">
+          <SelectValue placeholder="Select action" />
+        </SelectTrigger>
+        <SelectContent>
+          {ACTION_OPTIONS.map((opt) => (
+            <SelectItem key={opt.value} value={opt.value}>
+              {opt.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
       <input
         type="text"
@@ -332,20 +357,26 @@ export function RuleBuilder({
               <Zap className="w-4 h-4 text-yellow-400" />
               <span className="text-sm font-medium text-yellow-400">TRIGGER</span>
             </div>
-            <select
+            <Select
               value={rule.trigger.type}
-              onChange={(e) =>
+              onValueChange={(value) =>
                 onChange({
                   ...rule,
-                  trigger: { ...rule.trigger, type: e.target.value as TriggerType },
+                  trigger: { ...rule.trigger, type: value as TriggerType },
                 })
               }
-              className="w-full px-3 py-2 text-sm bg-surface-base border border-border rounded-lg text-white focus:border-yellow-500 focus:outline-none"
             >
-              {TRIGGER_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
-            </select>
+              <SelectTrigger className="w-full bg-surface-base border-border text-foreground focus:border-yellow-500">
+                <SelectValue placeholder="Select trigger" />
+              </SelectTrigger>
+              <SelectContent>
+                {TRIGGER_OPTIONS.map((opt) => (
+                  <SelectItem key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           {/* WHEN Section */}

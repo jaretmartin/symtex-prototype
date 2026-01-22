@@ -8,8 +8,8 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { Undo2, Redo2, Save, ExternalLink, Circle, Play, FlaskConical, FileText } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Undo2, Redo2, Save, ExternalLink, Circle, Play, FlaskConical, FileText, ChevronLeft } from 'lucide-react';
 import LuxCanvas from '../../../components/lux/LuxCanvas';
 import NodePalette from '../../../components/lux/NodePalette';
 import NaturalLanguageBuilder from '../../../components/lux/NaturalLanguageBuilder';
@@ -251,6 +251,8 @@ function createMockRunResult(automationId: string, name: string): RunResult {
 }
 
 export default function LuxBuilderPage(): JSX.Element {
+  const navigate = useNavigate();
+
   // Store state
   const {
     nodes,
@@ -449,6 +451,24 @@ export default function LuxBuilderPage(): JSX.Element {
         backgroundColor: '#0f0f1a',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <button
+            onClick={() => navigate('/control')}
+            style={{
+              padding: '8px',
+              borderRadius: '6px',
+              border: '1px solid #2a2a3e',
+              background: 'transparent',
+              color: '#fff',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            title="Back to Control"
+            aria-label="Back to Control"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
           <h1 style={{
             fontSize: '20px',
             fontWeight: 600,

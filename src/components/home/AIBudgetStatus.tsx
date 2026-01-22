@@ -128,12 +128,12 @@ export default function AIBudgetStatus({ className }: AIBudgetStatusProps): JSX.
 
   // Handle view details
   const handleViewDetails = useCallback((): void => {
-    navigate('/settings/budget')
+    navigate('/settings')
   }, [navigate])
 
   // Handle category click
   const handleCategoryClick = useCallback((categoryId: string): void => {
-    navigate(`/settings/budget?category=${categoryId}`)
+    navigate(`/settings?category=${categoryId}`)
   }, [navigate])
 
   // Show loading skeleton

@@ -7,7 +7,7 @@
  * Features:
  * - Clickable segments for navigation
  * - Keyboard navigation with arrow keys
- * - Active segment highlighting with subtle pulse animation
+ * - Active segment highlighting
  * - Accessible with proper ARIA attributes
  */
 
@@ -80,10 +80,7 @@ function BreadcrumbSegment({
           'text-sm font-medium transition-all duration-200',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-symtex-primary focus-visible:ring-offset-2 focus-visible:ring-offset-symtex-dark',
           isActive
-            ? [
-                'bg-symtex-primary/20 text-symtex-primary border border-symtex-primary/30',
-                'animate-pulse-subtle',
-              ]
+            ? 'bg-symtex-primary/20 text-symtex-primary border border-symtex-primary/30'
             : [
                 'text-muted-foreground hover:text-white hover:bg-card/50',
                 'border border-transparent',

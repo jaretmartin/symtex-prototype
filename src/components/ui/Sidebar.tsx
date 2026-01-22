@@ -24,7 +24,6 @@ import {
   Zap,
   Menu,
   X,
-  Lock,
   ChevronDown,
   ChevronRight,
 } from 'lucide-react';
@@ -139,8 +138,8 @@ export default function Sidebar(): JSX.Element {
                   } else if (type === 'domain') {
                     navigate(`/spaces/${id}`);
                   } else if (type === 'project') {
-                    // Find the domain for this project (handled by route)
-                    navigate(`/spaces/domain/${id}`);
+                    // Navigate to space by project ID
+                    navigate(`/spaces/${id}`);
                   } else if (type === 'mission') {
                     navigate(`/missions/${id}`);
                   }
@@ -258,17 +257,11 @@ export default function Sidebar(): JSX.Element {
           {/* Settings Link */}
           <Link
             to="/settings"
-            aria-label="Settings (Coming soon)"
-            className="flex items-center justify-between gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:bg-muted/50 transition-all duration-200"
+            aria-label="Settings"
+            className="flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:bg-muted/50 transition-all duration-200"
           >
-            <div className="flex items-center gap-3">
-              <Settings className="w-5 h-5" aria-hidden="true" />
-              <span className="font-medium">Settings</span>
-            </div>
-            <span className="flex items-center gap-1 text-xs bg-surface-elevated/50 text-muted-foreground px-2 py-0.5 rounded">
-              <Lock className="w-3 h-3" aria-hidden="true" />
-              Soon
-            </span>
+            <Settings className="w-5 h-5" aria-hidden="true" />
+            <span className="font-medium">Settings</span>
           </Link>
         </div>
       </aside>

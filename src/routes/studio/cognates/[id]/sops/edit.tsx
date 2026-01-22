@@ -5,10 +5,11 @@
  * This route handles editing existing SOPs for a Cognate.
  */
 
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { useCognateStore } from '@/store';
+import type { ExtendedSOP } from '@/types';
 
 // Lazy load the SOPEditor for code splitting
 const SOPEditor = lazy(() =>
@@ -29,7 +30,13 @@ export function SOPEditRoute(): JSX.Element {
   const { cognates, sops, updateSOP } = useCognateStore();
 
   const cognate = cognates.find((c) => c.id === id);
-  const sop = sops.find((s) => s.id === sopId);
+  const originalSop = sops.find((s) => s.id === sopId);
+  const [editedSop, setEditedSop] = useState<ExtendedSOP | null>(originalSop ?? null);
+
+  // Update local state if the original SOP changes (e.g., on initial load)
+  if (originalSop && !editedSop) {
+    setEditedSop(originalSop);
+  }
 
   if (!cognate) {
     return (
@@ -47,7 +54,7 @@ export function SOPEditRoute(): JSX.Element {
     );
   }
 
-  if (!sop) {
+  if (!originalSop || !editedSop) {
     return (
       <div className="p-6 text-center">
         <h2 className="text-xl font-medium text-foreground mb-2">SOP Not Found</h2>
@@ -63,7 +70,11 @@ export function SOPEditRoute(): JSX.Element {
     );
   }
 
-  const handleSave = (updatedSOP: typeof sop): void => {
+  const handleChange = (updatedSOP: ExtendedSOP): void => {
+    setEditedSop(updatedSOP);
+  };
+
+  const handleSave = (updatedSOP: ExtendedSOP): void => {
     updateSOP(sopId!, {
       ...updatedSOP,
       updatedAt: new Date().toISOString(),
@@ -88,15 +99,15 @@ export function SOPEditRoute(): JSX.Element {
             {cognate.name}
           </Link>
           <span>/</span>
-          <span className="text-foreground">{sop.name || 'Edit SOP'}</span>
+          <span className="text-foreground">{editedSop.name || 'Edit SOP'}</span>
         </div>
       </div>
 
       {/* Editor */}
       <Suspense fallback={<LoadingFallback />}>
         <SOPEditor
-          sop={sop}
-          onChange={() => {}}
+          sop={editedSop}
+          onChange={handleChange}
           onSave={handleSave}
           onCancel={handleCancel}
           isNew={false}

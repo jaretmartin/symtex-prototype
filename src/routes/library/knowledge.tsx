@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { mockKnowledge, type KnowledgeItem } from '@/mocks/knowledge';
 
 // ============================================================================
 // TYPES & INTERFACES
@@ -154,141 +155,56 @@ const DOCUMENT_TYPE_CONFIG: Record<DocumentType, { icon: React.ReactNode; color:
 };
 
 // ============================================================================
-// MOCK DATA
+// MOCK DATA - Transformed from centralized mock
 // ============================================================================
 
-const MOCK_DOCUMENTS: Document[] = [
-  {
-    id: '1',
-    title: 'AI Ethics Framework Analysis',
-    type: 'research',
-    excerpt: 'Comprehensive analysis of existing AI ethics frameworks and their application in enterprise settings. Covers principles of fairness, transparency, and accountability.',
-    tags: ['AI', 'Ethics', 'Framework'],
-    createdAt: '2024-01-15',
-    updatedAt: '2024-03-20',
-    connections: 8,
-    size: '2.4 MB',
-    author: 'Dr. Sarah Chen',
-    color: '#8B5CF6',
-  },
-  {
-    id: '2',
-    title: 'Q4 Market Research Report',
-    type: 'pdf',
-    excerpt: 'Detailed market analysis covering competitive landscape, consumer trends, and growth opportunities in the SaaS sector.',
-    tags: ['Market', 'Analysis', 'Q4'],
-    createdAt: '2024-02-10',
-    updatedAt: '2024-02-10',
-    connections: 5,
-    size: '8.1 MB',
-    author: 'Marketing Team',
-    color: '#EF4444',
-  },
-  {
-    id: '3',
-    title: 'Product Roadmap Notes',
-    type: 'note',
-    excerpt: 'Strategic planning notes for 2024 product development cycle. Includes feature prioritization and resource allocation.',
-    tags: ['Product', 'Strategy', 'Planning'],
-    createdAt: '2024-03-01',
-    updatedAt: '2024-03-18',
-    connections: 12,
-    size: '45 KB',
-    author: 'Product Team',
-    color: '#F59E0B',
-  },
-  {
-    id: '4',
-    title: 'Machine Learning Best Practices',
-    type: 'article',
-    excerpt: 'Industry best practices for implementing ML models in production environments. Covers model versioning, monitoring, and deployment strategies.',
-    tags: ['ML', 'Best Practices', 'Production'],
-    createdAt: '2024-01-22',
-    updatedAt: '2024-02-15',
-    connections: 15,
-    size: '1.2 MB',
-    author: 'Tech Publications',
-    color: '#3B82F6',
-  },
-  {
-    id: '5',
-    title: 'Brand Guidelines 2024',
-    type: 'pdf',
-    excerpt: 'Complete brand identity guidelines including logo usage, color palettes, typography, and voice & tone specifications.',
-    tags: ['Brand', 'Design', 'Guidelines'],
-    createdAt: '2024-01-05',
-    updatedAt: '2024-01-05',
-    connections: 7,
-    size: '15.3 MB',
-    author: 'Design Team',
-    color: '#EF4444',
-  },
-  {
-    id: '6',
-    title: 'User Interview Recordings',
-    type: 'video',
-    excerpt: 'Collection of user interview sessions exploring pain points and feature requests for the next product iteration.',
-    tags: ['UX', 'Research', 'Interviews'],
-    createdAt: '2024-02-28',
-    updatedAt: '2024-02-28',
-    connections: 4,
-    size: '2.1 GB',
-    author: 'UX Team',
-    color: '#EC4899',
-  },
-  {
-    id: '7',
-    title: 'Architecture Diagrams',
-    type: 'image',
-    excerpt: 'System architecture diagrams showing microservices structure, data flow, and integration points.',
-    tags: ['Architecture', 'Technical', 'Diagrams'],
-    createdAt: '2024-03-10',
-    updatedAt: '2024-03-15',
-    connections: 9,
-    size: '4.5 MB',
-    author: 'Engineering',
-    color: '#22C55E',
-  },
-  {
-    id: '8',
-    title: 'Competitive Analysis Deep Dive',
-    type: 'research',
-    excerpt: 'In-depth analysis of top 5 competitors including feature comparison, pricing strategies, and market positioning.',
-    tags: ['Competition', 'Analysis', 'Strategy'],
-    createdAt: '2024-02-05',
-    updatedAt: '2024-03-01',
-    connections: 11,
-    size: '3.8 MB',
-    author: 'Strategy Team',
-    color: '#8B5CF6',
-  },
-  {
-    id: '9',
-    title: 'API Documentation Draft',
-    type: 'note',
-    excerpt: 'Working draft for public API documentation. Includes endpoint specifications, authentication, and code examples.',
-    tags: ['API', 'Documentation', 'Developer'],
-    createdAt: '2024-03-05',
-    updatedAt: '2024-03-19',
-    connections: 6,
-    size: '890 KB',
-    author: 'Developer Relations',
-    color: '#F59E0B',
-  },
-  {
-    id: '10',
-    title: 'Neural Network Fundamentals',
-    type: 'article',
-    excerpt: 'Educational article covering neural network basics, backpropagation, and common architectures for beginners.',
-    tags: ['AI', 'Education', 'Neural Networks'],
-    createdAt: '2024-01-30',
-    updatedAt: '2024-01-30',
-    connections: 13,
-    size: '1.8 MB',
-    author: 'AI Research Lab',
-    color: '#3B82F6',
-  },
-];
+/** Map KnowledgeItem type to Document type */
+function knowledgeTypeToDocumentType(knowledgeType: KnowledgeItem['type']): DocumentType {
+  const typeMap: Record<KnowledgeItem['type'], DocumentType> = {
+    document: 'pdf',
+    policy: 'article',
+    procedure: 'note',
+    reference: 'research',
+  };
+  return typeMap[knowledgeType];
+}
+
+/** Format file size from bytes to human-readable */
+function formatFileSize(bytes?: number): string {
+  if (!bytes) return '1.0 MB';
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  if (bytes < 1024 * 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  return `${(bytes / (1024 * 1024 * 1024)).toFixed(1)} GB`;
+}
+
+/** Color map for document types */
+const typeColors: Record<DocumentType, string> = {
+  pdf: '#EF4444',
+  note: '#F59E0B',
+  article: '#3B82F6',
+  research: '#8B5CF6',
+  image: '#22C55E',
+  video: '#EC4899',
+};
+
+/** Transform KnowledgeItem to Document format */
+const MOCK_DOCUMENTS: Document[] = mockKnowledge.map((item) => {
+  const docType = knowledgeTypeToDocumentType(item.type);
+  return {
+    id: item.id,
+    title: item.title,
+    type: docType,
+    excerpt: item.description,
+    tags: item.tags.slice(0, 3), // Limit to 3 tags for display
+    createdAt: item.createdAt.split('T')[0],
+    updatedAt: item.updatedAt.split('T')[0],
+    connections: item.citations,
+    size: formatFileSize(item.fileSize),
+    author: item.author,
+    color: typeColors[docType],
+  };
+});
 
 // Generate graph nodes from documents
 const generateGraphNodes = (documents: Document[]): GraphNode[] => {
@@ -758,7 +674,7 @@ const DocumentList: React.FC<DocumentListProps> = ({
 // ============================================================================
 
 const KnowledgePage: React.FC = () => {
-  const [viewMode, setViewMode] = useState<ViewMode>('2d');
+  const [viewMode, setViewMode] = useState<ViewMode>('split');
   const [selectedDocument, setSelectedDocument] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isGraphFullscreen, setIsGraphFullscreen] = useState(false);

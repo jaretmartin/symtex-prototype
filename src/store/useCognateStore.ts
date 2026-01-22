@@ -26,6 +26,7 @@ import type {
   CognateExecution,
   CognateInstanceStatus,
 } from '@/types';
+import { cognates as canonicalCognates } from '@/mocks/cognates';
 
 // Re-export types with Cognate naming for external use
 export type { CognateTemplate, CognateInstance, CognateExecution, CognateInstanceStatus };
@@ -156,35 +157,27 @@ const defaultBootstrapConfig: BootstrapConfig = {
   customizations: {},
 };
 
-// Mock data for initial state
-const mockCognates: Cognate[] = [
-  {
-    id: 'cog-1',
-    name: 'Customer Support Cognate',
-    description: 'Handles customer inquiries and support tickets',
-    status: 'active',
-    industry: 'Technology',
-    role: 'Customer Support',
-    createdAt: '2024-01-15T10:00:00Z',
-    updatedAt: '2024-01-20T14:30:00Z',
-    sopCount: 12,
-    activeSOPCount: 8,
-    tags: ['support', 'customer-facing'],
-  },
-  {
-    id: 'cog-2',
-    name: 'Sales Assistant Cognate',
-    description: 'Assists with sales outreach and lead qualification',
-    status: 'draft',
-    industry: 'Technology',
-    role: 'Sales',
-    createdAt: '2024-01-18T09:00:00Z',
-    updatedAt: '2024-01-19T11:00:00Z',
-    sopCount: 5,
-    activeSOPCount: 0,
-    tags: ['sales', 'outreach'],
-  },
-];
+/**
+ * Adapt canonical mock cognates to the store's Cognate type.
+ * The canonical mocks use a different schema (autonomyLevel, skills, stats, etc.)
+ * so we map them to the store's expected format.
+ */
+const mockCognates: Cognate[] = canonicalCognates.map((cog) => ({
+  id: cog.id,
+  name: cog.name,
+  description: cog.description,
+  status: cog.status === 'idle' || cog.status === 'training' || cog.status === 'error'
+    ? 'active' as CognateStatus // Map non-standard statuses to 'active'
+    : cog.status as CognateStatus,
+  avatar: cog.avatar,
+  industry: cog.assignedSpaces[0]?.replace('space-', '').replace(/-/g, ' ') || 'Operations',
+  role: cog.name.replace(' Cognate', '').replace('Cognate', ''),
+  createdAt: '2024-01-15T10:00:00Z',
+  updatedAt: new Date().toISOString(),
+  sopCount: cog.sopCount,
+  activeSOPCount: Math.floor(cog.sopCount * 0.75), // Approximate 75% active
+  tags: cog.skills.slice(0, 3), // Use first 3 skills as tags
+}));
 
 const mockSOPs: SOP[] = [
   {

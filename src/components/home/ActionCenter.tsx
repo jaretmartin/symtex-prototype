@@ -393,7 +393,7 @@ export default function ActionCenter({ className }: ActionCenterProps): JSX.Elem
           {activeFilter && ` (filtered)`}
         </p>
         <button
-          onClick={() => navigate('/actions')}
+          onClick={() => navigate('/')}
           className="text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           View All Actions

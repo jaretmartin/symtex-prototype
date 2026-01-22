@@ -37,7 +37,7 @@ const quickActions: QuickAction[] = [
     icon: Workflow,
     color: 'text-blue-400',
     bg: 'bg-blue-500/20',
-    route: '/studio/lux/new'
+    route: '/control/lux'
   },
   {
     id: 'new-cognate',
@@ -46,7 +46,7 @@ const quickActions: QuickAction[] = [
     icon: Bot,
     color: 'text-purple-400',
     bg: 'bg-purple-500/20',
-    route: '/studio/cognates/new',
+    route: '/team/cognates',
     isNew: true
   },
   {
@@ -56,7 +56,7 @@ const quickActions: QuickAction[] = [
     icon: Target,
     color: 'text-green-400',
     bg: 'bg-green-500/20',
-    route: '/missions/new'
+    route: '/control/lux'
   },
   {
     id: 'new-context',
@@ -65,7 +65,7 @@ const quickActions: QuickAction[] = [
     icon: Layers,
     color: 'text-cyan-400',
     bg: 'bg-cyan-500/20',
-    route: '/spaces/new'
+    route: '/spaces'
   },
   {
     id: 'templates',
@@ -174,7 +174,7 @@ export default function QuickActionsWidget({ className }: QuickActionsWidgetProp
           <span>for command palette</span>
         </p>
         <button
-          onClick={() => navigate('/help/shortcuts')}
+          onClick={() => navigate('/settings')}
           className="text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
         >
           All shortcuts

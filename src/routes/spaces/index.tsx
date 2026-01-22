@@ -5,7 +5,7 @@
  * Provides an overview and management interface for organizational structure.
  */
 
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Layers,
@@ -20,8 +20,11 @@ import {
 import clsx from 'clsx';
 import { useSpaceStore } from '@/store/useSpaceStore';
 import { useContextStore } from '@/store/useContextStore';
-import { useToast } from '@/store';
-import type { DomainSpace, Project } from '@/types';
+import type { DomainSpace, Project, SpaceSettings } from '@/types';
+import { CreateDomainModal } from '@/components/space/CreateDomainModal';
+import { CreateProjectModal } from '@/components/space/CreateProjectModal';
+import { CreateMissionModal } from '@/components/space/CreateMissionModal';
+import { SpaceSettingsPanel } from '@/components/space/SpaceSettingsPanel';
 
 /**
  * Domain Card Component
@@ -162,13 +165,33 @@ function ProjectCard({
   );
 }
 
+// Default space settings for the settings panel
+const DEFAULT_SPACE_SETTINGS: SpaceSettings = {
+  communication: {
+    tone: 'casual',
+    verbosity: 'balanced',
+    proactivity: 'balanced',
+  },
+  autonomy: {
+    level: 2,
+    autoApprove: false,
+  },
+  rules: [],
+  inheritFromParent: true,
+};
+
 export default function SpacesPage(): JSX.Element {
   const navigate = useNavigate();
   const { domainId, projectId } = useParams<{
     domainId?: string;
     projectId?: string;
   }>();
-  const { info } = useToast();
+
+  // Modal visibility state
+  const [showDomainModal, setShowDomainModal] = useState(false);
+  const [showProjectModal, setShowProjectModal] = useState(false);
+  const [showMissionModal, setShowMissionModal] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   const personal = useSpaceStore((state) => state.personal);
   // Select raw data records (not methods that return new arrays)
@@ -234,14 +257,6 @@ export default function SpacesPage(): JSX.Element {
     [navigate, navigateTo]
   );
 
-  // Placeholder for adding new items
-  const handleAddNew = useCallback(
-    (type: 'domain' | 'project' | 'mission'): void => {
-      info('Coming Soon', `Creating new ${type}s will be available in a future update.`);
-    },
-    [info]
-  );
-
   // Render breadcrumb
   const renderBreadcrumb = (): JSX.Element => (
     <nav className="flex items-center gap-2 text-sm mb-6" aria-label="Breadcrumb">
@@ -297,7 +312,7 @@ export default function SpacesPage(): JSX.Element {
         </div>
         <button
           type="button"
-          onClick={() => handleAddNew('domain')}
+          onClick={() => setShowDomainModal(true)}
           className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground hover:border-border transition-all text-sm"
         >
           <Plus className="w-4 h-4" aria-hidden="true" />
@@ -323,7 +338,7 @@ export default function SpacesPage(): JSX.Element {
           <p className="text-muted-foreground mb-4">Create your first domain to get started</p>
           <button
             type="button"
-            onClick={() => handleAddNew('domain')}
+            onClick={() => setShowDomainModal(true)}
             className="flex items-center gap-2 px-4 py-2 rounded-lg gradient-primary text-foreground font-medium hover:opacity-90 transition-opacity"
           >
             <Plus className="w-4 h-4" aria-hidden="true" />
@@ -346,7 +361,7 @@ export default function SpacesPage(): JSX.Element {
         </div>
         <button
           type="button"
-          onClick={() => handleAddNew('project')}
+          onClick={() => setShowProjectModal(true)}
           className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground hover:border-border transition-all text-sm"
         >
           <Plus className="w-4 h-4" aria-hidden="true" />
@@ -374,7 +389,7 @@ export default function SpacesPage(): JSX.Element {
           </p>
           <button
             type="button"
-            onClick={() => handleAddNew('project')}
+            onClick={() => setShowProjectModal(true)}
             className="flex items-center gap-2 px-3 py-1.5 rounded-lg gradient-primary text-foreground text-sm font-medium hover:opacity-90 transition-opacity"
           >
             <Plus className="w-4 h-4" aria-hidden="true" />
@@ -397,7 +412,7 @@ export default function SpacesPage(): JSX.Element {
         </div>
         <button
           type="button"
-          onClick={() => handleAddNew('mission')}
+          onClick={() => setShowMissionModal(true)}
           className="flex items-center gap-2 px-3 py-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground hover:border-border transition-all text-sm"
         >
           <Plus className="w-4 h-4" aria-hidden="true" />
@@ -449,7 +464,7 @@ export default function SpacesPage(): JSX.Element {
           </p>
           <button
             type="button"
-            onClick={() => handleAddNew('mission')}
+            onClick={() => setShowMissionModal(true)}
             className="flex items-center gap-2 px-3 py-1.5 rounded-lg gradient-primary text-foreground text-sm font-medium hover:opacity-90 transition-opacity"
           >
             <Plus className="w-4 h-4" aria-hidden="true" />
@@ -476,9 +491,7 @@ export default function SpacesPage(): JSX.Element {
 
         <button
           type="button"
-          onClick={() => {
-            info('Coming Soon', 'Space settings will be available in a future update.');
-          }}
+          onClick={() => setShowSettings(true)}
           className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
           aria-label="Space settings"
         >
@@ -495,6 +508,45 @@ export default function SpacesPage(): JSX.Element {
         : selectedDomain
         ? renderProjectsView()
         : renderDomainsView()}
+
+      {/* Creation Modals */}
+      <CreateDomainModal
+        isOpen={showDomainModal}
+        onClose={() => setShowDomainModal(false)}
+      />
+
+      <CreateProjectModal
+        isOpen={showProjectModal}
+        onClose={() => setShowProjectModal(false)}
+        defaultDomainId={selectedDomain?.id}
+      />
+
+      <CreateMissionModal
+        isOpen={showMissionModal}
+        onClose={() => setShowMissionModal(false)}
+        defaultProjectId={selectedProject?.id}
+      />
+
+      {/* Settings Panel Modal */}
+      {showSettings && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setShowSettings(false)}
+            aria-hidden="true"
+          />
+          {/* Modal Content */}
+          <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto m-4">
+            <SpaceSettingsPanel
+              settings={DEFAULT_SPACE_SETTINGS}
+              spaceLabel="Space"
+              showInheritanceToggle={false}
+              onSave={() => setShowSettings(false)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

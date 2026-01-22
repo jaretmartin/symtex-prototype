@@ -530,7 +530,7 @@ export default function ContextSummaryPill({
       if (type === 'mission') {
         navigate(`/missions/${id}`);
       } else if (type === 'project') {
-        navigate(`/projects/${id}`);
+        navigate(`/spaces/${id}`);
       }
     },
     [navigate, navigateTo, domains, projects, missions]

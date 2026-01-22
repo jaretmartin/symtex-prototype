@@ -5,7 +5,7 @@
  */
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Plus,
   Search,
@@ -126,6 +126,7 @@ function CognateCard({ cognate, onEdit, onDelete }: CognateCardProps): JSX.Eleme
 }
 
 export function CognatesPage(): JSX.Element {
+  const navigate = useNavigate();
   const { cognates, removeCognate } = useCognateStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<CognateStatus | 'all'>('all');
@@ -149,9 +150,8 @@ export function CognatesPage(): JSX.Element {
     return true;
   });
 
-  const handleEdit = (_cognate: Cognate): void => {
-    // Navigate to edit page
-    // Edit cognate: _cognate.id
+  const handleEdit = (cognate: Cognate): void => {
+    navigate(`/studio/cognates/${cognate.id}`);
   };
 
   const handleDelete = (cognate: Cognate): void => {

@@ -15,6 +15,8 @@ import type {
   SpaceSettings,
   SpaceEntityType,
 } from '@/types';
+import { spaces as mockSpaces } from '@/mocks/spaces';
+import { projects as mockProjects } from '@/mocks/projects';
 
 interface SpaceState {
   // Data
@@ -80,10 +82,57 @@ interface SpaceState {
   resolveSettings: (entityType: SpaceEntityType, entityId: string) => SpaceSettings | null;
 }
 
+/**
+ * Transform mock spaces into DomainSpace format expected by the store
+ */
+function transformMockSpacesToDomains(): Record<string, DomainSpace> {
+  const domains: Record<string, DomainSpace> = {};
+
+  for (const mockSpace of mockSpaces) {
+    domains[mockSpace.id] = {
+      id: mockSpace.id,
+      parentId: 'personal',
+      name: mockSpace.name,
+      icon: mockSpace.icon,
+      color: mockSpace.color,
+      assignedCognates: [],
+      settingsOverrides: {
+        autonomy: {
+          level: mockSpace.settings.defaultAutonomy as 1 | 2 | 3 | 4,
+          autoApprove: !mockSpace.settings.requireApproval,
+        },
+      },
+    };
+  }
+
+  return domains;
+}
+
+/**
+ * Transform mock projects into Project format expected by the store
+ */
+function transformMockProjectsToProjects(): Record<string, Project> {
+  const projects: Record<string, Project> = {};
+
+  for (const mockProject of mockProjects) {
+    projects[mockProject.id] = {
+      id: mockProject.id,
+      domainId: mockProject.spaceId,
+      name: mockProject.name,
+      description: mockProject.description,
+      status: mockProject.status === 'archived' ? 'completed' : mockProject.status as 'active' | 'paused' | 'completed',
+      progress: mockProject.status === 'completed' ? 100 : 45,
+      objectives: [],
+    };
+  }
+
+  return projects;
+}
+
 const initialState = {
   personal: null,
-  domains: {},
-  projects: {},
+  domains: transformMockSpacesToDomains(),
+  projects: transformMockProjectsToProjects(),
   missions: {},
   isLoading: false,
   error: null,
@@ -331,6 +380,23 @@ export const useSpaceStore = create<SpaceState>()(
           projects: state.projects,
           missions: state.missions,
         }),
+        // Merge persisted state with initial state, preferring mock data if persisted data is empty
+        merge: (persistedState, currentState) => {
+          const persisted = persistedState as Partial<SpaceState> | undefined;
+
+          // If there's no persisted data or domains are empty, use mock data
+          const hasPersistedDomains = persisted?.domains && Object.keys(persisted.domains).length > 0;
+          const hasPersistedProjects = persisted?.projects && Object.keys(persisted.projects).length > 0;
+
+          return {
+            ...currentState,
+            personal: persisted?.personal ?? currentState.personal,
+            // Use persisted data if it has content, otherwise use mock data
+            domains: hasPersistedDomains ? persisted.domains! : currentState.domains,
+            projects: hasPersistedProjects ? persisted.projects! : currentState.projects,
+            missions: persisted?.missions ?? currentState.missions,
+          };
+        },
       }
     ),
     { name: 'SpaceStore' }

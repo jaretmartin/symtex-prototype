@@ -13,7 +13,7 @@
  * - Pattern compilation trigger
  */
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Play,
@@ -46,6 +46,8 @@ import { SimulationPanel, type SimulationResult } from '@/components/runs/Simula
 import { RunReview, type RunResult } from '@/components/runs/RunReview';
 import { PatternCompilationWidget } from '@/features/insights/PatternCompilationWidget';
 import type { PatternCompilation } from '@/features/insights/insights-store';
+import { mockAutomations as canonicalAutomations, type Automation as CanonicalAutomation } from '@/mocks/automations';
+import { getRunsByAutomation } from '@/mocks/runs';
 
 // ============================================================================
 // TYPES
@@ -76,123 +78,94 @@ interface Automation {
 type WF2Step = 'list' | 'plan' | 'simulate' | 'running' | 'review' | 'compile';
 
 // ============================================================================
-// MOCK DATA
+// MOCK DATA - Adapted from canonical mocks
 // ============================================================================
 
-const mockAutomations: Automation[] = [
-  {
-    id: 'auto-1',
-    name: 'Lead Qualification Flow',
-    description: 'Automatically scores and routes new leads based on criteria',
-    status: 'active',
-    triggerType: 'New Lead',
-    lastRun: new Date(Date.now() - 2 * 60 * 60 * 1000),
-    totalRuns: 1247,
-    estimatedCost: 0.05,
-    recentRuns: [
-      {
-        id: 'run-1-1',
-        status: 'success',
-        startedAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
-        completedAt: new Date(Date.now() - 2 * 60 * 60 * 1000 + 3400),
-        cost: 0.048,
-        stepsCompleted: 5,
+/**
+ * Map canonical run status to local AutomationRun status
+ */
+function mapRunStatus(status: string): AutomationRun['status'] {
+  switch (status) {
+    case 'completed':
+      return 'success';
+    case 'failed':
+      return 'failed';
+    case 'running':
+      return 'running';
+    case 'cancelled':
+    case 'awaiting_approval':
+    case 'pending':
+    default:
+      return 'partial';
+  }
+}
+
+/**
+ * Map canonical schedule type to trigger type display
+ */
+function mapScheduleToTrigger(schedule: string): string {
+  switch (schedule) {
+    case 'manual':
+      return 'Manual';
+    case 'every_30_min':
+      return 'Every 30 min';
+    case 'hourly':
+      return 'Hourly';
+    case 'every_4_hours':
+      return 'Every 4 hours';
+    case 'daily':
+      return 'Daily';
+    case 'weekly':
+      return 'Weekly';
+    case 'monthly':
+      return 'Monthly';
+    default:
+      return 'Schedule';
+  }
+}
+
+/**
+ * Adapt canonical automations to the local Automation type expected by this page.
+ * This creates the initial mock data from the canonical source.
+ */
+function createInitialAutomations(): Automation[] {
+  return canonicalAutomations.map((auto: CanonicalAutomation) => {
+    // Get runs for this automation from canonical runs
+    const automationRuns = getRunsByAutomation(auto.id);
+
+    // Find the most recent completed run for lastRun date
+    const lastCompletedRun = automationRuns
+      .filter((r) => r.completedAt)
+      .sort((a, b) => new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime())[0];
+
+    // Map canonical runs to local AutomationRun format
+    const recentRuns: AutomationRun[] = automationRuns
+      .slice(0, 5)
+      .map((run) => ({
+        id: run.id,
+        status: mapRunStatus(run.status),
+        startedAt: new Date(run.startedAt),
+        completedAt: run.completedAt ? new Date(run.completedAt) : undefined,
+        cost: run.cost / 100, // Convert credits to dollars (approximate)
+        stepsCompleted: run.output?.actionsTaken?.length ?? (run.status === 'completed' ? 5 : 2),
         totalSteps: 5,
-      },
-      {
-        id: 'run-1-2',
-        status: 'success',
-        startedAt: new Date(Date.now() - 5 * 60 * 60 * 1000),
-        completedAt: new Date(Date.now() - 5 * 60 * 60 * 1000 + 3200),
-        cost: 0.052,
-        stepsCompleted: 5,
-        totalSteps: 5,
-      },
-      {
-        id: 'run-1-3',
-        status: 'partial',
-        startedAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
-        completedAt: new Date(Date.now() - 24 * 60 * 60 * 1000 + 4100),
-        cost: 0.041,
-        stepsCompleted: 4,
-        totalSteps: 5,
-      },
-    ],
-  },
-  {
-    id: 'auto-2',
-    name: 'Welcome Email Sequence',
-    description: 'Sends personalized welcome emails to new customers',
-    status: 'active',
-    triggerType: 'New Customer',
-    lastRun: new Date(Date.now() - 30 * 60 * 1000),
-    totalRuns: 3892,
-    estimatedCost: 0.02,
-    recentRuns: [
-      {
-        id: 'run-2-1',
-        status: 'success',
-        startedAt: new Date(Date.now() - 30 * 60 * 1000),
-        completedAt: new Date(Date.now() - 30 * 60 * 1000 + 1200),
-        cost: 0.018,
-        stepsCompleted: 3,
-        totalSteps: 3,
-      },
-    ],
-  },
-  {
-    id: 'auto-3',
-    name: 'Weekly Sales Report',
-    description: 'Generates and emails weekly sales performance report',
-    status: 'active',
-    triggerType: 'Schedule',
-    lastRun: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
-    totalRuns: 52,
-    estimatedCost: 0.15,
-    recentRuns: [
-      {
-        id: 'run-3-1',
-        status: 'success',
-        startedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
-        completedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000 + 12000),
-        cost: 0.142,
-        stepsCompleted: 8,
-        totalSteps: 8,
-      },
-    ],
-  },
-  {
-    id: 'auto-4',
-    name: 'Support Ticket Escalation',
-    description: 'Escalates high-priority tickets to senior support',
-    status: 'paused',
-    triggerType: 'Ticket Created',
-    lastRun: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
-    totalRuns: 156,
-    estimatedCost: 0.08,
-    recentRuns: [
-      {
-        id: 'run-4-1',
-        status: 'failed',
-        startedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
-        completedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000 + 2300),
-        cost: 0.032,
-        stepsCompleted: 2,
-        totalSteps: 6,
-      },
-    ],
-  },
-  {
-    id: 'auto-5',
-    name: 'Cart Abandonment Follow-up',
-    description: 'Sends reminder emails for abandoned shopping carts',
-    status: 'draft',
-    triggerType: 'Cart Abandoned',
-    totalRuns: 0,
-    estimatedCost: 0.03,
-    recentRuns: [],
-  },
-];
+      }));
+
+    return {
+      id: auto.id,
+      name: auto.name,
+      description: auto.description,
+      status: auto.status === 'disabled' ? 'draft' : auto.status,
+      triggerType: mapScheduleToTrigger(auto.schedule),
+      lastRun: lastCompletedRun ? new Date(lastCompletedRun.startedAt) : undefined,
+      totalRuns: auto.stats.totalRuns,
+      estimatedCost: auto.estimatedCost / 100, // Convert credits to dollars (approximate)
+      recentRuns,
+    };
+  });
+}
+
+const initialMockAutomations: Automation[] = createInitialAutomations();
 
 function createMockExecutionPlan(automation: Automation): ExecutionPlan {
   return {
@@ -385,8 +358,9 @@ const mockPatterns: PatternCompilation[] = [
 // ============================================================================
 
 export default function RunsPage(): JSX.Element {
-  // State
-  const [automations, setAutomations] = useState<Automation[]>(mockAutomations);
+  // State - use memoized initial data to avoid recreation on each render
+  const initialAutomations = useMemo(() => initialMockAutomations, []);
+  const [automations, setAutomations] = useState<Automation[]>(initialAutomations);
   const [filter, setFilter] = useState<'all' | 'active' | 'paused' | 'draft'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 

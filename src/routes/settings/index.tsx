@@ -4,8 +4,10 @@
  * User settings and preferences including theme, notifications, and account management.
  */
 
+import { useState } from 'react';
 import { Settings as SettingsIcon, Palette, Bell, User, Mail, Smartphone, Shield, ChevronRight } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { useToast } from '@/store/useUIStore';
 
 /**
  * Settings card wrapper component for consistent section styling
@@ -107,18 +109,18 @@ function SettingsLink({
   icon: Icon,
   label,
   description,
+  onClick,
 }: {
   icon: React.ComponentType<{ className?: string }>;
   label: string;
   description?: string;
+  onClick?: () => void;
 }) {
   return (
     <button
       type="button"
       className="w-full flex items-center justify-between py-4 first:pt-0 last:pb-0 border-b border-border last:border-0 hover:bg-muted/30 -mx-6 px-6 transition-colors"
-      onClick={() => {
-        // Placeholder - would navigate to specific settings page
-      }}
+      onClick={onClick}
     >
       <div className="flex items-start gap-4">
         <div className="p-2 rounded-lg bg-muted/50">
@@ -140,10 +142,52 @@ function SettingsLink({
  * Settings Page Component
  */
 export default function SettingsPage(): JSX.Element {
-  // Placeholder state for notification toggles
+  const { success, info, warning } = useToast();
+
+  // Notification toggle states
   // In production, these would be connected to a settings store/API
-  const emailNotifications = true;
-  const pushNotifications = false;
+  const [emailNotifications, setEmailNotifications] = useState(true);
+  const [pushNotifications, setPushNotifications] = useState(false);
+  const [inAppNotifications, setInAppNotifications] = useState(true);
+
+  const handleEmailNotificationsChange = (enabled: boolean): void => {
+    setEmailNotifications(enabled);
+    success(
+      enabled ? 'Email notifications enabled' : 'Email notifications disabled',
+      'Your preference has been saved'
+    );
+  };
+
+  const handlePushNotificationsChange = (enabled: boolean): void => {
+    setPushNotifications(enabled);
+    success(
+      enabled ? 'Push notifications enabled' : 'Push notifications disabled',
+      'Your preference has been saved'
+    );
+  };
+
+  const handleInAppNotificationsChange = (enabled: boolean): void => {
+    setInAppNotifications(enabled);
+    success(
+      enabled ? 'In-app notifications enabled' : 'In-app notifications disabled',
+      'Your preference has been saved'
+    );
+  };
+
+  const handleProfileClick = (): void => {
+    info('Coming Soon', 'Profile settings will be available in a future update');
+  };
+
+  const handleSecurityClick = (): void => {
+    info('Coming Soon', 'Security settings will be available in a future update');
+  };
+
+  const handleDeleteAccount = (): void => {
+    warning(
+      'Demo Mode',
+      'Account deletion is disabled in demo mode'
+    );
+  };
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
@@ -187,9 +231,7 @@ export default function SettingsPage(): JSX.Element {
           >
             <ToggleSwitch
               enabled={emailNotifications}
-              onChange={() => {
-                // Placeholder - would update settings
-              }}
+              onChange={handleEmailNotificationsChange}
             />
           </SettingsRow>
 
@@ -200,9 +242,7 @@ export default function SettingsPage(): JSX.Element {
           >
             <ToggleSwitch
               enabled={pushNotifications}
-              onChange={() => {
-                // Placeholder - would update settings
-              }}
+              onChange={handlePushNotificationsChange}
             />
           </SettingsRow>
 
@@ -212,10 +252,8 @@ export default function SettingsPage(): JSX.Element {
             description="Show notifications within the application"
           >
             <ToggleSwitch
-              enabled={true}
-              onChange={() => {
-                // Placeholder - would update settings
-              }}
+              enabled={inAppNotifications}
+              onChange={handleInAppNotificationsChange}
             />
           </SettingsRow>
         </div>
@@ -231,12 +269,14 @@ export default function SettingsPage(): JSX.Element {
             icon={User}
             label="Profile"
             description="Update your name, email, and avatar"
+            onClick={handleProfileClick}
           />
 
           <SettingsLink
             icon={Shield}
             label="Security"
             description="Password, two-factor authentication, and sessions"
+            onClick={handleSecurityClick}
           />
         </div>
       </SettingsCard>
@@ -260,9 +300,7 @@ export default function SettingsPage(): JSX.Element {
             <button
               type="button"
               className="px-4 py-2 text-sm font-medium text-destructive bg-destructive/10 hover:bg-destructive/20 rounded-lg transition-colors"
-              onClick={() => {
-                // Placeholder - would show confirmation dialog
-              }}
+              onClick={handleDeleteAccount}
             >
               Delete Account
             </button>

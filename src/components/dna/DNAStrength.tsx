@@ -197,8 +197,8 @@ export default function DNAStrength({ className, compact = false }: DNAStrengthP
   }, [addToast])
 
   // Handle configure strand
-  const handleConfigure = useCallback((strandId: string): void => {
-    navigate(`/settings/dna/${strandId}`)
+  const handleConfigure = useCallback((_strandId: string): void => {
+    navigate('/signals')
   }, [navigate])
 
   // Calculate overall DNA strength
